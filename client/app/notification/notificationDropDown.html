@@ -1,0 +1,8 @@
+<div ng-controller="NotificationCtrl as notifications" class="nav-drop-down" md-offset="15 40" >
+
+  <div ng-class="notifications.notificationCount > 0 ? 'notify-number notify-number-solid' : 'notify-number'" ui-sref="notifications" ng-click="notifications.resetNotifications()">
+    <div class="arrow"></div>
+    <div ng-class="notifications.notificationCount > 0 ? 'arrow-shadow arrow-shadow-solid' : 'arrow-shadow'"></div>
+    <span ng-show="notifications.notificationCount > 0">{{notifications.notificationCount}}</span>
+  </div>
+</div>

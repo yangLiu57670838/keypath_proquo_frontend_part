@@ -1,0 +1,37 @@
+<div class="l-layout l-full-width l-home cf">
+  <div class="content-container cf how-sections-container">
+    <!-- START .content-column -->
+    <div class="content-column">
+
+      <md-divider ng-if="!currentUser.mimic"></md-divider>
+
+      <md-input-container ng-if="!currentUser.mimic">
+        <input placeholder="Search by name or email" ng-model="search.text" ng-model-options="{debounce: 500}" ng-change="refresh()">
+      </md-input-container>
+
+      <md-divider ng-if="!currentUser.mimic"></md-divider>
+
+      <md-list>
+
+        <md-list-item class="md-2-line" ng-if="currentUser.mimic">
+          <md-checkbox ng-model="currentUser.mimic" ng-change="stopMimicing()"></md-checkbox>
+          <div class="md-list-item-text">
+            <h3>{{currentUser.firstName}} {{currentUser.lastName}}</h3>
+            <p>{{currentUser.email}}</p>
+          </div>
+        </md-list-item>
+
+        <md-divider ng-if="currentUser.mimic"></md-divider>
+
+        <md-list-item class="md-2-line" ng-repeat="user in users" ng-if="!user.hide">
+          <md-checkbox ng-model="user.mimic" ng-change="startMimicing(user._id)"></md-checkbox>
+          <div class="md-list-item-text">
+            <h3>{{user.firstName}} {{user.lastName}}</h3>
+            <p>{{user.email}}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+
+    </div>
+  </div>
+</div>

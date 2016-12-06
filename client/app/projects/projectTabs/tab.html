@@ -1,0 +1,13 @@
+<div class="activity-detail project-section">
+  <div class="tab-desc md-padding"  ng-click="vm.redirectTo(vm.iconDesc.state, vm.iconDesc.params, vm.iconDesc.handler)"
+       layout="row" layout-align="space-between center" flex="100" ng-if="vm.iconDesc">
+    <div layout="row" layout-align="space-between center">
+      <!-- place holder for activity description icon-->
+      <div layout="column" layout-align="start">
+        <div>{{vm.iconDesc.desc}}</div>
+        <div class="tab-desc-note">{{vm.iconDesc.note}}</div>
+      </div>
+    </div>
+    <i class="material-icons tab-desc-arrow">keyboard_arrow_right</i>
+  </div>
+</div>

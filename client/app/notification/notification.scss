@@ -1,0 +1,100 @@
+.notifications-history {
+
+  .notifications-tab-label {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  padding-bottom: 20px;
+
+  md-tabs-wrapper {
+    background-color: $nab-bg-grey;
+    md-tabs-canvas {
+      height: 50px;
+      md-pagination-wrapper {
+        width:auto !important;
+        height: 50px;
+
+        .md-active{
+          color: #41648c;
+        }
+        md-ink-bar {
+          background-color:#41648c;
+        }
+        md-tab-item {
+          span {
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+  }
+
+
+  &.l-bg-grey {
+    background-color: $nab-bg-grey;
+  }
+
+  .record-list {
+    .checked {
+      background-color: #EDEDED;
+    }
+    .unchecked {
+      background-color: #FFFFFF;
+    }
+    .notification-record-row {
+      padding-bottom: 15px;
+      padding-top: 15px;
+
+      .head-section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .content-section {
+        cursor: pointer;
+        margin-top: 10px;
+        .message-text {
+          &.message-chat{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+
+      .tail-section {
+        margin-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        .updated-date {
+          font-size: 12px;
+          color: #A7A7A7;
+        }
+        .rounded-message-count {
+          background-color: rebeccapurple;
+          border-radius: 30px;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+
+    md-tab-content{
+      padding: 0 2px 2px 2px;
+      background: #F1F1F1;
+
+      &>div{
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.24);
+      }
+    }
+
+
+
+}

@@ -1,0 +1,122 @@
+.skill-selector {
+  box-shadow: $whiteframe-shadow-3dp;
+  @include bp-max(s){
+    box-shadow: none;
+  }
+
+
+  &.skills-offered {
+    border-top: 5px solid $dd-negative-color;
+  }
+
+  &.skills-needed {
+    border-top: 5px solid $dd-primary-background;
+  }
+
+
+  .category-button {
+    &:hover {
+      background-color: transparent;
+    }
+
+
+    @include bp-max(s) {
+      &.md-button {
+        min-width: 70px;
+      }
+    }
+    @include bp-max(xs) {
+      &.md-button {
+        min-width: 60px;
+        margin:0;
+      }
+    }
+    .category-icon {
+      width: 90px;
+      height: 90px;
+
+
+      @include bp-max(s){
+        width:70px;
+        height: 70px;
+      }
+      @include bp-max(xs){
+        width:55px;
+        height: 55px;
+      }
+    }
+
+    &.category-button-inactive:hover {
+      path, polyline, line, polygon, circle {
+        transition: 0.2s;
+        stroke: $dd-primary-background;
+      }
+    }
+
+    .heading {
+      text-transform: capitalize;
+      @include bp-max(xs){
+        display:none;
+      }
+    }
+
+    md-icon {
+      .icon-inactive, .icon-active {
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
+  @mixin category-button-color($color) {
+    color: $color;
+    // override embedded fill colour
+    .cls-1 {
+      fill: $color;
+    }
+  }
+
+  .category-button-active {
+    &.skills-offered {
+      @include category-button-color($dd-negative-color);
+    }
+    &.skills-needed {
+      @include category-button-color($dd-primary-background);
+    }
+
+    .heading {
+      font-weight: bolder;
+    }
+
+    md-icon.icon-inactive {
+      display: none;
+    }
+  }
+
+  .category-button-inactive {
+    color: darkgrey;
+
+    .heading {
+      font-weight: normal;
+    }
+
+    // override embedded stroke colour
+    .st0, .st1, .st2 {
+      stroke: darkgrey;
+    }
+
+    md-icon.icon-active {
+      display: none;
+    }
+  }
+
+  category-generic-selector, .section {
+    margin: 12px;
+  }
+
+  .skills-selector-wrapper {
+    margin: 0 !important;
+  }
+}

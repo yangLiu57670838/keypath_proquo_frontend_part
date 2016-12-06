@@ -1,0 +1,43 @@
+<div flex="100" ng-init="init()" class="edit-field">
+<md-input-container md-no-float class="md-block edit-container" id="resultLocation"  ng-show="!showLocationInput" ng-click="setLocationToggle(result.location)">
+  <input ng-readonly="true" type="text"  aria-label="location" ng-model="result.formattedAddress" placeholder="Click to add your suburb">
+  <div class="edit-functions" ng-show="showEditButton">
+    <ul>
+      <li>
+        <a ng-click="saveEdit()"> <i class="icon icon-tick" ></i></a>
+        <md-tooltip>
+          Save
+        </md-tooltip>
+      </li>
+      <li>
+        <a ng-click="cancelEdit()"> <i class="icon icon-close" ></i></a>
+        <md-tooltip>
+          Cancel
+        </md-tooltip>
+      </li>
+    </ul>
+  </div>
+</md-input-container>
+
+
+
+<md-input-container md-no-float class="md-block" class="edit-container" id="locationField" ng-show="showLocationInput" >
+  <input  id="{{setId}}"  type="text"  ng-blur="setLocationToggle()" aria-label="location" ng-model="location.local" placeholder="Type suburb">
+  <div class="edit-functions" ng-show="showEditButton">
+    <ul>
+      <li>
+        <a ng-click="saveEdit()"> <i class="icon icon-tick" ></i></a>
+        <md-tooltip>
+          Save
+        </md-tooltip>
+      </li>
+      <li>
+        <a ng-click="cancelEdit()"> <i class="icon icon-close" ></i></a>
+        <md-tooltip>
+          Cancel
+        </md-tooltip>
+      </li>
+    </ul>
+  </div>
+</md-input-container>
+</div>

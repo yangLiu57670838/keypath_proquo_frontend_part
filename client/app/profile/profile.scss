@@ -1,0 +1,556 @@
+.profile-container{
+
+  $somewhatblack: #191b1f;
+
+  .heading{
+    @include feature-heading();
+    @include font-size(14, 20);
+    @include font-feature-bold();
+    letter-spacing: 2px;
+    .rating-heading {
+      vertical-align: middle;
+    }
+  }
+
+  .profile-social-links{
+    float: right;
+
+    .btn-social{
+      width: 40px;
+      height: 40px;
+      margin: 0;
+      background-color: transparent;
+
+      &:hover{
+        i{
+          color: #000;
+        }
+      }
+
+    }
+  }
+
+
+
+
+  .profile-section{
+    margin: 0 0 60px 0;
+
+
+
+    &.profile-summary {
+
+      .profile-photo-container{
+          width:100%;
+      }
+      @extend .cf;
+      position: relative;
+      background:$white;
+
+      .summary-title{
+        @include font-feature();
+        @include font-size(30, 30);
+        letter-spacing: 2px;
+      }
+
+      .company{
+        @include font-feature();
+        @include font-size(16,16);
+        font-weight: normal;
+        margin: 10px 0 0 0;
+        color: white;
+      }
+
+      .company-location{
+        @include font-feature();
+        @include font-size(16,16);
+        font-weight: normal;
+        margin: 0 0 5px 0;
+        color: white;
+      }
+
+      .geo-distance {
+        @include font-feature();
+        font-weight: lighter;
+        font-size: smaller;
+        color: $dd-bg-grey-darker;
+      }
+
+
+      .accepts {
+        margin-bottom: 10px;
+        .acceptance{
+          @include font-feature();
+          @include font-size(16,16);
+          font-weight: normal;
+          margin: 10px 0 20px 0;
+        }
+
+        .transactions{
+          display: inline-block;
+          &:first-child{
+            margin-right: 5px;
+          }
+          .text{
+            margin-top: 5px;
+            @include font-feature();
+            @include font-size(16,16);
+            font-weight: normal;
+            width:100%;
+            text-align:center;
+            color: $dd-primary-background;
+          }
+          .icon{
+            @include profile-image(100%, 100%, 50%);
+            padding: 18px 10px 2px 10px;
+            width:40px;
+            height:40px;
+            text-align:center;
+            background-color: $dd-primary-background;
+            color:white;
+            font-size:20px;
+            display:block;
+          }
+        }
+      }
+
+
+      .message-btn {
+        width: 100%;
+        height: 60px;
+        margin: 0;
+      }
+
+
+      .experience {
+        @include font-feature();
+        @include font-size(16,20);
+        font-weight: normal;
+        margin: 10px 0;
+
+        @include bp(m) {
+          margin: 15px 0;
+        }
+
+        .star-rating {
+          margin-left: -8px;
+        }
+
+      }
+      .exp-value{
+        margin: 5px 0;
+      }
+      .business-name{
+        color:$dd-primary-background;
+      }
+
+
+
+      .verified{
+        @include horizontalUl($dd-primary-background);
+        margin:20px 0 40px 0;
+        span {
+          margin-right: 20px;
+          font-weight: bold;
+        }
+
+
+      }
+
+
+
+      .description-desktop {
+        max-height: 200px;
+        overflow-y: scroll;
+      }
+
+      .description {
+        margin-top: 10px;
+
+        @include bp(m) {
+          margin-top: 30px;
+        }
+      }
+
+
+      .profile-right-padding {
+        @include padding-variable(10, 20, 20, 20, 1.2);
+      }
+    }
+
+    .star-rating-col {
+      min-width: 175px;
+      @include bp(l) {
+        min-width: 185px;
+      }
+    }
+
+  }
+
+
+  /* SKILLS CONTAINER */
+  .profile-skills-container{
+    .heading{
+      margin:0;
+    }
+
+    .md-chips{
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .skills{
+      padding: 20px 10px;
+      background-color: $white;
+      @extend .cf;
+
+      .skill{
+        @include skill-tag();
+        background:$dd-primary-background;
+        margin: 0 10px 10px 0;
+      }
+    }
+  }
+
+
+  .profile-entry-missing{
+    background:$white;
+    h6 {
+      color: grey;
+    }
+  }
+
+
+  .portfolio{
+    .portfolio-images-empty{
+      background:$white;
+      height:10px;
+    }
+    .portfolio-images{
+
+      .portfolio-img-container{
+        background:$white;
+        height: 200px;
+        min-width:150px;
+        .portfolio-img{
+          max-height: 200px;
+          height: 200px;
+          max-width: 300px;
+          min-width: 300px;
+          object-fit: cover;
+          object-position: 50% 50%;
+        }
+      }
+
+
+      @extend .cf;
+      overflow-x: scroll;
+      white-space: nowrap;
+      background: $dd-lightest-grey;
+      min-height: 200px;
+      @include bp(l){
+        background: $white;
+      }
+      padding-top: 8px;
+      padding-left: 8px;
+
+      .portfolio-image-wrapper{
+        display: inline-block;
+        overflow: hidden;
+        margin:0;
+        position: relative;
+        height: 200px;
+        border: solid 1px white;
+        border-left: none;
+        cursor:pointer;
+
+        img{
+          height: auto;
+          width: auto;
+          max-height: 150px;
+          @include bp(s){
+            max-height: 300px;
+          }
+        }
+
+        @include bp(m){
+          width: 200px;
+
+          img{
+            height: auto;
+            width: auto;
+            max-height: 300px;
+          }
+        }
+
+
+        .item-info{
+          display: inline-block;
+          height: 0;
+          width:  0;
+          transition: height 550ms;
+          background-color: rgba(0, 0, 0, 0.5);
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+
+        .portfolio-text{
+          display: none; //dont't show on small screens
+          color: #fff;
+          text-align: center;
+          height: 30%;
+          padding-right: 10px;
+          padding-left: 10px;
+          padding-top: 30px;
+          white-space: normal;
+
+          .heading{
+            font-weight:bold;
+          }
+
+          .description{
+            @include font-size(13, 16);
+            display: block;
+            height: 80px;
+            overflow: hidden;
+          }
+
+
+          @include bp(m){
+            display: block;
+          }
+        }
+
+        .view-portfolio{
+          color: #fff;
+          white-space: normal;
+
+          width: 45px;
+          display: block;
+
+          margin: 80px auto 0 auto;
+          text-align: center;
+          @include feature-heading();
+        }
+
+        &:hover{
+          .item-info {
+            height: 100%;
+            width: 100%;
+          }
+
+
+        }
+      }
+
+    }
+  }
+
+  .platform-history{
+    >div{
+      background:$white;
+      padding:40px;
+
+      @include bp-max(s) {
+        padding: 5px;
+      }
+
+      .history-value {
+        @include font-feature();
+        @include font-size(24,24);
+        font-weight: bold;
+        color: $dd-primary-background;
+        @include bp-max(s) {
+          margin-top: 25px;
+        }
+      }
+
+      .history-label {
+        @include font-feature();
+        margin-top: 10px;
+        color: black;
+        text-align: center;
+      }
+    }
+
+  }
+
+
+  .profile-messages{
+    .star-rating{
+      white-space:nowrap;
+      @include bp(s){
+        float: right;
+        clear: right;
+      }
+
+      .btn-star{
+        min-width: 0;
+        min-height: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 0;
+        padding: 0;
+
+        i{
+          height: 30px;
+          line-height: 30px;
+          color: $nab-grey-light;
+
+        }
+
+        &.filled{
+          i{
+            color: $nice-yellow;
+          }
+        }
+      }
+    }
+
+    .margin-top {
+      margin-top: 15px;
+    }
+
+    .profile-message{
+      background-color: #fff;
+      position: relative;
+
+      profile-photo {
+        margin-bottom: 15px;
+        width:200px;
+        min-width:100px;
+
+        @include bp-max(s) {
+          margin-top: 15px;
+        }
+      }
+
+      .message-author{
+        @include font-size(16, 16);
+        @include font-feature-bold();
+
+      }
+
+      .message-datetime{
+        float: left;
+        clear: left;
+        color: $dd-primary-background;
+      }
+
+      .message-datetime-bottom{
+        @include feature-heading();
+        @include font-size(14,14);
+      }
+
+      .message-text{
+        margin: 20px 0;
+        @include font-size(14,21);
+        position: relative;
+
+        .btn-show-more{
+          position: absolute;
+          right: -45px;
+          bottom: -20px;
+          margin: 0;
+          @include button(40);
+
+          i{
+            color: $dd-primary-background;
+          }
+        }
+      }
+
+      @include bp(l){
+        padding: 20px;
+      }
+    }
+
+
+
+
+
+
+
+  }
+
+  .activity-feed .profile-messages .profile-message{
+    padding:20px !important;
+  }
+
+  .community-reviews{
+    position: relative;
+
+    .average-rating {
+      .star-rating {
+        white-space:nowrap;
+
+        @include bp(l) {
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+
+
+
+}
+
+/* This has to sit outside of the namespace because the component is rendered on the body*/
+.qualification-content{
+  .notification-heading{
+    font-weight:bold;
+  }
+  .notification-date{
+    @include font-size(12,12);
+  }
+  .arrow{
+    border-width: 11px;
+    border-style: solid;
+    border-color: transparent transparent $dd-light-grey;
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -22px;
+    left: 30%;
+    margin-left: -10px;
+  }
+}
+
+md-dialog.img-modal md-dialog-content, md-dialog.img-modal .md-dialog-content{
+    padding:0 !important;
+}
+
+.assign-btn-icon {
+  color: white !important;
+}
+
+.assign-content {
+  padding: 0;
+
+  .assign-no-project {
+    text-align: center;
+    font-size: smaller;
+    font-weight: bolder;
+  }
+
+  .menu-item-label {
+    font-weight: bold;
+  }
+
+  .assign-divider {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .assign-new-project {
+    background-color: $dd-negative-color;
+    color: white;
+
+    .assign-new-project-icon{
+      color: white;
+    }
+  }
+}

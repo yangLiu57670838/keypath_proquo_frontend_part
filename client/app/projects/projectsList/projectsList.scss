@@ -1,0 +1,36 @@
+.projects-list{
+  .due-text{
+    @include bp-max(s){
+      margin-top:10px;
+    }
+    md-icon{
+      fill:$dd-light-grey;
+      padding:0 10px 0 0;
+    }
+    padding-right:10px;
+    color:$dd-light-grey;
+  }
+  collapsible-card-header {
+    h6{
+      margin:0;
+    }
+  }
+  .action-btn{
+    width:100%;
+    margin:0;
+    border-radius:0;
+  }
+  .md-black-theme{
+    border-radius:0;
+    &:hover{
+      background:$dd-black;
+    }
+    &.md-focused{
+      background-color:$dd-black;
+    }
+  }
+
+}
+
+
+

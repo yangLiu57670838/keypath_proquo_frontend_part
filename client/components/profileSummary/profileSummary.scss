@@ -1,0 +1,25 @@
+.profile-summary {
+  .profile-present {
+    cursor: pointer;
+  }
+
+  .profile-summary-photo {
+    $profile-summary-photo-width: 160px;
+
+    width: $profile-summary-photo-width;
+    min-width: $profile-summary-photo-width;
+    @include bp-max(xs) {
+      width: (0.75 * $profile-summary-photo-width);
+      min-width: (0.75 * $profile-summary-photo-width);
+    }
+
+    .avatars {
+      min-width: inherit;
+      min-height: inherit;
+    }
+
+    .avatars .org-no-logo .txt-container .txt {
+      font-size: 50%;
+    }
+  }
+}

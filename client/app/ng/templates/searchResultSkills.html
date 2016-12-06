@@ -1,0 +1,5 @@
+<div flex class="skills" ng-class="{ 'is-overflown' : isOverflown }" layout="row">
+  <span flex ng-repeat="skill in skills track by $index" ng-bind="skill.name" class="skill"
+        ng-if="$index < skillsExpandLimit || expandSkills"></span>
+  <span class="skill hidden-skills-count" ng-show="skills.length > skillsExpandLimit">+{{skills.length - skillsExpandLimit}}</span>
+</div>

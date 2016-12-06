@@ -1,0 +1,76 @@
+<div class="footer">
+  <div class="l-padding cf">
+
+    <div layout-gt-xs="row" >
+        <div flex flex-gt-xs="35" layout="column">
+          <div flex class="logo">
+            <a ui-sref="home" href="/home">
+              <img src="assets/images/Proquo_Logo_Negative.png"/>
+            </a>
+
+          </div>
+          <div layout="row" layout-gt-xs="column" >
+            <ul class="contact">
+              <li>Contact or Feedback</li>
+              <li><a href="mailto:support@proquo.com.au"><md-icon class="icon icon-email"></md-icon> support@proquo.com.au</a></li>
+            </ul>
+
+          </div>
+
+        </div>
+
+        <div flex layout="row">
+          <div flex>
+            <ul class="about">
+              <li>About</li>
+              <li><a href="/how">How it works</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="http://www.proquo.net.au/blog/" target="_blank">Blog</a></li>
+            </ul>
+          </div>
+
+          <div flex>
+            <ul>
+              <li>Project</li>
+              <li><a ng-click="vm.startBusiness()">Get Going!</a></li>
+            </ul>
+          </div>
+
+          <div flex>
+            <ul>
+              <li>Support</li>
+              <li><a href="https://proquo.zendesk.com/hc/en-us" target="_blank">FAQs</a></li>
+            </ul>
+            <span class="appVersion">v. {{vm.appVersion}}</span>
+          </div>
+
+          <div flex>
+            <ul>
+              <li>Account</li>
+              <li ng-if="!vm.currentUser"><a ui-sref="getstarted">Join</a></li>
+              <li ng-if="vm.currentUser"><a href="/settings">Settings</a></li>
+              <li><a href="/terms">Terms and Conditions</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+    </div>
+
+  </div>
+
+
+
+
+</div>
+
+<div  class="privacy-banner ">
+  <div class="l-padding cf">
+    <div layout="column" layout-gt-xs="row"  layout-align="space-between center">
+      <div class="ident">
+        <img class="support-logo" src="assets/images/Proquo_Logo_Support.png">
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="edit-field">
+  <span ng-show="!toggle && decoratedValue" ng-if="fieldType==='textfield'">{{decoratedValue}}</span>
+  <span ng-show="!toggle && !decoratedValue" ng-if="fieldType==='textfield'">{{modelObj || noTextLabel}}</span>
+  <h2 ng-show="!toggle" ng-if="fieldType==='h2'" class="h2-title">{{modelObj || noTextLabel}}</h2>
+
+  <list-reveal  minheight="150" ng-if="!toggle && fieldType==='textarea'">
+    <p class="text-area">{{modelObj || noTextLabel}}</p>
+  </list-reveal>
+
+
+  <md-button ng-if="!toggle"  ng-click="setEdit() " aria-label="Edit description" class="md-fab md-mini" style="right:0; top:0; position:absolute;">
+    <i class="icon icon-pencil"></i>
+    <md-tooltip md-direction="{{tooltip_direction}}">
+      {{tooltipText}}
+    </md-tooltip>
+  </md-button>
+
+
+
+  <md-input-container md-no-float  class="md-block"  ng-show="toggle" class="edit-container">
+
+    <textarea ng-model="edit.editText" name="editField" placeholder="{{noTextLabel}}" md-maxlength="{{textareaLength?textareaLength:1000}}" ng-if="fieldType==='textarea'"></textarea>
+
+    <input type="text" name="editField" placeholder="{{noTextLabel}}" ng-model="edit.editText" ng-if="fieldType==='h2' || fieldType==='textfield'"/>
+
+    <div ng-messages="edit.$error" role="alert" md-auto-hide="false" ng-show="edit.$error.required">
+      <div ng-message="required">This is required</div>
+    </div>
+
+    <div class="edit-functions">
+      <ul>
+        <li>
+          <a ng-click="saveEdit()"> <i class="icon icon-tick" ></i></a>
+          <md-tooltip>
+            Save
+          </md-tooltip>
+        </li>
+        <li>
+          <a ng-click="cancelEdit()"> <i class="icon icon-close" ></i></a>
+          <md-tooltip>
+            Cancel
+          </md-tooltip>
+        </li>
+      </ul>
+    </div>
+  </md-input-container>
+
+</div>

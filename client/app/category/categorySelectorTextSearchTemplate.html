@@ -1,0 +1,38 @@
+<div class="ng-text-search-container" >
+  <div class="skills-keywords clearfix">
+    <div class="search-keywords-autocomplete-container" >
+      <div class="search-keywords-autocomplete-wrapper"
+           ng-class="{ 'is-active' : vm.searchAutocompleteIsActive }">
+        <div class="pick-from-search"  md-offset="100 -50">
+          <md-autocomplete
+            ng-disabled="vm.searchBoxData.length == 0"
+            class="search-keywords-autocomplete"
+            ng-focus=""
+            md-selected-item="vm.selectedItem"
+            md-search-text-change="vm.searchTextChange(searchText)"
+            md-search-text="searchText"
+            md-selected-item-change="vm.searchTextItemSelect($event, item, this)"
+            md-items="item in vm.getCategoriesInFlat(searchText)"
+            md-no-cache="true"
+            md-min-length="3"
+            md-delay="0"
+            md-floating-label=""
+            md-item-text="item.name"
+            placeholder="{{::vm.searchPlaceholder}}">
+            <md-item-template>
+              <span ng-bind="item.name"></span>
+            </md-item-template>
+            <md-not-found>
+              No matches found for <span ng-bind="vm.searchText"></span>.
+            </md-not-found>
+          </md-autocomplete>
+          <!--</md-input-container>-->
+          <a ng-if="vm.config.searchView == 'treecollapse' || vm.config.searchView == 'treemodal'" href="" class="see-all-tags-trigger" ng-click="vm.toggleTreeView($event)">See all
+            categories</a>
+        </div>
+      <p ng-show="vm.showSuggestMailLink" class="small suggest-mail-link"><a href="mailto:support@proquo.com.au?Subject=Suggesting add new skill '{{vm.searchText}}'">If you can't find what you're looking for contact us</a></p>
+      <p ng-if="vm.config.searchView == 'vertical'" class="small">or choose from the categories below</p>
+    </div>
+  </div>
+</div>
+</div>

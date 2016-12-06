@@ -1,0 +1,302 @@
+<div class="l-layout l-one-column l-bg-grey cf project-brief">
+  <div class="content-container l-padding cf l-content-padding">
+
+    <section class="max-page-size form-element-fixed" ng-cloak>
+
+      <form name="briefForm"  novalidate>
+        <div layout="row" layout-align="space-between center" layout-wrap>
+          <h2 class="no-margin">{{vm.pageTitle}}</h2>
+          <a ng-if="!vm.readonly" ng-click="vm.saveAndClose(briefForm)" class="bolder nowrap" hide-gt-xs>Save and Close</a>
+          <a ng-if="vm.readonly" ui-sref="projects({projectId: vm.project._id})" hide-gt-xs>Close</a>
+          <div layout="row" layout-align="end center" layout-padding flex-xs="100">
+            <a ng-if="!vm.readonly" ng-click="vm.saveAndClose(briefForm)" class="bolder nowrap" hide-xs>Save and Close</a>
+            <a ng-if="vm.readonly" ui-sref="projects({projectId: vm.project._id})" hide-xs>Close</a>
+            <md-button flex-xs="100" ng-if="vm.hasProjectAction(vm.project, 'recallBrief')"  class="btn md-primary-cta" ng-click="vm.editBrief($event)">Modify</md-button>
+
+          </div>
+
+        </div>
+
+        <section ng-if="!vm.readonly" class="brief-section" id="required-details">
+          <h5 class="padding-left-gt-xs-10"><span class="uppercase">Details </span> <span>(required)</span></h5>
+          <div class="brief-section-body">
+            <p class="bolder margin-top-10">Provide details of the work that you need:</p>
+            <md-input-container class="md-block">
+              <label>Work Title *</label>
+              <input aria-label="Work title" name="title" required ng-model="vm.project.brief.workTitle" maxlength="100">
+              <div ng-messages="briefForm.title.$error">
+                <div ng-message="required">This is required!</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Brief Description *</label>
+              <textarea name="description" ng-model="vm.project.brief.description" required maxlength="1000"></textarea>
+              <div ng-messages="briefForm.description.$error">
+                <div ng-message="required">This is required!</div>
+              </div>
+            </md-input-container>
+          </div>
+        </section>
+
+        <section ng-if="vm.readonly" class="brief-section">
+          <h5 class="padding-left-gt-xs-10"><span class="uppercase">Details </span></h5>
+          <div class="brief-section-body">
+              <label class="bolder">Work Title</label>
+              <p >{{vm.project.brief.workTitle}}</p>
+              <label class="bolder">Brief Description</label>
+              <p >{{vm.project.brief.description}}</p>
+          </div>
+        </section>
+
+
+        <!-- ATTACHMENTS -->
+        <section  class="brief-section" ng-if="!vm.readonly || (vm.readonly && vm.project && vm.project && vm.project.brief.attachments.length > 0)">
+          <h5 class="padding-left-gt-xs-10 uppercase margin-top-10">Attachments Added</h5>
+          <div class="brief-section-body">
+
+            <div class="attach-documents-link margin-bottom-10" ng-if="!vm.readonly"  layout="row" layout-align="end center" >
+              <a href="" ng-click="vm.project.brief.attachments.length >= 10? vm.numberOfFilesReachLimit($event): vm.addAttachment(briefForm, $event)" class="nowrap">
+                <i class="icon icon-clip"></i> Add Attachments</a>
+            </div>
+
+            <div ng-repeat="attachment in vm.project.brief.attachments" layout="row" layout-align="space-between center" >
+              <div>
+                <a ng-href="{{attachment.url}}" download="{{attachment.attachmentName}}"><i class="icon icon-clip"></i>
+                <label><span class="ellipsis-txt">{{attachment.attachmentName}} </span> <span class="ellipsis-txt">(</span><span class="ellipsis-txt">{{ attachment.size | filesize }}</span><span class="ellipsis-txt">)</span></label>
+                </a>
+              </div>
+              <div>
+                <label class="ellipsis-txt">{{attachment.updatedAt|date:"dd/MM/yyyy"}}</label>
+                <a class="ellipsis-txt" ng-if="!vm.readonly" class="remove-item" ng-click="vm.removeAttachment(attachment, briefForm, $event)"><i class="icon icon-remove"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- LINKS -->
+
+        <section  class="brief-section" ng-if="!vm.readonly || (vm.readonly && vm.project && vm.project.brief.links.length > 0)">
+          <h5 class="padding-left-gt-xs-10 uppercase margin-top-10">Links Added</h5>
+          <div class="brief-section-body">
+
+
+            <div class="attach-documents-link margin-bottom-10" ng-if="!vm.readonly"  layout="row" layout-align="end center">
+              <a href="" ng-click="vm.addLink(briefForm)" class="nowrap"><i class="icon material-icons" >link</i> Add Links</a>
+            </div>
+
+            <ng-form name="urlForm" ng-repeat="link in vm.project.brief.links" layout="column" layout-align="space-between none " layout-gt-sm="row" layout-align-gt-sm="space-between start">
+
+
+              <md-input-container flex >
+                <label>Link</label>
+                <input aria-label="link url" name="linkUrl" required ng-model="link.url" placeholder="e.g.http://www.example.com"
+                       ng-disabled="vm.readonly" ng-readonly="vm.readonly">
+                <div ng-messages="urlForm.linkUrl.$error">
+                  <div ng-message-exp="['required']" class="my-message">This is required!</div>
+                </div>
+              </md-input-container>
+
+
+              <md-input-container flex  >
+                <label>Description</label>
+                <textarea aria-label="Link Description" name="linkUrlDescription" required ng-model="link.urlDescription"
+                        ng-disabled="vm.readonly" ng-readonly="vm.readonly" maxlength="150"></textarea>
+                <div ng-messages="urlForm.linkUrlDescription.$error">
+                  <div ng-message="required">This is required!</div>
+                </div>
+              </md-input-container>
+
+              <a flex-order-xs="-1" flex-order-sm="-1" flex-offset-xs="95" flex-offset-sm="95" ng-if="!vm.readonly" class="remove-item" ng-click="vm.removeLink(link, $event)"><i class="icon icon-remove"></i></a>
+
+
+            </ng-form>
+
+          </div>
+        </section>
+
+        <!-- DATE EDIT -->
+        <section class="brief-section" ng-if="!vm.readonly">
+          <h5 class="padding-left-gt-xs-10 margin-top-10"><span class="uppercase">To be delivered by </span><span >(optional)</span></h5>
+          <div class="brief-section-body">
+            <div layout="column" layout-align="start" layout-gt-sm="row"  layout-align-gt-sm="space-between center">
+              <p  class="timing-header no-margin bolder">Work to be completed</p>
+
+              <div ng-if="!vm.project._id || (!vm.project.brief.dueDate && !vm.readonly )">
+                <md-radio-group  class="timing-width"  name="timing" ng-model="vm.timingSelection" layout="row" layout-align="space-between center"
+                                 ng-click="vm.project.brief.dueDate = undefined" ng-disabled="vm.readonly">
+                  <md-radio-button flex ng-value="'weeks'" ng-disabled="vm.readonly">
+                    <span class="nowrap">In a week</span>
+                  </md-radio-button>
+                  <md-radio-button flex ng-value="'months'" ng-disabled="vm.readonly">
+                    <span class="nowrap">In a month</span>
+                  </md-radio-button>
+                </md-radio-group>
+              </div>
+
+              <div flex layout="row" layout-align="start center" class="md-input-has-value md-datepicker-container timing-due-date">
+                <div layout="column">
+                  <div layout="row" layout-align="start center">
+                    <div ng-show="!vm.project._id || (!vm.project.brief.dueDate && !vm.readonly )" class="padding-left-gt-xs-10 margin-left-gt-xs-10 bolder timing-span">OR</div>
+                    <md-datepicker ng-model="vm.project.brief.dueDate" class="date-picker"
+                                   md-min-date="vm.minDueDate" ng-click="vm.timingSelection = undefined">
+                    </md-datepicker>
+                    <label ng-hide="vm.project.brief.dueDate" class="mdp-date-picker-place-holder"> Due Date</label>
+                    <label ng-show="vm.project.brief.dueDate" class="mdp-date-picker-text"> {{vm.project.brief.dueDate|date:'dd/MM/yyyy'}}</label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- DATE READONLY -->
+        <section class="brief-section" ng-if="vm.readonly">
+          <h5 class="padding-left-gt-xs-10 margin-top-10"><span class="uppercase">To be delivered by </span></h5>
+          <div class="brief-section-body">
+            <p ng-show="!vm.project.brief.dueDate" class="no-margin bolder">No delivered date chosen</p>
+            <p ng-show="vm.project.brief.dueDate" class="no-margin bolder">{{vm.project.brief.dueDate|date:'dd/MM/yyyy'}}</p>
+          </div>
+        </section>
+
+        <!-- Budget edit -->
+        <section class="brief-section" ng-if="!vm.readonly">
+          <h5 class="padding-left-gt-xs-10 margin-top-10"><span class="uppercase">Budget </span> <span>(optional)</span></h5>
+          <div class="brief-section-body">
+            <div layout="column" layout="center start" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+              <p class="no-margin bolder">
+                Do you have a maximum budget for the work?
+              </p>
+
+              <div layout="row" class="margin-top-10">
+                <div class="dropdown-label"><md-icon class="icon icon-dollar"></md-icon></div>
+                <div>
+                  <md-input-container md-no-float class="no-margin">
+
+                    <input placeholder="Budget" aria-label="Work budget" type="text" ng-pattern="vm.currencyPattern" name="briefBudget"  ng-blur="vm.formatCurrency()" ng-model="vm.budget">
+                    <div ng-messages="briefForm.briefBudget.$error">
+                      <div ng-message="pattern,number">This needs to be a valid number</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Budget readonly -->
+        <section class="brief-section" ng-if="vm.readonly">
+          <h5 class="padding-left-gt-xs-10 margin-top-10"><span class="uppercase">Budget </span></h5>
+            <div class="brief-section-body">
+              <p class="no-margin bolder" ng-show="vm.project.brief.budget > 0">
+                I have a maximum budget for the work
+              </p>
+              <p class="no-margin bolder" ng-hide=" vm.project.brief.budget > 0">
+                I have no maximum budget for the work
+              </p>
+              <p ng-show="vm.project.brief.budget > 0">$ {{vm.budget}}</p>
+            </div>
+        </section>
+
+
+        <section class="brief-section" ng-if="!vm.isProquote && !vm.supplierSwapPreference">
+          <div class="brief-section-body">
+            <h6>{{vm.project.brief.supplierName}} has indicated that they will not accept a swap</h6>
+          </div>
+        </section>
+
+
+
+        <!-- SWAP SECTION -->
+
+        <section class="brief-section" ng-if="( (vm.project.brief.thingsICanSwap.length >0 || vm.project.brief.considerSwap) && vm.readonly) || vm.supplierSwapPreference || vm.isProquote" id="swap-required-details">
+
+          <div>
+            <h5 ng-show="!vm.readonly"  class="padding-left-gt-xs-10 uppercase no-margin margin-top-10">Would you like to Swap?</h5>
+            <h5 ng-show="vm.project.brief.thingsICanSwap.length > 0 && vm.project.brief.considerSwap && vm.readonly" class="padding-left-gt-xs-10 no-margin margin-top-10 uppercase">YOU HAVE INDICATED YOU ARE OPEN TO SWAP</h5>
+            <div class="padding-top margin-bottom-10" ng-show="vm.project.brief.considerSwap && vm.readonly || !vm.readonly" layout="row" layout-align="start center" >
+              <a href="https://proquo.zendesk.com/hc/en-us/sections/204466067-Choosing-Swap-or-Pay" target="_blank" class="bolder padding-left-gt-xs-10 ">New to Swapping? </a><a href="https://proquo.zendesk.com/hc/en-us/sections/204466067-Choosing-Swap-or-Pay" target="_blank" class="info-btn btn md-fab md-mini dark-blue margin-left-10"><i class="icon icon-info"></i></a>
+            </div>
+          </div>
+
+          <div class="brief-section-body" >
+
+
+              <div ng-if="!vm.readonly" layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+                <p class="no-margin bolder">Would you be open for a swap?</p>
+                <div layout="row">
+                  <md-button class="btn btn-raised" ng-click="vm.project.brief.considerSwap = true; vm.swapError = false;" ng-class="{'md-primary':vm.project.brief.considerSwap}">Yes</md-button>
+                  <md-button class="btn btn-raised txt-negative" ng-click="vm.project.brief.considerSwap = false; vm.swapError = false;" ng-class="{'md-primary':!vm.project.brief.considerSwap}">No</md-button>
+                </div>
+              </div>
+
+            <div  ng-if="!vm.project.brief.considerSwap">
+              <h6 ng-show="vm.readonly" class="margin-top-10">You have indicated you are not willing to swap</h6>
+              <p  ng-show="!vm.readonly">You have indicated you are not willing to swap</p>
+            </div>
+
+
+            <div ng-show="vm.project.brief.considerSwap">
+
+              <h6 ng-hide="vm.readonly" ng-click="vm.showSwapComponent = true">I can swap</h6>
+              <h6 ng-hide="!vm.readonly">You can swap</h6>
+
+              <md-input-container ng-show="vm.swapError" class="no-margin">
+                <div class="md-input-messages-animation md-auto-hide  ng-inactive" ng-class="{'ng-active':vm.swapError}">
+                  <div class="md-input-message-animation txt-warning" ng-class="{'reveal-message':vm.swapError}">You have indicated that you want to swap but you haven't added any services</div>
+                </div>
+              </md-input-container>
+
+
+              <div class="swaps padding-left-no" layout="column"  layout-align="space-around start" layout-gt-xs="row" layout-align-gt-xs="start center" layout-padding>
+                <div class="padding-left-no">
+                  <md-icon ng-if="!vm.readonly" class="material-icons add_skill_btn" ng-click="vm.showBriefSwapSkillsModal()">add_circle</md-icon>
+
+                </div>
+
+                <div layout="row" layout-wrap layout-align="start center" >
+                  <div class="custom-chip is-active uppercase bolder" ng-repeat="swapItem in vm.project.brief.thingsICanSwap track by $index">
+                    <span>{{swapItem}}</span>
+                    <span class="icon icon-remove" ng-click="vm.removeThingsIcanSwap($index, swapItem)" ng-if="!vm.readonly"></span>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <section class="md-actions actions" aria-label="actions" layout="column" layout-gt-xs="row"  layout-align-gt-xs="end center">
+          <a flex-order-xs="3" ng-if="vm.project.status=='common.draft' || vm.isProquote && vm.project.status=='draft'"
+             md-theme="red" class="btn txt-negative" ng-click="vm.discard($event)">Discard Brief</a>
+          <md-button flex-order-xs="2" class="btn txt-positive"  ng-click="vm.showChatModal($event)" ng-if="vm.project.brief.supplierId">Message</md-button>
+          <span flex></span>
+          <md-button flex-order-xs="1"  ng-disabled="vm.processing" ng-if="vm.project.status=='common.draft' && !vm.isProquote"
+                     ng-keyup="$event.keyCode == 13" ng-click="vm.submit($event, briefForm)" class="btn md-raised md-primary-cta" ng-disabled="!vm.project.brief.supplierId">
+            <span ng-hide="vm.processing">Submit</span>
+            <md-progress-circular  ng-show="vm.processing" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+          </md-button>
+          <md-button flex-order-xs="1"  ng-disabled="vm.processing" ng-if="vm.isProquote && vm.engageWith"
+                     ng-keyup="$event.keyCode == 13 " ng-click="vm.submit($event, briefForm)" class="btn md-raised md-primary-cta" ng-disabled="!vm.project.brief.supplierId">
+            <span ng-hide="vm.processing">Send</span>
+            <md-progress-circular  ng-show="vm.processing" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+          </md-button>
+          <md-button flex-order-xs="1"  ng-disabled="vm.processing" ng-if="(vm.project.status=='draft' || vm.project.status=='in-progress') && vm.isProquote && !vm.engageWith"
+                     ng-keyup="$event.keyCode == 13" ng-click="vm.submit($event, briefForm, true)" class="btn md-raised md-primary-cta">
+            <span ng-hide="vm.processing">Find Users</span>
+            <md-progress-circular  ng-show="vm.processing" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+          </md-button>
+          <md-button flex-order-xs="1"  ng-if="vm.hasProjectAction(vm.project, 'recallBrief')"  class="btn md-primary-cta" ng-click="vm.editBrief($event)">Modify</md-button>
+
+        </section>
+
+      </form>
+    </section>
+  </div>
+</div>

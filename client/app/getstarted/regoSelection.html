@@ -1,0 +1,37 @@
+<div class="l-layout l-one-column cf">
+  <div class="content-container l-padding cf">
+    <div layout="row" layout-align="center center" class="getstarted-selection">
+      <div flex="100" flex-gt-sm="60" flex-gt-md="40">
+        <div layout="row" layout-align="center center">
+          <pre class="selection-heading padding-bottom-20">
+            Hi <h5>{{::vm.firstName}}</h5>! How can we help?
+          </pre>
+        </div>
+
+        <div layout="column" class="getstarted-selection-buttons">
+          <md-button class="btn md-raised btn-selection btn-buyer" ng-click="vm.selected('buyer')"><span>I am looking for suppliers</span>
+          </md-button>
+          <md-button class="btn md-raised btn-selection btn-seller" ng-click="vm.selected('supplier')"><span>I am looking for customers</span>
+          </md-button>
+          <md-button class="btn md-raised btn-selection btn-swap" ng-click="vm.selected('swap')"><span>I am looking to trade and swap</span>
+          </md-button>
+        </div>
+
+        <div class="text-on-a-line margin-top-bottom">
+          <div><span>OR</span></div>
+          <hr/>
+        </div>
+
+        <div layout="column" class="getstarted-selection-buttons">
+          <md-button class="btn md-primary-cta md-raised btn-selection" ng-click="vm.selected('browse')"><span>I just want to browse</span></md-button>
+        </div>
+
+        <div layout="row" class="left-btn-wrapper">
+          <md-button class="md-icon-button" ui-sref="getstarted-nameinfo">
+            <md-icon aria-label="Home" class="icon icon-arrow-left"></md-icon>
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

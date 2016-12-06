@@ -1,0 +1,110 @@
+<md-dialog aria-label="login" class="login-modal full-screen-on-mobile">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div flex>
+        <h2 class="heading">
+          Sign in
+        </h2>
+      </div>
+      <md-button class="md-icon-button" ng-click="close()">
+        <md-icon aria-label="Close chat" class=" icon icon-remove"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+	<md-dialog-content>
+
+		<form name="login" class="login-form" ng-submit="vm.login(login)" novalidate="novalidate">
+			<p class="center">
+				Sign in using your social media account
+			</p>
+      <div layout="column" layout="center center" layout-gt-xs="row" layout-gt-xs="space-between center">
+        <md-input-container >
+          <md-button type="button" class="md-raised btn btn-sign-in fn-btn-sign-in-fb fb" aria-label="sign in with facebook"
+                     ng-click="vm.loginOauth('facebook')"
+                     ng-disabled="disableFacebookSignIn"
+                     data-auth-type="register">
+            <span class="icon icon-facebook padding-right"></span><span  class="padding-left">Sign in with Facebook</span>
+          </md-button>
+        </md-input-container>
+        <md-input-container >
+          <md-button type="button"
+                     class="md-raised btn btn-sign-in linkedin"
+                     aria-label="sign in with linkedin"
+                     ng-click="vm.loginOauth('linkedin')"
+                     ng-disabled="disableLinkedInSignIn"
+                     data-auth-type="register">
+            <span class="icon icon-linkedin padding-right"></span><span class="padding-left">Sign in with LinkedIn</span>
+          </md-button>
+        </md-input-container>
+      </div>
+
+
+			<p class="center">
+				or sign in via email
+			</p>
+
+			<!-- <p class="center" ng-show="">
+				<span class="icon icon-spin6 animate-spin" aria-hidden="true"></span>
+			</p> -->
+      <div layout="column"  layout-gt-sm="row" layout-padding>
+
+
+            <md-input-container class="md-block" flex="100"  flex-gt-sm="45" >
+              <label>Email address *</label>
+              <input required aria-label="email" type="email" name="email" spellcheck="false" ng-pattern="/^.+@.+\..+$/" ng-model="vm.user.email">
+
+
+              <div ng-messages="login.email.$error" role="alert">
+                <div ng-message-exp="['required', 'pattern']">
+                  Your email is required and must be a valid email address
+                </div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex="100"  flex-gt-sm="45" ng-show="!showPassword">
+              <label>Password *</label>
+              <input aria-label="password" type="password" ng-model="vm.user.password">
+
+              <a class="showHidePasswd" href="" ng-click="showPassword=!showPassword">Show</a>
+
+            </md-input-container>
+
+            <md-input-container flex="100" class="md-block"  flex-gt-sm="45" ng-show="showPassword">
+              <label>Password *</label>
+              <input aria-label="password" type="text" ng-model="vm.user.password">
+
+              <a class="showHidePasswd" href="" ng-click="showPassword=!showPassword">Hide</a>
+
+            </md-input-container>
+
+
+
+      </div>
+
+      <div layout="column" layout-gt-xs="row" layout-align="end center">
+          <a class="md-block padding-right" ui-sref="forgotpwd" ng-click="close()">Forgot Password?</a>
+      </div>
+
+			<md-input-container class="padding-top-xs">
+				<md-checkbox ng-model="vm.user.rememberMe" aria-label="Remember by details">
+					Remember my details
+				</md-checkbox>
+			</md-input-container>
+
+
+			<md-button type="submit"
+					   class="md-raised md-primary-cta btn btn-sign-in fn-btn-sign-in-email"
+					   data-auth-type="login">
+				Sign in
+			</md-button>
+
+      <div ng-messages="vm.errors.other" role="alert">
+        <div class="md-input-message-animation txt-warning">{{vm.errors.other}} </div>
+      </div>
+
+		</form>
+
+    <p class="center">Not yet a member? <a ng-click="close()" ui-sref="getstarted">Join Now</a></p>
+
+ </md-dialog-content>
+</md-dialog>

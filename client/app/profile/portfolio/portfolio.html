@@ -1,0 +1,21 @@
+<md-dialog aria-label="Portfolio"  ng-cloak class="img-modal" >
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{item.name}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <img style="width: 100%;" alt="{{item.name}}" src="{{item.fullImageUrl}}">
+        <p class="md-padding ">{{item.description}}</p>
+      </div>
+    </md-dialog-content>
+
+  </form>
+</md-dialog>
+

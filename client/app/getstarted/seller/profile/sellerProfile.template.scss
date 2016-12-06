@@ -1,0 +1,228 @@
+.profile{
+  background-color: $white;
+  border-top: 5px solid $dd-dark-blue;
+  box-shadow: $whiteframe-shadow-3dp;
+
+  .denote{
+    border-radius: 10px;
+    background-color: #eee;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+    padding: 8px;
+  }
+
+  h4{
+    margin: 25px 0 0 0;
+  }
+
+  md-input-container{
+    margin: 0;
+    .md-errors-spacer{
+      min-height: 0;
+    }
+  }
+
+  .profile-left-top{
+    padding-bottom: 0;
+
+    .pay-swap-icon{
+      position: relative;
+      top: 4px;
+      height: 28px;
+    }
+
+    .pay-swap-icon-label{
+      position: relative;
+      bottom: 4px;
+      margin: 0 30px 0 5px;
+    }
+  }
+
+  .profile-business-desc{
+    padding-top: 0;
+  }
+
+  .avatar-container{
+    position:relative;
+    max-width:400px;
+
+    .avatars{
+      .org-logo, .user-logo, .org-no-logo{
+        cursor:pointer;
+      }
+    }
+
+    i{
+      position: absolute;
+      cursor: pointer;
+      font-size: 24px;
+      background: #fff;
+      line-height: 12px;
+      border-radius: 15px;
+      &.delete-avatar{
+        top: 10px;
+        left: 5%;
+        z-index:1;
+      }
+      &.delete-logo{
+        top: 10px;
+        left: 50%;
+        z-index:1;
+      }
+    }
+
+    a{
+      display: block;
+      background: $dd-dark-blue;
+      border-radius: 20px;
+      padding: 5px;
+      cursor:pointer;
+      position: absolute;
+      color: $white;
+      font-weight: bold;
+      padding:5px 15px;
+      z-index:2;
+      font-size: 0.875rem;
+      &.avatar{
+        top: 91%;
+        left:12%;
+      }
+      &.logo{
+        top: 91%;
+        left:58%;
+      }
+    }
+  }
+
+  .portfolio{
+    box-shadow: $box-shadow-general;
+
+    .portfolio-images{
+      @extend .cf;
+      overflow-x: scroll;
+      white-space: nowrap;
+      background: $dd-lightest-grey;
+      min-height: 150px;
+      @include bp(l){
+        background: $white;
+      }
+      padding-top: 8px;
+      padding-left: 8px;
+
+      .portfolio-image-wrapper{
+        display: inline-block;
+        overflow: hidden;
+        margin:0;
+        position: relative;
+        height: 150px;
+        border: solid 1px white;
+        border-left: none;
+        cursor:pointer;
+
+        .portfolio-img-container{
+          background:$white;
+          height: 150px;
+          min-width:150px;
+          .portfolio-img{
+            max-height: 200px;
+            height: 200px;
+            max-width: 200px;
+            min-width: 200px;
+            object-fit: cover;
+            object-position: 50% 50%;
+          }
+        }
+
+        .item-info{
+          display: inline-block;
+          height: 0;
+          width:  0;
+          transition: height 550ms;
+          background-color: rgba(0, 0, 0, 0.5);
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+
+        .portfolio-text{
+          color: $white;
+          text-align: center;
+          height: 30%;
+          padding-right: 10px;
+          padding-left: 10px;
+          padding-top: 30px;
+          white-space: normal;
+
+          .heading{
+            font-weight:bold;
+          }
+
+          .description{
+            @include font-size(13, 16);
+            display: block;
+            height: 80px;
+            overflow: hidden;
+          }
+        }
+
+        .view-portfolio{
+          color: #fff;
+          white-space: normal;
+          margin: 10px auto 0 auto;
+          text-align: center;
+          @include feature-heading();
+        }
+
+        &:hover{
+          .item-info {
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+
+    }
+
+    .media-btn-container{
+      width:65px;
+      @include bp(s) {
+        width:85px;
+      }
+      .upload-media{
+        background:$dd-primary-background;
+        color:$white;
+        font-weight:bold;
+        padding:10px;
+        cursor:pointer;
+        text-align: center;
+        .icon{
+          color:$white;
+        }
+      }
+    }
+
+  }
+
+  .abn{
+    md-input-container.md-has-icon {
+      padding-left: 0;
+      padding-right: 0;
+      margin-bottom: 0;
+    }
+
+    md-input-container div.validation-info {
+      font-size: 12px;
+      line-height: 14px;
+      padding-top: 36px;
+    }
+
+    md-input-container > md-icon {
+      position: absolute;
+      left: auto;
+      right: 0;
+      padding-left: 5px;
+      color: green;
+    }
+  }
+
+}

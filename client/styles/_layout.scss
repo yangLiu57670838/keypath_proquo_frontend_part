@@ -1,0 +1,360 @@
+// ==========================================================================
+// LAYOUT
+// ==========================================================================
+$sticky_footer_height: 280px;
+
+#outer-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  @if $IS_RESPONSIVE == true {
+    min-width: 320px;
+  }
+
+  //the following is for sticky footer
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto (-$sticky_footer_height);
+}
+
+//this is also for sticky footer
+.footer-push, main-footer {
+  height: $sticky_footer_height;
+}
+
+main-footer {
+  position: relative;
+}
+
+#inner-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.terms-modal {
+  .content-container {
+    padding: 0 !important;
+  }
+  .terms-container {
+    width: 100%;
+    padding: 0 !important;
+  }
+  .max-page-size {
+    width: inherit !important;
+    margin-left: inherit !important;
+    margin-right: inherit !important;
+  }
+}
+
+// ==========================================================================
+// CONTAINER AND PADDING LAYOUTS
+// ==========================================================================
+
+.l-container,
+.l-padding {
+  @include box-sizing(border-box);
+
+  @include bp(m) {
+    width: #{$bp-m-min}px;
+    margin: 0 auto;
+  }
+
+  @include bp(l) {
+    width: #{$bp-l-min}px;
+    .form-element-fixed {
+      width: 768px;
+      margin-left: auto;
+      margin-right: auto;
+      @include bp(l) {
+        width: 1024px;
+      }
+    }
+
+    .max-page-size {
+      width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      @include bp(l) {
+        width: 800px;
+      }
+    }
+
+  }
+
+  @include bp(xl) {
+    width: #{$bp-xl-min}px;
+  }
+
+  @include bp(xxl) {
+    width: #{$bp-xxl-min}px;
+  }
+}
+
+.l-padding {
+  padding: 0 $layout-padding;
+
+  @include bp(m) {
+    padding: 0 $layout-padding;
+  }
+
+  @include bp(xl) {
+    padding: 0 $layout-padding-xl;
+  }
+}
+
+// ==========================================================================
+// GLOBAL LAYOUT
+// ==========================================================================
+
+.content-container,
+.content-column,
+.aside,
+.complementary,
+.main,
+.l-layout {
+  @include box-sizing(border-box);
+  outline: none;
+}
+
+.main {
+  padding-top: 50px;
+  @include bp-max(xs) {
+    padding-top: 20px;
+  }
+}
+
+.content-container {
+  position: relative;
+  padding-top: 74px;
+
+  @include bp-max(s) {
+    padding-top: 58px;
+  }
+
+  @include bp(l) {
+    min-height: 500px;
+  }
+}
+
+// :not selctor added to ensure it doesn't interfere with the ng-materials styles
+.l-layout {
+  position: relative;
+}
+
+// ==========================================================================
+// TEMPLATE LAYOUTS
+// ==========================================================================
+
+.l-one-column {
+  // nothing required
+}
+
+.l-two-column-left {
+  .main {
+    @include bp(l) {
+      float: left;
+      width: $layout-l-width - $complementary-width - $layout-margins;
+      margin-right: $layout-margins;
+    }
+
+    @include bp(xl) {
+      width: $layout-xl-width - $complementary-width - $layout-margins;
+    }
+
+    @include bp(xxl) {
+      width: $layout-xxl-width - $complementary-width - $layout-margins;
+    }
+  }
+
+  .complementary {
+    @include bp(l) {
+      position: relative;
+      float: left;
+      width: $complementary-width;
+    }
+
+    @include bp(xl) {
+      width: $complementary-width;
+    }
+  }
+}
+
+// shared styles for two column right and three column
+.l-two-column-right,
+.l-three-column {
+  .content-column {
+    @include bp(m) {
+      float: right;
+      width: $layout-m-width - $aside-width;
+    }
+
+    @include bp(l) {
+      width: $layout-l-width - $aside-width;
+    }
+
+    @include bp(xl) {
+      width: $layout-xl-width - $aside-width;
+    }
+
+    @include bp(xxl) {
+      width: $layout-xxl-width - $aside-width;
+    }
+  }
+
+  .main {
+    width: auto;
+
+    @include bp(m) {
+      margin-left: $layout-margins;
+    }
+  }
+
+  .aside {
+    @include bp(m) {
+      position: relative;
+      float: left;
+      width: $aside-width;
+    }
+
+    @include bp(l) {
+      width: $aside-width;
+    }
+
+    @include bp(xl) {
+      width: $aside-width;
+    }
+  }
+}
+
+.l-three-column {
+  .main {
+    @include bp(xl) {
+      float: left;
+      width: $layout-xl-width - $aside-width - $complementary-width - $layout-margins - $layout-margins;
+      margin-right: $layout-margins;
+    }
+
+    @include bp(xxl) {
+      width: $layout-xxl-width - $aside-width - $complementary-width - $layout-margins - $layout-margins;
+    }
+  }
+
+  .complementary {
+    @include bp(m) {
+      width: auto;
+    }
+
+    @include bp(xl) {
+      position: relative;
+      float: left;
+      width: $complementary-width;
+    }
+
+    @include bp(m, l) {
+      margin-left: $layout-margins;
+    }
+  }
+}
+
+// full width layouts
+.l-full-width {
+  padding: 0;
+}
+
+.l-full-width-image {
+
+  background-repeat: no-repeat;
+  background-color: #ddd;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  // min-height:100vh;
+
+  &.vision {
+    background-image: url("../assets/images/landing-vision-bg-1.jpg");
+
+    .jumbotron {
+      margin-bottom: 10px;
+      // padding-bottom: 40px;
+    }
+  }
+
+  &.connect {
+    background-image: url("../assets/images/landing-vision-bg-2.jpg");
+  }
+
+  &:before {
+    content: ' ';
+    background-color: rgba(0, 0, 0, 0.78);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .content-container {
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .jumbotron {
+    color: #fff;
+    position: relative;
+    width: 60%;
+    background: none;
+    z-index: 10;
+
+    h1 {
+      color: #fff;
+    }
+  }
+}
+
+.l-full-width-video {
+  position: relative;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #000;
+
+  video {
+    min-height: 100vh;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  &:before {
+    content: ' ';
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+}
+
+// bg colour layouts
+.l-bg-grey {
+  background-color: $white;
+  @include bp(l) {
+    background-color: $nab-bg-grey;
+  }
+}
+
+.l-content-padding {
+  padding-top: 70px;
+
+  @include bp(m) {
+    padding-top: 120px;
+  }
+}

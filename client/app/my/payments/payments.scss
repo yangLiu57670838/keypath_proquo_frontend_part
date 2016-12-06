@@ -1,0 +1,46 @@
+.payments {
+  @include padding-variable(10, 0, 15, 0, 2);
+
+  .section-title {
+    margin-bottom: 15px;
+    font-size: 1.375rem;
+  }
+
+  .read-only {
+    border-width: 0 !important;
+  }
+
+  .card-types {
+    .card-type-disable {
+      opacity: 0.4;
+      filter: alpha(opacity=40);
+    }
+  }
+
+  .collapsible-card-body-content {
+    padding: 0 15px 0 15px;
+    @include bp-max(xs){
+      padding: 0;
+    }
+  }
+
+  .md-button {
+    @include bp-max(m) {
+      width: 100% !important;
+    }
+  }
+
+  .info-btn.md-fab.md-mini {
+    &.dark-blue{
+      width: 25px;
+      height: 25px;
+      padding: 0;
+      line-height: 26px;
+      background:$dd-dark-blue;
+
+      i{
+        @include font-size(12, 12);
+      }
+    }
+  }
+}

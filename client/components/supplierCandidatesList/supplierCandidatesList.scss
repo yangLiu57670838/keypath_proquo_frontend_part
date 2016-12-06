@@ -1,0 +1,90 @@
+.supplier-candidates-list-wrapper{
+  profile-summary .profile-summary{
+    overflow: hidden;
+    .profile-summary-photo{
+      width: 120px;
+      min-width: 120px;
+    }
+  }
+  .btn-star{
+    width:20px;
+  }
+  md-list-item{
+    box-shadow: $whiteframe-shadow-3dp;
+    margin-bottom:5px;
+  }
+
+
+
+  .project-state{
+    text-align: center;
+    font-weight:bold;
+    cursor:pointer;
+    .icon{
+      font-size:30px;
+      color:$dd-black;
+    }
+  }
+
+  .candidate-state{
+    &.btn-pending{
+      background:$dd-grey;
+    }
+    &.btn-exclaim{
+      background:$dd-action;
+    }
+    &.btn-done{
+      background:$dd-primary-background;
+    }
+    text-align: center;
+    font-weight:bold;
+    color:$white;
+    cursor:pointer;
+    .icon{
+      font-size:30px;
+      color:$white;
+    }
+
+  }
+
+  .reject-action{
+    background:$nab-red;
+    text-align: center;
+    font-weight:bold;
+    cursor:pointer;
+    &.deactivate{
+      cursor:default;
+    }
+    color:$white;
+    .icon{
+      font-size:30px;
+      color:$white;
+    }
+  }
+
+
+
+  .contact-name{
+    color:$dd-primary-background;
+  }
+  .business-name{
+    color:$dd-dark-blue;
+  }
+
+  .vertical-divider{
+    border-left:2px solid $dd-light-grey;
+    min-height: 60px;
+  }
+  .message{
+    color:$dd-primary-background;
+    .material-icons{
+      color:$dd-primary-background;
+      @include font-size(18, 16);
+      padding-right:5px;
+
+      &.mobile{
+        @include font-size(37, 30);
+      }
+    }
+  }
+}

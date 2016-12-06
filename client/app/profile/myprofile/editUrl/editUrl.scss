@@ -1,0 +1,53 @@
+.edit-url{
+
+  .chosen-url{
+    margin-top: 3px;
+    text-align: right;
+    @include bp-max(s){
+      text-align:left;
+    }
+  }
+
+  .qualification md-input-container{
+    margin:0;
+  }
+  @include bp-max(xs){
+    .add-btn{
+      width:100%;
+    }
+  }
+  .slash{
+    position: absolute;
+    left: 30px;
+    top: 12px;
+  }
+  .type-o-link{
+    min-width:120px;
+  }
+
+  md-list-item{
+    background:$dd-lightest-grey;
+    margin-bottom: 5px;
+
+    md-input-container > md-icon{
+      margin-top:10px;
+    }
+  }
+  md-input-container .md-auto-hide.md-input-messages-animation{
+    overflow: hidden;
+    min-width:150px;
+  }
+  md-input-container .md-auto-hide .md-input-message-animation{
+
+    &:not(.ng-animate).show-error-message{
+      opacity: 1;
+      margin-top: 0px;
+      @include font-size(12, 14);
+      color:rgb(221,44,0);
+      padding-top:5px;
+      transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    }
+  }
+
+}
+

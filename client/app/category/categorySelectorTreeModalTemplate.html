@@ -1,0 +1,21 @@
+<md-dialog aria-label="all skills" class="all-skill-tags-modal">
+  <md-dialog-content>
+
+    <p class="small">
+      Choose from the categories below
+    </p>
+
+    <div ng-include="'app/category/categorySelectorTreeTemplate.html'"></div>
+
+    <div class="md-actions" layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()" class="btn md-raised">
+        Cancel
+      </md-button>
+      <md-button ng-click="done()" class="btn md-primary-cta md-raised" >
+        Add to search
+      </md-button>
+    </div>
+
+  </md-dialog-content>
+</md-dialog>

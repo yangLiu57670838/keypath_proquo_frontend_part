@@ -1,0 +1,382 @@
+// ==========================================================================
+// BASE STYLES
+// These styles get added to scedit.css
+// ==========================================================================
+
+/*
+.md-primary{
+  color:$theme-colour !important;
+}
+.md-accent{
+  color:$theme-colour !important;
+}
+.md-warn{
+  color:$theme-warning !important;
+}
+*/
+
+html {
+	// -webkit-tap-highlight-color: rgba($dd-green, 0.5);
+  overflow-y: scroll;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+	@include font-base();
+}
+
+body {
+	@include font-size($paragraph-font-size, $paragraph-line-height);
+	color: $paragraph-color;
+	font-family: $font-family-base;
+}
+
+@if $IS_RESPONSIVE == false {
+	@media screen {
+		html, body {
+			min-width: #{$bp-static-max}px;
+		}
+	}
+}
+
+// ==========================================================================
+// TYPOGRAPHY
+// ==========================================================================
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	@include font-feature-heavy();
+	color: $heading-color;
+/*
+	&:first-child {
+		margin-top: 0;
+	}
+	*/
+}
+
+h1, .h1 {
+	@include font-size($h1-font-size, $h1-line-height);
+	margin: $h1-margin;
+}
+
+h2, .h2 {
+	@include font-size($h2-font-size, $h2-line-height);
+	margin: $h2-margin;
+}
+
+h3, .h3 {
+	@include font-size($h3-font-size, $h3-line-height);
+	margin: $h3-margin;
+}
+
+h4, .h4 {
+	@include font-size($h4-font-size, $h4-line-height);
+	margin: $h4-margin;
+}
+
+h5, .h5 {
+	@include font-size($h5-font-size, $h5-line-height);
+	margin: $h5-margin;
+}
+
+h6, .h6 {
+	@include font-size($h6-font-size, $h6-line-height);
+	margin: $h6-margin;
+}
+
+.feature-heading{
+	@include feature-heading();
+}
+
+p, pre, dl, menu, ol, ul {
+	margin: $paragraph-margin;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&.small{
+		@include font-size(12,18);
+	}
+
+}
+
+pre{
+  white-space:normal;
+  display:inline;
+  font-family: inherit;
+}
+.center{
+  text-align: center;
+}
+
+a {
+	color: $link-color-default;
+	text-decoration: none;
+	transition-duration: 250ms;
+	transition-property: color, background-color, border-color;
+  cursor:pointer;
+
+	&:focus,
+	&:hover {
+		color: $link-color-hover;
+
+		i{
+			color: $link-color-hover;
+		}
+	}
+
+	&:active {
+		color: $link-color-active;
+
+		i{
+			color: $link-color-active;
+		}
+	}
+
+	i{
+		transition-duration: 250ms;
+		transition-property: color, background-color, border-color;
+	}
+}
+
+// Button classnames are here so that they appear in scedit.css
+.btn,
+.md-button.btn{
+  text-align: center;
+	@include button();
+}
+
+.btn.btn-small{
+  height: 6px;
+  span{
+    font-size: 10px;
+    line-height: 2px;
+    display: block;
+    color:$theme-colour;
+  }
+}
+
+.btn.btn-theme-accent{
+  background-color: $theme-accent !important;
+  color:$white !important;
+}
+
+.btn.btn-grey{
+  background-color: $dd-grey !important;
+  color:$white !important;
+}
+
+.cta {
+	@include button();
+
+	&:hover,
+	&:focus,
+	&:active {
+
+	}
+
+}
+
+.btn-social,
+.md-button.btn-social {
+	width: 40px;
+	height: 40px;
+	min-height: 0;
+	min-width: 0;
+	border-radius: 50%;
+	i {
+		line-height: 40px;
+
+	}
+}
+
+.btn-plain,
+.md-button.btn-plain{
+	color: #000;
+}
+.btn-plain.is-selected,
+.md-button.btn-plain.is-selected{
+  border: 2px solid $nab-grey-border;
+}
+
+.cta-secondary {
+	@include button();
+
+	&:hover,
+	&:focus,
+	&:active {
+
+	}
+}
+
+.intro {
+	@include font-base();
+	@include font-size($h5-font-size, $h5-line-height);
+	color: $paragraph-color;
+}
+
+// ==========================================================================
+// LISTS
+// ==========================================================================
+
+
+li {
+	margin-top: 7px;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	li:first-child {
+		margin-top: 7px;
+	}
+}
+
+ul,
+ol {
+	padding-left: 18px;
+
+	ul,
+	ol {
+		margin-bottom: 0;
+	}
+}
+
+dl {
+	dt {
+		color: $heading-color;
+		font-weight: bold;
+		margin-top: 7px;
+	}
+
+	dd {
+		margin-left: 0;
+	}
+}
+
+// ==========================================================================
+// BLOCKQUOTE
+// ==========================================================================
+
+blockquote {
+	@include font-feature();
+	@include font-size(26);
+	margin: $margins-text-small 0;
+	position: relative;
+	padding-left: 20px;
+	color: $dd-black-text;
+	min-height: 40px;
+	border-left: 5px solid $dd-light-green;
+	font-weight: normal;
+
+	cite {
+		@include font-base();
+		font-style: normal;
+		font-weight: bold;
+		@include font-size($paragraph-font-size);
+		display: block;
+		color: $paragraph-color;
+	}
+}
+
+// ==========================================================================
+// IMAGES
+// ==========================================================================
+
+@include bp(xs) {
+	.float-left {
+		float: left;
+		margin: 5px 15px 5px 0;
+	}
+
+	.float-right {
+		float: right;
+		margin: 5px 0 5px 15px;
+	}
+}
+
+.float-center {
+	display: block;
+	margin: 5px auto;
+}
+
+// ==========================================================================
+// TABLES
+// ==========================================================================
+
+table.table {
+  width: 100%;
+
+  th, td {
+	text-align: left;
+	vertical-align: top;
+	padding: 14px 25px;
+  }
+
+  th {
+	border: 1px solid $dd-light-grey;
+	background-color: $dd-bg-grey;
+	color: $heading-color;
+	@include font-feature();
+  }
+
+  tbody {
+	th {
+	  font-weight: normal;
+	}
+
+	td {
+	  border: 1px solid $dd-light-grey;
+	  background-color: #fff;
+	  color: $paragraph-color;
+	}
+  }
+}
+
+
+table.small{
+
+	th, td{
+		@include font-size(14);
+	}
+}
+
+// ==========================================================================
+// CODE
+// ==========================================================================
+
+p > code,
+li > code {
+	background: #DDFED9;
+}
+
+// icons
+i{
+	color: $icon-colour-default;
+}
+.btn-star{
+  i{
+    color: $ratings-blank;
+  }
+}
+
+.italic-text{
+  font-style:italic;
+  @include font-size(14, 14);
+}
+
+button.md-green-theme{
+  color:$white !important;
+}
+
+md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-ripple-container {
+  color: $dd-primary-color;
+}

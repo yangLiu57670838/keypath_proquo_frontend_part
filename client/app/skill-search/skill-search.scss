@@ -1,0 +1,437 @@
+.browse{
+
+  .search-controls{
+    @include bp-max(xs){
+      background:$dd-lightest-grey;
+      padding:0;
+    }
+    .search-box{
+      background:$dd-lightest-grey;
+      padding-top: 50px;
+      @include bp-max(xs) {
+        padding-left:10px;
+        padding-right:10px;
+      }
+    }
+  }
+
+
+  .md-select-value{
+    border: 2px solid $dd-light-grey;
+    background:lighten($dd-light-grey, 7);
+    padding: 0 10px;
+  }
+
+  .skills-search-container{
+
+    /* SEARCH */
+    .row{
+      margin: 0 0;
+      @include font-size(24,36);
+
+      .column{
+        padding: 0 10px 0 0;
+        height: 40px;
+        line-height: 40px;
+        vertical-align: middle;
+
+        margin-bottom: 10px;
+      }
+
+      md-select{
+        padding: 0;
+        margin-top: -3px; // fix
+      }
+
+      .md-select-label{
+        padding: 0;
+      }
+
+      @include bp(m){
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        @include font-size(29,36);
+
+        .column{
+
+          width: auto;
+          float: none;
+        }
+      }
+
+    }
+
+
+
+
+
+
+
+
+    .search-keywords-autocomplete-container {
+      min-height: 70px;
+      .search-keywords-autocomplete-wrapper {
+        position: relative;
+        height: 70px;
+        transition: height 400ms;
+        margin: 0 auto;
+        @include bp(m){
+          margin: 0 auto;
+        }
+        .md-whiteframe-1dp, .md-whiteframe-z1{
+          box-shadow:none !important;
+        }
+        .search-keywords-autocomplete {
+
+
+          .md-whiteframe-z1 {
+
+            button {
+              position: absolute;
+              right: 0;
+              top: 5px;
+              margin: 0;
+            }
+          }
+
+          input {
+            @extend .md-input;
+          }
+        }
+
+        .see-all-tags-trigger {
+          position: absolute;
+          bottom: 5px;
+          left:0;
+          display: inline-block;
+          padding: 10px 0 0 2px;
+          @include font-size(14, 20);
+          /*opacity: 0;
+          transition: opacity 200ms;
+          outline: none;
+          pointer-events: none;*/
+
+
+        }
+        md-autocomplete-wrap {
+          height: 70px;
+        }
+        &.is-active {
+          //height: 70px;
+
+
+
+          .see-all-tags-trigger {
+            opacity: 1;
+            z-index: 200;
+            pointer-events: auto;
+          }
+        }
+      }
+    }
+
+
+
+
+
+
+
+
+    /* SKILLS */
+    .skills-by-category-container{
+      margin: 20px 0;
+
+      .ng-ec-title{
+        padding: 10px;
+        border-bottom: 1px solid $nab-grey-light;
+        @include font-size(14,20);
+      }
+
+      .ng-ec-section{
+        margin-bottom:2px;
+      }
+      .ng-ec-subsection{
+        @extend .cf;
+        padding: 10px 0;
+
+        .ng-ec-subsection-link{
+          @include button(30);
+          @include font-base();
+          @include font-size(14);
+          margin: 0 10px 5px 0;
+          background-color: $nab-bg-grey;
+          color: #000;
+          padding-right: 30px;
+          position: relative;
+          float: left;
+
+          &:after{
+            @extend .material-icons;
+            content: 'add';
+            position: absolute;
+            font-size: 16px;
+            height: 30px;
+            line-height: 30px;
+            right: 8px;
+            top: 0;
+            transition: all 250ms;
+          }
+
+
+          &.is-active{
+            background-color: $theme-accent;
+            color: #fff;
+
+            &:after{
+              transform: rotate(45deg);
+            }
+          }
+        }
+      }
+    }
+
+    md-chips .md-chips .md-chip, md-chips .md-chip.md-focused {
+      background:$theme-accent;
+      color:$white;
+      md-icon{
+        color:$white;
+      }
+    }
+
+
+
+
+    input[type=search]{
+      height: 40px;
+      font-size: 26px;
+      border-bottom:2px solid $dd-light-grey;
+      padding-left:0;
+    }
+
+
+
+      .skills-picker{
+        width: 100%;
+        @include bp(s){
+          width:60%;
+        }
+
+      }
+    .card-container{
+      position:relative;
+      background:#fff;
+      max-width:300px;
+      @include bp-max(xs){
+        max-width:100%;
+      }
+      @include bp(xl){
+        min-width:300px;
+      }
+
+      .card-btn {
+        position:absolute;
+        width:100%;
+        margin:0;
+        bottom:-5px;
+      }
+
+      .card {
+        box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.1);
+        border: 1px solid $dd-light-grey;
+        padding-bottom:0px;
+        cursor:pointer;
+        min-height: 100%;
+        .content {
+          min-height: unset;
+          padding: 20px 10px 40px 10px !important;
+          min-width:200px;
+          @include bp(s){
+            padding: 20px 20px 40px 20px !important;
+          }
+
+          .distance-container {
+            min-height: 0px;
+          }
+
+          .profile-photo{
+            max-width:160px;
+            .avatars{
+              min-height:inherit;
+              min-width:inherit;
+            }
+          }
+
+          .skills {
+            padding-right:0;
+            min-height:65px;
+            .skill{
+              @include font-size(10, 26);
+            }
+          }
+
+        }
+      }
+    }
+
+    .location-directive{
+      margin:0 10px 0 24px;
+    }
+
+    .edit-container input{
+      color:$white;
+    }
+
+
+    /* SORTING FILTER BUTTONS */
+    .search-filters-container{
+      min-height:45px;
+      @extend .cf;
+      background: lighten($dd-light-grey,7);
+      padding: 20px 0;
+      @include bp(m){
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .filters-label{
+        padding: 6px 0 13px 0;
+        color: $dd-black;
+        @include font-feature-heavy();
+
+        @include bp(m){
+          float: left;
+        }
+      }
+
+      .edit-field input{
+        padding-right:0;
+        color:$dd-primary-background;
+      }
+
+      .btn{
+        @include button(35);
+        color: $nab-text-grey;
+        @include font-feature();
+        margin: 0 0 0 10px;
+        border: 1px solid transparent; // keep the size constant
+
+        &:hover{
+          color: $white;
+          border: 1px solid $white;
+        }
+
+        &.is-selected{
+          background-color: rgba(158,158,158,0.2);
+          color:$dd-dark-blue;
+        }
+      }
+
+    }
+  }
+
+  h5.feature-heading-light{
+    margin-top:0;
+    @include font-size(18, 18);
+  }
+
+  .search-result-name {
+    word-wrap: break-word;
+    max-width: none;
+    max-height: 80px;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+
+  }
+
+  .profile-contact-name {
+    display: block;
+  }
+
+  .profile-business-name {
+    display: block;
+  }
+
+
+
+
+
+  /* Add users to proquote classes*/
+
+  .profile-selections-container{
+    box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.1);
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:$white;
+    z-index:9;
+    @include bp(s){
+      min-height:150px;
+    }
+
+    .cont-btn-container{
+      @include bp(m) {
+        margin-right: 200px;
+      }
+    }
+
+    .user-selected-pill{
+      position:relative;
+      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+      min-height:50px;
+      width:245px;
+      margin-right:10px;
+      margin-bottom:10px;
+      background:$white;
+      cursor:pointer;
+
+      .profile-summary {
+        .profile-summary-photo{
+          width:60px;
+          min-width:80px;
+        }
+
+        .ellipsis-txt{
+          max-width:70px;
+          @include font-size(14, 20);
+        }
+      }
+
+      .icon-remove{
+        margin-right:20px;
+        cursor:pointer;
+      }
+
+    }
+
+  }
+
+  .assign-title{
+    @include font-size(24,36);
+    text-align: center;
+  }
+
+  .fade-out{
+    opacity:0.5;
+  }
+  .add-remove-button{
+    z-index: 9;
+    position:absolute;
+    width:100%;
+    height:103%;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+  }
+  .chosen-checkbox{
+    z-index:8;
+    position: absolute;
+    right:5px;
+    top:5px;
+  }
+
+
+}

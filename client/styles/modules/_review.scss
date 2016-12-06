@@ -1,0 +1,138 @@
+.review-container {
+	padding: 20px 0;
+
+	.radio-btn {
+		md-radio-button {
+			display: inline;
+			margin: 0px;
+		}
+	}
+	.star-rating-container {
+		outline: none;
+		position: relative;
+		display: inline-flex;
+
+		input {
+			display: none;
+			.star-input {
+				opacity: 0;
+			}
+		}
+		label.star-label {
+			width: 40px;
+			hight: 30px;
+			&:before {
+				@extend .material-icons;
+				content: 'star_rate';
+				width: 100%;
+				height: 100%;
+				color: $formfield-disabled-color;
+			}
+		}
+
+		&.check-3 {
+			.label1,
+			.label2,
+			.label3 {
+				&:before {
+					color: $theme-colour;
+				}
+			}
+		}
+
+		&.check-4 {
+			.label1,
+			.label2,
+			.label3,
+			.label4 {
+				&:before {
+					color: $theme-colour;
+				}
+			}
+		}
+		&.check-2 {
+			.label1,
+			.label2 {
+				&:before {
+					color: $theme-colour;
+				}
+			}
+		}
+
+		&.check-5 {
+			.label1,
+			.label2,
+			.label3,
+			.label4,
+			.label5 {
+				&:before {
+					color: $theme-colour;
+				}
+			}
+		}
+
+		&.check-1 {
+			.label1 {
+				&:before {
+					color: $theme-colour;
+				}
+			}
+		}
+
+	}
+
+	//
+	//input.star1:checked + label.star-label {
+	//&:before {
+	//  @extend .material-icons;
+	//  content: 'star_rate';
+	//  width: 100%;
+	//  height: 100%;
+	//  color: $theme-colour
+	//}
+	//}
+	//
+	//
+	//input.star2:checked + label.label2{
+	//&:before {
+	//  @extend .material-icons;
+	//  content: 'star_rate';
+	//  width: 100%;
+	//  height: 100%;
+	//  color: $theme-colour
+	//}
+	//}
+	//
+	//
+	//input.star3:checked + label.star-label {
+	//&:before {
+	//  @extend .material-icons;
+	//  content: 'star_rate';
+	//  width: 100%;
+	//  height: 100%;
+	//  color: $theme-colour
+	//}
+	//}
+	//
+	//
+	//input.star4:checked + label.star-label {
+	//&:before {
+	//  @extend .material-icons;
+	//  content: 'star_rate';
+	//  width: 100%;
+	//  height: 100%;
+	//  color: $theme-colour
+	//}
+	//}
+	//
+	//input.star5:checked + label.star-label {
+	//&:before {
+	//  @extend .material-icons;
+	//  content: 'star_rate';
+	//  width: 100%;
+	//  height: 100%;
+	//  color: $theme-colour
+	//}
+	//}
+
+}

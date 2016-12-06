@@ -1,0 +1,68 @@
+<md-dialog aria-label="Add skills" class=" full-screen-on-mobile brief-swap-skills-modal">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Services to swap</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="vm.cancel()">
+        <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+
+
+    <div layout="column" layout-padding>
+    <div class="autocomplete-surround">
+      <p class="bolder no-margin">Add additional services</p>
+      <div class="autocomplete-container">
+        <md-autocomplete
+          ng-if="vm.showSwapComponent"
+          class="search-keywords-autocomplete"
+          md-input-name="swapItemsField"
+          md-min-length="2"
+          md-input-maxlength="40"
+          md-selected-item="vm.selectedItem"
+          md-search-text-change="vm.searchTextChange(searchText)"
+          md-search-text="searchText"
+          md-selected-item-change="vm.selectAndAddSwapItem(item, this)"
+          md-items="item in vm.searchSwapItems(searchText)"
+          md-delay="0"
+          md-floating-label=""
+          md-item-text="item.swapItem"
+          placeholder="Type to add additional services">
+          <md-item-template>
+            <div>+ <span ng-bind="item.swapItem"></span></div>
+          </md-item-template>
+
+        </md-autocomplete>
+      </div>
+
+
+      <div ng-show="vm.swapItemLengthToLong">
+        <div class="txt-warning">Your entry must be 40 characters or less</div>
+      </div>
+      <div ng-show="vm.swapItemDuplicate">
+        <div class="txt-warning">This service has already been added</div>
+      </div>
+    </div>
+
+    <div class="swaps">
+      <p class="bolder no-margin" ng-show="vm.businessSwapItems.length >0">Or click to add/remove services from below</p>
+      <p class="smaller-font font">* Chosen services will be highlighted green</p>
+      <div class="custom-chip uppercase bolder" ng-click="vm.toggleThingsIcanSwap(swapItem)" ng-class="{'is-active':swapItem.chosen}" ng-repeat="swapItem in vm.businessSwapItems track by $index">
+        <span>{{swapItem.swapItem}}</span>
+        <span class="icon icon-remove"></span>
+      </div>
+    </div>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions class="md-actions actions" aria-label="actions" layout="row" layout-align="space-between center">
+    <md-button class="btn md-raised md-primary" ng-click="vm.cancel()" aria-label="Ok">
+      OK
+    </md-button>
+  </md-dialog-actions>
+
+</md-dialog>

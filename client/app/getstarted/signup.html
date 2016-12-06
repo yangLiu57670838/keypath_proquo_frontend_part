@@ -1,0 +1,85 @@
+<div class="l-layout l-one-column cf">
+  <div class="content-container l-padding cf">
+    <div layout="row" layout-align="center center" class="getstarted-signup">
+      <div flex="100" flex-gt-sm="70" flex-gt-md="50">
+        <form class="form registration-form" name="form" ng-submit="vm.register(form)" novalidate autocomplete="off">
+          <h3 class="heading">Sign-up options</h3>
+          <h6 class="subheading">via social media</h6>
+          <div layout="row" layout-align="center center">
+            <div flex="80" flex-gt-sm="70" flex-gt-md="60">
+              <md-button type="button" class="md-raised btn btn-sign-in fn-btn-sign-in-fb fb margin-bottom"
+                         aria-label="sign in with facebook"
+                         ng-click="vm.loginOauth('facebook')"
+                         data-auth-type="register">
+                <span class="icon icon-facebook padding-right"></span>
+                <span>Sign up through Facebook</span>
+              </md-button>
+              <md-button type="button"
+                         class="md-raised btn btn-sign-in linkedin md-padding"
+                         aria-label="sign in with linkedin"
+                         ng-click="vm.loginOauth('linkedin')"
+                         data-auth-type="register">
+                <span class="icon icon-linkedin padding-right"></span>
+                <span>Sign up through LinkedIn</span>
+              </md-button>
+            </div>
+          </div>
+
+          <div ng-messages="vm.errors.other" role="alert">
+            <div class="md-input-message-animation txt-warning-bigger">{{vm.errors.other}}</div>
+          </div>
+
+          <p class="small center">
+            Your privacy is important to us, we will never pass on your personal information or post to LinkedIn or
+            Facebook without your permission.
+          </p>
+
+          <div class="text-on-a-line margin-top-bottom">
+            <div><span>OR</span></div>
+            <hr/>
+          </div>
+
+          <h6 class="subheading">via email</h6>
+          <div>
+            <h6 class="fieldName">Email</h6>
+            <md-input-container  md-no-float>
+              <input placeholder="Email address" type="text" aria-label="email" type="email" name="email" ng-model="vm.user.email" minlength="4"
+                     maxlength="100" ng-pattern="/^.+@.+\..+$/" ng-change="vm.changeFieldValue('email', form)" required>
+              <div ng-messages="form.email.$error" role="alert">
+                <div ng-message-exp="['minlength','required', 'pattern']">This is required and must be a valid email address</div>
+              </div>
+              <div class="md-input-message-animation txt-warning" role="alert">{{vm.errors.email}} </div>
+            </md-input-container>
+            <h6 class="fieldName">Password</h6>
+            <md-input-container md-no-float>
+              <input placeholder="Password" autocomplete="off" name="password" required aria-label="password" type="{{vm.showPassword?'text':'password'}}"
+                     ng-model="vm.user.password" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/" ng-change="vm.changeFieldValue('password')" required>
+              <a class="showHidePasswd" href="" ng-click="vm.showPassword = !vm.showPassword" ng-model="vm.showPassword">{{vm.showPassword?'Hide':'Show'}}</a>
+              <div class="validation-info" ng-if="form.password.$valid || form.password.$untouched">Must be a minimum 6 characters, at least one number and a mix of upper and lower case characters</div>
+              <div ng-messages="form.password.$error" role="alert" ng-if="form.password.$invalid && form.password.$touched">
+                <div ng-message-exp="['pattern','required']">Must be a minimum 6 characters, at least one number and a mix of upper and lower case characters</div>
+              </div>
+              <div ng-messages="form.password.$invalid" role="alert">
+                <div class="md-input-message-animation">{{vm.errors.password}}</div>
+              </div>
+            </md-input-container>
+          </div>
+
+          <div layout="row">
+            <md-button ui-sref="home" class="btn" ng-cloak>Cancel</md-button>
+            <span flex></span>
+            <md-button type="submit" class="btn btn-next md-primary-cta md-raised btn-save" ng-disabled="vm.isSubmitting" ng-cloak>Submit</md-button>
+          </div>
+
+          <p class="center">
+            Already a member? <a href="" ng-click="vm.showLoginModal()">Click here to login</a>.
+          </p>
+
+          <p class="small center padding-bottom-20">
+            By signing up you are agreeing to the <a href="" ng-click="vm.showTermsModal()">Terms of Use</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

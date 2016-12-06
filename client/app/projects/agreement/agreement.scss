@@ -1,0 +1,140 @@
+.project-agreement {
+  &.l-bg-grey{
+    background-color: #f1f1f1 !important;
+  }
+  .warn{
+    color:red;
+  }
+  .quote-status-panel{
+    h3{
+      margin:0;
+    }
+    @include bp(s){
+      margin-bottom:50px;
+    }
+
+  }
+  .padding-large{
+
+    padding-top:20px;
+    padding-bottom:20px;
+    @include bp-max(s){
+      padding-top:120px;
+      padding-bottom:100px;
+    }
+    @include bp(xl){
+      padding-top:150px;
+      padding-bottom:160px;
+    }
+  }
+  .content {
+    background-color: $white;
+    padding-left:60px;
+    padding-right:50px;
+    @include bp-max(s){
+      padding-left:10px;
+      padding-right:10px;
+      margin-left:0;
+      margin-right:0;
+    }
+    @include bp(xl){
+      padding-left:160px;
+      padding-right:150px;
+    }
+    font-weight: 900;
+    position:relative;
+
+    h1, h6{
+      margin-top:0;
+    }
+    h3{
+      margin-top:0;
+      margin-bottom: 0;
+    }
+    h5{
+      margin-bottom:0;
+      margin-top:20px;
+    }
+
+  }
+  .profile-positioner{
+    position: relative;
+    min-height: 70px;
+    .profile-container{
+      position: absolute;
+      left: 50%;
+      top: -70px;
+      width: 250px;
+      margin-left: -120px;
+      .org-logo-container{
+        background:$white;
+        border-radius:51%;
+      }
+    }
+  }
+
+
+
+  .icon-dollar, .icon-swap{
+    @include roundedIcon($theme-colour, $theme-colour, $white);
+
+    position: absolute;
+    @include font-size(30,30);
+    bottom:-43px;
+    left:50%;
+    margin-left:-35px;
+    z-index: 9;
+    @include bp(m) {
+      right: -66px;
+      top: 50%;
+      margin-top: -30px;
+      margin-left:inherit;
+      left:inherit;
+      bottom:inherit;
+    }
+    &:before{
+      border: 8px solid  #F1F1F1;
+      border-radius: 50%;
+      background: $dd-bg-grey-darker;
+      color: $white;
+    }
+  }
+
+  .tandc{
+    @include bp(s){
+      width:500px;
+    }
+  }
+
+  .reveal-btn{
+    cursor:pointer;
+  }
+
+  .icon-edit {
+    cursor:pointer;
+    color: #41648C;
+  }
+
+  .div-edit-quote-icon {
+    margin-top: 20px;
+  }
+
+  .icon-edit-quote {
+    @include font-size($h3-font-size, $h3-line-height);
+
+    &:before {
+      padding-top: 5px;
+      color: $dd-dark-blue;
+    }
+  }
+
+  .deposit-paid-value{
+    display:inline;
+  }
+
+  .deposit-paid-date {
+    font-size: 16px !important;
+    font-weight: normal !important;
+  }
+}
+

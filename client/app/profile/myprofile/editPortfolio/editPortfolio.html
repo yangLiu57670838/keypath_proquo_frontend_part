@@ -1,0 +1,52 @@
+<md-dialog aria-label="Edit portfolio"  class="edit-portfolio full-screen-on-mobile" id="edit-portfolio-dialog">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+
+        <div flex="90"  class="md-padding"
+             edit-field
+             service-id="vm.item.business._id"
+             tooltip-text="'Edit title'"
+             label-text="''"
+             no-text-label="'Enter a title'"
+             field-type="'h2'"
+             model-obj="vm.item.portfolioItem.name"
+             textarea-length="1000"
+             model-name="'name'"
+             save-back="vm.saveBusinessItem"
+             is-required="true"></div>
+
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div>
+        <img alt="{{vm.item.portfolioItem.name}}" src="{{vm.item.portfolioItem.fullImageUrl}}">
+          <md-button class="btn btn-next portfolio-image" ng-click="vm.uploadImage('avatar')">
+            + Replace image
+          </md-button>
+          <md-button class="btn btn-next portfolio-image" ng-click="vm.deletePortfolioEntry()">
+            Delete
+          </md-button>
+        </div>
+
+        <div flex="100"  class="md-padding "
+             edit-field
+             service-id="vm.item.business._id"
+             tooltip-text="'Edit Description'"
+             label-text="'Description'"
+             no-text-label="'Enter a description'"
+             field-type="'textarea'"
+             model-obj="vm.item.portfolioItem.description"
+             textarea-length="1000"
+             model-name="'description'"
+             save-back="vm.saveBusinessItem"></div>
+      </div>
+    </md-dialog-content>
+
+  </form>
+</md-dialog>

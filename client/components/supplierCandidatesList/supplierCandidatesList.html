@@ -1,0 +1,44 @@
+<div flex class="supplier-candidates-list-wrapper">
+  <div layout="column" class="supplier-candidates-list">
+      <md-list class="md-dense" flex>
+        <md-list-item ng-repeat="candidate in vm.candidates">
+          <div layout="row" class="supplier-candidate-wrapper" flex="100" layout-align="space-between stretch" ng-init="vm.setProjectState(candidate)" >
+            <div layout="row" class="candidate-info" layout-align="space-between center" flex>
+
+              <div class="candidate-info-profile" flex="65" flex-gt-xs="50">
+                <profile-summary business="::candidate"></profile-summary>
+              </div>
+
+
+
+              <div class="candidate-info-rating" layout="column" layout-align="start center" flex="15" flex-gt-xs="35">
+                <star-rating data-rating-disabled="true" rating="::candidate.averageReviewRating" hide-xs></star-rating>
+                <md-button class="message" ng-click="vm.showChatModal(candidate)"  hide-xs><md-icon aria-label="chat" class="material-icons">chat</md-icon>Message</md-button>
+                <a class="message" ng-click="vm.showChatModal(candidate)" hide-gt-xs><md-icon aria-label="chat" class="material-icons mobile">chat</md-icon></a>
+              </div>
+
+              <div class="vertical-divider margin-left-10"></div>
+
+              <div class="project-state " flex="20" flex-gt-xs="15" ng-click="vm.gotoToState(candidate.proQuote.stateState, candidate.proQuote.stateParams)" layout="column" layout-align="center center">
+                    <i class="icon {{candidate.proQuote.stateIcon}}"></i>
+                    <div hide-xs>{{candidate.proQuote.stateTitle}}</div>
+              </div>
+            </div>
+
+
+            <div class="candidate-state {{candidate.proQuote.btnStateClass}}" flex="15" layout="column" layout-align="center center" ng-click="vm.gotoToState(candidate.proQuote.candidateState, candidate.proQuote.candidateParams)" >
+              <i class="icon {{candidate.proQuote.candidateIcon}}"></i>
+              <div hide-xs>{{candidate.proQuote.candidateTitle}}</div>
+            </div>
+
+            <div class="reject-action" flex="15" layout="column" layout-align="center center" ng-if="!candidate.proQuote.disableRejectBtn" ng-click="vm.rejectUser(candidate)" >
+              <i class="icon icon-cross"></i>
+              <div hide-xs>Reject</div>
+            </div>
+
+
+          </div>
+        </md-list-item>
+      </md-list>
+  </div>
+</div>

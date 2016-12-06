@@ -1,0 +1,10 @@
+<div class="profile-summary" layout="column" layout-align="start start" layout-gt-sm="row" layout-align-gt-sm="start center" layout-margin>
+  <profile-photo class="profile-summary-photo" ng-class="{ 'profile-present': vm.business }" profile="vm.business" ng-click="vm.goProfile()"></profile-photo>
+  <div ng-if="vm.business" layout="column" layout-align="center start">
+    <div class="contact-name feature-heading-light-bold ellipsis-txt" hide-xs hide-sm>{{ vm.business.primaryContactFirstName }} {{ vm.business.primaryContactLastName }}</div>
+    <div class="business-name ellipsis-txt " hide-xs hide-sm>{{ vm.business.name }}</div>
+    <div ng-if="vm.isRemoveAllowed">
+      <a href="" ng-click="vm.remove(vm.business)" class="remove-btn">Remove Supplier</a>
+    </div>
+  </div>
+</div>

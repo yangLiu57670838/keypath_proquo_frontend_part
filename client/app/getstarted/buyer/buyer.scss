@@ -1,0 +1,44 @@
+.getstarted-buyer {
+  h5 {
+    text-align: center;
+  }
+  position: relative;
+  .welcome-msg {
+    font-size: 24px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+.profile-scroll-section {
+  background-color: $dd-bg-grey;
+  padding-bottom: 50px;
+
+  .header-text {
+    @include font-size($h6-font-size, $h6-line-height);
+    margin: $h6-margin;
+  }
+
+  .required-category-container {
+    padding: 0px 20px;
+    min-width: 100%;
+  }
+
+  pre {
+    white-space: pre !important;
+  }
+
+  .find-match-sort-wrapper{
+    margin-top: 10px;
+  }
+}
+
+.buyer-heading {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  font-weight: bolder;
+
+  h5 {
+    display: inline;
+  }
+}

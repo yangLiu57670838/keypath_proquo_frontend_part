@@ -1,0 +1,41 @@
+<div class="skills-by-category-container">
+	<!-- todo: replace this with a directive-->
+	<div class="ng-expand-collapse-container">
+		<div class="ng-ec-section"
+			 ng-class="{ 'is-expanded' : showSection[$index] }"
+			 ng-repeat="section in categorySkills track by $index">
+			<div class="ng-ec-title">
+				{{section.name}} ({{section.children.length}})
+				<a href="" class="ng-ec-trigger" ng-click="showSection[$index]=!showSection[$index]">
+				</a>
+				<i class="material-icons icon" >chevron_right</i>
+			</div>
+
+			<div class="ng-ec-subsection ng-anim-slide-down"
+				 ng-show="showSection[$index]"
+				 ng-if="section.children.length != 0">
+
+        <!-- Template for adding skills -->
+        <div ng-if="skilltype === 'skillsOffered'">
+            <div ng-repeat="subsection in section.children track by $index" class="custom-chip"
+               ng-class="{'is-active' : checkActive(subsection)}"
+               data-value="{{subsection.name}}">
+              <span ng-click="updateModel($event, subsection, false);">{{subsection.name}}</span>
+              <div class="icon icon-remove" ng-click="removeSkill(subsection)" ></div>
+            </div>
+        </div>
+
+        <div ng-if="skilltype === 'skillsRequired'">
+            <!-- skills btn -->
+            <div ng-repeat="subsection in section.children track by $index"
+                 class="custom-chip"  data-value="{{subsection.name}}"
+                 ng-class="{'is-active' : checkActive(subsection)}">
+              <span ng-click="openMenu($mdOpenMenu, $event)">{{subsection.name}}</span>
+              <div class="icon icon-remove" ng-click="removeSkill(subsection)" ></div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

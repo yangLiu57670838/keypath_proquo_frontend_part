@@ -1,0 +1,59 @@
+.request-for-quote {
+  .info {
+    margin: 15px;
+  }
+
+  .request-for-quote-action {
+    margin: 30px;
+    text-transform: none;
+  }
+
+  .info-title {
+    font-weight: bold;
+    padding-left: 16px;  // matches layout container margin * 2
+  }
+
+  .modify-brief {
+    color: $dd-dark-blue;
+    font-weight: bold;
+    text-transform: none;
+  }
+
+  .quote-card {
+    box-shadow: $whiteframe-shadow-3dp;
+    height: 80px;
+  }
+
+  .add-new-person {
+    background-color: $dd-home-neutral;
+    text-transform: none;
+  }
+
+  .icon-dollar {
+    @include font-size(25, 20);
+    color:$dd-light-grey;
+  }
+
+  // over rides for collapsableCard
+  .collapsibleCard{
+    border-radius:10px;
+    background:$dd-lightest-grey;
+    box-shadow: none;
+    &:hover{
+      box-shadow:none;
+    }
+    .section{
+      border-top:none;
+    }
+    .collapsible-card-body{
+
+    }
+    .summary{
+      padding:0 15px 0 0;
+    }
+    .profile-summary-photo {
+      width: 100px;
+      min-width: 100px;
+    }
+  }
+}

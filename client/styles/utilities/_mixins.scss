@@ -1,0 +1,554 @@
+// ==========================================================================
+// FONTS
+// ==========================================================================
+
+@mixin font-size($px, $lh:false) {
+	@if (unitless($px) == false) {
+		@error "The font-size mixin expects the first parameter to be a unitless number. `#{$px}` was provided.";
+	}
+
+	font-size: #{$px}px;
+	font-size: #{$px / $FONT_BASE}rem;
+
+	@if $lh != false {
+		@if (unitless($lh) == false) {
+			@error "The font-size mixin expects the second parameter to be a unitless number. `#{$lh}` was provided.";
+		}
+
+		/* line-height: #{$lh}px; */
+		line-height: #{$lh / $px};
+	}
+}
+
+// ==========================================================================
+// CSS TRIANGLES
+// ==========================================================================
+
+@mixin triangle-border($direction, $color, $width, $height, $duration: 250ms) {
+	@media screen {
+		@include transition(border-color $duration, border-width $duration);
+		width: 0;
+		height: 0;
+
+		@if index(top left bottom right, $direction) != false {
+			@if $direction == top or $direction == bottom {
+				border: ($width / 2) solid transparent;
+				border-#{opposite-position($direction)}: $height solid $color;
+			}
+			@else if $direction == left or $direction == right {
+				border: ($height / 2) solid transparent;
+				border-#{opposite-position($direction)}: $width solid $color;
+			}
+		} @else if index((top left) (top right) (bottom left) (bottom right), $direction) != false {
+			border: $width solid transparent;
+			@each $border in $direction {
+				border-#{$border}-color: $color;
+			}
+		}
+	}
+}
+
+@mixin triangle-position($direction, $width, $height) {
+	@if $direction == top or $direction == bottom {
+		#{$direction}: ($height * -2);
+	}
+	@else if $direction == left or $direction == right {
+		#{$direction}: ($width * -2);
+	}
+	@else if index((top left) (top right) (bottom left) (bottom right), $direction) != false {
+		@each $position in $direction {
+			#{$position}: 0;
+		}
+	}
+}
+
+@mixin triangle($direction, $color, $width, $height, $duration: 250ms) {
+	@include triangle-border($direction, $color, $width, $height, $duration);
+	@include triangle-position($direction, $width, $height);
+}
+
+@mixin triangle-content($direction, $color, $width, $height, $duration: 250ms) {
+    @include triangle($direction, $color, $width, $height, $duration: 250ms);
+	position: absolute;
+    content: '';
+}
+
+
+// ==========================================================================
+// SPRITES
+// ==========================================================================
+/*
+$sprites: sprite-map("sprites/global/*.png", $spacing: 15px);
+$sprites2x: sprite-map("sprites/global-2x/*.png", $spacing: 30px);
+*/
+// ==========================================================================
+// CLEARFIX
+// ==========================================================================
+//
+// For modern browsers
+// 1. The space content is one way to avoid an Opera bug when the
+//    `contenteditable` attribute is included anywhere else in the document.
+//    Otherwise it causes space to appear at the top and bottom of elements
+//    that receive the `cf` class.
+// 2. The use of `table` rather than `block` is only necessary if using
+//    `:before` to contain the top-margins of child elements.
+
+@mixin clearfix-micro() {
+	&:before,
+	&:after {
+		content: " "; /* 1 */
+		display: table; /* 2 */
+	}
+
+	&:after {
+		clear: both;
+	}
+
+	// For IE 6/7 only, to trigger hasLayout and contain floats.
+	& {
+		*zoom: 1;
+	}
+}
+
+@mixin visuallyhidden() {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+@mixin undovisuallyhidden() {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+// ==========================================================================
+// LIST FUNCTIONS
+// ==========================================================================
+
+@mixin list-reset() {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@mixin list-horizontal($reset:false) {
+	@include clearfix-micro();
+
+	@if $reset == true {
+		@include list-reset();
+	}
+
+	& > li {
+		float: left;
+		margin-top: 0;
+	}
+}
+
+// ==========================================================================
+// WEBKIT ANIMATION FLICKER FIX
+// ==========================================================================
+
+@mixin animation-flicker-fix() {
+	-webkit-transform:translate3d(0,0,0);
+}
+
+@mixin animation-flicker-fix-harsh() {
+	-webkit-perspective: 0;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateZ(0);
+}
+
+// ==========================================================================
+// PSEUDO-ELEMENT ICONS
+// Utilities for pseudo-elements as icons
+//
+// Example usage:
+//
+// This example will create a :before pseudo-element and :after pseudo-element.
+// The :before pseudo-element will be displayed by default
+// The :after pseudo-element will be displayed on hover / focus.
+//
+// .button > .icon {
+//     @include peicon-dual(48px, 48px, left, center, true);
+// }
+//
+// This example will just create a :before psuedo-element, but no :after pseudo-element.
+// The :before psuedo-element will have a property of right: 10px;
+//
+// .button > .icon:before {
+//     @include peicon-content(48px, 48px, none, center) {
+//         right: 10px;
+//     }
+// }
+//
+// ==========================================================================
+
+@mixin peicon($width: 48px, $height: 48px, $xPos: none, $yPos: none) {
+	width: $width;
+	height: $height;
+	display: block;
+	background-position: 50% 50%;
+
+	// Position absolutely if valid position values are provided
+	@if ($xPos != none or $yPos != none) {
+		position: absolute;
+	}
+
+	// Icon left position
+	@if ($xPos == left) {
+		left: 0;
+	} @else if ($xPos == center) {
+		left: 50%;
+		margin-left: ceil($width / 2) * -1;
+	} @else if ($xPos == right) {
+		right: 0;
+	} @else if ($xPos != none) {
+		left: $xPos;
+	}
+
+	// Icon top position
+	@if ($yPos == top) {
+		top: 0;
+	} @else if ($yPos == center) {
+		top: 50%;
+		margin-top: ceil($height / 2) * -1;
+	} @else if ($yPos == bottom) {
+		bottom: 0;
+	} @else if ($yPos != none) {
+		top: $yPos;
+	}
+
+	@content;
+}
+
+@mixin peicon-content($width: 48px, $height: 48px, $xPos: none, $yPos: none) {
+	content: "";
+	@include peicon($width, $height, $xPos, $yPos) {
+		@content;
+	}
+}
+
+@mixin peicon-dual-active() {
+	&:before {
+		opacity: 0;
+
+		.supports-no-opacity & {
+			display: none;
+			content: " ";
+		}
+	}
+
+	&:after {
+		opacity: 1;
+
+		.supports-no-opacity & {
+			display: block;
+			content: " ";
+		}
+	}
+}
+
+@mixin peicon-dual($width: 48px, $height: 48px, $xPos: none, $yPos: none, $activeOnHover: false, $duration: 250ms) {
+	&:before,
+	&:after {
+		@include peicon-content($width, $height, $xPos, $yPos) {
+			@content;
+		}
+		@include transition(opacity $duration);
+	}
+
+	&:before {
+		opacity: 1;
+
+		.supports-no-opacity & {
+			display: block;
+		}
+	}
+
+	&:after {
+		opacity: 0;
+
+		.supports-no-opacity & {
+			display: none;
+		}
+	}
+
+	@if $activeOnHover {
+		&:hover,
+		&:focus,
+		&:active {
+			@include peicon-dual-active();
+		}
+	}
+}
+
+// circular profile images
+@mixin profile-image($width: 100px, $height: 100px, $border-radius: 50px,  $transition-time: 250ms){
+	position: relative;
+	width: $width;
+	height: $height;
+	border-radius: $border-radius;
+	overflow: hidden;
+	transition: opacity $transition-time ease-in;
+	@include transparent-overlay($border-radius: 50px);
+
+	img{
+		vertical-align: top;
+		width: $width;
+		height: $height;
+	}
+}
+
+// transparent overlay
+@mixin transparent-overlay($color: #000, $opacity: 0.2, $border-radius: 0,  $transition-time: 250ms){
+	&:after{
+		content:' ';
+	    position:absolute;
+	    width:100%; height:100%;
+	    top:0; left:0;
+	    // @include rgba-background(rgba($color,$opacity));
+	    opacity:0;
+	    border-radius: $border-radius;
+	    transition: all $transition-time ease-in;
+	}
+
+	&:hover:after{
+		opacity: 1;
+	}
+}
+
+@mixin button($height: 50) {
+	height: #{$height}px;
+	@include border-radius(#{ $height / 3}px);
+	padding: 0 #{ $height / 2}px;
+	@include font-size(15);
+	line-height: #{$height}px;
+	@include font-feature-heavy();
+	//@include transition(background-color 250ms, color 250ms, border-color 250ms);
+	transition: background-color 250ms, color 250ms, border-color 250ms;
+	@include box-sizing(border-box);
+	display: inline-block;
+	text-transform: none;
+	outline: none; // this is OK because we have a focus state
+
+	&:hover,
+	&:focus,
+	&:active{
+		outline: none;
+	}
+
+	i{
+		height: #{$height}px;
+		line-height: #{$height}px;
+		vertical-align: middle;
+	}
+}
+
+@mixin cta($color: #fff) {
+	min-width: 200px;
+	padding: 20px 20px;
+	height: 60px;
+	@include box-sizing(border-box);
+	@include transition(background-color 250ms, color 250ms, border-color 250ms);
+	display: inline-block;
+	@include font-feature-heavy();
+	@include font-size(20,20);
+	text-transform: uppercase;
+	text-align: center;
+	// background: none;
+	color: $color;
+	border: 2px solid $color;
+
+	&:hover{
+		cursor: pointer;
+		background-color: rgba(255, 255, 255, 0.2);
+		text-decoration: none;
+	}
+}
+
+@mixin background-image($url){
+	background-repeat: no-repeat;
+	background-color: #ddd;
+	background-position: center center;
+	background-size: cover;
+	background-image: url($url);
+	// background-attachment: fixed;
+}
+
+@mixin skill-tag($height: 50, $text-color: #fff, $bg-color: $theme-colour){
+	@include button($height);
+	@include font-feature-heavy();
+	//text-transform: uppercase;
+	color: $text-color;
+	background-color: $bg-color;
+	display: inline-block;
+
+	a{
+		color: $text-color;
+		transition: color 400ms;
+		width: 100%;
+		display: inline-block;
+	}
+
+	i{
+		color: #fff;
+	}
+}
+
+@mixin feature-heading(){
+	@include font-feature-heavy();
+	text-transform: uppercase;
+	@include font-size(16,18);
+  letter-spacing: 2px;
+}
+
+.feature-heading-light{
+  @include font-feature-light();
+}
+
+.feature-heading-light-bold {
+  @include font-feature-light();
+  font-weight: bold;
+}
+
+/* Turns vertical list into horizontal list and applies color to icon if present*/
+@mixin horizontalUl ($iconColor){
+  ul{
+    list-style:none;
+    padding: 0;
+    margin: 0;
+
+    li{
+      display: inline;
+      padding: 10px 0px 10px 5px;
+      &>span{
+        white-space: nowrap;
+        display: inline-block;
+        margin-top: 10px;
+        .icon-tick-circle{
+          font-size: 30px;
+          line-height: 20px;
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: middle;
+          color:$iconColor;
+        }
+        .text{
+          line-height: 20px;
+          vertical-align: middle;
+          display: inline-block;
+
+        }
+      }
+
+    }
+  }
+}
+
+@mixin roundedLineContainer($text-color, $icon-color){
+  &.is-btn{
+    cursor:pointer;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
+  }
+  border-radius: 40px;
+  padding: 10px 20px;
+  display: inline-block;
+  font-family: "BrownStandardBold", "Arial Black";
+  border: 1px solid $icon-color;
+  color:$text-color;
+  .icon{
+    color:$icon-color;
+    font-size: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+}
+
+@mixin roundedIcon($border-color, $background-color, $text-color){
+  &:before{
+    margin-right: 20px;
+    border: 1px solid $border-color;
+    padding: 15px;
+    border-radius: 50%;
+    background: $background-color;
+    color: $text-color;
+  }
+
+}
+
+@mixin card-box-shadow() {
+  transition: all 0.2s ease-in-out;
+  box-shadow: $box-shadow-general;
+
+  &:hover {
+    box-shadow: $box-shadow-hover;
+  }
+}
+
+@mixin widgets() {
+    .widget-heading{
+      @include feature-heading();
+      @include font-size(14, 14);
+      @include font-feature-bold();
+      letter-spacing: 2px;
+      margin-top:20px !important;
+    }
+
+    .widget-body {
+      min-height: 100px;
+      background:$white;
+      margin-bottom:20px;
+      padding: 30px;
+    }
+
+    .bolder-font {
+      font-weight: bolder;
+    }
+
+    .border-bottom {
+      border-bottom: 1px dotted #cfcecf;
+    }
+
+    .border-top {
+      border-top: 1px dotted #cfcecf;
+    }
+
+    .widget-section {
+      margin-top: 5px;
+      padding: 10px 0 5px 0;
+    }
+
+    .padding-bottom {
+      padding-bottom: 10px;
+    }
+
+    .smaller-font {
+      font-size: smaller;
+    }
+
+    .md-button {
+      width: 100%;
+    }
+
+    .showHide {
+      border-top: 1px dotted #cfcecf;
+      padding-top: 10px;
+      font-size: smaller;
+      text-align: center;
+    }
+}
+
+
+
+
+
+

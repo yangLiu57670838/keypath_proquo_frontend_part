@@ -1,0 +1,49 @@
+.results-indicator{
+	width: 100%;
+	padding: 15px 0;
+	height: 50px;
+	@include font-feature-heavy();
+
+	@include bp(m){
+		@include font-size(18,24);
+	}
+}
+
+
+// quick look modal
+.search-quick-look-modal{
+	.profile-image-container{
+		height: auto;
+
+		@include bp(m){
+			width: 25%;
+			overflow: hidden;
+		}
+	}
+
+	.profile-summary{
+		margin: 20px 0;
+
+		.btn-connect{
+			line-height: 60px;
+		}
+
+
+		.summary-information-container{
+
+			@include bp(m){
+				padding: 15px 15px 15px 30px;
+			}
+
+		}
+
+		@include bp(l){
+			height: auto;
+
+			.profile-image-container{
+				height: auto;
+				background-color: #fff;
+			}
+		}
+	}
+}

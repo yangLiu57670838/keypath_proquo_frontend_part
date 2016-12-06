@@ -1,0 +1,127 @@
+.project-invitation{
+  background:$white;
+  .step-container{
+    position:relative;
+    height:43px;
+    .line{
+      border-top:3px solid grey;
+      position: absolute;
+      top: 50%;
+      width:100%;
+    }
+    .holder{
+      position: absolute;
+      width: 100%;
+      z-index: 1;
+
+
+      .invite-step{
+        background:$dd-grey;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        text-align: center;
+        line-height: 44px;
+        font-weight: bold;
+        font-size: 20px;
+        color: $white;
+        cursor:pointer;
+        span{
+          display:none;
+        }
+        &.active{
+          background:$dd-primary-background;
+          span{
+            display:block;
+          }
+        }
+      }
+    }
+  }
+
+  .invite-section{
+    @include bp(s){
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
+    }
+    background-color: white;
+    border-top:5px solid $dd-negative-color;
+
+
+    .pay-swap-icon{
+      position: relative;
+      top: 4px;
+      height: 28px;
+    }
+
+  }
+  .denote{
+    border-radius: 10px;
+    background-color: #eee;
+    margin-bottom: 10px;
+    padding: 7px;
+    @include font-size(14, 16);
+  }
+  .tips{
+    margin-left:40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
+    ul.tips-list{
+      list-style-type: none;
+      text-indent: -9px;
+      li{
+        &:before{
+          content: '\0073';
+          display: inline-block;
+          font-family: 'village';
+          font-style: normal;
+          font-weight: normal;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+          color:$dd-primary-background;
+          padding-right: 5px;
+        }
+      }
+
+    }
+  }
+  .icon-tick-circle{
+    margin-right:5px;
+    color:$dd-primary-background;
+  }
+
+  .attach-documents-link .icon{
+    vertical-align:bottom;
+  }
+
+
+  .slider{
+
+    md-slider{
+      .md-thumb {
+        &:after {
+          background-color: $dd-primary-background;
+          border-color: $dd-primary-background;
+        }
+      }
+
+      .md-track-container {
+        height: 4px;
+      }
+      .md-focus-ring {
+        background-color: $dd-primary-background;
+      }
+
+      .md-track-fill {
+        background-color: $dd-primary-background;
+      }
+    }
+
+    &.fade-out{
+      opacity:0.5;
+    }
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+}

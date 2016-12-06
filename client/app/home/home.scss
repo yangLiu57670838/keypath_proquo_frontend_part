@@ -1,0 +1,322 @@
+.l-home .content-container.homepage-sections-container{
+  padding-top:50px;
+  @include bp(m){
+    padding-top:70px;
+  }
+
+  .section-heading{
+    @include font-feature();
+    margin: 20px 0;
+  }
+
+
+  // LANDING PAGE
+
+
+
+  .landing-image-container{
+    overflow: hidden;
+    @include background-image("../../assets/images/img_hero.jpg");
+    background-position: center 20%;
+    height: calc( 100vh - 50px );
+    width: 100%;
+    position: relative;
+
+    @include bp(l){
+      height: calc( 100vh - 70px );
+    }
+
+
+    .content-container{
+      position: relative;
+      z-index: 10;
+      padding-top:0;
+      height: 100%;
+
+      .image{
+        display: block;
+        margin: 20px auto;
+        width: 320px;
+
+        @include bp(s){
+          width: 400px;
+        }
+
+        @include bp(m){
+          width: 400px;
+          margin: 20px auto 40px -75px;
+        }
+      }
+
+
+      .heading-container{
+        width:60%;
+        @include bp-max(xs){
+          width:100%;
+        }
+
+        h1, h5, h3{
+          color:$white;
+        }
+        @include bp(s){
+          h3{
+            @include font-size(48, 51);
+          }
+        }
+
+        @include bp-max(xs){
+          h1, h3{
+            text-align:center;
+            margin:0;
+          }
+          h5{
+            /*@include font-size(18, 22);*/
+            text-align:center;
+          }
+        }
+
+        .section-heading{
+          @include font-feature();
+        }
+
+
+        .divider{
+          width:90px;
+          border-bottom:solid $white  5px;
+        }
+        .scroll-indicator,
+        .scroll-indicator.md-button{
+          display: block;
+          width: 56px;
+          height: 56px;
+          left: 0;
+          background: none;
+          border: 2px solid $white;
+
+          .icon-pointer-right{
+            transform: rotate(90deg);
+            position: absolute;
+            font-size: $base-font-size;
+            @include font-size($h6-font-size, 18);
+            top: 20px;
+            right: 18px;
+            color:$white;
+          }
+
+          &:hover{
+            background-color: $white;
+            .icon-pointer-right{
+              color:darken($white,20);
+            }
+
+          }
+        }
+
+
+      }
+
+
+    }
+
+    &:after{
+      content: '';
+      position: absolute;
+      width:100%;
+      min-height:2000px;
+      top: 0;
+      right: 0;
+      left: 0;
+      background-image: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.22) 51%,rgba(0,0,0,0.1) 79%,rgba(0,0,0,0.1) 99%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#38000000', endColorstr='#000000',GradientType=1 );
+    }
+  }
+
+  .button-row {
+    min-width: 380px;
+  }
+
+  .learn-more-btn{
+    background: $dd-negative-color;
+    color: $white;
+    margin-top:30px;
+    .material-icons{
+      color:$white;
+    }
+  }
+
+  .watch-vid-btn{
+    background: $dd-primary-background;
+    color: $white;
+    margin-top:30px;
+    .material-icons{
+      color:$white;
+    }
+  }
+
+  .icon-pointer-right{
+    color:$white;
+    @include font-size(12,12);
+  }
+
+  // HOW IT WORKS
+  .section-how{
+
+    padding: 50px;
+    background:$dd-home-neutral;
+    .section-heading{
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .how-it-works-container{
+      width:90%; margin:0 auto 0 auto;
+      .how-it-works {
+        padding:0 50px 0 50px;
+
+        max-width: 33% !important;
+        min-width: 210px;
+        img{
+          width: 100%;
+          @include bp-max(xs){
+            width:80%;
+          }
+        }
+
+
+        p, h5{
+          text-align:center;
+        }
+
+        @include bp-max(s){
+          h5{
+            @include font-size(16);
+            margin:0;
+          }
+          p{
+            margin-top:0;
+            @include font-size(12);
+          }
+        }
+
+        @include bp-max(xs){
+          padding:0;
+        }
+
+      }
+
+    }
+  }
+
+  // GET STARTED TODAY
+
+
+
+
+  .section-activity{
+    padding: 40px 0;
+
+    .section-heading{
+      text-align: center;
+    }
+
+    .get-started{
+      width:60%;
+      @include bp-max(xs){
+        width:100%;
+
+      }
+      margin:20px auto 0 auto;
+
+
+      .homepage-services{
+
+        @include bp-max(xs){
+          width:100px;
+        }
+        .content{
+          @include padding-variable(20, 20, 20, 20, 1.1);
+
+          padding-left: 20px;
+          padding-right: 20px;
+
+          @include bp-max(s){
+            h6 {
+              margin: 10px 0;
+            }
+          }
+
+          h5{
+            color:$dd-black;
+          }
+
+          .heading{
+            @include font-size(24, 24);
+
+            @include bp-max(m) {
+              @include font-size(16, 16);
+            }
+
+            @include bp-max(s) {
+              @include font-size(12, 12);
+              text-align: center;
+            }
+          }
+
+        }
+
+      }
+    }
+
+  }
+}
+
+.video-modal{
+  position: fixed;
+  z-index: 99999999;
+  min-height: 100%;
+  min-width: 100%;
+  background: $dd-black;
+
+  .videoWrapper {
+    background: $dd-black;
+    padding-bottom: 56.25%;
+    height: 100%;
+    z-index: 99;
+
+    .video-close{
+      position: absolute;
+      min-height: 50px;
+      top: 15px;
+      right: 10px;
+      z-index: 999999;
+      .icon{
+        font-size: 30px;
+        cursor:pointer;
+      }
+    }
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      @media (min-width:2370px){
+        max-width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        height: 80%;
+      }
+      @media (min-width:2750px){
+        max-width: 70%;
+        margin-left: 15%;
+        margin-right: 15%;
+        height: 70%;
+      }
+      @media (min-width:3250px){
+        max-width: 66%;
+        margin-left: 17%;
+        margin-right: 17%;
+        height: 66%;
+      }
+    }
+  }
+}

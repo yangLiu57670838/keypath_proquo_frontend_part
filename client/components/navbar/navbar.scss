@@ -1,0 +1,317 @@
+/* ==========================================================================
+ * HEADER
+ * ========================================================================== */
+
+navbar{
+  z-index:21;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  background: $white;
+
+
+
+.header {
+  position: relative;
+
+  .avatars-container .avatars{
+    .user-logo{
+      border: 2px solid transparent;
+    }
+  }
+
+
+  .inactiveLink {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .top {
+    position: relative;
+    @include bp-max(xs){
+      padding-right:0;
+    }
+
+    /* Start a Project */
+    .btn-start-a-project{
+      background: $dd-negative-color;
+      color: $white;
+      border-radius: 2rem;
+      padding: 0 20px;
+      margin: 20px 0;
+      text-transform: none;
+      float: right;
+      @include font-feature-heavy();
+      @include bp-max(s){
+        margin: 10px 0;
+      }
+      &:hover{
+        background: lighten($dd-negative-color, 5);
+      }
+    }
+
+    /* JOIN NOW BUTTON */
+    .btn-join{
+      background:$dd-negative-color;
+      color:$white;
+      line-height: 57px;
+    }
+    .btn-join:hover{
+      background: lighten($dd-negative-color, 5);
+      color:$white;
+    }
+
+    .btn-login{
+      color: $dd-black-text;
+      line-height: 57px;
+      margin-top: 0;
+    }
+
+    /* SIGN IN  / SIGN OUT BUTTON */
+    .btn-login,
+    .btn-join{
+      height: 100%;
+      border-radius: 0;
+      float: right;
+      margin: 0;
+      padding: 8px 15px;
+      @include box-sizing(border-box);
+      @include font-feature-heavy();
+      min-width: 60px;
+      @include bp-max(s){
+        line-height:37px;
+      }
+      text-transform: capitalize;
+    }
+
+    .username{
+      color: #fff;
+      display: none;
+      @include bp(l){
+        display: inline-block;
+      }
+    }
+
+
+    .logo {
+      float: left;
+      position:relative;
+      a {
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        color: $dd-black-text;
+        @include font-feature-heavy();
+        text-transform: uppercase;
+
+        &:hover{
+          text-decoration: none;
+        }
+
+        @include bp(l){
+          height: 70px;
+          line-height: 70px;
+        }
+
+        span{
+          display: inline-block;
+        }
+
+      }
+
+      img {
+        height: 16px;
+        width: auto;
+        margin-top: 20px;
+
+        @include bp(s) {
+          height: 30px;
+          margin-top: 16px;
+        }
+        @include bp(m) {
+          margin-top: 24px;
+        }
+      }
+        display: block; // only show on m screens and above
+    }
+
+
+  }
+}
+
+}
+
+
+
+
+.notification-dropdown {
+  display:inline;
+  float:right;
+  position:relative;
+  margin-top: 10px;
+  margin-right:10px;
+
+  @include bp(s){
+      margin-top: 10px !important;
+  }
+  @include bp(m){
+    margin-top: 17px !important;
+    margin-right: 20px;
+  }
+  @include bp(l){
+    margin-top: 17px !important;
+    margin-right: 20px;
+  }
+
+}
+
+
+
+.nav-toggle {
+  position: relative;
+  display: block;
+  float: right;
+  width: 50px;
+  outline: none;
+  margin: 0;
+
+  padding-top: 5px;
+  height: 48px;
+  @include bp-max(xs){
+    background:$dd-primary-background;
+  }
+
+
+  .icon{
+    color:$dd-black;
+    @include font-size(30,50);
+    @include bp-max(xs){
+      color: $white;
+      @include font-size(21,50);
+    }
+
+
+    @include transition(color 250ms);
+    text-align: center;
+    margin-left: 14px;
+    height: 50px;
+  }
+
+  &:hover,
+  &:focus{
+    text-decoration: none;
+  }
+  @include bp(s){
+    margin: 3px 0 0 25px;
+  }
+  @include bp($offscreen-bp){
+    height: 70px;
+    margin: 3px 0 0 25px;
+    .icon{
+      height: 70px;
+      line-height: 70px;
+    }
+  }
+
+  @include bp($onscreen-bp) {
+    display: none;
+  }
+
+}
+
+.nav-toggle-open {
+  .icon {
+    color: $white;
+  }
+}
+
+.nav{
+  .nav-active {
+    position:relative;
+
+    .arrow{
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent;
+      border-bottom-color: $dd-black;
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      right: inherit;
+      bottom: 0px;
+      left: 50%;
+      margin-top: 76px;
+      margin-left: -10px;
+    }
+  }
+
+  .navbar-profilePhoto {
+    display: block;
+    margin: 15px;
+    width:60px;
+  }
+}
+
+nav-offscreen{
+  profile-photo{
+    width:100px;
+    margin-top:20px;
+  }
+  .menu-items{
+    outline: none;
+    cursor:pointer;
+
+    md-list-item{
+
+      a{
+        display: block;
+        margin-left: 5px;
+        font-weight: bold;
+        height: 60px;
+        width: 100%;
+
+        >span{
+          display:block;
+          margin-top:14px;
+        }
+      }
+      min-height: 60px;
+
+      .nav-title{
+        display: inline-block;
+        margin-left:40px;
+        line-height: 31px;
+        color: $dd-dark-grey;
+      }
+      i{
+        position: absolute;
+        color: $dd-light-grey-text;
+        font-size: 25px;
+        margin-right: 20px;
+      }
+      &:hover{
+        background:$dd-light-grey;
+      }
+      &.side-active{
+        background: $theme-colour;
+        .nav-title{
+          color: $white;
+        }
+        i{
+          color: $white;
+        }
+
+        &:hover{
+          color: $white;
+          background: lighten($theme-colour, 5);
+        }
+      }
+    }
+  }
+
+
+
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+  background-color:$dd-primary-background;
+}

@@ -1,0 +1,58 @@
+.simple-form-modal-validation-error {
+  color: red;
+}
+
+.abn-check-dialog {
+  width: 650px;
+
+  .md-toolbar-tools {
+    padding: 0 !important;
+    background-color: #ededed;
+  }
+  .heading-text {
+    font-size: 30px;
+    font-weight: bolder;
+  }
+}
+
+.start-business-options-modal {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  .start-business-heading {
+    width:100%;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .start-business-or {
+    margin: 0 15px;
+  }
+
+  .start-business-btn-wrapper {
+    color: white;
+    .btn-itdb {
+      border-radius:0;
+      height: 125px;
+      width: 125px;
+      background: $dd-primary-background;
+      div{
+        line-height: 22px;
+      }
+    }
+
+    .btn-project-brief {
+      border-radius:0;
+      height: 125px;
+      width: 125px;
+      background: $dd-negative-color;
+      div{
+        line-height: 22px;
+      }
+    }
+  }
+
+}
+
+

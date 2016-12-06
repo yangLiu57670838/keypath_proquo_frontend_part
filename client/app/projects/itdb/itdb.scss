@@ -1,0 +1,155 @@
+.invites-list {
+
+  h6{
+    margin:0;
+  }
+
+  .sent-invites, .received-invites{
+    display: inline-block;
+    color: $white;
+    padding: 2px 20px;
+    @include font-size(14, 16);
+    font-weight: bold;
+  }
+  .sent-invites{
+    background:$dd-primary-background;
+  }
+  .received-invites{
+    background:$dd-negative-color;
+  }
+
+  .invitation-to-do-business {
+    .info {
+      margin: 15px;
+    }
+
+    .itdb-action {
+      margin: 30px;
+      text-transform: none;
+    }
+
+    .info-title {
+      font-weight: bold;
+    }
+
+    .modify-brief {
+      color: $dd-dark-blue;
+      font-weight: bold;
+      text-transform: none;
+    }
+
+    .quote-card {
+      box-shadow: $whiteframe-shadow-3dp;
+      height: 80px;
+    }
+
+    .add-new-person {
+      background-color: $dd-home-neutral;
+      text-transform: none;
+    }
+
+    .icon-dollar {
+      @include font-size(25, 20);
+      color: $dd-light-grey;
+    }
+
+    // over rides for collapsableCard
+    .collapsibleCard {
+      border-radius: 10px;
+      background: $dd-lightest-grey;
+      box-shadow: none;
+      &:hover {
+        box-shadow: none;
+      }
+      .section {
+        border-top: none;
+      }
+      .collapsible-card-body {
+
+      }
+      .summary {
+        padding: 0 15px 0 0;
+      }
+      .profile-summary-photo {
+        width: 100px;
+        min-width: 100px;
+      }
+    }
+
+    //invitee list
+    .itdb-invitee-list-wrapper {
+      profile-summary .profile-summary {
+        overflow: hidden;
+        .profile-summary-photo {
+          width: 120px;
+          min-width: 120px;
+        }
+      }
+      .btn-star {
+        width: 20px;
+      }
+      md-list-item {
+        box-shadow: $whiteframe-shadow-3dp;
+        margin-bottom: 5px;
+      }
+
+      .project-state {
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        .icon {
+          font-size: 30px;
+          color: $dd-black;
+        }
+      }
+
+      .remove-action {
+        background: $nab-red;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        &.deactivate {
+          cursor: default;
+        }
+        color: $white;
+        .icon {
+          font-size: 30px;
+          color: $white;
+        }
+      }
+
+      .contact-name {
+        color: $dd-primary-background;
+      }
+      .business-name {
+        color: $dd-dark-blue;
+      }
+
+      .vertical-divider {
+        border-left: 2px solid $dd-light-grey;
+        min-height: 60px;
+      }
+      .message {
+        color: $dd-primary-background;
+        .material-icons {
+          color: $dd-primary-background;
+          @include font-size(18, 16);
+          padding-right: 5px;
+
+          &.mobile {
+            @include font-size(37, 30);
+          }
+        }
+      }
+    }
+    .request-for-invite-action {
+      margin: 30px;
+      text-transform: none;
+    }
+
+  }
+  .visibility{
+    color:$dd-black;
+    font-size: 40px
+  }
+}

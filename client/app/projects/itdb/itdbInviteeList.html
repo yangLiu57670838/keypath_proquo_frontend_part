@@ -1,0 +1,22 @@
+<div flex class="itdb-invitee-list-wrapper">
+  <div layout="column" class="itdb-invitee-list">
+    <md-list class="md-dense" flex>
+      <md-list-item ng-repeat="invitee in vm.invitees" class="padding-right-no">
+        <div layout="row" class="itdb-invitee-wrapper" flex="100" layout-align="space-between stretch">
+          <div layout="row" class="invitee-info" layout-align="space-between center" flex>
+
+            <div class="invitee-info-profile" flex="65" flex-gt-xs="50">
+              <profile-summary business="::invitee"></profile-summary>
+            </div>
+          </div>
+
+          <div class="remove-action" flex="15" layout="column" layout-align="center center"
+               ng-click="vm.removeInvitee(invitee)">
+            <i class="icon icon-cross"></i>
+            <div hide-xs>Remove</div>
+          </div>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+</div>

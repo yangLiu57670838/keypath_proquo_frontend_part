@@ -1,0 +1,39 @@
+<div class="l-layout l-one-column cf">
+  <div class="content-container l-padding cf">
+    <div layout="row" layout-align="center center" class="getstarted-welcome">
+      <div flex="100" flex-gt-sm="60" flex-gt-md="40">
+        <form class="form registration-form" name="form" ng-submit="vm.submit(form)" novalidate>
+          <div layout="row" layout-align="center center">
+            <span class="welcome-heading padding-bottom-20" style="">Welcome! What is your name?<i class="icon-asterisk"></i></span>
+          </div>
+          <div>
+            <md-input-container md-no-float>
+              <label>First Name</label>
+              <input required aria-label="first name" name="firstName" ng-model="vm.user.firstName" minlength="1"
+                     maxlength="25">
+              <div ng-messages="form.firstName.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Last Name</label>
+              <input required aria-label="last name" name="lastName" ng-model="vm.user.lastName" minlength="1"
+                     maxlength="25">
+              <div ng-messages="form.lastName.$error" role="alert">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+          </div>
+
+          <div layout="row">
+
+            <span flex></span>
+            <md-button type="submit" class="btn btn-next md-primary-cta md-raised btn-save"
+                       ng-disabled="vm.isSubmitting" ng-cloak>Submit
+            </md-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

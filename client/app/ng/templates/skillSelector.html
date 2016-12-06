@@ -1,0 +1,25 @@
+<div class="skill-selector">
+	<div class="skill-category">
+		<md-input-container>
+			<md-select ng-model="skillsCategory" placeholder="Select a category" class="category-selector" md-container-class="category-md-select-container">
+				<md-option ng-value="categoryKey" ng-repeat="(categoryKey,categoryValue) in categoryMap">
+					{{categoryValue.label}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+
+		<div class="skill-tags-container"
+			 ng-class="{ 'is-active' : (skillsCategory == categoryKey) }"
+			 ng-repeat="(categoryKey,categoryValue) in categoryMap track by $index">
+			<md-button type="button"
+					   class="md-raised skill"
+					   ng-class="{ 'is-active' : skillActiveFlag[$index]}"
+					   ng-init="skillActiveFlag[$index] = false"
+					   ng-click="skillActiveFlag[$index] = !skillActiveFlag[$index]"
+					   ng-repeat="skill in categoryValue.skills">
+				{{skill}} <i class="material-icons">add</i>
+			</md-button>
+		</div>
+
+	</div>
+</div>

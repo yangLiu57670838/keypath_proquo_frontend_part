@@ -1,0 +1,30 @@
+.projects-list{
+  .num-indicator{
+    background:white;
+    @include bp(s){
+      background:red;
+    }
+
+    @include bp(m){
+      background:red;
+    }
+
+    @include bp(l){
+      background:red;
+    }
+
+  }
+  .project-num {
+    border-radius: 50%;
+    border: 2px solid $dd-primary-background;
+    @include font-size(12, 27);
+    width: 27px;
+    height: 27px;
+    color: $white;
+    text-align: center;
+    background: $dd-dark;
+  }
+  .profile-summary-photo{
+    width: 60px;
+  }
+}

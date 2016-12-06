@@ -1,0 +1,79 @@
+<md-dialog aria-label="Chat" class="chat-component full-screen-on-mobile">
+
+    <md-toolbar ng-show="!vm.showABNForm">
+      <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+        <div class="other-user-first-name" >
+          <div class="ellipsis-txt chat-name margin-left-10">{{vm.otherUserDetail.firstName}}</div>
+        </div>
+
+        <div>
+          <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+          </md-button>
+        </div>
+
+      </div>
+    </md-toolbar>
+
+
+    <md-dialog-content class="chat-dialog-content" ng-show="!vm.showABNForm">
+      <div class="detail-bar" layout="row" layout-align="space-between center">
+        <div flex="25" flex-gt-sm="25" flex-gt-xs="25" flex-gt-md="30"   class="profile-photo padding-left">
+          <profile-photo profile="vm.otherUserProfile" user-only="true" class="navbar-profilePhoto"/>
+        </div>
+        <div flex class="profile-detail padding-left" layout="column">
+          <div class="other-user-name ellipsis-txt">{{vm.otherUserDetail.firstName}} {{vm.otherUserDetail.lastName}}</div>
+          <div class="ellipsis-txt">{{vm.otherUserDetail.businessName}}</div>
+          <div>{{vm.otherUserDetail.businessLocation}}</div>
+        </div>
+      </div>
+      <div layout="column">
+        <div id="chat-dialog-body" class="chat-content-section">
+          <div ng-repeat="message in vm.messages track by $index" class="message-container">
+
+            <div ng-if="message.displayDate != vm.messages[$index-1].displayDate" layout="row" class="chat-message-date">
+              <div flex-offset="40" class="chat-display-date">
+                {{message.displayDate}}
+              </div>
+            </div>
+
+            <div ng-if="vm.user._id === message.poster" layout="row">
+              <div flex></div>
+              <div flex="60"  class="message-box mine md-primary">
+                <div>
+                  <span ng-bind-html='message.message'></span>
+                </div>
+                <div class="message-time">{{message.displayTime}}</div>
+              </div>
+            </div>
+
+            <div ng-if="vm.user._id != message.poster" layout="row">
+              <div flex="60" class="message-box ">
+                <div>
+                  <span ng-bind-html='message.message'></span>
+                </div>
+                <div class="message-time">{{message.displayTime}}</div>
+              </div>
+              <div flex></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions class="chat-footer-section" ng-if="!vm.showABNForm">
+      <div layout="row"  flex="100">
+
+        <md-input-container flex="75" class="chat-input-area-container" md-no-float>
+          <textarea id="chat-input-area" flex="100" placeholder="Type to chat" class="chat-input-area" name="newMessage" ng-model="vm.newMessage" rows="1" autofocus></textarea>
+        </md-input-container>
+
+
+        <div  flex  class="chat-send-link-container">
+          <a ng-click="vm.sendMessage()" class="btn chat-send-link" ng-disabled="vm.sendingMessage">Send</a>
+        </div>
+      </div>
+    </md-dialog-actions>
+
+</md-dialog>

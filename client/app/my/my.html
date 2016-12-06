@@ -1,0 +1,40 @@
+<div class="l-layout l-one-column cf l-bg-grey">
+  <div class="content-container l-padding cf l-content-padding my">
+    <section class="max-page-size form-element-fixed">
+      <md-tabs md-dynamic-height md-border-bottom class="my-tabs dashboard-tabs">
+        <!--<md-tab class="tab" ui-sref="my.circle" md-active="myCtrl.currentState.name=='my.circle'">-->
+          <!--<md-tab-label class="tab-label">-->
+            <!--<div class="heading">My inner circle</div>-->
+          <!--</md-tab-label>-->
+          <!--<md-tab-body>-->
+          <!--</md-tab-body>-->
+        <!--</md-tab>-->
+
+        <md-tab class="tab" ui-sref="my.settings" md-active="myCtrl.currentState.name=='my.settings'">
+          <md-tab-label class="tab-label">
+            <div class="heading">General</div>
+          </md-tab-label>
+          <md-tab-body>
+            <div class="tab-body" ng-show="myCtrl.currentState.name.indexOf('settings') > -1">
+              <div ui-view="settings"></div>
+            </div>
+          </md-tab-body>
+        </md-tab>
+        <md-tab class="tab" ui-sref="my.payments" md-active="myCtrl.currentState.name=='my.payments'">
+          <md-tab-label class="tab-label">
+            <div class="heading">Payments</div>
+          </md-tab-label>
+          <md-tab-body>
+            <div class="tab-body" ng-show="myCtrl.currentState.name.indexOf('payments') > -1">
+              <div ui-view="payments"></div>
+            </div>
+          </md-tab-body>
+        </md-tab>
+      </md-tabs>
+
+      <!--<div class="tab-body" ng-show="myCtrl.currentState.name.indexOf('circle') > -1">-->
+        <!--<div ui-view="circle"></div>-->
+      <!--</div>-->
+      </section>
+  </div>
+</div>

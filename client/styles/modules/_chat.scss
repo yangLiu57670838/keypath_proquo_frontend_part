@@ -1,0 +1,262 @@
+// styles for chat module
+
+
+.chat-modal{
+  background:$dd-bg-grey;
+  position:relative;
+
+	@include bp(m){
+		width: 1000px;
+	}
+
+
+  .user-summary{
+    padding: 10px 0;
+    margin-left: 20px;
+    width: 100%;
+
+    .image-wrapper{
+
+      float: left;
+      margin-right: 20px;
+      display:inline-block;
+      width:60px;
+    }
+
+    .name{
+      display: inline-block;
+      @include font-feature-heavy();
+      @include font-size(20,30);
+      color:$dd-black-text;
+    }
+
+    .company{
+      color:$dd-black-text;
+    }
+
+
+    .online-now{
+      display: inline-block;
+      color: $nab-village-green;
+      @include font-feature-heavy();
+      @include font-size(14);
+    }
+  }
+
+  md-dialog-content{
+    position:relative;
+    min-height: 300px;
+    @include padding-variable(0, 20, 20, 20, 1.2);
+    background:$white;
+  }
+
+  .chat-container{
+
+    .img-wrapper{
+      @include profile-image(50px, 50px, 50px);
+    }
+
+    .messages {
+      padding: 10px;
+      margin: 70px 0 50px 0;
+      @extend .cf;
+
+      .message {
+        margin-bottom:20px;
+        .message-content{
+          background-color: $nab-bg-grey;
+          padding: 10px 15px;
+          min-height: 50px;
+          @include box-sizing(border-box);
+          border-radius: 18px;
+          margin-bottom: 5px;
+          float: left;
+          width:80%;
+          @include font-size(14);
+          &.current-user{
+            background-color: $theme-colour;
+            color:$white;
+          }
+          &.system-user{
+            background-color: $dd-dark-grey;
+            color:$white;
+            h6{
+              color:$white;
+            }
+          }
+
+        }
+        .system-user-title{
+          @include font-size(14, 14);
+        }
+        .message-pointers{
+          width:100%;
+        }
+        .message-icon{
+          width: 20%;
+
+
+          .time-post{
+            @include font-size(10,10);
+            margin:0;
+          }
+        }
+
+      }
+    }
+  }
+
+  .message-tips{
+    position: absolute;
+    left: 0;
+    top:55px;
+    width: 100%;
+    margin-top: 0px;
+    z-index: 1;
+    padding:10px;
+    background:$dd-lightest-grey;
+
+    h6.feature-heading-light{
+      margin:0 20px 0 0;
+      @include bp(l){
+        margin:0 20px 20px 0;
+      }
+    }
+    .btn-green{
+      margin:0;
+      background: $theme-accent;
+      width:auto;
+    }
+
+    @include bp(l){
+      left:inherit;
+      top:90px;
+      right: 20px;
+      width: 200px;
+      .btn-green{
+        margin:0;
+        background: $theme-accent;
+        @include bp(l){
+          width:100%;
+        }
+
+      }
+    }
+
+
+
+    .tips{
+      position:relative;
+      margin-bottom: 20px;
+      margin-top:30px;
+      padding: 0;
+      @include font-size(14,20);
+      border-top:2px solid $white;
+      text-align:center;
+      display:none;
+      @include bp(l){
+        display:block;
+      }
+      .arrow{
+        left:50%;
+        top:-22px;
+        margin-left: -15px
+
+      }
+    }
+  }
+
+
+  .md-actions{
+
+    min-height: 80px;
+    border-top: 1px solid $nab-bg-grey;
+
+    .message-input-container{
+      md-input-container.chat-box{
+        padding-bottom:0 !important;
+      }
+
+      position: relative;
+
+      textarea{
+        padding-right: 60px;
+        max-height: 50px;
+        overflow-y: scroll;
+        border: 0;
+      }
+
+      .btn-send{
+        margin: 0;
+        position: absolute;
+        right: 0;
+        top:50%;
+        margin-top:-10px;
+        padding: 0;
+        outline: none;
+
+        i{
+          height: 56px;
+          width: 56px;
+          line-height: 40px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .md-icon-button{
+
+
+
+    .popover{
+      position: fixed;
+      min-width:200px;
+      background: $white;
+      display:none;
+      right: 5px;
+      box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+
+      @include bp(l){
+        right: -20px;
+      }
+
+      .arrow{
+        left: inherit;
+        right: 20px;
+      }
+
+      .popover-content{
+        padding:10px;
+        @include font-size(10, 16);
+        color:$dd-black;
+        white-space: normal;
+        width: 300px;
+      }
+    }
+
+    &:hover .popover{
+      display:block;
+    }
+  }
+}
+
+
+/* Grey background mask */
+.md-dialog-backdrop{
+  height: 100% !important;
+}
+
+.md-dialog-container md-dialog.chat-modal{
+  width:700px;
+}
+
+.chat-close-container {
+  .arrow{
+    left: 50%;
+  }
+  p{
+    width:250px;
+    padding:20px;
+  }
+}

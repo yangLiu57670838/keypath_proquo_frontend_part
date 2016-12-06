@@ -1,0 +1,178 @@
+.quote {
+
+  .collapsibleCard {
+    @include bp-max(m){
+      background:$dd-lightest-grey;
+      .summary{
+        padding:15px !important;
+      }
+    }
+    .project-section{
+      padding:15px !important;
+    }
+
+    .collapsible-container.inactive{
+      max-height:50px;
+      position:relative;
+
+      &::after{
+        width:100%;
+        display:block;
+        content: "";
+        position:absolute;
+        left:0;
+        right:0;
+        bottom: 0;
+        height:100%;
+        min-height:100px;
+        width:100%;
+        transition:opacity 0.5s;
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.55) 50%,rgba(255,255,255,1) 91%);
+        @include bp-max(xs){
+          background: linear-gradient(to bottom, rgba(226, 226, 226, 0) 0%, rgba(243, 241, 241, 0.55) 50%, #E8E6E6 91%);
+        }
+        opacity:1;
+        z-index: 9;
+      }
+    }
+  }
+
+  .collapsibleCard .collapsible-container.active{
+    &::after{
+      transition:opacity 0.5s;
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.55) 0%,rgba(255,255,255,1) 0%);
+      opacity:0;
+      display:none;
+    }
+  }
+
+  .headline{
+    margin: 40px 0 15px 0;
+  }
+
+  .pills{
+    .pill{
+      padding: 10px 35px;
+      margin: 10px;
+      border-radius: 28px;
+      color: $paragraph-color;
+      background: $dd-light-grey;
+      display: inline-block;
+    }
+    .pill-on{
+      color: white;
+      background: $dd-primary-background;
+    }
+  }
+
+  .info-link{
+    color: $dd-dark-blue;
+  }
+
+  .ticked{
+    color: $dd-primary-background;
+    @include font-size(50, 50);
+  }
+
+  section {
+    margin-bottom: 10px;
+    .content {
+      background-color: white;
+      padding: 10px 20px;
+      font-weight:900;
+    };
+
+    .section-header {
+      font-size: 24px;
+      font-weight:bolder;
+    }
+  }
+
+
+  h3{
+    margin:0;
+  }
+
+  .add-attachments.icon-clip{
+    color:$dd-dark-grey;
+    margin-right: 5px;
+  }
+  .brief-files .icon-clip{
+    margin-right: 10px;
+    @include font-size(14, 14);
+  }
+
+  .attach-documents-link .icon {
+    vertical-align: bottom;
+  }
+
+  .brief-file{
+    padding-right: 15px;
+  }
+
+  .icon-remove{
+    margin-left: 10px;
+    @include font-size(14, 14);
+  }
+
+
+  .add-attachments{
+    margin: 30px 0;
+  }
+
+  .quote-detail{
+    background:$white;
+    padding:20px 10px;
+    @include bp-max(xs){
+      padding:20px 0;
+    }
+  }
+
+  .md-datepicker-container{
+    padding-left: 0;
+    min-width: 170px;
+    width:100%;
+    md-datepicker {
+      .md-datepicker-input{
+        display:none;
+      }
+      .md-datepicker-triangle-button{
+        display:none;
+      }
+    }
+  }
+
+  .timing-width{
+    min-width: 100px;
+    max-width: 250px;
+
+    md-radio-button{
+      margin:16px;
+    }
+  }
+
+  .timing-span{
+    margin:16px;
+  }
+
+  .timing-due-date{
+    padding-left:0px;
+  }
+
+  .timing-header{
+    margin:16px;
+    min-width: 170px;
+    padding-right:5px;
+  }
+
+  .attachment-margin-bottom{
+    margin-bottom: 28px;
+  }
+
+}
+
+.bolder {
+  font-weight:bolder;
+}
+
+

@@ -1,0 +1,7 @@
+<div class="reveal-container" ng-class="{'reveal-show':toggle}">
+  <div ng-show="showToggle" class="reveal-btn icon" ng-click="revealShow()"><div class="icon-pointer-right"></div></div>
+  <div ng-show="showToggle" class="cover" ng-click="revealShow()"></div>
+  <div class="reveal-content">
+    <ng-transclude></ng-transclude>
+  </div>
+</div>

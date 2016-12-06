@@ -1,0 +1,226 @@
+<div class="l-layout l-one-column l-bg-grey cf project-invitation"  id="project-invitation">
+  <div class="content-container l-padding cf l-content-padding">
+
+    <section class=" form-element-fixed">
+
+      <form name="inviteForm"  novalidate>
+        <div layout="row" layout-align="space-between center" layout-wrap class="margin-bottom">
+          <h2 class="no-margin">Create an Offer</h2>
+        </div>
+
+        <section layout="row" layout-align="center" flex-gt-xs="70" class=" margin-top-10 margin-bottom-10">
+          <div flex="100" flex-gt-xs="70" class="step-container margin-top-10 margin-bottom-10" >
+            <div class="line"></div>
+            <div class="holder">
+              <div layout="row" layout-align="space-between center" flex="100">
+                <div class="invite-step " ng-class="{'active':vm.step === $index}" ng-click="vm.gotoStep(inviteForm, $index)" ng-repeat="step in vm.steps"><span>{{::$index+1}}</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div layout="row" layout-align="space-around start" class="margin-top-50">
+
+          <div flex-gt-xs="70">
+            <!-- STEP 1 -->
+            <section ng-show="vm.step === 0" class="invite-section" flex="100">
+              <h4 flex="100" class="text-align-center">Tell us about your offer</h4>
+              <h5 class="md-title">What do you want to call your offer? <i class="icon-asterisk"></i></h5>
+              <md-input-container flex md-no-float>
+                <input aria-label="Project title" name="workTitle" required ng-model="vm.itdb.brief.workTitle" placeholder="Summarise your offer in a few words" maxlength="100">
+                <div ng-messages="inviteForm.workTitle.$error">
+                  <div ng-message-exp="['required']" class="my-message">This is required!</div>
+                </div>
+              </md-input-container>
+
+              <h5 class="md-title">What will your customers receive? <i class="icon-asterisk"></i></h5>
+              <md-input-container flex md-no-float>
+                <textarea aria-label="itdb title" name="description" required ng-model="vm.itdb.brief.description" placeholder="Tell us about your offer in a bit more detail" maxlength="1000" md-maxlength="1000" ></textarea>
+                <div ng-messages="inviteForm.description.$error">
+                  <div ng-message-exp="['required']" class="my-message">This is required!</div>
+                </div>
+              </md-input-container>
+
+
+              <h5 class="md-title">Would you be open to a swap? <i class="icon-asterisk"></i></h5>
+              <md-input-container layout="row" layout-align="start middle" md-no-float>
+                <md-checkbox ng-model="vm.itdb.acceptsCash">
+                  <img class="pay-swap-icon" src="assets/images/icon_pay.png"/>
+                  <span class="pay-swap-icon-label">Pay only</span>
+                </md-checkbox>
+                <md-checkbox ng-model="vm.itdb.acceptsSwap">
+                  <img class="pay-swap-icon" src="assets/images/icon_payswap.png"/>
+                  <span class="pay-swap-icon-label">Swap + Pay</span>
+                </md-checkbox>
+
+              </md-input-container>
+              <div id="check-box" class="margin-bottom-10">
+                <div ng-show="vm.checkboxInvalid" class="my-message txt-warning">At least one choice is required!</div>
+              </div>
+              <div class="denote md-padding" flex-gt-sm="50">
+                When you agree to swap, both parties agree to provide services and goods to each other which is
+                a useful way for small business to save money.
+              </div>
+            </section>
+
+
+            <!-- STEP 2 -->
+            <section ng-show="vm.step === 1" class="invite-section" flex="100">
+              <h4 flex="100" class="text-align-center">Tell us more. Would you like to showcase your work?</h4>
+              <h5 class="md-title">Add Files</h5>
+
+
+              <!-- ADD FILES-->
+
+              <div class="attach-documents-link margin-bottom-10" layout="row" layout-align="end center" >
+                <a href="" ng-click="vm.addAttachment(inviteForm, $event)" class="nowrap">
+                  <i class="icon icon-clip"></i> Add Attachments</a>
+              </div>
+
+              <div ng-repeat="attachment in vm.itdb.brief.attachments" layout="row" layout-align="space-between center" >
+                <div>
+                  <a ng-href="{{attachment.url}}" download="{{attachment.attachmentName}}"><i class="icon icon-clip"></i>
+                    <label>
+                      <span class="ellipsis-txt">{{attachment.attachmentName}} </span>
+                      <span ng-show="attachment.size" hide-xs hide-sm>
+                        <span class="ellipsis-txt">(</span><span class="ellipsis-txt">{{ attachment.size | filesize }}</span><span class="ellipsis-txt">)</span>
+                      </span>
+                    </label>
+                  </a>
+                </div>
+                <div>
+                  <label class="ellipsis-txt" hide-xs hide-sm>{{attachment.updatedAt|date:"dd/MM/yyyy"}}</label>
+                  <a class="ellipsis-txt" ng-if="!vm.readonly" class="remove-item" ng-click="vm.removeAttachment(attachment, $event)"><i class="icon icon-remove"></i></a>
+                </div>
+              </div>
+
+              <!-- ADD LINKS -->
+              <h5 class="md-title">Add Websites</h5>
+              <div class="attach-documents-link margin-bottom-10"  layout="row" layout-align="end center">
+                <a href="" ng-click="vm.addLink(inviteForm)" class="nowrap"><i class="icon material-icons" >link</i> Add New Link</a>
+              </div>
+              <ng-form name="urlForm" ng-repeat="link in vm.itdb.brief.links" layout="column" layout-align="space-between none " layout-gt-sm="row" layout-align-gt-sm="space-between start">
+
+                <md-input-container flex >
+                  <label>Link</label>
+                  <input aria-label="link url" name="linkUrl" required ng-model="link.url" placeholder="e.g.http://www.example.com">
+                  <div ng-messages="urlForm.linkUrl.$error">
+                    <div ng-message-exp="['required']" class="my-message">This is required!</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container flex>
+                  <label>Description</label>
+                <textarea aria-label="Title" name="linkUrlTitle" required ng-model="link.urlDescription"
+                          ng-disabled="vm.readonly" ng-readonly="vm.readonly" maxlength="150"></textarea>
+                  <div ng-messages="urlForm.linkUrlTitle.$error">
+                    <div ng-message="required">This is required!</div>
+                  </div>
+                </md-input-container>
+                <a flex-order-xs="-1" flex-order-sm="-1" flex-offset-xs="95" flex-offset-sm="95" class="remove-item" ng-click="vm.removeLink(link, $event)"><i class="icon icon-remove"></i></a>
+              </ng-form>
+            </section>
+
+
+            <!-- STEP 3 -->
+            <section ng-show="vm.step === 2" class="invite-section" flex="100">
+              <h4 flex="100"class="text-align-center">What else do we need to know?</h4>
+              <h5 class="md-title">How long will this take?</h5>
+
+              <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center" flex="100">
+
+                <div flex-gt-sm="20" class="bolder padding-top-10">
+                    It will take me
+                </div>
+
+                <div flex-gt-sm="60">
+                  <div layout="column" layout-align="center center" flex="100" class="slider" ng-class="{'fade-out': vm.noTimeSpan}">
+                    <md-slider ng-disabled="vm.noTimeSpan" style="width:80%" min="0" max="7" ng-change="vm.onSideChange()" ng-model="vm.estimatedDurationSliderPosition" aria-label="red" id="timeSpan" > </md-slider>
+                    <div style="width:100%" layout="row" layout-align="space-between center">
+                      <div>&lt; a week</div>
+                      <div>{{vm.sliderText}}</div>
+                      <div>&gt; 6 months</div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div flex-gt-sm="20" class="padding-left-gt-md-10   margin-left-gt-md-10 padding-top-10">
+                  <md-input-container layout="row" layout-align="start middle" md-no-float class="no-margin">
+                    <md-checkbox ng-model="vm.noTimeSpan" class="no-margin">
+                      <span class="pay-swap-icon-label">Not sure</span>
+                    </md-checkbox>
+                  </md-input-container>
+                </div>
+              </div>
+
+              <h5 class="md-title">What would it cost?</h5>
+              <div layout="row" class="margin-top-10">
+                <div class="dropdown-label"><md-icon class="icon icon-dollar"></md-icon></div>
+                <div flex="100">
+                  <md-input-container md-no-float class="no-margin" flex="30">
+                    <input placeholder="Budget" aria-label="Work budget" type="text" ng-pattern="vm.currencyPattern" name="budget"  ng-blur="vm.formatCurrency()" ng-model="vm.budget">
+                    <div ng-messages="inviteForm.budget.$error">
+                      <div ng-message="pattern,number">This needs to be a valid number</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+
+            </section>
+
+
+
+            <!-- SUBMIT / DISCARD / CONTINUE BUTTONS -->
+            <section layout="row" layout-align="space-between start" layout-align-gt-xs="space-between center" class="margin-top-bottom margin-top-50">
+              <a  md-theme="red" class="btn txt-negative" ng-click="vm.confirmDiscardInvite()">Discard</a>
+
+              <div ng-show="vm.step === 2"layout="column" layout-gt-xs="row" layout-align="space-between center">
+                <a  ng-click="vm.saveAndClose(inviteForm, vm.step, false)" class="bolder nowrap margin-right-gt-xs-10">Save and Close</a>
+                <md-button  flex-order-gt-xs="2" class="btn md-raised md-primary-cta"  ng-click="vm.findUsers(inviteForm)">Find Customers</md-button>
+              </div>
+
+              <div ng-show="vm.step < 2"layout="column" layout-gt-xs="row" layout-align="space-between center">
+                <md-button  flex-order-gt-xs="2" class="btn md-raised md-primary-cta"  ng-click="vm.gotoStep(inviteForm, vm.step+1)">Continue</md-button>
+                <a  flex-order-gt-xs="1" class="btn" ng-click="vm.gotoStep(inviteForm, vm.step+1)" ng-show="vm.step > 0">Skip</a>
+              </div>
+            </section>
+          </div>
+
+          <!-- TIPS-->
+          <section  class="denote tips"  hide-xs flex-gt-xs="30" flex-gt-sm="20">
+            <!-- STEP 1 TIPS-->
+            <div ng-show="vm.step === 0">
+              <p class="bolder">Here are a few tips:</p>
+              <ul class="tips-list ">
+                <li>Keep it simple.</li>
+                <li>A great offer is a good way to build your customer base.</li>
+                <li>Be open to swaps. You never know what you might get.</li>
+              </ul>
+            </div>
+            <!-- STEP 2 TIPS-->
+            <div ng-show="vm.step === 1">
+              <p class="bolder">Give buyers a reason to pick you</p>
+              <p>Here's how you can increase your chance of finding a buyer</p>
+              <ul class="tips-list ">
+                <li>Show examples of your previous work</li>
+                <li>Show examples of concept work for inspiration</li>
+                <li>Show your past accomplishments</li>
+              </ul>
+            </div>
+            <!-- STEP 3 TIPS-->
+            <div ng-show="vm.step === 2">
+              <h6 layout="row" layout-align="center"> <i class="icon icon-tick-circle"></i>Good to go!</h6>
+            </div>
+
+          </section>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </div>
+
+</div>

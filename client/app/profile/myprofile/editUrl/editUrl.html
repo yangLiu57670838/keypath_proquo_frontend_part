@@ -1,0 +1,91 @@
+<md-dialog aria-label="Edit links"  class="edit-url full-screen-on-mobile">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Edit links</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="vm.cancel()">
+        <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+
+    <div layout="column">
+
+
+        <form name="urlForm" ng-submit="vm.addLink(urlForm)" novalidate>
+          <div layout="column" layout-gt-xs="row" layout-align="space-between center"  ng-if="vm.socialTypes.length >0">
+
+            <div layout="row" layout-align="start start" layout-wrap>
+
+             <md-input-container flex="100" flex-gt-sm="30" required>
+               <label>Type of link</label>
+               <md-select name="socialType" ng-model="vm.chosenType" required ng-change="vm.chosen()" class="type-o-link">
+                 <md-option ng-repeat="type in vm.socialTypes" value="{{type.value}}">{{type.label}}</md-option>
+               </md-select>
+               <div ng-class="{'ng-active':vm.dropDownError}" class="md-input-messages-animation md-auto-hide ">
+                 <div class="md-input-message-animation" ng-class="{'show-error-message':vm.dropDownError}">This is required</div>
+               </div>
+             </md-input-container>
+
+              <md-input-container flex flex-gt-sm="40" ng-show="vm.chosenUrl">
+                <p class="chosen-url">{{vm.chosenUrl || ''}}</p>
+              </md-input-container>
+
+             <md-input-container flex flex-gt-sm="30" md-no-float ng-show="vm.chosenUrl">
+               <input name="linkName" required type="text" placeholder="Enter {{vm.chosenType}} link" ng-model="vm.newLink"  />
+               <div ng-messages="urlForm.linkName.$error" role="alert" ng-auto-hide="false"  ng-show="urlForm.linkName.$touched || urlForm.linkName.$error.required">
+                 <div ng-message="required">This is required</div>
+                 <div ng-message="linkInvalid">Only include your 'id' suffix</div>
+               </div>
+             </md-input-container>
+
+             <md-input-container flex="100" md-no-float ng-if="vm.chosenUrl">
+               <textarea name="description" placeholder="Short description" ng-model="vm.newDescription" maxlength="60" md-maxlength="60"></textarea>
+             </md-input-container>
+
+           </div>
+
+          <md-button type="submit"  flex-xs="100" class="md-raised md-primary-cta add-btn">Add</md-button>
+      </div>
+        </form>
+
+
+
+<form name="urlSaveForm"  novalidate>
+      <md-list>
+        <md-list-item class="qualification" layout="column" layout-align="start start" layout-gt-sm="row" layout-align-gt-sm="center center"  layout-padding  ng-repeat="link in vm.socialUrls">
+
+
+          <md-input-container  flex-xs="100"  md-no-float >
+            <md-icon class="icon icon-{{link.urlIconImage}}"></md-icon>
+            <span class="slash"> /</span><input readonly name="url" required type="text" placeholder="Edit {{link.urlIconImage}} link" ng-model="link.url" />
+          </md-input-container>
+
+          <md-input-container  flex-xs="100" md-no-float>
+            <textarea name="desc" readonly placeholder="No description" ng-model="link.urlDescription" maxlength="60"></textarea>
+          </md-input-container>
+
+
+          <md-button  flex-sm="100" ng-click="vm.deleteLink($index)" aria-label="Delete" >
+            Delete
+          </md-button>
+
+
+        </md-list-item>
+      </md-list>
+
+
+    </div>
+
+  </md-dialog-content>
+
+  <md-dialog-actions  class="dialog-actions actions" aria-label="actions" layout="row" layout-align="end center">
+    <md-button ng-click="vm.cancel()" aria-label="Delete">
+      Cancel
+    </md-button>
+    <md-button type="button" class="md-raised md-primary-cta" ng-click="vm.saveLinks(urlSaveForm)" aria-label="Save" >Save</md-button>
+  </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,75 @@
+// GLOBAL IMPORTS
+// ==========================================================================
+
+$IS_DEBUG: false;
+$FONT_BASE: 16;
+
+// VARIABLES
+// ==========================================================================
+
+@import "variables";
+
+// VENDOR
+// ==========================================================================
+
+// bower:scss
+@import "../bower_components/compass-mixins/lib/_compass.scss";
+@import "../bower_components/ddbreakpoints/lib/dd.breakpoints.scss";
+// endbower
+
+
+// UTILITIES
+// Note: // comments are used here because there is no point exporting this comment to the output CSS
+// ==========================================================================
+
+// @import "utilities/photoshop-shadows"; // fix multiplication
+// @import "utilities/animations"; // remove compass dependancies
+@import "utilities/mixins";
+@import "utilities/_debug";
+
+// LAYOUTS
+// ==========================================================================
+
+@import "layout";
+
+// BASE STYLES AND GLOBAL STYLES
+// ==========================================================================
+
+@import "base";
+@import "_webfonts";
+@import "_ng-materials";
+@import "global";
+
+
+// MODULES
+// All files from the "modules" folder are imported
+// Modules that your website does not use should be deleted
+// ==========================================================================
+
+
+// todo: investigate globbing
+@import "global/header";
+@import "global/navigation/offscreen";
+@import "global/navigation/onscreen";
+@import "modules/login";
+@import "modules/fullpage";
+@import "modules/home";
+@import "modules/review";
+@import "modules/search-results";
+@import "modules/ng-expand-collapse";
+@import "modules/ng-modal";
+@import "modules/skill-selector";
+@import "modules/chat";
+
+// @import "forms/**/*";
+
+
+// FUNCTIONAL
+// ==========================================================================
+
+@import "functional";
+
+// PRINT
+// ==========================================================================
+
+@import "print";

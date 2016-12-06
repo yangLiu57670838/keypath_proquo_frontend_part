@@ -1,0 +1,18 @@
+.brief-swap-skills-modal{
+  .autocomplete-surround {
+    min-height: 70px;
+
+    .autocomplete-container {
+      min-height: 50px;
+      md-autocomplete-wrap {
+        box-shadow: none;
+        input {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+  .smaller-font{
+    font-size:12px;
+  }
+}

@@ -1,0 +1,72 @@
+// styles for custom skill selector
+
+.skill-selector{
+
+
+
+	.skill-tags-container{
+		@extend .cf;
+		display: none;
+
+		&.is-active{
+			display: block;
+		}
+
+		.skill{
+			float: left;
+			//display: inline-block;
+			@include button(30);
+			@include font-feature();
+			@include font-size(14);
+			margin: 0 10px 5px 0;
+			background-color: $nab-bg-grey;
+
+			i{
+				color: #000;
+				height: 30px;
+				line-height: 30px;
+				@include font-size(20);
+				transition: all 250ms;
+			}
+
+			&.is-active{
+				background-color: $theme-accent;
+				color: #fff;
+
+				i{
+					color: #fff;
+					transform: rotate(45deg);
+				}
+			}
+		}
+
+
+	}
+
+}
+
+// set z-index in dialog
+body.md-dialog-is-showing .category-md-select-container{
+	z-index: $z-index-modal;
+}
+
+
+.skills-by-category-container{
+  .ng-ec-title{
+    margin-bottom: 4px;
+    padding: 5px 10px;
+    color:$white;
+    padding-left:20px;
+    background: $dd-primary-background;
+
+    &:hover{
+      background:lighten($dd-primary-background, 5);
+    }
+
+  }
+
+}
+
+.suggest-mail-link{
+  margin-top:55px;
+}

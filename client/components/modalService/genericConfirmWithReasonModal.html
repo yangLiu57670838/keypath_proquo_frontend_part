@@ -1,0 +1,36 @@
+<md-dialog aria-label="Edit portfolio"  class="edit-portfolio full-screen-on-mobile confirm-with-reason">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{vm.title}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content layout="column"  layout-padding  layout-align="space-between start">
+
+      <div>
+        <div layout="column"  layout-padding  layout-align="space-between start">
+          <p ng-bind-html="vm.confirmationMessage"></p>
+          <p>Add a personal message to let the supplier know your reasons for cancelling.</p>
+          <md-input-container md-no-float>
+            <textarea flex="100" placeholder="Enter a reason" rows="1" ng-model="vm.reason"></textarea>
+          </md-input-container>
+        </div>
+      </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions  class="md-actions actions" aria-label="actions" layout="row" layout-align="space-between center">
+      <a ng-click="vm.cancel()" aria-label="Delete"  class="btn md-raised txt-negative">
+        No
+      </a>
+      <md-button class="btn md-raised md-primary-cta" aria-label="Save" ng-click="vm.confirm()">
+        Yes
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,156 @@
+navbar{
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+md-sidenav{
+  position: fixed;
+  z-index: 999;
+}
+md-backdrop{
+  position: fixed;
+}
+
+.nav-drop-down{
+  position:relative;
+  cursor:pointer;
+  .icon{
+    margin-top:20px;
+    @include font-size($icon-size, $icon-line-height);
+    color:$white;
+  }
+
+  .notify-number{
+    position: relative;
+    padding:3px;
+    height:18px;
+    @include font-size(14, 21);
+    color: $dd-dark-blue;
+    font-weight:bold;
+    min-width: 32px;
+    text-align: center;
+    background:$white;
+    border-color: $dd-dark-blue;
+    border-width: 2px;
+    border-style: solid;
+    border-radius:5px;
+    z-index: 8;
+
+    .arrow{
+      border-width: 9px;
+      border-style: solid;
+      border-color: transparent transparent transparent $dd-dark-blue;
+      right: 20px;
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 16px;
+      left: -2px;
+      z-index: 10;
+    }
+
+    .arrow-shadow{
+      border-width: 9px;
+      border-style: solid;
+      border-color: transparent transparent transparent $white;
+      right: 20px;
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 11px;
+      left: 0px;
+      z-index: 20;
+    }
+
+    .arrow-shadow-solid{
+      border-color: transparent transparent transparent $dd-dark-blue;;
+    }
+  }
+
+  .notify-number-solid{
+    color: $white;
+    background: $dd-dark-blue;
+  }
+
+}
+
+@include bp(m){
+  .arrow{
+    left:inherit;
+    right: 300px;
+  }
+}
+
+@include bp(s){
+  .arrow{
+    left:inherit;
+    right: 300px;
+  }
+}
+
+.notify-container{
+  padding:10px;
+  h6{
+    margin-top:0;
+    text-align: left;
+  }
+
+  .notify-item{
+    margin-bottom:10px;
+    height: 70px;
+    min-height: 70px;
+
+    .notify-btn{
+      border:3px solid $dd-bg-grey;
+      padding:5px;
+
+      &:hover{
+        border:3px solid $theme-colour;
+      }
+
+      .notify-icon{
+        @include profile-image(30px, 30px, 15px);
+        @include bp(m){
+          @include profile-image(50px, 50px, 25px);
+        }
+      }
+
+       h6{
+        font-weight: bold;
+        font-family: "BrownStandardBold", "Arial Black";
+        display:inline-block;
+        margin:0;
+        font-size:14px;
+        text-align:left;
+        width:auto;
+
+         &~span{
+           color:$dd-grey;
+         }
+      }
+      .text-notify{
+        line-height: 25px;
+        padding: 5px;
+        div{
+          overflow-x:hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+md-menu-content[width="4"]{
+  width:340px;
+
+  @include bp(m){
+    width:820px;
+  }
+
+}
+
+
+
+

@@ -1,0 +1,19 @@
+<div class="avatars-container">
+  <div class="avatar-border"></div>
+  <div class="avatars" layout="row" >
+
+    <div flex="50" layout="row" layout-align="center center" ng-if="!profile.primaryContactAvatarUrl || profile.primaryContactAvatarUrl.length<1">
+      <img  ng-click="uploadImage('avatar')" class="user-logo" src="assets/images/avatar.png" />
+    </div>
+    <div flex="50" layout="row" layout-align="center center"  ng-if="profile.primaryContactAvatarUrl && profile.primaryContactAvatarUrl.length>0">
+      <img id="user-avatar" ng-click="uploadImage('avatar')" class=" user-logo" ng-src="{{profile.primaryContactAvatarUrl}}"  />
+    </div>
+
+
+    <div flex="50" layout="row" layout-align="center center" class="org-logo-container" ng-class="{'no-logo-container':!profile.businessLogoUrl}">
+      <img id="business-logo"  ng-click="uploadImage('logo')" class="org-logo" ng-class="{'no-org-logo':!profile.businessLogoUrl}" ng-src="{{profile.businessLogoUrl || 'assets/images/business_logo.png'}}"  />
+    </div>
+
+  </div>
+</div>
+

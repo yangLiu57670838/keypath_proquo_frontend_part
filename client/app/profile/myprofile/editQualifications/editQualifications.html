@@ -1,0 +1,109 @@
+<div>
+  <md-button  ng-click="vm.showDatePicker()" aria-label="Edit qualifications" class="md-fab md-mini" >
+    <i class="icon icon-pencil"></i>
+    <md-tooltip>
+      {{vm.myheading}}
+    </md-tooltip>
+  </md-button>
+  <div class="my-popup ">
+    <div class="md-dialog-container" ng-show="vm.showpopup" >
+      <div class="md-dialog-focus-trap" tabindex="0"></div>
+      <div>
+
+
+        <div aria-label="Edit portfolio"  class="my-popup-dialog edit-qualifications full-screen-on-mobile" >
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <h2>Edit qualifications</h2>
+              <span flex></span>
+              <a class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+              </a>
+            </div>
+          </md-toolbar>
+
+          <md-dialog-content>
+            <div layout="column">
+              <div  layout="row" layout-align="space-between center"  ng-show="vm.qualifications.length<3">
+
+                <md-input-container  md-no-float flex="80"  >
+                  <input  type="text" placeholder="Enter Qualification / Membership" ng-model="vm.newQualification" />
+                </md-input-container>
+                <a class="md-button md-raised md-primary-cta" ng-click="vm.addQualification()">Add</a>
+
+              </div>
+              <md-list>
+                <md-list-item class="qualification" layout="column" layout-align="end" layout-gt-sm="row" layout-align-gt-sm="space-between start"  layout-padding  ng-repeat="(idx, qualification) in vm.qualifications">
+
+                 <md-input-container  md-no-float  class="qual-input" flex flex-gt-sm="10">
+                    <input type="text" placeholder="Edit Qualification / Membership" ng-model="qualification.name" ng-change="vm.valueChanged()"/>
+
+                    <div ng-messages="vm.errors[idx]" ng-auto-hide="false" ng-show="vm.errors[idx]">
+                      <div ng-message="titleRequired">This is required</div>
+                    </div>
+                 </md-input-container>
+
+                  <div layout="row" flex>
+                  <md-input-container layout="row" flex-gt-sm class="qual-input">
+                    <label>From </label>
+                    <div>
+                      <input name="from" type="text" placeholder="DD/MM/YYYY" ng-model="qualification.fromDateStr"
+                             required ng-blur="vm.valueChanged()"/>
+
+                      <div ng-messages="vm.errors[idx]" ng-auto-hide="false" ng-show="vm.errors[idx]">
+                        <div ng-message="fromRequired">This is required</div>
+                        <div ng-message="fromPattern">Format must be DD/MM/YYYY</div>
+                        <div ng-message="endBeforeStart">Must be earlier than the 'to' date</div>
+                        <div ng-message="cannotBeFuture">Must not be a future date</div>
+                      </div>
+                    </div>
+                  </md-input-container>
+
+                  <md-input-container layout="row" flex-gt-sm class="qual-input">
+                    <label>To </label>
+                    <div>
+                      <input name="from" type="text" placeholder="DD/MM/YYYY" ng-model="qualification.endDateStr"
+                              ng-blur="vm.valueChanged()"/>
+                      <div ng-messages="vm.errors[idx]" ng-auto-hide="false" ng-show="vm.errors[idx]">
+                        <div ng-message="endPattern">Format must be DD/MM/YYYY</div>
+                        <div ng-message="endBeforeStart">Must be later than the 'from' date</div>
+                      </div>
+                    </div>
+                  </md-input-container>
+                  </div>
+
+
+
+
+
+                  <div>
+                    <md-button ng-click="vm.deleteQualification($index)" aria-label="Delete" style="width:100%;" >
+                      Delete
+                    </md-button>
+                  </div>
+
+
+
+                </md-list-item>
+              </md-list>
+
+
+            </div>
+
+
+          </md-dialog-content>
+          <md-dialog-actions class="md-actions actions" aria-label="actions" layout="row" layout-align="end center">
+
+            <a ng-click="vm.cancel()" aria-label="Delete" class="md-button">
+              Cancel
+            </a>
+            <a class="md-button md-raised md-primary-cta" aria-label="Save" ng-disabled="!vm.dirty || vm.errorsPresent" ng-readonly="!vm.dirty || vm.errorsPresent" ng-click="!vm.dirty || vm.errorsPresent || vm.saveQualificaton()">Save</a>
+
+          </md-dialog-actions>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

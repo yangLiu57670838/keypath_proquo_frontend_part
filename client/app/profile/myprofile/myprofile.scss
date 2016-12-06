@@ -1,0 +1,717 @@
+.myprofile-container{
+
+  $somewhatblack: #191b1f;
+
+  .heading{
+    @include feature-heading();
+    @include font-size(14, 60);
+    @include font-feature-bold();
+  }
+
+  .heading-portfolio-img{
+    display: inline-block;
+    max-width:150px;
+  }
+
+  .heading-reduced{
+    @include feature-heading();
+    @include font-size(14, 20);
+    @include font-feature-bold();
+    .rating-heading {
+      vertical-align: middle;
+    }
+  }
+
+  .report-flag{
+    white-space:nowrap;
+    .material-icons{
+      @include font-size(14, 14);
+    }
+  }
+
+  .company-name{
+    color: $dd-primary-background;
+  }
+
+  .profile-social-links{
+
+    .btn-social{
+      width: 40px;
+      height: 40px;
+      margin: 0;
+      background-color: transparent;
+      i {
+        color: $dd-primary-background;
+      }
+      &:hover{
+        i{
+          color: $dd-primary-background;
+        }
+      }
+
+    }
+  }
+
+
+
+
+  .profile-section{
+    margin: 0 0 60px 0;
+
+
+
+    .profile-summary {
+      hm-read-more {
+        span {
+          word-wrap: break-word;
+        }
+      }
+      .flex-fix{
+        @include bp-max(xs){
+          display:block !important;
+        }
+        @include bp-max(s){
+          display:block !important;
+        }
+        @include bp-max(m){
+          display:block !important;
+        }
+        @include bp-max(l){
+          display:block !important;
+        }
+      }
+
+      padding:0;
+      @include bp(s){
+        padding:20px;
+      }
+      @extend .cf;
+      position: relative;
+      background:$white;
+
+      .summary-title{
+        @include font-feature();
+        @include font-size(30, 30);
+        letter-spacing: 2px;
+      }
+
+      .company{
+        @include font-feature();
+        @include font-size(16,16);
+        font-weight: normal;
+        margin: 10px 0 0 0;
+        color: white;
+      }
+
+      .company-location{
+        @include font-feature();
+        @include font-size(16,16);
+        font-weight: normal;
+        margin: 0 0 5px 0;
+        color: white;
+      }
+
+      .geo-distance {
+        @include font-feature();
+        font-weight: lighter;
+        font-size: smaller;
+        color: $dd-primary-background;
+      }
+
+
+      .accepts {
+        margin-bottom: 10px;
+        margin-top:20px;
+        .acceptance{
+          @include font-feature();
+          @include font-size(16,16);
+          font-weight: normal;
+          margin: 10px 0 20px 0;
+        }
+
+        .transactions{
+          display: inline-block;
+          &:first-child{
+            margin-right: 5px;
+          }
+          .text{
+            margin-top: 5px;
+            @include font-feature();
+            @include font-size(16,16);
+            font-weight: bold;
+            width:100%;
+            text-align:center;
+            color: $dd-primary-background;
+          }
+          .icon{
+            @include profile-image(100%, 100%, 50%);
+            padding: 18px 10px 2px 10px;
+            width:40px;
+            height:40px;
+            text-align:center;
+            background-color: $dd-primary-background;
+            color:white;
+            font-size:20px;
+            display:block;
+          }
+          .disabled-icon{
+            @include profile-image(100%, 100%, 50%);
+            padding: 18px 10px 2px 10px;
+            width:40px;
+            height:40px;
+            text-align:center;
+            background-color: $nab-grey-light;
+            color:white;
+            font-size:20px;
+            display:block;
+          }
+        }
+      }
+
+
+      .message-btn {
+        width: 100%;
+        height: 60px;
+        margin: 0;
+      }
+
+
+      .experience {
+        @include font-feature();
+        @include font-size(16,24);
+        margin: 10px 0;
+
+        @include bp(m) {
+          margin: 15px 0;
+        }
+
+        .exp-value{
+          margin: 15px 0 18px 0 !important;
+        }
+      }
+
+      .verified{
+        @include horizontalUl($dd-primary-background);
+        margin:30px 0 0 0;
+        span {
+          margin-right: 20px;
+        }
+        .icon-tick-circle{
+          font-size: 30px;
+          line-height: 20px;
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: middle;
+          color:$dd-primary-background;
+        }
+      }
+
+      .exp-value{
+        @include horizontalUl($dd-primary-background);
+        margin:30px 0 40px 0;
+        span {
+          margin-right: 20px;
+          word-wrap: break-word;
+        }
+        .icon-tick-circle{
+          font-size: 30px;
+          line-height: 20px;
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: middle;
+          color:$dd-primary-background;
+        }
+      }
+
+      .description-desktop {
+        max-height: 200px;
+        overflow-y: scroll;
+      }
+
+      .description {
+        textarea{
+          font-weight:bold;
+        }
+      }
+
+
+      .profile-right-padding {
+        @include padding-variable(10, 20, 20, 20, 1.2);
+      }
+
+
+      .date-picker-container{
+        white-space: nowrap;
+        display:inline-block;
+        mdp-date-picker .md-button.md-icon-button{
+          margin:0;
+        }
+        .md-input-has-placeholder{
+          display:none;
+        }
+        md-datepicker {
+          background: #F1F1F1;
+          .md-datepicker-input{
+            display:none;
+          }
+          .md-datepicker-triangle-button{
+            display:none;
+          }
+        }
+      }
+
+    }
+
+  }
+
+
+  /* SKILLS CONTAINER */
+  .profile-skills-container{
+
+    button.vertical-modal-toggle{
+      background: none;
+      border: 0;
+      text-decoration: underline;
+      color:$dd-dark-blue;
+      font-weight:bold;
+      padding:0;
+    }
+    .heading{
+      margin:0;
+    }
+
+    .md-chips{
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .skills{
+      padding: 20px 10px;
+      background-color: #fff;
+      @extend .cf;
+
+      .skill{
+        @include skill-tag();
+        background:$dd-primary-background;
+        margin: 0 10px 10px 0;
+      }
+    }
+
+    .things-swap{
+      padding: 20px 10px;
+      background-color: #fff;
+      @extend .cf;
+
+      .add_swap_btn{
+        color:$dd-dark-blue;
+        font-size: 48px;
+        cursor: pointer;
+      }
+
+      .the-thing{
+        margin: 0 10px 10px 0;
+        @include font-feature();
+      }
+    }
+  }
+
+
+
+
+
+  .portfolio-edit{
+    .portfolio-images{
+      @extend .cf;
+      overflow-x: scroll;
+      white-space: nowrap;
+      background: $dd-lightest-grey;
+      min-height: 150px;
+      @include bp(l){
+        background: $white;
+      }
+      padding-top: 8px;
+      padding-left: 8px;
+
+      .portfolio-image-wrapper{
+        display: inline-block;
+        overflow: hidden;
+        margin:0;
+        position: relative;
+        height: 150px;
+        border: solid 1px white;
+        border-left: none;
+        cursor:pointer;
+
+        .portfolio-img-container{
+          background:$white;
+          height: 150px;
+          min-width:150px;
+          .portfolio-img{
+            max-height: 200px;
+            height: 200px;
+            max-width: 200px;
+            min-width: 200px;
+            object-fit: cover;
+            object-position: 50% 50%;
+          }
+        }
+
+
+
+
+
+
+
+
+
+        .item-info{
+          display: inline-block;
+          height: 0;
+          width:  0;
+          transition: height 550ms;
+          background-color: rgba(0, 0, 0, 0.5);
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+
+        .portfolio-text{
+          color: $white;
+          text-align: center;
+          height: 30%;
+          padding-right: 10px;
+          padding-left: 10px;
+          padding-top: 30px;
+          white-space: normal;
+
+          .heading{
+            font-weight:bold;
+          }
+
+          .description{
+            @include font-size(13, 16);
+            display: block;
+            height: 80px;
+            overflow: hidden;
+          }
+
+
+
+        }
+
+        .view-portfolio{
+          color: #fff;
+          white-space: normal;
+          margin: 10px auto 0 auto;
+          text-align: center;
+          @include feature-heading();
+        }
+
+        &:hover{
+          .item-info {
+            height: 100%;
+            width: 100%;
+          }
+
+
+        }
+      }
+
+    }
+  }
+
+  .platform-history{
+    >div{
+      background:$white;
+      padding:40px;
+
+      @include bp-max(s) {
+        padding: 5px;
+      }
+
+      .history-value {
+        @include font-feature();
+        @include font-size(24,24);
+        font-weight: bold;
+        color: $dd-primary-background;
+        @include bp-max(s) {
+          margin-top: 25px;
+        }
+      }
+
+      .history-label {
+        @include font-feature();
+        margin-top: 10px;
+        color: black;
+        text-align: center;
+      }
+    }
+
+  }
+
+
+  .profile-messages{
+    .star-rating{
+      white-space:nowrap;
+
+      @include bp(s){
+        float: right;
+        clear: right;
+      }
+
+      .btn-star{
+        min-width: 0;
+        min-height: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 0;
+        padding: 0;
+
+        i{
+          height: 30px;
+          line-height: 30px;
+          color: $nab-grey-light;
+
+        }
+
+        &.filled{
+          i{
+            color: $nice-yellow;
+          }
+        }
+      }
+    }
+
+    .margin-top {
+      margin-top: 15px;
+    }
+
+    .profile-message{
+      background-color: $white;
+      position: relative;
+      &:not:first-child{
+        border-bottom: 1px solid #ccc;
+      }
+
+      profile-photo {
+        width: 150px;
+        min-width:150px;
+        max-width:150px;
+        @include bp-max(xs){
+          width: 80px;
+          min-width:80px;
+          max-width:80px;
+        }
+        margin-bottom: 15px;
+
+        @include bp-max(s) {
+          margin-top: 15px;
+        }
+      }
+
+      .message-author{
+        float: left;
+        @include feature-heading();
+        @include font-size(16, 16);
+        @include font-feature-bold();
+
+        .message-business{
+          text-transform: capitalize;
+
+          @include bp-max(s) {
+            display: block;
+          }
+        }
+      }
+
+      .message-datetime{
+        float: left;
+        clear: left;
+        color: $dd-primary-background;
+      }
+
+      .message-datetime-bottom{
+        @include feature-heading();
+        @include font-size(14,14);
+      }
+
+      .message-text{
+        margin: 20px 0;
+        @include font-size(14,21);
+        position: relative;
+
+        .btn-show-more{
+          position: absolute;
+          right: -45px;
+          bottom: -20px;
+          margin: 0;
+          @include button(40);
+
+          i{
+            color: $dd-primary-background;
+          }
+        }
+      }
+
+      @include bp(l){
+        padding: 20px;
+      }
+    }
+  }
+
+  .activity-feed .profile-messages .profile-message{
+    padding:20px !important;
+  }
+
+  .community-reviews{
+    position: relative;
+
+    .average-rating {
+      .star-rating {
+
+
+        @include bp(l) {
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+
+
+  .avatar-container{
+    position:relative;
+
+    &.layout-float-fix{
+      @include bp(s){
+        display:inline-block; width:60%; float: left; margin-bottom:20px;
+        &.accept-layout-fix{
+          width:40%;
+        }
+      }
+      @include bp(l){
+        display:block; width:100%; float: none;
+      }
+
+    }
+
+      .avatars{
+        .org-logo, .user-logo, .org-no-logo{
+          cursor:pointer;
+        }
+      }
+
+      i{
+        position: absolute;
+        cursor: pointer;
+        font-size: 24px;
+        background: #fff;
+        line-height: 12px;
+        border-radius: 15px;
+        &.delete-avatar{
+          top: 10px;
+          left: 5%;
+          z-index:1;
+        }
+        &.delete-logo{
+          top: 10px;
+          left: 49%;
+          z-index: 1;
+        }
+      }
+
+      a{
+        display: block;
+        background: rgb(224,224,224);
+        border-radius: 12px;
+        padding: 5px;
+        cursor:pointer;
+        position: absolute;
+        color: $dd-primary-background;
+        font-weight: bold;
+        padding:5px 15px;
+        z-index:10;
+        &.avatar{
+          top: 90%;
+          left:14%;
+          @include bp(m){
+            left:16%;
+          }
+          @include bp(l){
+            left:14%;
+          }
+          @include bp(xl){
+            left:18%;
+          }
+
+        }
+        &.logo{
+          top: 90%;
+          left:62%;
+          @include bp-max(xs){
+            left:56%;
+          }
+          @include bp(xs){
+            left:61%;
+          }
+          @include bp(m){
+            left:63%;
+          }
+          @include bp(l){
+            left:58%;
+          }
+          @include bp(xl){
+            left:64%;
+          }
+        }
+      }
+
+
+
+
+
+
+  }
+
+  .icon-swap, .icon-tick, .icon-close, .toggle-link{
+    cursor:pointer;
+  }
+
+  .media-btn-container{
+    width:65px;
+    @include bp(s) {
+      width:85px;
+    }
+    .upload-media{
+      background:$dd-primary-background;
+      color:$white;
+      font-weight:bold;
+      padding:10px;
+      cursor:pointer;
+      text-align: center;
+      .icon{
+        color:$white;
+      }
+    }
+  }
+
+
+}
+
+
+#profile-edit, #profile-edit-offered{
+  .vertical-modal-toggle{
+    background:transparent;
+    border:0;
+    padding:0;
+  }
+}
+
+
+
+
+
+
+
+
+

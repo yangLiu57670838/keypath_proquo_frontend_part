@@ -1,0 +1,26 @@
+<md-dialog id="generic-confirmation" aria-label="Confirmation"  class="generic-confirm full-screen-on-mobile">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Please Confirm</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div layout="column"  layout-padding >
+          <p ng-bind-html="vm.confirmationMessage"></p>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions  class="md-actions actions" aria-label="actions" layout="row" layout-align="space-between center">
+      <md-button ng-click="vm.cancel()" aria-label="Delete" >
+        NO
+      </md-button>
+      <md-button class="btn md-raised md-primary-cta" aria-label="Save" ng-click="vm.confirm()">
+        YES
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,42 @@
+<md-dialog aria-label="Edit links"  class="edit-company-name full-screen-on-mobile">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Edit Business Name</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="vm.cancel()">
+        <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <form name="companySaveForm"  novalidate>
+    <md-dialog-content>
+      <md-list>
+        <md-list-item>
+
+          <md-input-container   md-no-float >
+            <md-icon class="icon icon-custom"></md-icon>
+            <label>Business name</label>
+            <input type="text"  required  name="companyName"  ng-model="vm.businessName" maxlength="60" />
+            <div ng-messages="companySaveForm.companyName.$error" role="alert">
+              <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container   md-no-float >
+            <md-icon class="icon icon-{{link.urlIconImage}}"></md-icon>
+            <label>Business website link</label>
+            <input name="companyUrl" type="text" ng-model="vm.url" />
+          </md-input-container>
+
+        </md-list-item>
+      </md-list>
+    </md-dialog-content>
+
+    <md-dialog-actions  class="dialog-actions actions" aria-label="actions" layout="row" layout-align="end center">
+      <md-button ng-click="vm.cancel()" aria-label="Delete">
+        Cancel
+      </md-button>
+      <md-button type="button" class="md-raised md-primary-cta" ng-click="vm.saveCompanyName(companySaveForm)" aria-label="Save" >Save</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

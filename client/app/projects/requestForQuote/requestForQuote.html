@@ -1,0 +1,70 @@
+<div class="request-for-quote">
+  <div class="margin-top-10">
+
+    <div layout="row" layout-align="space-between top">
+      <div  flex-gt-sm="30" class="info-title">You:</div>
+      <div flex="20" flex-gt-sm="10"> </div>
+      <div flex="45" flex-gt-sm="55" class="info-title">Supplier:</div>
+    </div>
+    <div layout="row" layout-align="space-between top">
+      <div layout="column" flex-gt-sm="30">
+        <profile-summary business="::vm.myBusiness"></profile-summary>
+      </div>
+
+      <div layout="row" layout-align="center center" flex="20" flex-gt-sm="10">
+        <div class="icon" ng-class="{'icon-dollar': vm.nameSpace === 'cash', 'icon-swap': vm.nameSpace !== 'cash'}"></div>
+      </div>
+
+      <div layout="row" flex="45" flex-gt-sm="55">
+        <profile-summary business="::vm.supplierBusiness"></profile-summary>
+        <div ng-if="!vm.supplierBusiness" layout="row" layout-align="start center">
+          <div hide-xs hide-sm>{{vm.projectStatus}}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<div layout="row" class="margin-right-gt-xs-10 margin-left-gt-xs-10" ng-if="vm.statusDescs.length">
+  <collapsible-card card-id="{{project._id}}" flex="100">
+    <collapsible-card-header>
+      <div layout="row" layout-align="start center" layout-padding>
+        <profile-photo class="profile-summary-photo"  profile="vm.statusDescs[0].avatars"></profile-photo>
+        <div> {{vm.statusDescs[0].txt}}</div>
+      </div>
+    </collapsible-card-header>
+    <collapsible-card-body>
+      <div layout="row" layout-align="start center" layout-padding ng-repeat="statusDesc in vm.statusDescs.slice(1)" class="title padding-left-15">
+        <profile-photo class="profile-summary-photo"  profile="statusDesc.avatars"></profile-photo>
+        <div>{{statusDesc.txt}}</div>
+      </div>
+    </collapsible-card-body>
+  </collapsible-card>
+</div>
+
+
+
+  <div layout="row">
+    <div flex="5" hide-xs></div>
+      <div flex layout="column" >
+        <div>
+          <md-button class="modify-brief" ng-click="vm.modifyRequestForQuote()">Modify Brief Template</md-button>
+        </div>
+
+        <supplier-candidates-list  candidates="vm.candidates"></supplier-candidates-list>
+
+        <md-button ng-show="vm.allowedToAddSuppliers" class="quote-card add-new-person no-margin" layout="row" layout-align="center center" layout-margin ng-click="vm.addUsers($event)">
+          <svg fill="#000000" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          <h5 class="bolder" >Add new person</h5>
+        </md-button>
+      </div>
+    <div flex="5" hide-xs></div>
+  </div>
+
+  <div>
+    <md-button  class="request-for-quote-action" ng-click="vm.deleteRequestForQuote()">Cancel Project</md-button>
+  </div>
+</div>

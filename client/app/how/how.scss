@@ -1,0 +1,343 @@
+.l-home .content-container.how-sections-container{
+  padding-top:50px;
+  @include bp(m){
+    padding-top:70px;
+  }
+
+  .section-heading{
+    @include font-feature();
+    margin: 20px 0;
+    vertical-align: top;
+  }
+
+
+  // LANDING PAGE
+
+
+
+  .landing-image-container{
+    overflow: hidden;
+    @include background-image("../../assets/images/img_howitworkshero.jpg");
+    background-position: center top;
+    height: calc( 50vh - 25px);
+    width: 100%;
+    position: relative;
+
+    @include bp(l){
+      height: calc(50vh - 35px);
+    }
+
+
+    .content-container{
+      min-height: 200px;
+      position: relative;
+      z-index: 10;
+      padding-top:0;
+      height: 100%;
+
+      .image{
+        display: block;
+        margin: 20px auto;
+        width: 320px;
+
+        @include bp(s){
+          width: 400px;
+        }
+
+        @include bp(m){
+          width: 400px;
+          margin: 20px auto 40px -75px;
+        }
+      }
+
+
+      .heading-container{
+
+        h1, h5{
+          text-align:center;
+          color:$white;
+        }
+
+
+
+        .section-heading{
+          @include font-feature();
+        }
+
+
+        .divider{
+          width:90px;
+          border-bottom:solid $white  5px;
+        }
+        .scroll-indicator,
+        .scroll-indicator.md-button{
+          display: block;
+          width: 56px;
+          height: 56px;
+          left: 0;
+          background: none;
+          border: 2px solid $white;
+
+          .icon-pointer-right{
+            transform: rotate(90deg);
+            position: absolute;
+            font-size: $base-font-size;
+            @include font-size($h6-font-size, 18);
+            top: 20px;
+            right: 18px;
+            color:$white;
+          }
+
+          &:hover{
+            background-color: $white;
+            .icon-pointer-right{
+              color:darken($white,20);
+            }
+
+          }
+        }
+      }
+    }
+
+
+      &:after{
+        content: '';
+        position: absolute;
+        width:100%;
+        min-height:2000px;
+        top: 0;
+        right: 0;
+        left: 0;
+        background-image: radial-gradient(ellipse at center, rgba(0,0,0,0.32) 0%,rgba(0,0,0,0.42) 51%,rgba(0,0,0,0.3) 79%,rgba(0,0,0,0.3) 99%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#38000000', endColorstr='#000000',GradientType=1 );
+      }
+
+
+  }
+
+  .example-section {
+    font-weight: bold;
+    margin:0 auto 0 auto;
+
+    .example-column {
+      @include bp(m){
+        margin: 0 15%;
+      }
+    }
+
+    .example-header {
+      padding-bottom: 30px;
+    }
+
+    .example-desc {
+      font-weight: normal;
+      text-align: left;
+      padding: 15px;
+    }
+
+    .example-row {
+      text-align: center;
+      padding-bottom: 20px;
+      padding-top: 20px;
+      border-bottom: solid 1px;
+      border-bottom-color: $dd-bg-grey-darker;
+      width: 100%;
+    }
+
+    .example-bottom-row {
+      border-bottom: none;
+      padding-bottom: 60px;
+    }
+
+    .example-img {
+      max-width: 140px;
+    }
+
+    .icon {
+      font-size: 30px;
+      color: $dd-dark-blue;
+    }
+  }
+
+
+
+  // START TRADING
+  .section-how{
+    padding: 10px 0 20px 0;
+    background:$dd-negative-color;
+
+    .section-heading{
+      margin-top: 40px;
+      margin-bottom: 10px;
+      text-align: center;
+      color:$white;
+    }
+
+    .start-trading-container{
+      position:relative;
+
+      .line{
+        position:absolute;
+        border-bottom:5px solid $nice-yellow;
+        height:5px;
+        right: 18%;
+        top: 0;
+        margin-top: 60px;
+        left: 20%;
+      }
+
+      @include bp(m){
+        margin: 0 15%;
+      }
+      margin:0 auto 0 auto;
+
+      h5, p{
+        margin:0;
+        color:$white;
+        text-align:center;
+      }
+
+      .steps-containter{
+        text-align:center;
+        position:relative;
+        .steps{
+          background:$dd-negative-color;
+          border-radius:50%;width:65px;
+          height:65px;
+          border:5px solid $nice-yellow;
+          text-align:center;
+          line-height:65px;
+          font-size:32px;
+          color:$nice-yellow;
+          font-weight:bold;
+        }
+      }
+
+    }
+
+  }
+
+
+  // DESCRIPTION
+
+  .section-activity{
+    padding: 40px 0;
+    background-color: $nab-bg-grey;
+
+    .desciption{
+
+      @include bp(s){
+        margin: 0 15%;
+      }
+
+      .img-container{
+        max-width: 200px;
+        text-align:center;
+      }
+      h5{
+        margin-top:0;
+      }
+      img{
+        width:80%;
+      }
+      h6{
+        margin:0;
+      }
+    }
+  }
+
+  .section-signup {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    h6 {
+      margin: 20px 0px 0px 0px;
+      padding-bottom: 0px;
+    }
+
+    md-input-container {
+      width: 90%!important;
+      label {
+        top: -20px;
+      }
+    }
+
+    .join-now-btn {
+      background: $dd-negative-color;
+      color: $white;
+      margin: -4px 0px 0px 30px;
+
+      @include bp(0, 599) {
+        margin: 15px 0px 0px 0px;
+      }
+      .material-icons{
+        color:$white;
+        @include font-size(12, 12);
+      }
+    }
+
+    .email-input-container {
+      min-width: 550px;
+      @include bp(0, 599) {
+        min-width: 220px;
+        max-width: 350px;
+      }
+    }
+    .email-input {
+      @include bp(0, 599) {
+        width: 200px;
+      }
+      width: 300px;
+      height: 45px;
+      background-color: $white;
+    }
+  }
+
+
+  // FEE GUARENTEE
+  .background-circle {
+    max-height: 500px;
+    overflow:hidden;
+
+    @include bp(s){
+      max-height: 550px;
+    }
+
+    .background-circle-img {
+      opacity: 0.4;
+      width: 550px;
+      top: -550px;
+      left: 30%;
+      position: relative;
+      //z-index: -1;
+
+      @include bp(s) {
+        width: 800px;
+        top: -600px;
+        left: 53%;
+      }
+    }
+
+    .guarantee-section{
+      .center-align {
+        text-align: center;
+      }
+      padding: 50px 0;
+      @include bp(s){
+        margin: 0 25%;
+      }
+
+
+      .icon-tick-circle {
+        color:$dd-primary-background;
+        @include font-size(30,48);
+        margin-right:20px;
+      }
+
+
+
+
+   }
+
+  }
+
+}

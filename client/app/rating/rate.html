@@ -1,0 +1,65 @@
+<md-dialog aria-label="login" class="rate-modal full-screen-on-mobile">
+  <form name="workForm" ng-submit="vm.submit(workForm)" novalidate>
+  <md-toolbar>
+    <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+      <h2 >Rate {{vm.otherPartyName}}</h2>
+      <a class="md-icon-button" ng-click="vm.cancel()">
+        <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+      </a>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+      <div class="rate-section">
+          <div layout="column" layout-align-xs="center center" layout-align-sm="center center" layout-align-gt-sm="space-between center" layout-gt-sm="row" layout-padding>
+            <div flex-gt-sm="60" class="md-title">How would you rate your overall experience with {{vm.otherPartyName}}?</div>
+            <div flex-gt-sm="40">
+              <star-rating data-rating-disabled="false" rating="vm.review.rating"></star-rating>
+            </div>
+          </div>
+
+          <md-divider></md-divider>
+
+            <div layout="column" layout-gt-xs="row"  layout-padding layout-align-gt-xs="start center">
+              <div flex-gt-xs="50">
+                <md-input-container class="md-block">
+                    <label>Write a review *</label>
+                    <textarea name="comments" ng-model="vm.review.reviewText" required  md-maxlength="500" rows="8" cols="3"></textarea>
+                    <div ng-messages="workForm.comments.$error" role="alert" md-auto-hide="false" ng-show="workForm.comments.$touched">
+                      <div ng-show="workForm.comments.$viewValue===''">You need to provide a review</div>
+                      <div ng-show="!vm.review.rating">You need to rate your overall experience with {{vm.otherPartyName}}</div>
+                    </div>
+                </md-input-container>
+              </div>
+
+              <div flex-gt-xs="50" hide-xs>
+
+                <ul>
+                  <li>Tips</li>
+                  <li>How was the response time of {{vm.otherPartyName}}?</li>
+                  <li>Comment on the quality of work of {{vm.otherPartyName}}</li>
+                  <li>How was the communication overall?</li>
+                </ul>
+              </div>
+
+            </div>
+
+            <md-divider></md-divider>
+
+
+        <md-dialog-actions class="actions" aria-label="actions" >
+
+          <div flex-xs="100" layout="column" layout-gt-xs="row" layout-align-gt-xs="end center">
+            <md-button flex-xs="100" class="md-secondary btn" ng-click="vm.cancel()">Cancel</md-button>
+            <md-button type="submit" flex-order-xs="-1" flex-xs="100" class="btn md-raised md-primary-cta" ng-disabled="vm.submitted">Submit</md-button>
+          </div>
+
+        </md-dialog-actions>
+
+        </div>
+
+
+  </md-dialog-content>
+
+  </form>
+</md-dialog>

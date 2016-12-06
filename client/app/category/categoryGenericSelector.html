@@ -1,0 +1,41 @@
+<div ng-if="vm.config" class="skills-by-category-container {{vm.config.searchView}}" id="{{options.selectorid}}">
+  <div ng-include="'app/category/categorySelectorTextSearchTemplate.html'"
+       ng-if="['textonly', 'vertical', 'treecollapse', 'treemodal'].indexOf(vm.config.searchView) > -1">
+  </div>
+  <div ng-include="'app/category/categorySelectorTreeTemplate.html'"
+       ng-if="['treeonly', 'vertical', 'treecollapse'].indexOf(vm.config.searchView) > -1"
+       ng-show="vm.config.searchView == 'treeonly' || vm.config.searchView == 'vertical' || vm.showTreeView == true">
+  </div>
+
+  <div ng-if="vm.config.searchView == 'verticalmodal'">
+    <div layout="column" layout-align="space-around start" layout-padding layout-gt-xs="row" class="vertical-modal-view"
+         layout-align-gt-xs="start center">
+      <div flex="none">
+        <md-icon class="material-icons add_skill_btn" ng-click="vm.showVerticalModal()">add_circle</md-icon>
+      </div>
+      <div layout-wrap class="vertical-modal-pills">
+        <div ng-repeat="category in vm.config.currentCategories"
+             class="custom-chip is-active" data-value="{{category.name}}">
+          <span ng-click="vm.removeChosenSelectedCategory($event,category)">{{category.name}}</span>
+
+          <div class="icon icon-remove" ng-click="vm.removeChosenSelectedCategory($event,category)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="vm.config.searchView != 'verticalmodal'">
+    <p class="small  margin-top-10">
+      So far you've chosen
+    </p>
+    <div ng-repeat="category in vm.config.currentCategories"
+         class="custom-chip is-active" ng-class="::vm.theme" data-value="{{category.name}}">
+      <span ng-click="vm.removeChosenSelectedCategory($event,category)">{{category.name}}</span>
+
+      <div class="icon icon-remove" ng-click="vm.removeChosenSelectedCategory($event,category)"></div>
+    </div>
+  </div>
+</div>
+
+
+

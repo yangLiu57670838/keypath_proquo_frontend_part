@@ -1,0 +1,36 @@
+<div class="projects-list">
+  <div>
+    <paginator ng-if="vm.pagingOptions.totalRecord != 0" options="vm.pagingOptions" goto-page-callback="vm.changePage(pageNum)"></paginator>
+    <div id="anchor{{project._id}}" ng-if="vm.projects.length > 0" ng-repeat="project in vm.projects">
+        <collapsible-card card-id="{{project._id}}" anchor-project-id="{{vm.anchorProjectId}}" expand-card="{{($first && vm.anchorProjectId == undefined) || vm.anchorProjectId == project._id}}">
+          <collapsible-card-header>
+            <div layout="column" layout-gt-xs="row" layout-align-gt-xs="start center">
+              <h6>{{project.brief.workTitle}}</h6>
+                <div class="margin-left-gt-xs-10 margin-top-ls-xs-10">
+                  <profile-photo class="profile-summary-photo" ng-class="{ 'profile-present': project.otherBusiness }" profile="project.otherBusiness"></profile-photo>
+                </div>
+                <div layout="row" layout-align-gt-xs="end center" layout-align="start center" class="flex">
+                  <div class="due-text"><md-icon md-svg-icon="mdp-event"></md-icon><span>{{project.projectCycle}}</span></div>
+                </div>
+            </div>
+          </collapsible-card-header>
+          <collapsible-card-body>
+
+            <project-detail project-id="project._id" initial-load="($first && vm.anchorProjectId == undefined) || vm.anchorProjectId == project._id"></project-detail>
+          </collapsible-card-body>
+          <collapsible-card-actions>
+            <div>
+              <md-button layout-fill md-theme="blue" class="" ng-click="vm.toggleActions(project)">Project Actions<md-icon class="material-icons arrow-drop">{{project.showActionList ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon></md-button>
+
+                <md-button ng-show="project.showActionList" class="action-btn" ng-class="{'md-primary btn-connect message-btn':action.label.startsWith('Message')}" ng-repeat="action in vm.filteredActionList[$parent.$index]" ng-click="vm.doAction($event, action.key, project)">
+
+                  {{action.label}}
+                </md-button>
+
+            </div>
+          </collapsible-card-actions>
+        </collapsible-card>
+      </div>
+    </div>
+  <div ng-if="vm.emptyMessageNeeded">No projects in this state</div>
+</div>

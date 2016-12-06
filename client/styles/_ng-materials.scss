@@ -1,0 +1,220 @@
+// styles for ng-materials
+
+
+
+md-toast {
+
+  &.full-width-toast {
+    position: fixed;
+    width: 100%;
+    top: 50px;
+    max-height: 200px;
+    height: auto;
+    min-height: 48px;
+    .md-toast-content{
+      background-color:$theme-colour;
+
+      .content{
+        position: relative;
+        padding: 15px 130px 15px 0;
+        .btn{
+          position: absolute;
+          right: 0;
+          top: 8px;
+          margin: 0;
+          @include button(30);
+          @include font-feature();
+          color: $white;
+        }
+      }
+
+      .toastAction {
+        a {
+          color: $white;
+          font-weight: bold;
+          text-decoration: underline;
+        }
+      }
+    }
+
+
+
+
+
+
+		@include bp(l) {
+			top: 70px;
+			max-width: 100%;
+		}
+	}
+}
+
+.md-chip-content{
+	@include font-feature();
+}
+
+.md-scroll-mask {
+	z-index: 1000; // put z-indices into vars
+}
+
+.md-dialog-container {
+	/*z-index: $z-index-modal;*/
+}
+
+
+
+
+md-tabs {
+	md-ink-bar {
+		background-color: $dd-primary-background;
+	}
+
+  md-tab-item.md-active .heading{
+    color:$dd-primary-background;
+  }
+
+	md-tabs-canvas{
+		height: 60px;
+	}
+
+	md-pagination-wrapper {
+		height: 60px;
+    //width: 1000px !important;
+	}
+}
+
+
+
+md-dialog{
+	z-index:  $z-index-modal;
+
+  @include bp(m){
+    min-width: 500px;
+  }
+  md-dialog-content{
+	  padding: 10px;
+    min-width:360px;
+
+  }
+
+}
+
+.md-select-menu-container.md-active{
+  z-index: $z-index-modal;
+}
+
+.md-chip-content{
+	@include font-base();
+}
+
+
+// set z-indices in dialogs
+// set z-index in dialog
+body.md-dialog-is-showing {
+
+	.md-autocomplete-suggestions-container {
+		z-index: $z-index-modal;
+	}
+
+	.md-autocomplete-suggestions{
+		z-index: $z-index-modal;
+	}
+}
+
+// ensure header is behind modal backdrop
+.js-nav.js-nav-fixed body.md-dialog-is-showing #header{
+	z-index: 1;
+}
+
+md-input-container .md-input {
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+  display: block;
+  margin-top: auto;
+  background: 0 0;
+  padding: 2px 2px 1px;
+  border-width: 0 0 1px;
+  line-height: 26px;
+  -ms-flex-preferred-size: 26px;
+  border-radius: 0;
+}
+
+
+
+
+.md-datepicker-calendar-pane{
+  background: $white;
+}
+
+
+
+
+@include bp-max(m){
+  .layout-column > .flex-sm-100,.layout-sm-column > .flex-sm-100,
+  .layout-column > .flex-md-100,.layout-md-column > .flex-md-100,
+  .layout-column > .flex-25,.layout-md-column > .flex-25,
+  .layout-column > .flex-20,.layout-md-column > .flex-20,
+  .layout-column > .flex-33,.layout-md-column > .flex-33,
+  .layout-column > .flex-65,.layout-md-column > .flex-65,
+  .layout-column > .flex-100,.layout-md-column > .flex-100,
+  .layout-column > .flex-50,.layout-md-column > .flex-50{
+    -webkit-flex: 0 0 auto !important;
+    -ms-flex: 0 0 auto !important;
+    flex: 1 1 auto !important;
+    max-width: 100% !important;
+    width:100% !important;
+    max-height: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+md-input-container{
+  width:100% !important;
+}
+
+md-input-container textarea.md-input{
+  height:100px;
+}
+
+
+
+.md-button .md-ripple-container{
+  border-radius: 25px;
+}
+
+.md-title{
+  font-size:18px;
+}
+
+.md-button{
+  font-weight:bold;
+}
+
+a.md-button.md-default-theme.md-primary.md-raised, a.md-button.md-primary.md-raised,
+a.md-button.md-default-theme.md-primary.md-fab, a.md-button.md-primary.md-fab,
+.md-button.md-default-theme.md-primary.md-raised, .md-button.md-primary.md-raised,
+.md-button.md-default-theme.md-primary.md-fab, .md-button.md-primary.md-fab{
+  color:$white;
+}
+
+md-switch.md-default-theme.md-checked .md-bar, md-switch.md-checked .md-bar {
+  background-color: $dd-primary-background-trans;
+}
+
+md-switch.md-default-theme.md-checked .md-thumb, md-switch.md-checked .md-thumb {
+  background-color: $dd-primary-background;
+}
+
+md-switch.md-default-theme.md-checked .md-ink-ripple, md-switch.md-checked .md-ink-ripple {
+  color: $dd-primary-background;
+}
+
+md-switch.md-default-theme.md-checked.md-focused .md-thumb:before,
+md-switch.md-checked.md-focused .md-thumb:before{
+  background-color: $dd-primary-background-trans;
+}
+
+.no-animate {
+  -webkit-transition: none !important;
+  transition: none !important;
+}

@@ -1,0 +1,184 @@
+.project-tabs{
+
+  .tab-desc{
+    background-color: #f1f1f1;
+    border-radius: 7px;
+    color: #333;
+    font-weight:bold;
+    cursor: pointer;
+  }
+
+  .tab-desc-note{
+    color: #a1a1a1;
+  }
+
+  .tab-desc-arrow{
+    font-size: 36px;
+    color:$theme-colour;
+  }
+
+  .tab-hide{
+    display:none;
+  }
+  .tab-show{
+    display:block !important;
+  }
+  .project-tab{
+    @include bp(m){
+      padding:0 10px 0 0;
+    }
+
+    .project-icons{
+      opacity:0.3;
+
+      &.cursor-pointer{
+        cursor:pointer;
+      }
+    }
+
+    .tab-active{
+      .arrow-container{
+        display: block;
+      }
+      .tab-text{
+        overflow: visible;
+        color:$dd-black;
+      }
+      .project-icons{
+        opacity:1;
+      }
+    }
+
+    .arrow-container{
+      position:relative;
+      width:100%;
+      display:none;
+      .arrow-down{
+        border-width: 11px;
+        border-style: solid;
+        border-color: #ccc transparent transparent ;
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 16px;
+
+        left: 50%;
+        margin-left: -10px;
+
+      }
+
+    }
+
+    .tab-text{
+      color:$dd-light-grey;
+      font-weight:bold;
+
+      min-height:42px;
+      max-height:42px;
+      max-width:130px;
+      width: 130px;
+      text-align: center;
+      text-overflow: ellipsis;
+      overflow: visible;
+
+      @include bp-max(xs){
+        @include font-size(12, 12);
+        min-height:24px;
+        max-height: 35px;
+        max-width: 50px;
+      }
+
+
+    }
+    .project-icons{
+      width:100px;
+      height:100px;
+      background-size:305px;
+      @include bp-max(xs){
+        width:50px;
+        height:50px;
+        background-size:152px;
+      }
+      background-image: url('../../assets/images/project-icons.png');
+      background-repeat:no-repeat;
+
+
+      // brief done
+      &.brief-done{
+        background-position:0 0;
+      }
+      &.brief-off{
+        background-position:-100px 0;
+        @include bp-max(xs){background-position:-50px 0;};
+      }
+      &.brief-inprogress{
+        background-position: -200px 0;
+        @include bp-max(xs){background-position:-100px 0;};
+      }
+
+
+
+      // deposit icons
+      &.deposit-done{
+        background-position:0px -100px;
+        @include bp-max(xs){background-position:0 -50px;};
+      }
+      &.deposit-off{
+        background-position:-100px -100px;
+        @include bp-max(xs){background-position:-50px -50px;};
+      }
+      &.deposit-inprogress{
+        background-position:-200px -100px;
+        @include bp-max(xs){background-position:-100px -50px;};
+      }
+
+      // payment icons
+      &.payment-done{
+        background-position:0px -200px;
+        @include bp-max(xs){background-position:0 -100px;};
+      }
+      &.payment-off{
+        background-position:-100px -200px;
+        @include bp-max(xs){background-position:-50px -100px;};
+      }
+      &.payment-inprogress{
+        background-position:-200px -200px;
+        @include bp-max(xs){background-position:-100px -100px;};
+      }
+
+      // rate and review icons
+      &.rate-done{
+        background-position:0 -300px;
+        @include bp-max(xs){background-position:0 -150px;};
+      }
+      &.rate-off{
+        background-position:-100px -300px;
+        @include bp-max(xs){background-position:-50px -150px;};
+      }
+      &.rate-inprogress{
+        background-position:-200px -300px;
+        @include bp-max(xs){background-position:-100px -150px;};
+      }
+
+      //quote icons
+      &.quote-done{
+        background-position:0px -400px;
+        @include bp-max(xs){background-position:0px -200px;};
+      }
+      &.quote-off{
+        background-position:-100px -400px;
+        @include bp-max(xs){background-position:-50px -200px;};
+      }
+      &.quote-inprogress{
+        background-position:-200px -400px;
+        @include bp-max(xs){background-position:-100px -200px;};
+      }
+    }
+
+
+
+  }
+
+}
+

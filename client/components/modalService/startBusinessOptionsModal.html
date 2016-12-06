@@ -1,0 +1,26 @@
+<md-dialog aria-label="Start a project" class="start-business-options-modal">
+  <div layout-align="center center">
+    <div layout="column" layout-align="center center">
+    <h3 class="start-business-heading">
+      What would you like to do?
+    </h3>
+      <div class="start-business-btn-wrapper" layout="row">
+        <div>
+          <md-button class="btn btn-itdb" ng-click="vm.createITDB()">
+            <div>Create an</div>
+            <div>offer to sell</div>
+            <div>a service</div>
+          </md-button>
+        </div>
+        <div class="start-business-or"><h3 class="start-business-heading">or</h3></div>
+        <div>
+          <md-button class="btn btn-project-brief" ng-click="vm.createProquote()">
+            <div>Get quotes</div>
+            <div>to receive</div>
+            <div>a service</div>
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</md-dialog>

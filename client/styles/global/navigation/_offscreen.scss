@@ -1,0 +1,466 @@
+/* ==========================================================================
+ * OFFSCREEN NAVIGATION
+ * ========================================================================== */
+
+// these variables should also match the JS variables in _navOffscreen.js
+$USE_NAV_DRAWER_PATTERN: true; // the JS variable OPTIONS.USE_NAV_DRAWER_PATTERN in _navOffscreen.js should match this
+$USE_NAV_DRAWER_OVER_FIXED_HEADER: true; // the JS variable OPTIONS.USE_NAV_DRAWER_OVER_FIXED_HEADER in _navOffscreen.js should match this
+$OPEN_NAV_FROM_RIGHT: false; // the JS variable OPTIONS.OPEN_NAV_FROM_RIGHT in _navOffscreen.js should match this
+$offscreen-bg-opacity: 0.8;
+
+// Add the following code if you want a fixed header
+///*
+@if $USE_NAV_DRAWER_PATTERN {
+	@include bp(0, $offscreen-bp) {
+		.js-nav.js-nav-fixed {
+			body {
+				padding-top: 50px; //height of the header
+
+				@include bp(l){
+					padding-top: 70px; //height of the header
+				}
+			}
+
+			#header {
+				position: fixed;
+				top: 0;
+				width: 100%;
+				z-index: 10002;
+			}
+
+			#nav {
+				@if $USE_NAV_DRAWER_OVER_FIXED_HEADER {
+					z-index: 10003;
+				}
+			}
+		}
+	}
+}
+//*/
+
+/* ==========================================================================
+ * - FUNCTIONAL
+ * ========================================================================== */
+
+#nav {
+	display: block;
+	@include box-sizing(border-box);
+}
+
+@include bp(0, $offscreen-bp) {
+	#nav {
+		position: absolute;
+		display: block;
+		top: 0;
+		-webkit-overflow-scrolling: touch;
+
+		//before the JS kicks in for the nav - remove offscreen straight away
+		@if $OPEN_NAV_FROM_RIGHT {
+			right: -9999px;
+		} @else {
+			left: -9999px;
+		}
+
+		&:target {
+			// if the user clicks the nav without JS and makes the URL #nav it will show
+			@if $OPEN_NAV_FROM_RIGHT {
+				right: 0;
+			} @else {
+				left: 0;
+			}
+		}
+
+		.nav-inner {
+			padding: 0;
+			width: auto;
+			max-width: none;
+			position: relative;
+		}
+	}
+
+	.js-nav {
+		// background colour that fades in/out with the swipe of the screen.
+		.offscreen-nav-bg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 10000;
+			display: none;
+
+			.bg {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: $overlay-bg;
+				z-index: 1;
+				opacity: 0;
+			}
+		}
+	}
+
+	// touch states to ensure you can't interact with items that aren't visible
+	.js-nav-open {
+		// offscreen navigation
+		#nav {
+			// note that the defaults are different here
+			// this is to resolve text selection bugs in iOS Safari
+			-webkit-touch-callout: default;
+			-webkit-user-select: auto;
+			-khtml-user-select: auto;
+			-moz-user-select: text;
+			-ms-user-select: text;
+			user-select: text;
+		}
+
+		// page content
+		#inner-wrap {
+			// ensures the user can't select any text inside the page when the navigation is open
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+	}
+
+	.js-nav-transitioning {
+		// background colour that fades in/out with the swipe of the screen.
+		.offscreen-nav-bg {
+			display: block;
+		}
+	}
+
+	.js-nav-open {
+		// background colour that fades in/out with the swipe of the screen.
+		.offscreen-nav-bg {
+			display: block;
+
+			.bg {
+				// background opacity must also be set in the JS
+				@include opacity($offscreen-bg-opacity);
+			}
+		}
+	}
+
+	@if $USE_NAV_DRAWER_PATTERN {
+		.js-nav {
+			//offscreen navigation
+			#nav {
+				height: 100%;
+				width: $offscreen-nav-width;
+				z-index: 10001;
+				overflow: hidden;
+				// @include backface-visibility(hidden); // stops animation issues inside the area
+
+				//if CSS transitions aren't supported use "left/right" instead of a transform
+				@if $OPEN_NAV_FROM_RIGHT {
+					right: -$offscreen-nav-width;
+				} @else {
+					left: -$offscreen-nav-width;
+				}
+			}
+
+				&.js-nav-translate #nav {
+					@if $OPEN_NAV_FROM_RIGHT {
+						right: 0;
+						@include translate3d($offscreen-nav-width, 0, 0);
+					} @else {
+						left: auto;
+						@include translate3d(-$offscreen-nav-width, 0, 0);
+					}
+				}
+		}
+
+		.js-nav-fixed {
+			#nav,
+			.offscreen-nav-bg {
+				position: fixed;
+			}
+		}
+
+		.js-nav-open,
+		.js-nav-transitioning {
+			.slide-out-nav {
+				//@include photoshop-drop-shadow(180, 3px, 0, 5px, rgba(0,0,0,0.2));
+			}
+		}
+
+		.js-nav-open {
+			// navigation drawer
+			#nav {
+				@if $OPEN_NAV_FROM_RIGHT {
+					right: 0;
+				} @else {
+					left: 0;
+				}
+			}
+
+				&.js-nav-translate #nav {
+					@if $OPEN_NAV_FROM_RIGHT {
+						right: 0;
+						@include translate3d(0, 0, 0);
+					} @else {
+						left: auto;
+						@include translate3d(0, 0, 0);
+					}
+				}
+		}
+	} @else {
+		.js-nav {
+			//offscreen navigation
+			#nav {
+				height: 100%;
+				z-index: 200;
+				overflow: hidden;
+				@include backface-visibility(hidden); // stops animation issues inside the area
+
+				//if CSS transitions aren't supported use "left/right" instead of a transform
+				@if $OPEN_NAV_FROM_RIGHT {
+					right: -$offscreen-nav-width;
+					width: $offscreen-nav-width;
+				} @else {
+					left: -$offscreen-nav-width;
+					width: $offscreen-nav-width + 1px; //requires a little bit extra width to stop device display issues
+				}
+			}
+
+				&.js-nav-translate #nav {
+					@if $OPEN_NAV_FROM_RIGHT {
+						right: 0;
+						@include translate3d($offscreen-nav-width, 0, 0);
+					} @else {
+						left: auto;
+						@include translate3d(-$offscreen-nav-width, 0, 0);
+					}
+				}
+
+				&.lt-ie9 #nav {
+					width: $offscreen-nav-width; // reset the additional pixel to resolve IE overflow issues
+				}
+
+			// parallax effect
+			.nav-inner {
+				@if $OPEN_NAV_FROM_RIGHT {
+					left: -50%;
+				} @else {
+					left: 50%;
+				}
+			}
+
+				&.js-nav-translate .nav-inner {
+					@if $OPEN_NAV_FROM_RIGHT {
+						left: auto;
+						@include translate3d(-50%, 0, 0);
+					} @else {
+						left: auto;
+						@include translate3d(50%, 0, 0);
+					}
+				}
+
+			// page content
+			#inner-wrap {
+				left: 0;
+			}
+		}
+
+		.js-nav-open {
+			// parallax effect
+			.nav-inner {
+				left: 0;
+			}
+
+				&.js-nav-translate .nav-inner {
+					@include translate3d(0, 0, 0);
+				}
+
+			// page content
+			#inner-wrap {
+				@if $OPEN_NAV_FROM_RIGHT {
+					left: -$offscreen-nav-width;
+				} @else {
+					left: $offscreen-nav-width;
+				}
+			}
+
+				&.js-nav-translate #inner-wrap {
+					left: 0;
+
+					@if $OPEN_NAV_FROM_RIGHT {
+						@include translate3d(-$offscreen-nav-width, 0, 0);
+					} @else {
+						@include translate3d($offscreen-nav-width, 0, 0);
+					}
+				}
+		}
+	}
+}
+
+// turn off the transforms for larger screens
+@include bp($onscreen-bp) {
+	#nav {
+		display: none;
+	}
+
+	#inner-wrap .offscreen-nav-bg {
+		display: none;
+	}
+}
+
+/* ==========================================================================
+ * - DESIGN
+ * ========================================================================== */
+
+// Colour variations
+#nav {
+	background-color: #f0f0f0; //COLOR VARIATION
+	outline: none;
+
+	h2 {
+		color: #fff;
+	}
+}
+
+//offscreen nav style
+@include bp(0, $offscreen-bp) {
+	.slide-out-nav {
+		@if $USE_NAV_DRAWER_PATTERN == false {
+			.supports-pointerevents & {
+				position: relative;
+				min-height: 100%;
+
+				// if pointer-events: none is supported add the dropshadow inside the nav which can't be clicked and
+				// and doesn't stop links under it from being clicked
+				&:after {
+					position: absolute;
+					background-color: transparent;
+					width: 40px;
+					height: 100%;
+					top: 0;
+					content: ' ';
+					z-index: 99999;
+
+					background-size: 50% 50%;
+					pointer-events: none;
+					@include backface-visibility(hidden); // stops animation issues inside the area
+
+					@if $OPEN_NAV_FROM_RIGHT {
+						background: transparent url("../img/support/left-edge-inner-shadow.png") repeat-y left top;
+						left: -1px;
+					} @else {
+						background: transparent url("../img/support/right-edge-inner-shadow.png") repeat-y right top;
+						right: 0;
+					}
+				}
+			}
+		}
+
+		ul {
+			@include list-reset();
+		}
+
+		li {
+			overflow: hidden; // clear floats
+			border-top: 1px solid #d9d9d9;
+			margin: 0;
+		}
+
+		.nav-lvl1,
+		.nav-lvl2,
+		.nav-lvl3 {
+			@include transition-property(background-color, color);
+			@include transition-duration(250ms);
+			@include box-sizing(border-box);
+			line-height: 50px;
+			padding-left: 10px;
+			display: block;
+
+			&:hover,
+			&:focus,
+			&:active {
+				background-color: #fff;
+			}
+		}
+
+			.nav-lvl2 {
+				padding-left: 25px;
+			}
+
+				.nav-lvl3 {
+					padding-left: 40px;
+				}
+
+		.has-children {
+			position: relative;
+
+			& > .nav-lvl1,
+			& > .nav-lvl2,
+			& > .nav-lvl3 {
+				padding-right: 68px;
+				//@include ellipsis(true);
+			}
+		}
+
+		.is-active {
+			& > .nav-lvl1,
+			& > .nav-lvl2,
+			& > .nav-lvl3 {
+				font-weight: bold;
+			}
+		}
+
+		a {
+			text-decoration: none;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			outline: none;
+		}
+
+		.expandcollapse {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 58px;
+			height: 50px;
+			padding: 0;
+			overflow: hidden;
+			text-indent: -500px;
+			color: $dd-green;
+			border-left: 1px solid #d9d9d9;
+			background-color: #f2f2f2;
+
+			&:hover .ec,
+			.focusable:focus + .ec {
+				background-color: #fff;
+			}
+
+			&:active .ec,
+			.focusable:active + .ec {
+				background-color: #c2c2c2;
+			}
+
+			.ec {
+				@include transition-duration(250ms);
+				@include transition-property(color, background-color);
+				width: 58px;
+				height: 50px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin: 0;
+			}
+		}
+
+		.menu {
+			clear: left;
+			outline: none;
+
+			li:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+}

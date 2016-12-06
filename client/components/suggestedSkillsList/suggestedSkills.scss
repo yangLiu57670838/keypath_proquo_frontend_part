@@ -1,0 +1,65 @@
+
+.suggested-skills {
+  position: relative;
+  max-width: 700px;
+  font-size: 14px;
+  box-shadow: $whiteframe-shadow-3dp;
+
+  .md-list-item-text{
+    width: 100%;
+  }
+
+  .list-item:hover{
+    background-color: #199682;
+  }
+
+  .arrow-left {
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #000;
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: inherit;
+    left: -20px;
+    margin-top: 11px;;
+    @include rotate(270deg);
+    @include bp-max(xs){
+      border-left-color: #000;
+      border-bottom-color: transparent;
+      top: -30px;
+      left: 50%;
+      margin-left: -5px;
+    }
+  }
+
+
+  .suggested-skills-toolbar {
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+
+    .icon-arrow-right, .icon-arrow-left{
+      font-size:16px;
+    }
+    .suggested-skills-header {
+      background-color: black;
+      color: white;
+      font-size: 14px !important;
+      font-weight: bolder;
+      height: 40px;
+
+      &.suggested-skills-actions {
+        background-color: lightgray !important;
+        color: black !important;
+      }
+    }
+
+
+  }
+
+
+
+}

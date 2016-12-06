@@ -1,0 +1,189 @@
+.project-brief{
+
+  .brief-section-title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .brief-section {
+    padding-bottom: 10px;
+  }
+
+  .brief-section-body {
+    @include bp(s){
+      padding: 10px;
+    }
+
+    background-color: white;
+  }
+
+  .attach-documents-link {
+    .icon {
+      margin-left: 20px;
+      vertical-align: bottom;
+    }
+  }
+
+  .give-me-space {
+    padding: 20px;
+  }
+
+  .dropdown-label {
+    padding-top: 8px;
+  }
+
+  .remove-item{
+    position:relative;
+    a {
+      position: absolute;
+      margin-top:-9px;
+      top:50%;
+    }
+  }
+
+  .deliverable-examples{
+    margin-bottom: 20px;
+    padding: 20px;
+    @include font-size(14,21);
+    background-color: #DDDDDD;
+  }
+
+  .actions {
+    margin-top: 20px;
+  }
+
+  .md-datepicker-container{
+    padding-left: 0;
+    min-width: 170px;
+    width:100%;
+    md-datepicker {
+      .md-datepicker-input{
+        display:none;
+      }
+      .md-datepicker-triangle-button{
+        display:none;
+      }
+    }
+  }
+
+
+
+  mdp-date-picker{
+
+    .md-icon-button{
+      margin: 0;
+      padding-top: 0;
+      height: 30px;
+    }
+
+    .md-input-has-placeholder{
+      display:none;
+    }
+  }
+
+  .mdp-date-picker-min-width{
+    min-width: 170px;
+  }
+
+  .mdp-date-picker-text{
+    padding-top: 3px;
+  }
+
+  .mdp-date-picker-place-holder{
+    padding-top: 3px;
+  }
+
+  .timing-width{
+    min-width: 100px;
+    max-width: 230px;
+
+    md-radio-button{
+      margin:16px 0;
+    }
+  }
+
+  .deliverable-padding {
+    padding: 0 16px;
+  }
+
+
+  .timing-span{
+      margin:16px;
+  }
+
+  .timing-due-date{
+    padding-left:0px;
+  }
+
+  .timing-header{
+    margin:16px;
+    min-width: 170px;
+    padding-right:5px;
+  }
+
+  .timing-alert{
+    margin: -16px 0px 0px 0px;
+    min-width: 100px;
+    color: rgb(221,44,0);
+    font-size:12px;
+    line-height: 14px;
+  }
+
+  .disabled{
+    color: gray;
+    cursor: not-allowed;
+  }
+
+  .swaps{
+    margin-top:20px;
+  }
+
+
+  .info-btn.md-fab.md-mini {
+    &.dark-blue{
+      width: 25px;
+      height: 25px;
+      padding: 0;
+      line-height: 26px;
+      background:$dd-dark-blue;
+
+      i{
+        @include font-size(12, 12);
+      }
+    }
+  }
+
+  .custom-chip{
+    cursor:default;
+  }
+
+  .md-input-messages-animation{
+    overflow:hidden;
+    .reveal-message{
+      opacity: 1 !important;
+      margin-top: 0 !important;
+      transition: 0.3s;
+    }
+  }
+
+  ng-form{
+    @include bp-max(s){
+      background: $dd-lightest-grey;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .ellipsis-txt{
+    @include bp-max(xs){
+      max-width: 84px;
+    }
+    max-width: 250px;
+    display: inline-block;
+  }
+
+  md-progress-circular{
+    margin-left:45%;
+  }
+
+}

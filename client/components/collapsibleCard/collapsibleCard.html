@@ -1,0 +1,17 @@
+<div class="collapsibleCard" ng-click="showDetails=!showDetails;collapsibleCardCtrl.emitEvent(cardId, showDetails);">
+  <div class="summary" layout="row" layout-align="space-between center">
+    <div class="title" flex>
+      <div class="collapsible-card-header"></div>
+    </div>
+    <md-icon class="arrow-drop" ><span class=" icon icon-pointer-right" ng-class="{'active':showDetails}"></span></md-icon>
+  </div>
+  <div class="collapsible-container inactive"  ng-class="{'active':showDetails}" ng-click="$event.stopPropagation();">
+    <div layout="row" layout-sm="column" class="section">
+      <div class="collapsible-card-body" ></div>
+    </div>
+  </div>
+  <div class=" inactive"  ng-class="{'active':showDetails}" ng-click="$event.stopPropagation();" >
+    <div class="collapsible-card-actions">
+    </div>
+  </div>
+</div>

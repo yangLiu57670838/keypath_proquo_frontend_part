@@ -1,0 +1,302 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="digitalVillageApp"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <base href="/">
+    <title ng-bind="'proquo' + pageTitle">Proquo</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="favicon.ico?v=2" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <link rel="stylesheet" href="bower_components/prism/themes/prism.css" />
+      <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
+      <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
+      <link rel="stylesheet" href="bower_components/mdPickers/dist/mdPickers.min.css" />
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+      <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <!-- endinjector -->
+    <!-- endbuild -->
+    <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7c_HOFpXnOBDSIwWHLFtFrerHaUWnJss&signed_in=true&libraries=places"
+            async defer></script-->
+    <script src="assets/scripts/head.js"></script>
+    <script src="assets/scripts/head/_modernizr-2.7.1.min.js"></script>
+    <script src="assets/scripts/head/_match-media.js"></script>
+    <script src="assets/scripts/head/_fixedfixed.js"></script>
+    <script src="assets/scripts/head/_ie.js"></script>
+    <script src="assets/scripts/head/_isReady.js"></script>
+
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', GOOGLE_ANALYTICS_TRACKING_ID, 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+
+    <!-- Crazy Egg -->
+    <script type="text/javascript">
+      setTimeout(function(){var a=document.createElement("script");
+        var b=document.getElementsByTagName("script")[0];
+        a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/0062.js?"+Math.floor(new Date().getTime()/3600000);
+        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <!-- End Crazy Egg -->
+
+
+    <!-- Start of proquo Zendesk Widget script -->
+    <script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(c){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","proquo.zendesk.com");
+    /*]]>*/</script>
+    <!-- End of proquo Zendesk Widget script -->
+  </head>
+  <body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PK8TGP"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PK8TGP');</script>
+    <!-- End Google Tag Manager -->
+
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div id="outer-wrap" class="outer-wrap">
+      <div id="inner-wrap" class="inner-wrap">
+        <nav-bar></nav-bar>
+        <div ui-view autoscroll="true"></div>
+      </div>
+      <div class="footer-push"></div>
+    </div>
+
+    <main-footer></main-footer>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js({client,node_modules}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/modernizr/modernizr.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-i18n/angular-locale_en-au.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
+      <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/ui-router-extras/release/ct-ui-router-extras.js"></script>
+      <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+      <script src="bower_components/angular-material/angular-material.js"></script>
+      <script src="bower_components/angular-timeago/src/timeAgo.js"></script>
+      <script src="bower_components/angular-load/angular-load.js"></script>
+      <script src="bower_components/ddbreakpoints/lib/dd.breakpoints.js"></script>
+      <script src="bower_components/enquire/dist/enquire.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/prism/prism.js"></script>
+      <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+      <script src="bower_components/velocity/velocity.js"></script>
+      <script src="bower_components/velocity/velocity.ui.js"></script>
+      <script src="bower_components/underscore/underscore.js"></script>
+      <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+      <script src="bower_components/flow.js/dist/flow.js"></script>
+      <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
+      <script src="bower_components/angular-read-more/dist/readmore.min.js"></script>
+      <script src="bower_components/angular-slick/dist/slick.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/filepicker-js-bower/filepicker.min.js"></script>
+      <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+      <script src="bower_components/angular-credit-cards/release/angular-credit-cards.js"></script>
+      <script src="bower_components/mdPickers/dist/mdPickers.min.js"></script>
+      <script src="bower_components/pubnub/web/dist/pubnub.min.js"></script>
+      <script src="bower_components/pubnub-angular/dist/pubnub-angular.min.js"></script>
+      <script src="bower_components/angular-price-format/js/jquery-price-format.js"></script>
+      <script src="bower_components/angular-price-format/js/angular-price-format.js"></script>
+      <script src="bower_components/SHA-1/sha1.js"></script>
+      <script src="bower_components/angulartics/src/angulartics.js"></script>
+      <script src="bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js"></script>
+      <!-- endbower -->
+    <!-- endbuild -->
+    <script src="assets/scripts/script.js"></script>
+    <!-- build:js(.tmp) app/app.js -->
+      <script src="app/app.js"></script>
+      <!-- injector:js -->
+      <script src="app/admin/admin.module.js"></script>
+      <script src="components/auth/auth.module.js"></script>
+      <script src="components/util/util.module.js"></script>
+      <script src="app/projects/brief/brief.js"></script>
+      <script src="app/account/forgotpassword/forgotpassword.controller.js"></script>
+      <script src="app/account/login/loginModal.controller.js"></script>
+      <script src="app/account/resetpassword/resetpassword.controller.js"></script>
+      <script src="app/account/settings/settings.controller.js"></script>
+      <script src="app/account/signup/categories.service.js"></script>
+      <script src="app/account/signup/emailvalidation.controller.js"></script>
+      <script src="app/account/signup/googlemaps.service.js"></script>
+      <script src="app/account/signup/join.directive.js"></script>
+      <script src="app/account/signup/location.directive.js"></script>
+      <script src="app/account/signup/termsModal.controller.js"></script>
+      <script src="app/admin/admin.controller.js"></script>
+      <script src="app/abn/abn.service.js"></script>
+      <script src="app/admin/admin.router.js"></script>
+      <script src="app/animations.js"></script>
+      <script src="app/app.constant.js"></script>
+      <script src="app/business/business.service.js"></script>
+      <script src="app/category/category.service.js"></script>
+      <script src="app/category/categoryGenericSelector.js"></script>
+      <script src="app/category/categorySelectorModal.controller.js"></script>
+      <script src="app/chat/chat.controller.js"></script>
+      <script src="app/chat/chat.service.js"></script>
+      <script src="app/chat/message.service.js"></script>
+      <script src="app/email/verificationModal/emailVerificationModal.controller.js"></script>
+      <script src="app/getstarted/NameInfo.controller.js"></script>
+      <script src="app/getstarted/buyer/buyer.controller.js"></script>
+      <script src="app/getstarted/getstarted.js"></script>
+      <script src="app/getstarted/getstarted.state.service.js"></script>
+      <script src="app/getstarted/regoSelection.controller.js"></script>
+      <script src="app/getstarted/router.decorator.js"></script>
+      <script src="app/getstarted/seller/profile/sellerProfile.directive.js"></script>
+      <script src="app/getstarted/seller/seller.controller.js"></script>
+      <script src="app/getstarted/signup.controller.js"></script>
+      <script src="app/getstarted/welcome.controller.js"></script>
+      <script src="app/home/home.controller.js"></script>
+      <script src="app/home/home.js"></script>
+      <script src="app/home/videoLoader.controller/videoLoader.controller.controller.js"></script>
+      <script src="app/how/how.controller.js"></script>
+      <script src="app/how/how.js"></script>
+      <script src="app/message/message.service.js"></script>
+      <script src="app/mimic/mimic.controller.js"></script>
+      <script src="app/mimic/mimic.js"></script>
+      <script src="app/my/editField/editField.directive.js"></script>
+      <script src="app/my/my.controller.js"></script>
+      <script src="app/my/my.js"></script>
+      <script src="app/my/payments/payments.controller.js"></script>
+      <script src="app/my/payments/payments.js"></script>
+      <script src="app/ng/controllers/chatModal.js"></script>
+      <script src="app/ng/directives/categorySkillSelector.js"></script>
+      <script src="app/ng/directives/searchResult.js"></script>
+      <script src="app/ng/directives/searchResultSkills.js"></script>
+      <script src="app/not-implemented/not-implemented.controller.js"></script>
+      <script src="app/not-implemented/not-implemented.js"></script>
+      <script src="app/notification/notification.controller.js"></script>
+      <script src="app/notification/notification.js"></script>
+      <script src="app/notification/notification.service.js"></script>
+      <script src="app/notification/notificationHistory.controller.js"></script>
+      <script src="app/notification/notificationRecordRow.js"></script>
+      <script src="app/payments/payments.service.js"></script>
+      <script src="app/privacy/privacy/privacy.controller.js"></script>
+      <script src="app/privacy/privacy/privacy.js"></script>
+      <script src="app/profile/myprofile/editCompanyName/editCompanyName.controller.js"></script>
+      <script src="app/profile/myprofile/editPortfolio/editPortfolio.controller.js"></script>
+      <script src="app/profile/myprofile/editQualifications/editQualifications.controller.js"></script>
+      <script src="app/profile/myprofile/editQualifications/myPopup/myPopup.directive.js"></script>
+      <script src="app/profile/myprofile/editUrl/editUrl.controller.js"></script>
+      <script src="app/profile/myprofile/mySave/mySave.directive.js"></script>
+      <script src="app/profile/myprofile/myprofile.controller.js"></script>
+      <script src="app/profile/portfolio/portfolio.controller.js"></script>
+      <script src="app/profile/profile.controller.js"></script>
+      <script src="app/profile/profile.js"></script>
+      <script src="app/profile/social/social.service.js"></script>
+      <script src="app/projects/agreement/agreement.controller.js"></script>
+      <script src="app/projects/agreement/agreement.js"></script>
+      <script src="app/projects/brief/brief.controller.js"></script>
+      <script src="app/about/about.controller.js"></script>
+      <script src="app/projects/brief/briefSwapSkillsModal/briefSwapSkillsModal.controller.js"></script>
+      <script src="app/projects/createItdb/createItdb.controller.js"></script>
+      <script src="app/projects/createItdb/createItdb.js"></script>
+      <script src="app/projects/itdb/itdb.directive.js"></script>
+      <script src="app/projects/itdb/itdb.service.js"></script>
+      <script src="app/projects/itdb/itdbInviteeList.directive.js"></script>
+      <script src="app/projects/itdb/itdbList.directive.js"></script>
+      <script src="app/projects/itdbView/itdbView.controller.js"></script>
+      <script src="app/projects/itdbView/itdbView.js"></script>
+      <script src="app/projects/pay/pay.controller.js"></script>
+      <script src="app/projects/pay/pay.js"></script>
+      <script src="app/projects/project.service.js"></script>
+      <script src="app/projects/projectDetail/projectDetail.directive.js"></script>
+      <script src="app/projects/projectTabs/projectTabs.directive.js"></script>
+      <script src="app/projects/projects.controller.js"></script>
+      <script src="app/projects/projects.js"></script>
+      <script src="app/projects/projectsList/cancelInProgressConfirm.controller.js"></script>
+      <script src="app/projects/projectsList/projectsList.directive.js"></script>
+      <script src="app/projects/quote/deleteQuoteConfirm.controller.js"></script>
+      <script src="app/projects/quote/quote.controller.js"></script>
+      <script src="app/projects/quote/quote.js"></script>
+      <script src="app/projects/quote/rejectBriefConfirm.controller.js"></script>
+      <script src="app/projects/quote/rejectQuoteConfirm.controller.js"></script>
+      <script src="app/projects/requestForQuote/requestForQuote.directive.js"></script>
+      <script src="app/projects/requestForQuotesList/requestForQuotesList.directive.js"></script>
+      <script src="app/projects/requestforquote.service.js"></script>
+      <script src="app/rating/rate.controller.js"></script>
+      <script src="app/rating/rate.js"></script>
+      <script src="app/review/review.service.js"></script>
+      <script src="app/scripts/_util.js"></script>
+      <script src="app/scripts/modules/_mqad.js"></script>
+      <script src="app/scripts/modules/_slickslider.js"></script>
+      <script src="app/scripts/modules/nav/_nav.js"></script>
+      <script src="app/scripts/modules/nav/_navOffscreen.js"></script>
+      <script src="app/scripts/modules/nav/_navOnscreen.js"></script>
+      <script src="app/skill-search/skill-search.controller.js"></script>
+      <script src="app/skill-search/skill-search.js"></script>
+      <script src="app/skill-search/skill-selector/skill-selector.directive.js"></script>
+      <script src="app/swapagree/swapagree.controller.js"></script>
+      <script src="app/swapagree/swapagree.js"></script>
+      <script src="app/terms/terms/terms.controller.js"></script>
+      <script src="app/terms/terms/terms.js"></script>
+      <script src="app/about/about.js"></script>
+      <script src="components/auth/auth.service.js"></script>
+      <script src="components/auth/interceptor.service.js"></script>
+      <script src="components/auth/router.decorator.js"></script>
+      <script src="components/auth/user.service.js"></script>
+      <script src="components/collapsibleCard/collapsibleCard.directive.js"></script>
+      <script src="components/config/config.service.js"></script>
+      <script src="components/content-header/content-header.directive.js"></script>
+      <script src="components/document/document.service.js"></script>
+      <script src="components/filters/filesize.filter.js"></script>
+      <script src="components/filters/relativedate.filter.js"></script>
+      <script src="components/footer/footer.directive.js"></script>
+      <script src="components/listReveal/listReveal.directive.js"></script>
+      <script src="components/modalService/ABNRegisterModalCtrl.js"></script>
+      <script src="components/modalService/GenericConfirmationModalCtrl.js"></script>
+      <script src="components/modalService/SimpleFormModalCtrl.js"></script>
+      <script src="components/modalService/genericConfirmWithReasonModalCtrl.js"></script>
+      <script src="components/modalService/modalService.service.js"></script>
+      <script src="components/modalService/startBusinessModal.controller.js"></script>
+      <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+      <script src="components/navbar/navbar.controller.js"></script>
+      <script src="components/navbar/navbar.directive.js"></script>
+      <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
+      <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
+      <script src="components/paginator/paginator.directive.js"></script>
+      <script src="components/profilePhoto/avatarPhoto.directive.js"></script>
+      <script src="components/profilePhoto/profilePhoto.directive.js"></script>
+      <script src="components/profileScroll/profileScroll.directive.js"></script>
+      <script src="components/profileSummary/profileSummary.directive.js"></script>
+      <script src="components/skillSearch/skillSearch.service.js"></script>
+      <script src="components/starRating/starRating.directive.js"></script>
+      <script src="components/suggestedSkillsList/suggestedSkills.js"></script>
+      <script src="components/supplierCandidatesList/supplierCandidatesList.js"></script>
+      <script src="components/toast/toast.service.js"></script>
+      <script src="components/ui-router/statechange-approval.service.js"></script>
+      <script src="app/account/account.js"></script>
+      <script src="components/util/util.service.js"></script>
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </body>
+</html>

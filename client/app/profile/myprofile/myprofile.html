@@ -1,0 +1,534 @@
+<div class="l-layout l-one-column l-bg-grey cf">
+  <div class="content-container l-padding cf ">
+
+    <div class="content-column">
+
+      <!-- START .main -->
+      <div id="main" tabindex="-1" role="main" class="main myprofile-container">
+
+        <!-- PROFILE SUMMARY -->
+
+        <div class="profile-section ">
+          <form name="profileEditForm">
+
+
+            <!--  SUMMARY -->
+            <div layout="row" layout-align="end center" hide-gt-sm>
+              <a ui-sref="profile({profileId: myProfileCtrl.business._id})" class="btn md-raised md-primary-cta">View Profile</a>
+            </div>
+            <div layout="column" layout-gt-md="row"  class="profile-summary flex-fix">
+
+
+                <div  layout="row"  layout-gt-sm="row"  flex-gt-md="30" flex-gt-lg="40" layout-align="center center" layout-wrap layout-padding class="flex-fix" >
+
+                  <!-- AVATARS -->
+
+                  <div class="avatar-container layout-float-fix">
+                    <div>
+                      <profile-photo  ng-if="myProfileCtrl.business" profile="myProfileCtrl.business" upload-image="myProfileCtrl.uploadAvatar" />
+                    </div>
+                    <i ng-show="myProfileCtrl.business.primaryContactAvatarUrl && myProfileCtrl.business.primaryContactAvatarUrl.length>0" ng-click="myProfileCtrl.deleteAvatar('avatar')" class="delete-avatar icon icon-remove" ></i>
+                    <i ng-show="myProfileCtrl.business.businessLogoUrl && myProfileCtrl.business.businessLogoUrl.length>0" ng-click="myProfileCtrl.deleteAvatar('logo')" class="delete-logo icon icon-remove"></i>
+
+                    <a class="avatar" ng-click="myProfileCtrl.uploadAvatar('avatar')">
+                      <span ng-show="!myProfileCtrl.business.primaryContactAvatarUrl">+ photo</span>
+                      <span ng-show="myProfileCtrl.business.primaryContactAvatarUrl">Change</span>
+                    </a>
+                    <a class=" logo" ng-click="myProfileCtrl.uploadAvatar('logo')">
+                      <span ng-show="!myProfileCtrl.business.businessLogoUrl">+ logo</span>
+                      <span ng-show="myProfileCtrl.business.businessLogoUrl">Change</span>
+                    </a>
+                  </div>
+
+                  <!-- ACCEPT BUTTONS -->
+
+                  <div class="accepts layout-float-fix accept-layout-fix">
+                    <div layout="row" layout-align="center center" class="acceptance">
+                      <span ng-show="myProfileCtrl.business.acceptsCash || myProfileCtrl.business.acceptsSwaps">I accept:</span>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                      <div class="transactions">
+                        <i class="icon icon-dollar">
+                        </i>
+                        <div class="text">Pay</div>
+                      </div>
+                      <div class="transactions">
+                        <i
+                          ng-class="{'icon icon-swap': myProfileCtrl.business.acceptsSwaps, 'disabled-icon icon-swap': !myProfileCtrl.business.acceptsSwaps}"
+                          ng-click="myProfileCtrl.changeAccepts('acceptsSwaps')">
+                          <md-tooltip ng-if="!myProfileCtrl.business.acceptsSwaps" md-direction="bottom">
+                            You have indicated that you will accept monetary payments only
+                          </md-tooltip>
+                        </i>
+                        <div class="text">Swap</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+                <div  layout="column" layout-gt-xs="row" layout-align="start start" flex-gt-md="70" flex-gt-lg="60" class="profile-right-padding flex-fix" layout-padding >
+                  <div layout="row" layout-align="start start" layout-wrap="true" layout-padding class="paddingless">
+                    <!-- NAME -->
+                    <div layout="column" layout-align="space-between start" layout-gt-sm="row" layout-align-gt-sm="space-between center" flex="100">
+                    <div flex-xs="100" flex-sm="100" flex-gt-sm="80" class="edit-field">
+                      <h2 class="no-margin" ng-show="!myProfileCtrl.toggleUsername">{{myProfileCtrl.business.primaryContactFirstName + ' '
+                        + myProfileCtrl.business.primaryContactLastName}}</h2>
+                      <md-button ng-show="!myProfileCtrl.toggleUsername" ng-click="myProfileCtrl.setEditUsername() "
+                                 aria-label="Edit your name" class="md-fab md-mini">
+                        <i class="icon icon-pencil"></i>
+                        <md-tooltip md-direction="bottom">
+                          Edit your name
+                        </md-tooltip>
+                      </md-button>
+                      <div layout-gt-sm="row" ng-show="myProfileCtrl.toggleUsername">
+                        <md-input-container md-no-float class="md-block edit-container">
+                          <input required type="text" name="firstName" placeholder="First name"
+                                 ng-model="myProfileCtrl.editFirstName"/>
+                          <div ng-messages="profileEditForm.firstName.$error" role="alert" md-auto-hide="false"
+                               ng-show="profileEditForm.firstName.$touched">
+                            <div ng-message="required">This is required</div>
+                          </div>
+                        </md-input-container>
+                        <md-input-container md-no-float class="md-block edit-container">
+                          <input required type="text" name="lastName" placeholder="Last name"
+                                 ng-model="myProfileCtrl.editLastName"/>
+                          <div ng-messages="profileEditForm.lastName.$error" role="alert" md-auto-hide="false"
+                               ng-show="profileEditForm.lastName.$touched">
+                            <div ng-message="required">This is required</div>
+                          </div>
+                        </md-input-container>
+                        <div class="edit-functions">
+                          <ul>
+                            <li>
+                              <a ng-click="myProfileCtrl.saveEditUsername()"> <i class="icon icon-tick"></i></a>
+                              <md-tooltip md-direction="bottom">
+                                Save
+                              </md-tooltip>
+                            </li>
+                            <li>
+                              <a ng-click="myProfileCtrl.cancelEditUsername()"> <i class="icon icon-close"></i></a>
+                              <md-tooltip md-direction="bottom">
+                                Cancel
+                              </md-tooltip>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="width:100%;" hide-xs hide-sm layout="row" layout-align-gt-xs="end center" layout-align-xs="center center" class="margin-top-10">
+                      <a ui-sref="profile({profileId: myProfileCtrl.business._id})" class="btn md-raised md-primary-cta">View Profile</a>
+                    </div>
+                    </div>
+
+                    <!-- COMPANY -->
+                    <div flex="100" flex-gt-xs="50" class="experience">
+
+                      <label class="bolder">Business name</label>
+                      <div layout="row" layout-align="start center">
+                        <div>
+                          <a class="company-name" ng-if="myProfileCtrl.businessUrl" ng-click="myProfileCtrl.openBusinessUrlIfLoggedIn($event)" target="_blank">{{myProfileCtrl.business.name}}</a>
+                          <span ng-if="!myProfileCtrl.businessUrl">{{myProfileCtrl.business.name}}</span>
+                        </div>
+                        <div>
+                          <md-button ng-show="!myProfileCtrl.toggleLinks" ng-click="myProfileCtrl.editCompanyName()"
+                                     aria-label="Edit links" class="md-fab md-mini">
+                            <i class="icon icon-pencil"></i>
+                            <md-tooltip md-direction="bottom">
+                              Edit Business Name
+                            </md-tooltip>
+                          </md-button>
+                        </div>
+                      </div>
+
+
+
+                      <label class="text bolder">Location</label>
+                      <div class="exp-value">
+
+                        <div class="edit-field" ng-if="!myProfileCtrl.toggleLocation">
+                          <span>{{myProfileCtrl.locationReadonlyText()}}</span>
+                          <md-button ng-show="!myProfileCtrl.toggleLocation" ng-click="myProfileCtrl.setEditLocation() "
+                                     aria-label="Edit location" class="md-fab md-mini">
+                            <i class="icon icon-pencil"></i>
+                            <md-tooltip md-direction="bottom">
+                              Edit location
+                            </md-tooltip>
+                          </md-button>
+                        </div>
+                        <location flex="80" ng-if="myProfileCtrl.toggleLocation"
+                                  result="myProfileCtrl.editLocationObject"
+                                  thisid="'googleLookup'"
+                                  title-label="'Your location'"
+                                  show-edit-button="true"
+                                  save-location="myProfileCtrl.saveEditLocation()"
+                                  cancel-location="myProfileCtrl.cancelEditLocation"></location>
+                      </div>
+                      <div class="geo-distance">{{myProfileCtrl.distanceAway || ''}}</div>
+                    </div>
+
+
+
+                    <!-- SOCIAL LINKS -->
+
+                    <div flex="100" flex-gt-xs="50" class="experience">
+
+                      <label class="bolder">
+                        Social page links
+                      </label>
+                      <div class="exp-value" style="margin-bottom:0 !important; margin-top:7px !important;">
+                        <div layout="row" style="max-height: 45px;">
+
+
+                          <div class="profile-social-links" layout="column" layout-align="center start">
+                            <div>
+                            <div ng-show="myProfileCtrl.business.socialUrls.length<1">Add social page links</div>
+                            <a ng-repeat="social in myProfileCtrl.business.socialUrls"
+                               ng-click="myProfileCtrl.openSocialUrlIfLoggedIn($event, social)"
+                               aria-label="{{social.urlIconImage}}" class="md-button btn-social">
+                              <i class="icon icon-{{social.urlIconImage}}"></i>
+                              <md-tooltip ng-if="social.urlDescription" md-direction="bottom">
+                                {{social.urlDescription}}
+                              </md-tooltip>
+                            </a>
+                            </div>
+                          </div>
+                          <div>
+                            <md-button ng-show="!myProfileCtrl.toggleLinks" ng-click="myProfileCtrl.editUrl()"
+                                       aria-label="Edit links" class="md-fab md-mini">
+                              <i class="icon icon-pencil"></i>
+                              <md-tooltip md-direction="bottom">
+                                Edit links
+                              </md-tooltip>
+                            </md-button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- EXPERIENCE -->
+                      <label class="bolder">Industry Experience</label>
+                      <div class="edit-field exp-value">
+                        <span ng-show="!myProfileCtrl.toggleIndustryExp && myProfileCtrl.business.experienceYear != undefined">
+                          {{myProfileCtrl.business.experienceYear + (myProfileCtrl.business.experienceYear == 1 ? ' year' : ' years')}}
+                        </span>
+                        <span ng-show="!myProfileCtrl.toggleIndustryExp && myProfileCtrl.business.experienceYear == undefined">Edit total years of experience</span>
+                        <md-button ng-show="!myProfileCtrl.toggleIndustryExp"  ng-click="myProfileCtrl.editIndustryExp() " aria-label="Edit description" class="md-fab md-mini" >
+                          <i class="icon icon-pencil"></i>
+                          <md-tooltip md-direction="bottom">
+                            Edit your total years of industry experience
+                          </md-tooltip>
+                        </md-button>
+                        <md-input-container md-no-float  class="md-block"  ng-show="myProfileCtrl.toggleIndustryExp" class="edit-container">
+                          <input type="tel" name="industryExp" placeholder="Edit total years of experience" ng-model="myProfileCtrl.experienceYear"
+                                 maxlength="3" ng-pattern="myProfileCtrl.expPattern" ng-pattern="myProfileCtrl.expPattern" ng-keypress="myProfileCtrl.checkExpValue($event)"/>
+                          <div ng-messages="profileEditForm.industryExp.$error" role="alert" md-auto-hide="false">
+                            <div ng-message="pattern">Invalid value for years of experience</div>
+                            <div ng-message="maxlength">Industry experience cannot be more than 999 years</div>
+                          </div>
+                          <div class="edit-functions">
+                            <ul>
+                              <li>
+                                <a ng-click="myProfileCtrl.saveIndustryExp()"> <i class="icon icon-tick" ></i></a>
+                                <md-tooltip>
+                                  Save
+                                </md-tooltip>
+                              </li>
+                              <li>
+                                <a ng-click="myProfileCtrl.cancelIndustryExp()"> <i class="icon icon-close" ></i></a>
+                                <md-tooltip>
+                                  Cancel
+                                </md-tooltip>
+                              </li>
+                            </ul>
+                          </div>
+                        </md-input-container>
+                      </div>
+                    </div>
+
+                    <!-- DESCRIPTIONS   -->
+
+
+
+                      <div  style="width:100%;" class="experience description " layout="column" >
+
+                          <label class="bolder">Your Business</label>
+                          <div style="width:100%;"
+                               class="exp-value"
+                               edit-field service-id="myProfileCtrl.business._id"
+                               tooltip-text="'Edit Description'"
+                               tooltip-direction="bottom"
+                               label-text="'Description'"
+                               no-text-label="'Enter a description of your company'"
+                               field-type="'textarea'"
+                               textarea-length="2500"
+                               model-obj="myProfileCtrl.business.description"
+                               model-name="'description'"
+                               save-back="myProfileCtrl.save">
+                          </div>
+
+
+
+                      </div>
+
+                    <!-- ABN  -->
+                    <div class="verified" flex="100" flex-gt-xs="50" >
+                      <div class="edit-field">
+                        <span ng-show="myProfileCtrl.business.abnVerified && !myProfileCtrl.toggleABN">
+                          <i class="icon icon-tick-circle"></i>
+                          <span class="text bolder">ABN CHECKED</span>
+                          <md-button ng-click="myProfileCtrl.editABN()" aria-label="Edit your ABN"
+                                     class="md-fab md-mini">
+                            <i class="icon icon-pencil"></i>
+                            <md-tooltip md-direction="bottom">
+                              Edit your ABN
+                            </md-tooltip>
+                          </md-button>
+                        </span>
+                        <span ng-show="!myProfileCtrl.business.abnVerified && !myProfileCtrl.toggleABN">
+                          <span class="text bolder">ABN NOT CHECKED</span>
+                          <md-button ng-click="myProfileCtrl.editABN()" aria-label="Edit your ABN"
+                                     class="md-fab md-mini">
+                            <i class="icon icon-pencil"></i>
+                            <md-tooltip md-direction="bottom">
+                              Edit your ABN
+                            </md-tooltip>
+                          </md-button>
+                        </span>
+                        <div layout-gt-sm="row" ng-show="myProfileCtrl.toggleABN">
+                          <md-input-container md-no-float class="md-block edit-container">
+                            <input type="text" name="abn" placeholder="ABN" ng-model="myProfileCtrl.abn" abn/>
+                            <div ng-messages="profileEditForm.abn.$error" role="alert">
+                              <div ng-message="abn">Invalid ABN - please check if you have typed it correctly.</div>
+                            </div>
+                            <div ng-show="myProfileCtrl.serverErrors.abn" role="alert"
+                                 ng-messages="myProfileCtrl.serverErrors.abn"
+                                 ng-show="profileEditForm.abn.$touched">
+                              <div ng-message="message">{{myProfileCtrl.serverErrors.abn.message}}</div>
+                            </div>
+                          </md-input-container>
+                          <div class="edit-functions">
+                            <ul>
+                              <li>
+                                <a ng-click="myProfileCtrl.saveABN()"> <i class="icon icon-tick"></i></a>
+                                <md-tooltip md-direction="bottom">
+                                  Save
+                                </md-tooltip>
+                              </li>
+                              <li>
+                                <a ng-click="myProfileCtrl.cancelABN()"> <i class="icon icon-close"></i></a>
+                                <md-tooltip md-direction="bottom">
+                                  Cancel
+                                </md-tooltip>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+
+                    <!-- QUALIFICATIONS  -->
+                    <div class="exp-value" flex="100" flex-gt-xs="50">
+                      <div >
+                          <span aria-label="Open demo menu" class="md-icon-button "
+                                ng-click="myProfileCtrl.showQualificationsModal()">
+                            <i class="icon icon-tick-circle"></i> <span class="text bolder">QUALIFICATIONS & MEMBERSHIPS ({{myProfileCtrl.business.qualifications.length}}) </span>
+                            <div style="display:inline-block"
+                                 my-popup
+                                 datamodel="myProfileCtrl.business"
+                                 mytemplate="app/profile/myprofile/editQualifications/editQualifications"
+                                 myheading="'Edit qualifications'"
+                                 ctrl="EditQualificationsCtrl"></div>
+
+                          </span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+            </div>
+          </form>
+
+
+          <!-- SKILLS INFO  -->
+
+          <div class="profile-section profile-skills-container">
+            <md-tabs md-dynamic-height md-border-bottom>
+              <md-tab>
+                <md-tab-label>
+                  <h2 class="heading">
+                    Skills offered
+                  </h2>
+                </md-tab-label>
+                <md-tab-body>
+                  <div class="skills">
+                    <p>Tell us about what services you can provide others</p>
+                    <div ng-if="myProfileCtrl.offeredSelectorOptions" category-generic-selector
+                         data-options="myProfileCtrl.offeredSelectorOptions"
+                         data-select-callback="myProfileCtrl.selectedOffers(categories)">
+                    </div>
+                  </div>
+                </md-tab-body>
+              </md-tab>
+
+              <md-tab>
+                <md-tab-label>
+                  <h2 class="heading">
+                    Things I can swap
+                  </h2>
+                </md-tab-label>
+                <md-tab-body>
+                  <div class="things-swap" >
+                    <p>Tell us about what services you are willing to swap</p>
+                    <div layout="column" layout-align="space-around start" layout-padding layout-gt-xs="row" layout-align-gt-xs="start center">
+
+                      <div>
+                        <md-icon class="material-icons add_swap_btn" ng-click="myProfileCtrl.addNewSwapThing()">add_circle</md-icon>
+                      </div>
+                      <div layout-wrap >
+                        <md-menu ng-repeat="theThing in myProfileCtrl.business.thingsICanSwap track by $index">
+                          <div class="custom-chip is-active the-thing" data-value="{{theThing}}">
+                            <span>{{theThing}}</span>
+                            <div class="icon icon-remove" ng-click="myProfileCtrl.removeSwapThing($index)"></div>
+                          </div>
+                          <div></div>
+                        </md-menu>
+                      </div>
+                    </div>
+                  </div>
+
+                </md-tab-body>
+              </md-tab>
+
+              <md-tab>
+                <md-tab-label>
+                  <h2 class="heading ">
+                    Skills needed
+                  </h2>
+                </md-tab-label>
+                <md-tab-body>
+                  <div class="skills">
+                    <p>Tell us about what services you need</p>
+                    <div ng-if="myProfileCtrl.neededSelectorOptions" category-generic-selector
+                         data-options="myProfileCtrl.neededSelectorOptions"
+                         data-select-callback="myProfileCtrl.selectedNeeds(categories)">
+                    </div>
+
+                  </div>
+                </md-tab-body>
+              </md-tab>
+
+            </md-tabs>
+          </div>
+
+
+          <!-- PORTFOLIO -->
+
+          <div class="profile-section portfolio-edit">
+            <h2 class="heading no-margin">Portfolio</h2>
+
+            <div layout="row">
+              <div flex>
+                <div class="portfolio-images" id="portfolio">
+                  <p ng-show="myProfileCtrl.business.portfolio.length <1">What are some highlights or accomplishments you'd like others to know about?</p>
+                  <div ng-repeat="item in myProfileCtrl.business.portfolio"
+
+                       class="portfolio-image-wrapper" layout="row" layout-align="center center">
+                    <div class="portfolio-img-container">
+                    <img src={{item.thumbnailImageUrl}} class="portfolio-img" alt="Portfolio"  >
+                    </div>
+
+                      <div class="item-info">
+                        <div class="portfolio-text">
+                          <span class="heading heading-portfolio-img ellipsis-txt nowrap">{{item.name}}</span><br/>
+                        </div>
+                        <div layout="row" layout-align="space-around center">
+                          <span class="view-portfolio" ng-click="myProfileCtrl.showEnlargedImg( item, $index)">
+                              EDIT
+                          </span>
+                          <span class="view-portfolio" ng-click="myProfileCtrl.deleteImgPrompt(item)">
+                              DELETE
+                          </span>
+                        </div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="media-btn-container" layout="row" layout-align="end stretch">
+                <div class="upload-media"  layout="column" layout-align="center center"
+                     ng-click="myProfileCtrl.uploadImage('newPortfolio')">
+                  <i class="icon icon-pencil"></i>
+                  <div id="reviews">Add Media</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!--COMMUNITY REVIEWS SECTION-->
+
+          <div class="profile-section profile-messages community-reviews">
+            <div layout="row" layout-align="space-between center" layout-wrap>
+              <h2 class="heading no-margin">Community reviews ({{myProfileCtrl.business.numberOfReviews}})</h2>
+              <div>
+                <div layout="row" layout-align="center center" class="average-rating">
+                  <div class="heading-reduced">
+                    <span class="rating-heading">Average rating</span>
+                  </div>
+                  <div class="star-rating-container">
+                    <star-rating data-rating-disabled="true" rating="myProfileCtrl.business.averageReviewRating"></star-rating>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- REVIEWS SECTION -->
+
+            <p ng-show="myProfileCtrl.ratings.length <1">You currently have no reviews from members of the community</p>
+            <section layout="column">
+              <div ng-repeat="ratingProfile in myProfileCtrl.ratings" layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between start" class="profile-message" layout-padding ng-class="{'margin-top' : !$first}">
+
+                <div layout="row" layout-align-xs="space-between start" layout-padding>
+                  <profile-photo  profile="ratingProfile.reviewerInfo"></profile-photo>
+
+                  <div ng-if="ratingProfile.reviewerInfo.userName" layout="column" >
+                    <div class="message-author">
+                      {{ratingProfile.reviewerInfo.userName}}<span hide-sm hide-xs>, </span>
+                      <span class="message-business">{{ratingProfile.reviewerInfo.name}}</span>
+                    </div>
+                    <div class="message-datetime">{{ratingProfile.updatedAt | date}}</div>
+                    <div>
+
+                      <list-reveal minheight="60">
+                        <p>{{ratingProfile.reviewText || 'No review created'}}</p>
+                      </list-reveal>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div layout="row" layout-align="space-between center" layout-gt-xs="column" layout-align-gt-xs="center end" layout-padding class="padding-right-no">
+                  <star-rating data-rating-disabled="true" rating="ratingProfile.rating" class="padding-right-no"></star-rating>
+                  <a class="report-flag" href="mailto:support@proquo.com.au"><i class="material-icons">flag</i> Report</a>
+                </div>
+              </div>
+            </section>
+
+
+
+
+          </div>
+        </div>
+        <!-- END .main -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+
+<!-- video  -->
+<div class="video-modal" ng-if="homeCtrl.showVideo" layout="column" layout-align="center none">
+  <div class="videoWrapper"  layout="row" layout-align="center center">
+    <div>
+      <div class="video-close" ng-click="homeCtrl.closeVideo()"><div class="icon icon-remove"></div></div>
+      <div id="player">
+        <iframe width="550" height="315" src="https://www.youtube.com/embed/blY8Xs5KYo8?autoplay=1&amp;rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <div  ng-include="'app/home/videoLoader.controller/youtubeapi.html'"></div>
+</div>
+
+
+
+
+<div class="l-layout l-full-width l-home cf">
+
+  <div class="content-container cf homepage-sections-container">
+  <!-- START .content-column -->
+    <div class="content-column">
+
+      <!-- START .main -->
+      <div id="main" tabindex="-1" role="main">
+
+        <div>
+          <div class="homepage-section">
+            <div class="landing-image-container">
+              <div class="content-container l-padding" ng-cloak>
+                <div layout="column" layout-padding layout-margin layout-align="center center" layout-align-gt-xs="center start" layout-fill layout-align="stretch" class="heading-container">
+
+                  <h3 class="section-heading">
+                   Get ahead with the expertise and customers you need
+                  </h3>
+                  <div class="divider"></div>
+                  <h5 class="section-heading section-sub-heading">Helping Australian businesses buy, sell or swap services together</h5>
+
+                  <div layout="row" class="button-row" layout-align="space-around center">
+                    <a class="btn btn-raised watch-vid-btn" ng-click="homeCtrl.playVideo()"> <md-icon class="material-icons play-circle-filled">play_circle_filled</md-icon> Watch Video</a>
+                    <a class="btn md-raised learn-more-btn" ui-sref="getstarted" ng-if="!homeCtrl.isLoggedIn()">Join Now <md-icon class="icon icon-pointer-right"></md-icon></a>
+                  </div>
+
+                  <md-button ng-click="homeCtrl.scrollToPos('homepage-section-how')"  class="md-button md-fab md-raised scroll-indicator" aria-label="scroll down">
+                    <md-icon class=" icon icon-pointer-right"></md-icon>
+                  </md-button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOW IT WORKS -->
+          <div class="homepage-section" id="homepage-section-how">
+            <div class="section-how" >
+              <div class="l-padding">
+                <h5 class="section-heading">
+                  How it works
+                </h5>
+
+                <div layout="column"  layout-gt-xs="row" layout-wrap  layout-fill layout-align="center center"  layout-align-gt-xs="space-around start" class="how-it-works-container">
+
+                    <div layout="column"  flex class="how-it-works" layout-align="start center">
+                      <img src="assets/images/img_connect.png"/>
+                      <h5>Connect</h5>
+                      <p>Find quality small businesses with the skills you need</p>
+                    </div>
+
+
+                    <div layout="column"  flex class="how-it-works" layout-align="start center">
+                      <img src="assets/images/img_swap.png"/>
+                      <h5>Swap or Pay</h5>
+                      <p>Swap goods or services or pay cash</p>
+                    </div>
+
+                    <div layout="column" flex class="how-it-works" layout-align="start center">
+                      <img src="assets/images/img_refer.png"/>
+                      <h5>Recommend and Refer</h5>
+                      <p>Help build a network of trusted small businesses</p>
+                    </div>
+
+                </div>
+                <div layout="row" layout-align="center center" ui-sref="how">
+                  <a  class="btn md-raised learn-more-btn" md-theme="red">Learn More <md-icon class="icon icon-pointer-right"></md-icon></a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+          <!-- GET STARTED TODAY-->
+          <div class="homepage-section" flex="100">
+            <div class="section-activity">
+              <div class="l-padding">
+                  <h4 class="section-heading no-margin-top">
+                    Our members are experts
+                  </h4>
+
+                  <div layout="row" layout-wrap  layout-fill   class="get-started" layout-align="center center">
+                     <div flex-gt-xs="20"  class="homepage-services" ng-repeat="service in homeCtrl.appServices">
+                        <div class="content">
+                          <div layout="column" layout-align="center center">
+                            <img  src="{{service.icon}}"/>
+                            <h6 class="heading feature-heading-light-bold">{{service.heading}}</h6>
+                          </div>
+
+                        </div>
+                     </div>
+                  </div>
+
+              </div>
+            </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+    <!-- END .content-column -->
+  </div>
+</div>

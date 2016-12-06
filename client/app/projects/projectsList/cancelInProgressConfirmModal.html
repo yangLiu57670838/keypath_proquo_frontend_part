@@ -1,0 +1,34 @@
+<md-dialog aria-label="Edit portfolio"  class="edit-portfolio full-screen-on-mobile">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>I want to cancel my project</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+
+      <div layout="column"  layout-padding  layout-align="space-between center">
+        <p>
+          OK, so you want to cancel the project - no problem.
+          <br/><br/>We just need to have a chat with you and work out the next steps as the deposit {{vm.depositPaid ? 'has already been paid' : 'is in process of being paid'}}.
+          <br/><br/>Please contact our support team and request the cancellation{{vm.depositPaid ? ' so we can work out with you what to do with the deposit' : ''}}.
+        </p>
+      </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions  class="md-actions actions" aria-label="actions" layout="row" layout-align="space-between center">
+      <md-button ng-click="vm.cancel()" aria-label="Delete" >
+        Cancel
+      </md-button>
+      <md-button class="md-raised md-primary-cta" aria-label="ContactSupport" ng-click="vm.confirm()">
+        Contact Support
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

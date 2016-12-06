@@ -1,0 +1,13 @@
+.terms-container{
+  .list-style-alpha li{
+    list-style-type: lower-alpha;
+  }
+  .list-style-decimal li{
+    list-style-type: decimal;
+  }
+  .underlined{
+    text-decoration: underline;
+  }
+
+  padding-bottom:50px;
+}

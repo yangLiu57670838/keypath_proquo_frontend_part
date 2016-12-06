@@ -1,0 +1,111 @@
+<div class="project-detail">
+  <div class="parties project-section">
+    <div layout="row" layout-xs="column" layout-align="space-between start">
+      <div layout="column">
+        <div class="feature-heading-light-bold">You:</div>
+        <profile-summary business="vm.business"></profile-summary>
+      </div>
+
+      <div layout="row" layout-align="center center" layout-padding class="padding-left-no">
+        <div class=" icon " ng-class="{'icon-dollar': vm.projectDetail.nameSpace === 'cash', 'icon-swap':vm.projectDetail.nameSpace !== 'cash'}"></div>
+      </div>
+
+      <div layout="column">
+        <div class="feature-heading-light-bold">{{vm.buyerSupplierTitle}}:</div>
+        <profile-summary business="vm.collaborator" show-remove="vm.hasProjectAction(vm.projectDetail, 'removeSeller')" remove="vm.removeSeller(vm.projectDetail)"></profile-summary>
+      </div>
+    </div>
+  </div>
+
+  <md-divider></md-divider>
+  <div class="activity project-section">
+    <div class="feature-heading-light-bold">Activity</div>
+  </div>
+
+  <project-tabs ng-if="vm.projectDetail" tab-model="vm.tabModel" the-model="vm.projectDetail"></project-tabs>
+
+  <md-divider></md-divider>
+  <div class="files project-section" ng-if="vm.projectDetail">
+    <div class="feature-heading-light-bold" layout="column" layout-gt-sm="row" layout-align-gt-sm="space-between stretch">
+      <!--Buyer-->
+      <div layout="column" layout-align="space-between stretch" class="files-container" ng-if="vm.projectDetail.userId == vm.user._id && vm.showFileList('buyerEditFile')">
+        <div class="files-heading" layout="row" layout-align="space-between start">
+          <div>{{vm.fileListTitle('buyerEditFile')}}</div>
+          <a ng-click="vm.projectDetail.buyerFiles.length < 10 ? vm.addFile(vm.projectDetail, $event, 'buyerEditFile') : vm.numberOfFilesReachLimit($event)"
+             ng-show="vm.hasProjectAction(vm.projectDetail, 'buyerEditFile')">
+            <i class="material-icons icon-add">add</i>
+          </a>
+        </div>
+        <div class="files-body"  layout-align="space-between start">
+          <div ng-repeat="file in vm.projectDetail.buyerFiles" layout="row" layout-align="space-between center" class="file">
+            <div flex-xs="60" class="filename ellipsis-txt">
+              <a ng-href="{{file.url}}" download="{{file.attachmentName}}" target="_blank">
+                <i class="icon icon-clip"></i>
+                <label>{{file.attachmentName}}({{ file.size | filesize }})</label>
+              </a>
+            </div>
+            <div layout="row" layout-align="space-between center">
+              <label class="date">{{file.updatedAt|date:"dd/MM/yyyy"}}</label>
+              <a  ng-if="vm.hasProjectAction(vm.projectDetail, 'buyerEditFile')"
+                  ng-click="vm.removeFile(file, $event, 'buyerEditFile')"><i class="icon icon-remove" layout="row" layout-align="space-between center"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Seller-->
+      <div layout="column" layout-align="stretch" class="files-container" ng-if="vm.showFileList('sellerEditFile')">
+        <div class="files-heading" layout="row" layout-align="space-between center">
+          <div>{{vm.fileListTitle('sellerEditFile')}}</div>
+          <a ng-click="vm.projectDetail.sellerFiles.length < 10 ? vm.addFile(vm.projectDetail, $event, 'sellerEditFile') : vm.numberOfFilesReachLimit($event)"
+             ng-if="vm.hasProjectAction(vm.projectDetail, 'sellerEditFile')">
+            <i class="material-icons icon-add">add</i>
+          </a>
+        </div>
+
+        <div class="files-body" layout="column" layout-align="space-between stretch">
+          <div ng-repeat="file in vm.projectDetail.sellerFiles" layout="row" layout-align="space-between stretch" class="file">
+            <div flex-xs="60" class="filename ellipsis-txt">
+              <a ng-href="{{file.url}}" download="{{file.attachmentName}}" target="_blank">
+                <i class="icon icon-clip"></i>
+                <label>{{file.attachmentName}}({{ file.size | filesize }})</label>
+              </a>
+            </div>
+            <div layout="row" layout-align="space-between center">
+              <label class="date">{{file.updatedAt|date:"dd/MM/yyyy"}}</label>
+              <a  ng-if="vm.hasProjectAction(vm.projectDetail, 'sellerEditFile')"
+                  ng-click="vm.removeFile(file, $event, 'sellerEditFile')"><i class="icon icon-remove" layout="row" layout-align="space-between center"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Buyer-->
+      <div layout="column" layout-align="space-between stretch" class="files-container" ng-if="vm.projectDetail.userId !== vm.user._id && vm.showFileList('buyerEditFile')">
+
+        <div class="files-heading" layout="row" layout-align="space-between start">
+          <div>{{vm.fileListTitle('buyerEditFile')}}</div>
+          <a ng-click="vm.projectDetail.buyerFiles.length < 10 ? vm.addFile(vm.projectDetail, $event, 'buyerEditFile') : vm.numberOfFilesReachLimit($event)"
+             ng-show="vm.hasProjectAction(vm.projectDetail, 'buyerEditFile')">
+            <i class="material-icons icon-add">add</i>
+          </a>
+        </div>
+        <div class="files-body"  layout-align="space-between start">
+          <div ng-repeat="file in vm.projectDetail.buyerFiles" layout="row" layout-align="space-between center" class="file">
+            <div flex-xs="60" class="filename ellipsis-txt">
+              <a ng-href="{{file.url}}" download="{{file.attachmentName}}" target="_blank">
+                <i class="icon icon-clip"></i>
+                <label>{{file.attachmentName}}({{ file.size | filesize }})</label>
+              </a>
+            </div>
+            <div layout="row" layout-align="space-between center">
+              <label class="date">{{file.updatedAt|date:"dd/MM/yyyy"}}</label>
+              <a  ng-if="vm.hasProjectAction(vm.projectDetail, 'buyerEditFile')"
+                  ng-click="vm.removeFile(file, $event, 'buyerEditFile')"><i class="icon icon-remove" layout="row" layout-align="space-between center"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <md-divider></md-divider>
+
+</div>

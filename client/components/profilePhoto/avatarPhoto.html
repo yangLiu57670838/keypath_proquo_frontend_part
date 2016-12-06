@@ -1,0 +1,7 @@
+<div class="avatars-container">
+  <div class="avatars" layout="row" >
+    <img id="user-avatar" flex ng-if="profile.avatarUrl && profile.avatarUrl.length>0" class="user-logo" ng-src="{{profile.avatarUrl}}"  />
+    <img flex ng-if="!profile.avatarUrl || profile.avatarUrl.length<1" class="user-logo" src="assets/images/avatar.png" />
+  </div>
+</div>
+

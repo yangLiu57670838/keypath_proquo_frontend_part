@@ -1,0 +1,33 @@
+<div class="suggested-skills" ng-if="vm.allSkills && vm.allSkills.length > 0">
+  <div class="arrow-left"></div>
+
+  <md-toolbar class="suggested-skills-toolbar" layout="row">
+    <div class="md-toolbar-tools suggested-skills-header" layout="row" layout-align="center center">
+      <span>Suggested skills</span>
+    </div>
+  </md-toolbar>
+
+  <md-content>
+    <md-list flex>
+      <md-list-item class="list-item" ng-repeat="skill in vm.currentSkills track by $index" ng-click="vm.selectSkill(skill, $index)">
+        <div class="md-list-item-text" layout="column" layout-align="center center">
+          <div>{{ skill.name }}</div>
+        </div>
+      </md-list-item>
+      <md-divider></md-divider>
+    </md-list>
+  </md-content>
+
+  <md-toolbar class="suggested-skills-toolbar" layout="row">
+    <div class="md-toolbar-tools suggested-skills-header suggested-skills-actions" layout="row">
+      <md-button class="md-icon-button" ng-click="vm.prePage()" ng-disabled="vm.isFirstPage">
+        <md-icon aria-label="Pre" class="icon icon-arrow-left"></md-icon>
+      </md-button>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="vm.nextPage()" ng-disabled="vm.isLastPage">
+        <md-icon aria-label="Next" class="icon icon-arrow-right"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+</div>

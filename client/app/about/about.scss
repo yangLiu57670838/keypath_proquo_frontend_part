@@ -1,0 +1,130 @@
+.about {
+  .about-us-container {
+    margin-bottom: 60px;
+  }
+
+  .contact-box {
+    width: 250px;
+    padding: 20px;
+    margin: 10px 40px 0 40px;
+    background-color: $nab-bg-grey;
+    @include bp(s) {
+      margin-left: 60px;
+    }
+
+    p {
+      margin: 5px 0px;
+      @include font-size($tooltip-font-size, $base-line-height);
+    }
+  }
+  .slider-container {
+    background-color: $nab-bg-grey;
+    width: 100%;
+    padding: 0px 40px 50px 40px;
+    margin: auto;
+
+    .slick-dots li button:before{
+      font-size:17px;
+    }
+
+    @include bp(s) {
+      padding: 0px 160px 50px 40px;
+    }
+
+
+    @include bp(m) {
+      padding: 0px 160px 50px 80px;
+    }
+
+    .slider-box {
+      padding-top: 20px;
+      margin-left: -20px;
+
+      .slick-prev:before {
+        color: $dd-grey;
+        font-family: 'village';
+        font-size: 36px;
+        content:'\006d';
+      }
+
+      .slick-next:before {
+        color: $dd-grey;
+        font-family: 'village';
+        font-size: 36px;
+        content:'\006e';
+      }
+
+      .item-container {
+        width: 250px;
+        min-width: 200px;
+        height: 250px;
+        margin: 0px 20px 20px 20px;
+        background-color: $white;
+        .item-header {
+          height: 40px;
+          padding: 20px 10% 0px;
+          vertical-align: middle;
+        }
+
+        .item-header-img {
+          opacity: 0.7;
+          max-height: 90%;
+          max-width: 90%;
+          margin: auto;
+        }
+
+        .item-content {
+          text-align: center;
+          margin: 5px 10px 0px;
+          padding-top: 10px;
+          background-image: url("../../assets/images/about/quotemarks.png");
+          background-repeat: no-repeat;
+          background-size: contain;
+          height: 140px;
+          vertical-align: middle;
+          line-height: 18px;
+
+          @include bp(m) {
+            line-height: 20px;
+          }
+
+          @include bp(l) {
+            line-height: 24px;
+          }
+        }
+
+        .item-footer {
+          padding: 5px;
+          text-align: center;
+          height: 30px;
+          color: $white;
+          background-color: $dd-dark-blue;
+          vertical-align: middle;
+          @include font-size($tooltip-font-size, $base-line-height);
+          a {
+            color: $white;
+          }
+          a:visited {
+            color: $white;
+          }
+        }
+
+        .dense-line {
+          line-height: 16px;
+
+          @include bp(m) {
+            line-height: 18px;
+          }
+
+          @include bp(l) {
+            line-height: 20px;
+          }
+
+        }
+      }
+    }
+  }
+
+
+
+}

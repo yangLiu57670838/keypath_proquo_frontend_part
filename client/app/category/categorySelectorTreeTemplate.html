@@ -1,0 +1,25 @@
+<div class="ng-expand-collapse-container skills-by-category-container">
+  <div class="ng-ec-section"
+       ng-class="{ 'is-expanded' : vm.showSection[$index] }"
+       ng-repeat="section in vm.categorySkills track by $index">
+    <div class="ng-ec-title" ng-click="vm.showSection[$index] = ! vm.showSection[$index]; vm.updateShowSection();">
+      {{section.name}} ({{section.children.length}})
+      <a href="" class="ng-ec-trigger" >
+        <i class="material-icons icon">chevron_right</i>
+      </a>
+    </div>
+    <div class="ng-ec-subsection ng-anim-slide-down"
+         ng-show="vm.showSection[$index]"
+         ng-if="section.children.length != 0">
+      <div ng-if="vm.config.skilltype === 'skillsRequired' || vm.config.skilltype === 'skillsOffered'">
+        <div ng-repeat="subsection in section.children track by $index" class="custom-chip"
+             ng-class="{'is-active' : vm.checkActive(subsection)}"
+             data-value="{{subsection.name}}" ng-click="vm.toggleSkillChosen($event, subsection)">
+            <span>{{subsection.name}}</span>
+            <div class="icon icon-remove"></div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

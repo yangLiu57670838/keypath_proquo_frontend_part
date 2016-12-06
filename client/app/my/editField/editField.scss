@@ -1,0 +1,64 @@
+.edit-field{
+  position:relative;
+
+  md-input-container{
+    margin:0;
+    .md-errors-spacer{
+      min-height:0;
+    }
+  }
+  textarea{
+    padding-right:75px;
+  }
+  input{
+    margin-right:20px;
+    padding-right:85px;
+  }
+  .edit-functions{
+    position:absolute;
+    right: 10px;
+    top:10px;
+    ul{
+      list-style:none;
+      li{
+        padding-left:0 !important;
+        display: inline;
+        a{
+          padding: 10px 13px;
+        }
+        .icon-tick{
+          font-size:14px;
+        }
+        .icon-close{
+          font-size:14px;
+        }
+      }
+    }
+
+  }
+
+  .md-fab.md-mini{
+    background: transparent;
+    box-shadow:none;
+    position:absolute;
+    bottom: -18px;
+    &:hover{
+      background:$dd-bg-grey;
+    }
+    i{
+      color:$dd-light-grey;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6{
+    display: inline-block;
+  }
+
+  .icon-tick, .icon-close{
+    cursor:pointer;
+  }
+
+  .edit-container{
+    position:relative;
+  }
+}

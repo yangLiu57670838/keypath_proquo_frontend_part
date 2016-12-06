@@ -1,0 +1,43 @@
+<div>
+  <h5 class="md-title section-title no-margin-top itdb-list-heading">Your Offers</h5>
+  <div class="invites-list" ng-if="vm.itdbList.length>0">
+
+    <div>
+      <paginator ng-if="vm.pagingOptions.totalRecord != 0" options="vm.pagingOptions" goto-page-callback="vm.changePage(pageNum)"></paginator>
+
+      <section>
+        <div class="sent-invites">Sent</div>
+        <div id="anchor{{ itdb._id }}" ng-if="vm.itdbList.length && itdb.userId === vm.currentUser._id" ng-repeat="itdb in vm.itdbList">
+          <collapsible-card  card-id="{{itdb._id}}" anchor-project-id="{{vm.itdbIdToOpen}}" expand-card="{{($first && vm.itdbIdToOpen === '') || vm.itdbIdToOpen === itdb._id}}">
+            <collapsible-card-header>
+              <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+                <h6 flex>{{itdb.brief.workTitle}}</h6>
+              </div>
+            </collapsible-card-header>
+            <collapsible-card-body>
+              <invitation-to-do-business model="itdb" on-delete="vm.refresh()" ></invitation-to-do-business>
+            </collapsible-card-body>
+          </collapsible-card>
+        </div>
+      </section>
+
+      <section>
+        <div class="received-invites">Received</div>
+        <div id="anchor{{ itdb._id }}" ng-if="itdb.userId != vm.currentUser._id" ng-repeat="itdb in vm.itdbList">
+          <collapsible-card  card-id="{{itdb._id}}" anchor-project-id="{{vm.itdbIdToOpen}}" expand-card="{{($first && vm.itdbIdToOpen === '') || vm.itdbIdToOpen === itdb._id}}">
+            <collapsible-card-header>
+              <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+                <h6 flex>{{itdb.brief.workTitle}}</h6>
+              </div>
+            </collapsible-card-header>
+            <collapsible-card-body>
+              <invitation-to-do-business model="itdb" on-delete="vm.itdbDeleted()" ></invitation-to-do-business>
+            </collapsible-card-body>
+          </collapsible-card>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <div ng-show="vm.itdbList.length===0">No offers created</div>
+</div>

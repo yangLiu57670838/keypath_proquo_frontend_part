@@ -1,0 +1,371 @@
+<!--
+title: Profile page
+layoutClass: l-one-column l-bg-grey
+-->
+
+<div class="l-layout l-one-column l-bg-grey cf">
+  <div class="content-container l-padding cf ">
+    <!-- START .content-column -->
+    <div class="content-column">
+
+      <!-- START .main -->
+      <div id="main" tabindex="-1" role="main" class="main profile-container">
+
+        <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+          <h2 class="heading">Profile</h2>
+        </div>
+
+
+
+
+        <!-- PROFILE SUMMARY -->
+
+        <div class="profile-section profile-summary">
+
+          <div layout="column" layout-align="start center" layout-gt-xs="row" layout-align-gt-xs="center start"
+               layout-padding>
+
+            <div layout="column" layout-align="start center" flex="100" flex-gt-xs="30" layout-padding>
+              <div class="profile-photo-container">
+                <profile-photo profile="profileCtrl.business"/>
+              </div>
+
+              <div class="accepts">
+                <div layout="row" layout-align="center center" class="acceptance"
+                     ng-show="profileCtrl.business.acceptsCash || profileCtrl.business.acceptsSwaps">
+                  {{::profileCtrl.business.primaryContactFirstName}} accepts:
+                </div>
+
+                <div layout="row">
+                  <div class="transactions" ng-show="profileCtrl.business.acceptsCash">
+                    <i class="icon icon-dollar"></i>
+
+                    <div class="text">Pay</div>
+                  </div>
+                  <div class="transactions" ng-show="profileCtrl.business.acceptsSwaps">
+                    <i class="icon icon-swap"></i>
+
+                    <div class="text">Swap</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div flex="100" flex-gt-xs="70">
+
+
+
+              <div layout="column" layout-gt-md="row" layout-padding layout-align-gt-md="space-around start">
+
+
+                <div layout="column" flex>
+
+                  <h2 class="summary-title no-margin">{{profileCtrl.business.primaryContactFirstName || 'No name provided'}}
+                    {{profileCtrl.business.primaryContactLastName}}</h2>
+
+
+
+
+                  <div class="experience">
+                    <div>
+                      <span ng-if="!profileCtrl.businessUrl" class="nowrap">{{profileCtrl.business.name}}</span>
+                      <a ng-click="profileCtrl.openBusinessUrlIfLoggedIn($event)" target="_blank"
+                         ng-if="profileCtrl.businessUrl" class="business-name nowrap">{{profileCtrl.business.name}}</a>,
+                      <span class="nowrap">{{profileCtrl.business.suburb || 'Location not provided'}}, </span>
+                      {{profileCtrl.business.postCode}}
+                    </div>
+                    <div class="geo-distance">{{profileCtrl.distanceAway || ''}}</div>
+                  </div>
+
+
+
+                  <list-reveal  minheight="100" ng-if="profileCtrl.business">
+                    <p class="text-area">{{profileCtrl.business.description || 'No description of business provided'}}</p>
+                  </list-reveal>
+
+                  <div class="verified">
+                    <ul>
+                      <li ng-show="profileCtrl.business.abnVerified">
+                        <span><i class="icon icon-tick-circle"></i><span class="text">ABN CHECKED</span></span>
+                      </li>
+                      <li ng-show="!profileCtrl.business.abnVerified">
+                        <span><span class="text">ABN NOT CHECKED</span></span>
+                      </li>
+                      <li ng-show="profileCtrl.business.qualifications.length>0">
+                                <span>
+                                  <md-menu md-offset="0 20">
+                                    <span aria-label="Open demo menu" class="md-icon-button"
+                                          ng-click="$mdOpenMenu($event)">
+                                      <i class="icon icon-tick-circle"></i> QUALIFICATIONS & MEMBERSHIPS ({{profileCtrl.business.qualifications.length}})
+                                    </span>
+                                    <md-menu-content width="6" class="qualification-content">
+                                      <div class="arrow"></div>
+                                      <md-menu-item ng-repeat="qualification in profileCtrl.business.qualifications">
+                                        <div>
+                                          <span class="notification-heading">{{qualification.name}}</span> <br/>
+                                          <span class="notification-date">{{qualification.fromDate  | date : 'MMMM, yyyy' : timezone}}</span>
+                                          <span class="notification-date" ng-show="qualification.endDate"> - {{qualification.endDate  | date : 'MMMM, yyyy' : timezone}}</span>
+                                          <span class="notification-date"
+                                                ng-show="!qualification.endDate"> to present</span>
+                                        </div>
+
+                                      </md-menu-item>
+                                    </md-menu-content>
+                                  </md-menu>
+                                </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+                <div layout="column">
+
+
+                  <div layout="column" layout-align="center start">
+
+
+                    <div class="profile-social-links">
+                      <a id="socialUrl_$index" ng-repeat="social in profileCtrl.business.socialUrls"
+                         ng-click="profileCtrl.openSocialUrlIfLoggedIn($event, social)" aria-label="{{social.urlIconImage}}"
+                         class="md-button btn-social">
+                        <i class="icon icon-{{social.urlIconImage}}"></i>
+                        <md-tooltip ng-if="social.urlDescription">
+                          {{social.urlDescription}}
+                        </md-tooltip>
+                      </a>
+                    </div>
+                    <a ng-if="profileCtrl.myProfile" ui-sref="profileEdit" class="btn md-raised md-primary-cta">Edit Profile</a>
+                    <div class="experience">
+                      <div class="bolder">Average rating</div>
+                      <star-rating data-rating-disabled="true" rating="profileCtrl.business.averageReviewRating">
+                      </star-rating>
+                    </div>
+                    <div class="experience">
+                      <div class="bolder">Industry experience</div>
+                      <div class="exp-value">{{profileCtrl.displayExp}}</div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div layout="column" layout-gt-md="row" layout-padding layout-margin ng-show="profileCtrl.business && !profileCtrl.myProfile">
+                <div flex flex-lg="50">
+                  <md-button aria-label="chat" class="btn md-raised message-btn" ng-click="profileCtrl.showChatModal($event)">
+                    Message
+                  </md-button>
+                </div>
+                <div flex flex-lg="50">
+                  <md-menu md-offset="200 50" class="assign-project">
+                    <md-button class="btn md-raised message-btn md-primary-cta" ng-click="profileCtrl.openMenu($mdOpenMenu, $event);">
+                      Show an Offer <md-icon class="material-icons arrow-drop assign-btn-icon">arrow_drop_down</md-icon>
+                    </md-button>
+                    <md-menu-content width="3" class="assign-content">
+                      <div class="arrow-up"></div>
+                      <md-menu-item ng-repeat="proquote in profileCtrl.myProquotes">
+                        <md-button ng-disabled="proquote.alreadyAssigned" ng-click="profileCtrl.assignProject(proquote)">
+                          <div layout="row" layout-align="space-between center">
+                            <div flex="95" class="menu-item-label">{{proquote.brief.workTitle}}</div>
+                            <md-icon flex="5" class="material-icons">navigate_next</md-icon>
+                          </div>
+                        </md-button>
+                      </md-menu-item>
+                      <md-menu-item ng-if="!profileCtrl.myProquotes.length">
+                        <div class="assign-no-project">You currently have<br> no projects</div>
+                      </md-menu-item>
+                      <md-menu-divider class="assign-divider"></md-menu-divider>
+                      <md-menu-item class="assign-new-project">
+                        <md-button>
+                          <div layout="row" layout-align="space-between center" ui-sref="briefCreate({engageWith: profileCtrl.profileId, proquote: true})">
+                            <div flex="95" class="menu-item-label">Get Going!</div>
+                            <md-icon flex="5" class="material-icons assign-new-project-icon">add_circle</md-icon>
+                          </div>
+                        </md-button>
+                      </md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+                </div>
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+        <!-- SKILLS INFO  -->
+
+        <div class="profile-section profile-skills-container">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab>
+              <md-tab-label>
+                <h2 class="heading">
+                  Skills offered
+                </h2>
+              </md-tab-label>
+              <md-tab-body>
+                <div ng-if="profileCtrl.business.offers && profileCtrl.business.offers.length > 0" class="skills">
+                  <div class="custom-chip is-active" ng-repeat="skill in profileCtrl.business.offers">{{skill.name}}</div>
+                </div>
+                <div class="skills" ng-if="!profileCtrl.business.offers || profileCtrl.business.offers.length == 0">
+                  <div class="profile-entry-missing" layout="column" layout-align="center center">
+                    <h6>{{::profileCtrl.business.primaryContactFirstName}} is not providing any services at this time</h6>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+            <md-tab>
+              <md-tab-label>
+                <h2 class="heading">
+                  Things I can swap
+                </h2>
+              </md-tab-label>
+              <md-tab-body>
+                <div ng-if="profileCtrl.business.thingsICanSwap && profileCtrl.business.thingsICanSwap.length > 0" class="skills">
+                  <div class="custom-chip is-active" ng-repeat=" swapItem in profileCtrl.business.thingsICanSwap">{{swapItem}}</div>
+                </div>
+                <div class="skills" ng-if="!profileCtrl.business.thingsICanSwap || profileCtrl.business.thingsICanSwap.length == 0">
+                  <div class="profile-entry-missing" layout="column" layout-align="center center">
+                    <h6>{{::profileCtrl.business.primaryContactFirstName}} has nothing available for swap at this time</h6>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+            <md-tab>
+              <md-tab-label>
+                <h2 class="heading">
+                  Skills needed
+                </h2>
+              </md-tab-label>
+              <md-tab-body>
+                <div ng-if="profileCtrl.business.needs && profileCtrl.business.needs.length > 0" class="skills">
+                  <div class="custom-chip is-active" ng-repeat="skill in profileCtrl.business.needs">{{skill.name}}</div>
+                </div>
+                <div class="skills" ng-if="!profileCtrl.business.needs || profileCtrl.business.needs.length == 0">
+                  <div class="profile-entry-missing" layout="column" layout-align="center center">
+                    <h6>{{::profileCtrl.business.primaryContactFirstName}} has not registered any needs yet</h6>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+
+
+          </md-tabs>
+        </div>
+
+        <!--portfolio-->
+        <div class="profile-section portfolio" ng-if="profileCtrl.business.portfolio && profileCtrl.business.portfolio.length > 0">
+          <h2 class="heading">Portfolio</h2>
+
+          <div class="portfolio-images" id="portfolio">
+            <div ng-repeat="item in profileCtrl.business.portfolio"
+                 ng-click="profileCtrl.showEnlargedImg($event, item)"
+                 class="portfolio-image-wrapper" layout="row" layout-align="center center">
+              <div class="portfolio-img-container">
+                <img src={{item.thumbnailImageUrl}} alt="" class="portfolio-img">
+              </div>
+              <span class="item-info">
+                <span class="portfolio-text">
+                  <span class="heading">{{item.name}}</span><br/>
+                  <span class="description">{{item.description}}</span>
+                </span>
+                <span class="view-portfolio">
+                  VIEW
+                </span>
+              </span>
+            </div>
+          </div>
+
+
+          <div ng-if="!profileCtrl.business.portfolio || profileCtrl.business.portfolio.length == 0">
+            <div class="profile-entry-missing" layout="column" layout-align="center center" layout-padding>
+              <h6>{{::profileCtrl.business.primaryContactFirstName}} does not have any items added to their portfolio</h6>
+            </div>
+          </div>
+
+        </div>
+
+        <!--COMMUNITY REVIEWS SECTION-->
+
+        <div class="profile-section profile-messages community-reviews">
+
+          <div layout="column" layout="center start" layout-gt-sm="row" layout-align-gt-sm="space-between center">
+            <h2 ng-if="profileCtrl.numberOfReviews > 0" class="heading">Community reviews ({{profileCtrl.numberOfReviews}})</h2>
+            <h2 ng-if="profileCtrl.numberOfReviews < 1" class="heading">Community reviews</h2>
+
+            <div>
+              <div layout="row" layout-align="start center" layout-align-gt-sm="end center" class="average-rating">
+                <div class="heading">
+                  <span class="rating-heading">Average rating</span>
+                </div>
+                <div class="star-rating-container">
+                  <star-rating data-rating-disabled="true"
+                               rating="profileCtrl.business.averageReviewRating"></star-rating>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- REVIEWS SECTION -->
+
+          <section layout="column">
+            <div ng-repeat="ratingProfile in profileCtrl.ratings" layout="column" layout-gt-xs="row"
+                 layout-align-gt-xs="space-between start" class="profile-message" layout-padding
+                 ng-class="{'margin-top' : !$first}">
+
+              <div layout="row" layout-align-xs="space-between start" layout-padding>
+                <profile-photo profile="ratingProfile.reviewerInfo"></profile-photo>
+
+                <div ng-if="ratingProfile.reviewerInfo.userName" layout="column">
+                  <div class="message-author">
+                    {{ratingProfile.reviewerInfo.userName}}<span hide-sm hide-xs>, </span>
+                    <span class="message-business">{{ratingProfile.reviewerInfo.name}}</span>
+                  </div>
+                  <div class="message-datetime">{{ratingProfile.updatedAt | date}}</div>
+                  <div>
+                    <list-reveal  minheight="100">
+                      <p>{{ratingProfile.reviewText || 'No review created'}}</p>
+                    </list-reveal>
+                  </div>
+                </div>
+              </div>
+
+              <div layout="row" layout-align="space-between center" layout-gt-xs="column"
+                   layout-align-gt-xs="center end" layout-padding class="padding-right-no star-rating-col">
+                <star-rating data-rating-disabled="true" rating="ratingProfile.rating" class="padding-right-no"></star-rating>
+                <div>
+                  <a ng-if="ratingProfile.userId != profileCtrl.currentPerson._id"
+                     href="mailto:support@proquo.com.au"><i class="material-icons">flag</i> Report</a>
+                  <a ng-if="ratingProfile.userId == profileCtrl.currentPerson._id"
+                     ng-click="profileCtrl.editMyRating(ratingProfile)"><i class="material-icons">mode edit</i> Edit</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div ng-if="profileCtrl.numberOfReviews  < 1" class="profile-section profile-message">
+            <div class="profile-entry-missing" layout="column" layout-align="center center">
+              <h6>{{::profileCtrl.business.primaryContactFirstName}} has not been reviewed yet</h6>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <!-- END .main -->
+
+    </div>
+    <!-- END .content-column -->
+
+  </div>
+</div>

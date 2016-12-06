@@ -1,0 +1,26 @@
+<div layout="row" class="notification-record-row" ng-class="{checked : vm.viewModel.checked, unchecked: !vm.viewModel.checked}" layout-wrap>
+  <div flex-xs="50" flex-gt-xs="30" flex-gt-md="20" flex-order="1" flex-order-xs="1"
+       class="profile-dropdown head-section">
+    <div class="profile-dropDown-btn">
+      <a ng-if="vm.viewModel.head.businessId" ui-sref="profile({profileId: vm.viewModel.head.businessId})">
+        <profile-photo profile="vm.viewModel.head"/>
+      </a>
+    </div>
+  </div>
+  <div flex flex-xs="100" flex-order="2" flex-order-xs="3" layout="column" class="content-section" ng-click="vm.clickNotification()" layout-padding>
+    <div style="font-weight: bold;" ng-bind-html="vm.viewModel.content.subject"></div>
+    <!-- ng-if used below rather than ng-class to avoid prod build problems arising from ng-class="vm.viewModel.isChat ? 'message-chat' : ''" -->
+    <div ng-if="vm.viewModel.isChat" class="message-text message-chat" ng-bind-html="vm.viewModel.content.body"></div>
+    <div ng-if="vm.viewModel.isNotification" class="message-text" ng-bind-html="vm.viewModel.content.body"></div>
+  </div>
+  <div flex-xs="40" flex="20" flex-order="3" flex-order-xs="2" layout="column" layout-align="center center"
+       class="tail-section" >
+    <div class="updated-date">
+      {{ vm.viewModel.tail.date | relativedate }}
+    </div>
+    <div layout-align="center center" class="rounded-message-count md-primary-default-theme"
+         ng-if="vm.viewModel.isChat && vm.viewModel.tail.iconValue > 0">
+      <div>{{ vm.viewModel.tail.iconValue }}</div>
+    </div>
+  </div>
+</div>

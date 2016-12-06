@@ -1,0 +1,41 @@
+<div class="l-layout l-one-column cf l-bg-grey notifications-history">
+  <div class="content-container l-padding cf l-content-padding">
+    <div layout="row">
+      <div flex="25" hide-sm="true" hide-md="true" hide-xs="true">
+
+      </div>
+      <div flex>
+        <md-content style="overflow: hidden">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab  ui-sref="notifications" md-active="vm.activeTab == 'notifications'">
+              <md-tab-label>
+                <span class="notifications-tab-label">Notifications</span>
+              </md-tab-label>
+              <md-tab-body>
+                <div class="md-3-line" ng-repeat="viewModel in vm.notificationViewModels track by $index">
+                  <div notification-record-row data-view-model="viewModel" data-user="vm.user" flex="100"
+                       class="record-list"></div>
+                  <md-divider ng-if="!$last"></md-divider>
+                </div>
+              </md-tab-body>
+            </md-tab>
+            <md-tab ui-sref="chats" md-active="vm.activeTab == 'chats'">
+              <md-tab-label>
+                <span class="notifications-tab-label">Chats</span>
+              </md-tab-label>
+              <md-tab-body >
+                <div class="md-3-line" ng-repeat="viewModel in vm.chatViewModels track by $index">
+                  <div notification-record-row data-view-model="viewModel" data-user="vm.user" flex="100"
+                       class="record-list"></div>
+                  <md-divider ng-if="!$last"></md-divider>
+                </div>
+                </md-tab-body>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+        <paginator ng-if="vm.activeTab === 'notifications' && vm.notificationsPagingOptions.totalRecord > 0" options="vm.notificationsPagingOptions" goto-page-callback="vm.changeNotificationsPage(pageNum)"></paginator>
+        <paginator ng-if="vm.activeTab === 'chats' && vm.chatsPagingOptions.totalRecord > 0" options="vm.chatsPagingOptions" goto-page-callback="vm.changeChatsPage(pageNum)"></paginator>
+      </div>
+    </div>
+  </div>
+</div>

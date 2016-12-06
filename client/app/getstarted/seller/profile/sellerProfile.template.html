@@ -1,0 +1,122 @@
+<form name="profileForm">
+
+  <div layout="column" class="form profile margin-bottom-10">
+    <div layout="row" layout-align="center middle">
+      <h4>Your Business</h4>
+    </div>
+
+    <div layout="column" layout-gt-sm="row" layout-align-gt-sm="space-between middle">
+      <div class="profile-left-top md-padding" flex="100" flex-gt-sm="55" flex-order="3" flex-order-gt-sm="1">
+        <!-- Pay/Swap Pay field -->
+        <div id="profile-service-selection">
+          <h5 class="md-title">I accept:</h5>
+          <md-input-container layout="row" layout-align="start middle">
+            <md-checkbox ng-model="vm.business.acceptsCash">
+              <img class="pay-swap-icon" src="assets/images/icon_pay.png"/>
+              <span class="pay-swap-icon-label">Pay</span>
+            </md-checkbox>
+            <md-checkbox ng-model="vm.business.acceptsSwaps">
+              <img class="pay-swap-icon" src="assets/images/icon_payswap.png"/>
+              <span class="pay-swap-icon-label">Swap + Pay</span>
+            </md-checkbox>
+          </md-input-container>
+          <div class="denote md-padding">When you agree to swap, both parties agree to provide services and goods to each other which is a useful way for small business to save money.</div>
+        </div>
+        <!-- Business name field -->
+        <div id="profile-business">
+          <h5 class="md-title">Business<i class="icon-asterisk"></i></h5>
+          <md-input-container md-no-float>
+            <input placeholder="Business name" required aria-label="business name" name="businessName" ng-model="vm.business.name" maxlength="45"/>
+            <div ng-messages="profileForm.businessName.$error" role="alert" md-auto-hide="false" ng-show="profileForm.businessName.$touched || !vm.profileFormValid">
+              <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+        </div>
+        <!-- ABN field -->
+        <div id="profile-abn" class="abn" layout-align="space-between start" flex="91">
+          <h5 class="md-title">ABN<i class="icon-asterisk"></i></h5>
+          <md-input-container md-no-float>
+            <input placeholder="ABN" aria-label="abn" ng-model="vm.business.abn" name="abn" abn required />
+            <md-icon ng-show="profileForm.abn.$modelValue.length > 0 && !serverErrors.abn" class="icon icon-tick-circle abn-icon-verified"></md-icon>
+            <div ng-messages="profileForm.abn.$error" role="alert" md-auto-hide="false" ng-show="profileForm.abn.$touched || !vm.profileFormValid">
+              <div ng-message="required">This is required</div>
+              <div ng-message="abn">Invalid ABN - please check if you have typed it correctly.</div>
+            </div>
+            <div ng-show="serverErrors.abn || !vm.profileFormValid" role="alert" ng-messages="serverErrors.abn">
+              <div ng-message="message">{{serverErrors.abn.message}}</div>
+            </div>
+          </md-input-container>
+          <div>
+            Can't remember your ABN? <a href="http://abr.business.gov.au/" target="_blank">Check the Australian Business Registry</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- profile field -->
+      <div id="profile-right-top" flex="100" flex-gt-sm="45" flex-order="1" flex-order-gt-sm="3" class="md-padding">
+        <h5 class="md-title">Profile photo</h5>
+        <p style="white-space: nowrap;">Click '+photo' or '+logo' to add profile avatars</p>
+        <div flex-gt-sm="100" layout-align="start center" class="padding-right avatar-container">
+          <profile-photo ng-if="vm.business" profile="vm.business" upload-image="vm.uploadAvatar"></profile-photo>
+          <i ng-show="vm.business.primaryContactAvatarUrl && vm.business.primaryContactAvatarUrl.length>0"
+             ng-click="vm.deleteAvatar('avatar')" class="delete-avatar icon icon-remove" ></i>
+          <i ng-show="vm.business.businessLogoUrl && vm.business.businessLogoUrl.length>0"
+             ng-click="vm.deleteAvatar('logo')" class="delete-logo icon icon-remove"></i>
+          <a class="avatar" ng-click="vm.uploadAvatar('avatar')">
+            <span ng-show="!vm.business.primaryContactAvatarUrl">+ photo</span>
+            <span ng-show="vm.business.primaryContactAvatarUrl">Change</span>
+          </a>
+          <a class="logo" ng-click="vm.uploadAvatar('logo')">
+            <span ng-show="!vm.business.businessLogoUrl">+ logo</span>
+            <span ng-show="vm.business.businessLogoUrl">Change</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Your business field -->
+    <div class="profile-business-desc md-padding">
+      <h5 class="md-title">Your Business</h5>
+      <md-input-container md-no-float flex class="md-block">
+        <textarea placeholder="What do you do?" aria-label="What do you do" ng-model="vm.business.description"
+                  md-maxlength="2500" rows="3" md-select-on-focus></textarea>
+      </md-input-container>
+    </div>
+
+    <!-- Portfolio field-->
+    <div class="md-padding">
+      <h5 class="md-title">Portfolio</h5>
+      <div layout="row" class="portfolio">
+        <div flex>
+          <div class="portfolio-images" id="portfolio">
+            <p ng-show="vm.business.portfolio.length == 0">
+              What are some highlights or accomplishments you'd like others to know about?
+            </p>
+            <div ng-repeat="item in vm.business.portfolio"
+                 class="portfolio-image-wrapper" layout="row" layout-align="center center">
+              <div class="portfolio-img-container">
+                <img src={{item.thumbnailImageUrl}} class="portfolio-img" alt="Portfolio"  >
+              </div>
+              <div class="item-info">
+                <div class="portfolio-text">
+                  <span class="heading heading-portfolio-img ellipsis-txt nowrap">{{item.name}}</span>
+                </div>
+                <div layout="row" layout-align="space-around center">
+                  <span class="view-portfolio" ng-click="vm.showEnlargedImg(item, $index)">EDIT</span>
+                  <span class="view-portfolio" ng-click="vm.deleteImgPrompt(item)">DELETE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="media-btn-container" layout="row" layout-align="end stretch">
+          <div class="upload-media"  layout="column" layout-align="center center"
+               ng-click="vm.uploadImage()">
+            <i class="icon icon-pencil"></i>
+            <div id="reviews">Add Media</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,49 @@
+.my-popup {
+
+  .edit-qualifications {
+
+    .icon-close {
+      cursor: pointer;
+    }
+
+    .qualification {
+      background: $dd-lightest-grey;
+      margin-bottom: 5px;
+      .date-picker input {
+        display: none;
+      }
+
+      .date-picker-container {
+        white-space: nowrap;
+        md-input-container {
+          display: none;
+        }
+      }
+      button {
+        width: 70px;
+      }
+      .chosen-date, mdp-date-picker {
+        display: inline-block;
+      }
+      mdp-date-picker .md-button.md-icon-button {
+        width: 55px;
+        margin: 0;
+      }
+      .qual-input {
+        margin-bottom: 0;
+      }
+
+      .chosen-date {
+        min-width: 125px;
+        .icon-remove {
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
+}
+
+.mdp-datepicker.portrait{
+  max-width: 100% !important;
+}

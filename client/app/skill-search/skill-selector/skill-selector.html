@@ -1,0 +1,32 @@
+<md-whiteframe class="skill-selector padding-gt-xs-20 top-bar" ng-class="::vm.theme" layout="column">
+
+
+  <div layout="row" layout-align="center">
+    <h5 ng-if="vm.skillType == 'skillsRequired'">What skills are you looking for?<i class="icon-asterisk"></i></h5>
+    <h5 ng-if="vm.skillType == 'skillsOffered'">What skills can you offer?<i class="icon-asterisk"></i></h5>
+  </div>
+
+  <div class="section" layout="row" layout-align="center none">
+    <md-button class="category-button {{::vm.theme}}" ng-class="$index === vm.activeTopCategoryIndex ? 'category-button-active' : 'category-button-inactive'"
+               ng-click="vm.selectTopCategory($index)" ng-repeat="category in vm.topCategories">
+      <div layout="column" layout-align="center center">
+        <md-icon class="category-icon icon-inactive" md-svg-src="{{::category.inactiveIcon}}"></md-icon>
+        <md-icon class="category-icon icon-active" md-svg-src="{{::category.activeIcon}}"></md-icon>
+        <div class="heading">{{::category.name}}</div>
+      </div>
+    </md-button>
+  </div>
+
+  <div layout="column" layout-gt-xs="row" class="margin-left-gt-xs-10 skills-chooser">
+    <div flex flex-gt-xs="50">
+      <category-generic-selector class="skills-selector-wrapper" options="vm.skillSelectorOptions" search-box-data="vm.activeCategories"
+                                 select-callback="vm.updateSelectedSkills(categories)"></category-generic-selector>
+    </div>
+    <div flex-offset-gt-xs="10">
+      <suggested-skills category-id="vm.activeCategoryId" category-skills="vm.activeCategories" selected-skills="vm.selectedSkills"
+                        skill-select-callback="vm.selectSkillFromSuggestedList(selectedSkill)"></suggested-skills>
+    </div>
+  </div>
+
+
+</md-whiteframe>

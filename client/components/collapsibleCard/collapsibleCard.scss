@@ -1,0 +1,86 @@
+.collapsibleCard {
+  margin: 15px 2px 15px 2px;
+  @include bp-max(s){
+    margin: 0;
+    border-top:1px solid rgba(0,0,0,0.12);
+  }
+  background-color: #fff;
+  outline: none;
+
+  @include bp(s){
+    @include card-box-shadow();
+  }
+
+
+
+
+  .summary {
+    padding: 15px;
+    @include bp-max(xs){
+      padding: 15px 0 15px 0;
+    }
+    outline: none;
+    cursor:pointer;
+  }
+
+  .show-details {
+    outline: none;
+  }
+
+  .text-align-right {
+    text-align: right;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+
+  .padding-label {
+    padding-top: 10px;
+  }
+
+  .section-button {
+    padding-right: 10px !important;
+    border-top: 1px solid #cfcecf;
+    padding-top: 10px;
+  }
+
+  .arrow-drop{
+    @include font-size(30, 30);
+    position:relative;
+    .icon{
+      &.icon-pointer-right{
+        transform: rotate(0deg);
+        transition:0.2s;
+        position: absolute;
+        font-size: $base-font-size;
+        @include font-size($h6-font-size, 18);
+        top: 8px;
+        right: 5px;
+        color:$dd-black;
+        &.active{
+          transform: rotate(90deg);
+          transition:0.2s;
+        }
+      }
+
+    }
+  }
+  .collapsible-card-body{
+    width: 100%;
+  }
+
+  .inactive{
+    max-height:0px;
+    transition:0.3s;
+    overflow: hidden;
+  }
+  .active{
+    max-height:2000px !important;
+    transition:0.6s;
+    overflow: hidden;
+  }
+
+
+}

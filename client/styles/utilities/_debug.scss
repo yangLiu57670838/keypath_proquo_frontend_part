@@ -1,0 +1,48 @@
+/* =============================================================================
+	- DEBUG
+	========================================================================== */
+
+@if $IS_DEBUG == true {
+	body:after {
+		color: #000;
+		background-color: #fff;
+		opacity: 0.5;
+		font-size: 10px;
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 9999999;
+		padding: 0 5px;
+		font-family: monospace;
+		content: "none";
+
+		@include bp(xxs) {
+			content: "xxsmall";
+		}
+
+		@include bp(xs) {
+			content: "xsmall";
+		}
+
+		@include bp(s) {
+			content: "small";
+		}
+
+		@include bp(m) {
+			content: "medium";
+		}
+
+		@include bp(l) {
+			content: "large";
+		}
+
+		@include bp(xl) {
+			content: "xlarge";
+		}
+
+		@include bp(xxl) {
+			content: "xxlarge";
+		}
+	}
+}

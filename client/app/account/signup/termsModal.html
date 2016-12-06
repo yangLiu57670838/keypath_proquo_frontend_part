@@ -1,0 +1,17 @@
+<md-dialog aria-label="Terms" class="terms-modal full-screen-on-mobile">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div flex>
+        <h2 class="heading">
+          Terms and conditions
+        </h2>
+      </div>
+      <md-button class="md-icon-button" ng-click="tc.close()">
+        <md-icon aria-label="Close terms" class=" icon icon-remove"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout="column" layout-padding>
+    <div ng-include="'app/terms/terms/terms.html'"></div>
+  </md-dialog-content>
+</md-dialog>

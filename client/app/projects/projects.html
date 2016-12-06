@@ -1,0 +1,77 @@
+<div class="l-layout l-one-column cf l-bg-grey" id="projects">
+  <div class="content-container l-padding cf l-content-padding projects">
+    <div layout="row">
+
+      <!-- SIDE PANEL -->
+
+      <div flex="25" hide-sm="true" hide-md="true" hide-xs="true">
+        <div class="side-panel" layout="column" layout-align="end center" layout-margin>
+
+          <div class="have-say" layout="column" layout-align="end center" >
+            <div class="txt-holder">
+              <div layout="column" layout-align="center center" layout-padding>
+                <h4 class="no-margin">How are we doing?</h4>
+                <p class="no-margin">
+                  We would love to know what you think of the experience so far
+                </p>
+
+              </div>
+              <div ng-click="vm.showFeedbackModal()" class="have-say-call"><h6 class="no-margin">HAVE YOUR SAY</h6></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div flex >
+
+        <div class="section-no-projects" ng-show="vm.noProjectsOrInvites">
+          <md-button class="btn md-primary-cta md-raised btn-get-started" ui-sref="skill-search">Get started now</md-button>
+          <div layout="column" layout-align="start" class="section-no-projects-guide" ng-repeat="projectGuideStep in vm.projectGuideSteps">
+              <div layout-gt-sm="row" layout-align="center"><h4>{{projectGuideStep.phase}}</h4></div>
+              <div layout-gt-sm="row" layout-align="center center" class="connect-line"></div>
+              <div layout-gt-sm="row" layout-align="space-around start" class="phase-step-row">
+                <div ng-repeat="phaseStep in projectGuideStep.steps">
+                  <div class="phase-step-heading" layout-align="center center"><div class="text">Step {{phaseStep.step}}</div></div>
+                  <div class="phase-step-img-container"><div class="phase-step-img img-{{phaseStep.step}}">&nbsp;</div></div>
+                  <div class="project-guide-desc" layout-align="start start"><div class="text">{{phaseStep.description}}</div></div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="!vm.noProjectsOrInvites">
+
+          <!-- ITDB -->
+          <div class="section-invites">
+            <itdb-list></itdb-list>
+          </div>
+
+          <!-- PROJECTS / PROQUOTES -->
+          <div class="section-projects">
+            <h5 class="md-title section-title">Pending Projects</h5>
+
+            <request-for-quotes-list status="{ $ne: 'complete' }" list-empty-callback="vm.pendingSectionEmpty(listEmpty, 'rfq')"></request-for-quotes-list>
+
+            <projects-list cache-key="projectListOptions.pending" filter="vm.pendingProjectFilter" show-empty-message="false" list-empty-callback="vm.pendingSectionEmpty(listEmpty, 'project')"></projects-list>
+
+            <div ng-show="!vm.isPendingSectionNonEmpty">No projects in this state</div>
+          </div>
+
+          <div class="section-projects">
+            <h5 class="md-title section-title">Current Projects</h5>
+
+            <projects-list cache-key="projectListOptions.current" filter="vm.currentProjectFilter"></projects-list>
+          </div>
+
+
+          <div class="section-projects">
+            <h5 class="md-title section-title">Completed Projects</h5>
+
+            <projects-list cache-key="projectListOptions.completed" filter="vm.completedProjectFilter"></projects-list>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

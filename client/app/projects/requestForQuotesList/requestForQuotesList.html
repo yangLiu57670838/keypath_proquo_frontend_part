@@ -1,0 +1,25 @@
+<div class="projects-list">
+  <div>
+    <paginator ng-if="vm.pagingOptions.totalRecord != 0" options="vm.pagingOptions" goto-page-callback="vm.changePage(pageNum)"></paginator>
+    <div id="anchor{{ rfq._id }}" ng-if="vm.requestForQuotes.length" ng-repeat="rfq in vm.requestForQuotes">
+      <collapsible-card card-id="{{ rfq._id }}" anchor-project-id="{{ vm.anchorRfqId }}" expand-card="{{($first && !vm.anchorRfqId) || vm.anchorRfqId == rfq._id}}">
+        <collapsible-card-header>
+          <div layout="column" layout-gt-xs="row" layout-align-gt-xs="start center">
+            <h6 >{{ rfq.brief.workTitle }}</h6>
+            <div layout="row" class="margin-top-ls-xs-10">
+              <div ng-if="rfq.validProjects.length > 0" class="margin-left-gt-xs-10">
+                <profile-photo class="profile-summary-photo" ng-class="{ 'profile-present': rfq.lastSupplier }" profile="rfq.lastSupplier"></profile-photo>
+              </div>
+              <div ng-if="rfq.validProjects.length > 1" class="circle project-num margin-left-5"  >
+                +{{rfq.validProjects.length - 1}}
+              </div>
+            </div>
+          </div>
+        </collapsible-card-header>
+        <collapsible-card-body>
+          <request-for-quote model="rfq" on-delete="vm.rfqDeleted()" initial-load="($first && vm.anchorRfqId == undefined) || vm.anchorRfqId == rfq._id"></request-for-quote>
+        </collapsible-card-body>
+      </collapsible-card>
+    </div>
+  </div>
+</div>

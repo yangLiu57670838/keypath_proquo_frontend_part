@@ -1,0 +1,57 @@
+.edit-portfolio{
+
+  .h2-title{
+    max-width:80%;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+  }
+
+  md-dialog-content,  .md-dialog-content{
+    padding:0 !important;
+  }
+
+  img{
+    width:100%;
+    object-fit: contain;
+    max-height: 600px;
+  }
+}
+
+.image-title.ellipsis-txt{
+  max-width:80%;
+}
+#edit-portfolio-dialog {
+  .md-fab.md-mini {
+    background: transparent;
+    box-shadow: none;
+    position: relative;
+    bottom: 0px;
+    &:hover {
+      background: $dd-bg-grey;
+    }
+    i {
+      color: $dd-light-grey;
+    }
+  }
+
+  .edit-functions {
+    position: absolute;
+    right: 10px;
+    top: 3px;
+    ul {
+      list-style: none;
+      li {
+        display: inline;
+        .icon-tick {
+          font-size: 14px;
+        }
+        .icon-close {
+          font-size: 12px;
+        }
+      }
+    }
+
+  }
+
+}

@@ -1,0 +1,36 @@
+<md-content layout="column"  class="md-padding" ng-show="vm.changePasswordEnabled">
+  <form name="form" ng-submit="vm.changePassword(form)" novalidate class="changepwd">
+
+    <div>
+      <label class="md-subhead">Change Password</label>
+    </div>
+
+    <div ng-show="vm.changePasswordResult && vm.changePasswordResult.successful" class="settings-msg-successful">Password is changed successfully.</div>
+    <div ng-show="vm.changePasswordResult && !vm.changePasswordResult.successful" class="settings-msg-failed">{{vm.changePasswordResult.errMsg}}</div>
+
+    <md-input-container class="settings-maxwidth">
+      <label>Old Password</label>
+      <input type="{{vm.showPassword?'text':'password'}}" name="oldPassword"  ng-model="vm.user.oldPassword" required/>
+      <div ng-messages="form.oldPassword.$error" role="alert" multiple>
+        <div ng-message="required" class="my-message">You must supply your current password.</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="settings-maxwidth">
+      <label>New Password</label>
+      <input type="{{vm.showPassword?'text':'password'}}" name="newPassword"  ng-model="vm.user.newPassword" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/" required />
+      <div ng-messages="form.newPassword.$error" role="alert" multiple>
+        <div ng-message-exp="['pattern','required']" class="my-message">Must be a minimum 6 characters, at least one number and a mix of upper and lower case characters.</div>
+      </div>
+    </md-input-container>
+
+    <div layout="row" layout-align="space-between" >
+      <md-checkbox ng-model="vm.showPassword"> Show password</md-checkbox>
+      <md-button class="btn md-raised md-primary-cta" type="submit">Submit</md-button>
+    </div>
+
+  </form>
+</md-content>
+
+
+

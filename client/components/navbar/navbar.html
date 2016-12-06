@@ -1,0 +1,152 @@
+<div class="nav-bar-wrapper">
+  <!-- MOBILE MENU -->
+  <nav-offscreen>
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+
+      <md-toolbar class="md-theme-light" >
+        <a href="" ng-click="navCtrl.close()" class="nav-toggle nav-toggle-open">
+          <span class="vh">Close Navigation</span>
+          <span class="icon icon-menu"></span>
+        </a>
+      </md-toolbar>
+
+      <md-content>
+
+          <md-list>
+
+            <div class="menu-items" ng-click="navCtrl.showLoginModal($event);close();">
+              <md-list-item  class="md-1-line" ng-hide="navCtrl.isLoggedIn">
+                <div><i class="icon icon-on-off"></i><span class="nav-title">Sign in</span></div>
+              </md-list-item>
+              <md-divider ></md-divider>
+            </div>
+            <div class="menu-items" ng-click="navCtrl.close()" ng-repeat="item in navCtrl.menu" ng-show="item.menuItemVisible && !item.hideOnSideMenu" >
+
+              <md-list-item ng-show="item.state != 'external'" ng-class="navCtrl.currentState.name == item.activeState ? 'side-active' : ''" class="md-1-line" ui-sref="{{item.state}}({{item.params}})">
+                <div><i class="icon {{item.icon}}"></i><span class="nav-title">{{item.title}}</span></div>
+              </md-list-item>
+
+              <md-list-item class="md-1-line" ng-show="item.url" >
+                <a href="{{item.url}}"  target="_blank">
+                 <span><i class="icon {{item.icon}}"></i><span class="nav-title">{{item.title}}</span></span>
+                </a>
+              </md-list-item>
+
+              <md-divider ></md-divider>
+            </div>
+            <!-- support -->
+            <div class="menu-items">
+              <md-list-item  class="md-1-line">
+                <a href="https://proquo.zendesk.com/hc/en-us" target="_blank">
+                 <span> <i class="icon icon-info"></i><span  class="nav-title">Support</span></span>
+                </a>
+              </md-list-item>
+              <md-divider ></md-divider>
+            </div>
+            <!-- sign out -->
+            <div class="menu-items" ng-click="navCtrl.logout(); navCtrl.close();">
+              <md-list-item  class="md-1-line" ng-show="navCtrl.isLoggedIn">
+                <div class="margin-left-5"><i class="icon icon-on-off"></i><span class="nav-title">Sign out</span></div>
+              </md-list-item>
+            </div>
+
+
+
+          </md-list>
+
+        </md-content>
+
+    </md-sidenav>
+  </nav-offscreen>
+
+
+  <navbar>
+    <div id="header" class="header">
+      <div class="top l-padding cf">
+        <!-- START Accessibility Links - NOTE: these will change per template as not all areas will be on the page at once -->
+        <ul class="accessibility-links">
+          <li><a href="#nav">Site Navigation</a></li>
+          <li><a href="#main">Page Content</a></li>
+        </ul>
+        <!-- END Accessibility Links -->
+
+        <a href="" ng-click="navCtrl.toggleRight()" class="nav-toggle" ng-if="!navCtrl.onSignUpPage">
+          <span class="vh">Open Navigation</span>
+          <span class="icon icon-menu"></span>
+        </a>
+
+        <div class="logo">
+          <a ui-sref="home" ng-class="navCtrl.onSignUpPage && navCtrl.isLoggedIn ? 'inactiveLink' : ''">
+            <span class=" navbar-logo">
+                <img src="assets/images/Proquo_Logo_Positive.png"/>
+            </span>
+          </a>
+        </div>
+
+        <md-button ng-show="navCtrl.isLoggedIn" class="btn-login hide-sm hide-md hide-xs" ng-click="navCtrl.logout()">
+          Sign Out
+        </md-button>
+
+        <md-button ng-hide="navCtrl.onSignUpPage" class="btn-start-a-project" ng-click="navCtrl.startBusiness()">
+          Get Going!
+        </md-button>
+
+        <md-button ng-hide="navCtrl.isLoggedIn" class="btn-login hide-sm hide-md hide-xs" ng-click="navCtrl.showLoginModal($event)">
+          Sign In
+        </md-button>
+
+        <md-button ng-hide="navCtrl.isLoggedIn" aria-label="register" class="btn-login" ui-sref="getstarted"  >
+          Sign Up
+        </md-button>
+
+
+        <span ng-if="navCtrl.isLoggedIn && !navCtrl.onSignUpPage">
+          <div class="notification-dropdown" ng-include="'app/notification/notificationDropDown.html'"></div>
+        </span>
+
+        <div hide-xs hide-sm hide-md class="profile-dropdown" ng-if="navCtrl.isLoggedIn && !navCtrl.onSignUpPage">
+          <md-menu md-offset="15 45" >
+            <div class="profile-dropDown-btn" ng-click="navCtrl.openMenu($mdOpenMenu, $event)">
+              <profile-photo profile="navCtrl.business"></profile-photo>
+            </div>
+
+            <md-menu-content class="profile-dropdown-menu">
+              <div class="arrow-up"></div>
+              <md-menu-item>
+                <md-button ui-sref="profileEdit" >
+                  <span class="bolder">Profile</span>
+                </md-button>
+              </md-menu-item>
+
+              <md-menu-item>
+                <md-button ui-sref="my.settings" >
+                  <span class="bolder">Settings</span>
+                </md-button>
+              </md-menu-item>
+
+            </md-menu-content>
+          </md-menu>
+        </div>
+
+        <div class="header-nav">
+          <div class="navbar">
+            <ul class="nav cf">
+              <li ng-repeat="item in navCtrl.menu" ng-show="item.menuItemVisible && !item.hideOnDesktop" ng-class="navCtrl.currentState.name.indexOf(item.activeState) > -1 ? 'nav-active' : ''">
+                <a ui-sref="{{item.state}}({{item.params}})" ng-show="item.state != 'external'">
+                  {{item.title}}
+                </a>
+                <a href="{{item.url}}" target="_blank" ng-show="item.url">
+                  {{item.title}}
+                </a>
+                <div class="arrow"></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </navbar>
+</div>

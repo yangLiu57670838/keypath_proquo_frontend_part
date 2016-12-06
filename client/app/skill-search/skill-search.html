@@ -1,0 +1,198 @@
+<div class="l-layout l-one-column cf browse">
+  <div class="content-container cf">
+    <!-- START .content-column -->
+    <div class="content-column">
+
+      <!-- START .main -->
+      <div id="main" tabindex="-1" role="main" ng-cloak>
+        <div class="skills-search-container">
+          <!-- search controls-->
+          <div class="search-controls l-padding">
+
+            <div layout="column" layout-align="center center" class="search-box">
+              <div class="row" layout="row" layout-align="center center" layout-wrap>
+                <div class="column">
+                  Show me people
+                </div>
+                <div class="column">
+                  <md-select placeholder="need" ng-model="vm.searchType" md-on-close="vm.changeSearchType()">
+                    <md-option value="skillsRequired">who <b>need</b> help with</md-option>
+                    <md-option value="skillsOffered">who <b>can</b> help with</md-option>
+                    <md-option value="only"><b>by name or business name</b></md-option>
+                  </md-select>
+                </div>
+              </div>
+              <div ng-if="vm.searchType === 'skillsRequired' || vm.searchType === 'skillsOffered'"
+                   class="skills-picker">
+                <div category-generic-selector
+                     data-options="vm.categorySelectorOptions"
+                     data-select-callback="vm.selectCategories(categories)">
+                </div>
+              </div>
+
+              <div ng-if="vm.searchType === 'only'" class="skills-picker">
+                <div class="ng-text-search-container" >
+                  <div class="skills-keywords clearfix">
+                    <div class="search-keywords-autocomplete-container" >
+                      <div class="search-keywords-autocomplete-wrapper">
+                        <md-input-container class="search-keywords-autocomplete" >
+                          <input placeholder="Search by name or business" ng-model="vm.searchText" ng-model-options="{debounce: 500}" ng-change="vm.searchTextChange(vm.searchText)">
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!--search filters-->
+            <div class="search-filters-container">
+              <div class="l-padding">
+                <div layout="row" layout-wrap class="search-filters">
+                  <div class="filters-label">
+                    Sort by
+                  </div>
+                  <div layout="column" layout-gt-xs="row" layout-align="space-between start">
+
+
+                    <md-button class="btn btn-plain"
+                               ng-class="{ 'is-selected' : ((vm.searchOrder == 'newest') && !vm.showSearchOrderLocation)}"
+                               ng-click="vm.changeSearchOrder('newest'); vm.showSearchOrderLocation=false;">
+                      Newest
+                    </md-button>
+
+
+                    <md-button class="btn btn-plain"
+                               ng-class="{ 'is-selected' : ((vm.searchOrder == 'rating') && !vm.showSearchOrderLocation)}"
+                               ng-click="vm.changeSearchOrder('rating'); vm.showSearchOrderLocation=false;">
+                      Highest rated
+                    </md-button>
+
+
+                    <div ng-hide="vm.showSearchOrderLocation">
+                      <md-button class="btn btn-plain"
+                                 ng-class="{ 'is-selected' :vm.searchOrder == 'closest'}"
+                                 ng-click="vm.changeSearchOrder('closest')">
+                        Closest to
+                      </md-button>
+                    </div>
+
+
+                    <div ng-show="vm.showSearchOrderLocation" class="location-directive" md-no-float>
+                      <location result="vm.selectedLocation" thisid="'googleLookup'"
+                                ng-focus="vm.showMyLocationTrigger==true" save-location="vm.searchByDistance()"
+                                activate-watch="true"></location>
+                      <md-progress-circular ng-show="locationSearching" class="loading-indicator"
+                                            md-mode="indeterminate"
+                                            md-diameter="26"></md-progress-circular>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!--search results-->
+          <div class=" l-padding">
+            <div layout="row" layout-align="center center">
+              <div ng-show="vm.offerProquoteFlag || vm.offerItdbFlag" class="assign-title margin-top-10 padding-top">
+
+                <ng-pluralize count="vm.numberAssigned"
+                              when="{'0': 'You have reached the maximum number of people you can add',
+                                     '1': 'Select up to 1 more person for your project',
+                                     '5': 'Select up to {} people for your project',
+                                     'other': 'Select up to {} more people for your project'}">
+                </ng-pluralize>
+
+
+              </div>
+            </div>
+            <paginator ng-if="vm.pagingOptions && vm.pagingOptions.totalRecord != 0" options="vm.pagingOptions"
+                       goto-page-callback="vm.changePage(pageNum)"></paginator>
+            <div class="results-indicator" ng-if="vm.filteredResults.length > 0">
+              <span ng-bind="vm.filteredResults.length"></span> result<span
+              ng-show="vm.filteredResults.length > 1">s</span> found (out of total {{vm.recordCount}} )
+            </div>
+            <div layout="row" layout-wrap layout-fill layout-margin layout-align="center stretch">
+
+              <div
+                   flex="25"
+                   flex-xl="20"
+                   flex-lg="25"
+                   flex-md="33"
+                   flex-sm="50"
+                   flex-xs="100"
+                   class="card-container" ng-repeat="result in vm.filteredResults" ng-class="{'fade-out':result.chosen && (vm.offerProquoteFlag  || vm.offerItdbFlag)}">
+                <md-checkbox ng-click="vm.assignToggle(result)" ng-checked="result.chosen"
+                             aria-label="Assigned person" class="chosen-checkbox"
+                             ng-if="vm.offerProquoteFlag || vm.offerItdbFlag">
+                </md-checkbox>
+               <div ng-if="vm.offerProquoteFlag || vm.offerItdbFlag" ng-click="vm.assignToggle(result)" class="add-remove-button"></div>
+                <search-result data-result="result" data-search-type="vm.searchType" data-rating-disabled="true" data-skills-expand-limit="3">
+                </search-result>
+                <md-button ng-if="(vm.offerProquoteFlag  || vm.offerItdbFlag) && vm.chosenAssignees.length<vm.numAssigneesAllowed" aria-label="chat"
+                           class="md-raised  btn-connect message-btn card-btn"
+                           ng-click="vm.assignToggle(result)">
+                  Pick Me
+                </md-button>
+                <md-button ng-if="!vm.offerProquoteFlag  && !vm.offerItdbFlag" aria-label="chat"
+                           class="md-raised  btn-connect message-btn card-btn"
+                           ng-click="vm.showChatModal(result)">
+                  Message
+                </md-button>
+              </div>
+              <div class="search-error-container"
+                   ng-show="vm.filteredResults.length === 0 && vm.selectedCategoryNames.length > 0">
+                No results found
+              </div>
+            </div>
+
+            <paginator ng-if="vm.pagingOptions && vm.pagingOptions.totalRecord != 0" options="vm.pagingOptions"
+                       goto-page-callback="vm.changePage(pageNum)"></paginator>
+          </div>
+        </div>
+        <!-- END .main -->
+      </div>
+      <!-- END .content-column -->
+    </div>
+  </div>
+
+
+  <div class="profile-selections-container" layout="column" layout-align="start start" ng-if="(vm.offerProquoteFlag  || vm.offerItdbFlag) && !(vm.profileIdsAssigned.length === vm.totalAssigneesAllowed)">
+    <div class="l-padding margin-bottom-10" style="width:100%;">
+      <h5 class="margin-top-10">You selected: {{vm.chosenAssignees.length}}/{{vm.numAssigneesAllowed}}</h5>
+      <div layout="row" layout-align="end center" flex="100" ng-show="vm.chosenAssignees.length">
+        <div layout="row" layout-align="start center" flex="100" layout-wrap hide-xs hide-sm>
+
+          <div ng-repeat="assigned in vm.chosenAssignees track by $index"
+               class="user-selected-pill" layout="row" layout-align="space-around center">
+            <div class="add-remove-button" ng-click="vm.removeAssigned(assigned)"></div>
+            <profile-summary business="assigned"></profile-summary>
+            <div class="icon icon-remove"></div>
+          </div>
+
+        </div>
+        <div class="cont-btn-container">
+          <md-button  ng-click="vm.saveAssigned()" class="btn md-primary-cta">Continue</md-button>
+        </div>
+
+      </div>
+      <div ng-hide="vm.chosenAssignees.length>0" class="nowrap bolder margin-bottom-10">
+        <ng-pluralize count="vm.numberAssigned"
+                      when="{'0': 'You have reached the maximum number of people you can add',
+                                     '1': 'Select up to 1 more person for your project',
+                                     '5': 'Select up to {} people for your project',
+                                     'other': 'Select up to {} more people for your project'}">
+        </ng-pluralize>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

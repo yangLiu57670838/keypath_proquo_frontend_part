@@ -1,0 +1,129 @@
+// social sign in buttons
+
+$modalDialogbackground:$white;
+
+
+
+.registration-section {
+  header.relative {
+    position: relative;
+    top: 0px;
+    background: #fff;
+    z-index: 9;
+    width:100%;
+    padding-top:0;
+  }
+
+  main{
+    padding-top:20px;
+
+    &.padding-100{
+      padding-top:0;
+    }
+
+  }
+}
+
+
+
+.btn-sign-in,
+.md-button.btn-sign-in{
+	width: 100%;
+	display: block;
+
+	&.fb{
+		background-color: $facebook-colour;
+
+		&:hover{
+			background-color : lighten($facebook-colour, 15);
+		}
+	}
+
+	&.linkedin{
+		background-color: $linkedin-colour;
+
+		&:hover{
+			background-color : lighten($linkedin-colour, 15);
+		}
+	}
+
+	.icon{
+		color: $white;
+
+	  &~span{
+		color:$white !important;
+	  }
+	}
+
+
+}
+
+// login modal
+.login-modal{
+  md-toolbar{
+    background:$white;
+  }
+
+	md-input-container{
+		/*max-width: 350px;*/
+		margin: 0 auto;
+	}
+}
+
+
+// common styles for both modals
+.login-modal, .registration-modal{
+
+	background:$modalDialogbackground;
+	.heading{
+		text-align: center;
+		margin-bottom: 0;
+    margin-top:10px;
+	}
+	@include bp(m){
+		min-height: 400px;
+	}
+}
+
+.text-on-a-line{
+  	position:relative;
+  	margin:$hr-block-margin;
+  	&>div{
+	  position:absolute;
+	  width: 100%;
+	  text-align:center;
+	  top:50%;
+	  margin-top:-12px;
+
+	  &>span{
+		background:$modalDialogbackground;
+		display:inline-block;
+		padding:0 20px;
+	  }
+
+	}
+}
+
+.md-button.premium-login{
+  background:$dd-black;
+  padding:20px;
+  color:$white;
+  border-radius:20px;
+  h6{
+    color:$white;
+    margin-bottom:0;
+  }
+  p{
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  &:hover{
+    color:$dd-black;
+    h6{
+      color:$dd-black;
+    }
+  }
+}
+/*icon-after-asterisk css located in _global.scss */
+
+

@@ -1,0 +1,68 @@
+<div class="l-layout l-one-column cf getstarted">
+    
+  <div class="content-container l-padding l-content-padding">
+    <div layout="row" layout-align="center center" class="getstarted-buyer form-element-fixed" id="getstarted">
+      <div>
+        <div layout="column" layout-align="center center">
+          <div class="welcome-msg">
+            <p>Hi <b>{{::vm.firstName}}</b>,
+            tell us what you are looking for before <br/>you can start a project
+            </p>
+          </div>
+        </div>
+
+        <skill-selector skill-type="skillsRequired" selected-skills="vm.selectedSkills"
+                        class="skill-needed"></skill-selector>
+
+        <div layout="row">
+          <div flex></div>
+          <p class="small margin-top-10 ">
+            <b>Find Match</b> will add all completed information to your profile and helps you find a buyer.
+          </p>
+        </div>
+
+        <div layout="row" layout-align="space-between center">
+          <md-button ui-sref="getstarted-selection">
+            <md-icon class="icon icon-arrow-left"></md-icon>
+          </md-button>
+                    
+          <div layout="column" layout-gt-xs="row" layout-align-gt-xs="end center">
+
+            <md-button class="btn" ng-click="vm.saveProfile()" ui-sref="profileEdit" ng-disabled="vm.selectedSkills.length == 0">
+              Complete Your Profile
+              <md-tooltip md-direction="bottom" ng-if="vm.selectedSkills.length == 0">
+                Please add at least one skill from above
+              </md-tooltip>
+            </md-button>
+
+            <md-button class="btn md-primary md-primary-cta" ng-disabled="vm.selectedSkills.length == 0 || vm.saveInProgress" ng-click="vm.saveProfileAndSearch()">
+              Find Match
+            </md-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div flex="100" ng-hide="vm.hideSearchResults" class="profile-scroll-section">
+      <profile-scroll options="vm.searchOptions" load-page-fn="vm.changePage(idx)"></profile-scroll>
+    </div>
+
+    <div layout="row" class="back-to-top-wrapper">
+      <div class="wide-screen" show-gt-sm hide hide-md flex-offset-gt-sm="95">
+        <md-button class="btn-back-to-top md-primary-cta" ng-click="vm.gotoTop()">
+          <md-icon class="icon icon-pointer-right-270 icon-pointer-right"></md-icon>
+        </md-button>
+      </div>
+
+      <div flex layout="row" hide-gt-sm show-md>
+        <span flex></span>
+        <md-button class="btn-back-to-top md-primary-cta" ng-click="vm.gotoTop()">
+          <md-icon class="icon icon-pointer-right-270 icon-pointer-right"></md-icon>
+        </md-button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

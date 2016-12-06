@@ -1,0 +1,87 @@
+
+
+.getstarted-signup {
+
+  .subheading {
+    margin-bottom: 30px;
+  }
+
+  .fieldName {
+    margin: 0px;
+  }
+
+  .margin-bottom {
+    margin-bottom: 14px;
+  }
+
+}
+
+.getstarted-welcome {
+
+  .welcome-heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 50px;
+  }
+}
+
+.getstarted-selection {
+
+  .selection-heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 50px;
+
+    h5 {
+      display: inline;
+    }
+  }
+
+  .getstarted-selection-buttons {
+    .btn {
+      font-size: 16px;
+    }
+  }
+  .btn-selection {
+    text-transform: none !important;
+    color: $white !important;
+  }
+
+  .left-btn-wrapper {
+    margin: 30px 0;
+  }
+
+  .btn-buyer {
+    background-color: $dd-negative-color !important;
+  }
+
+  .btn-seller {
+    background-color: $pq-rego-selection-seller-color !important;
+  }
+
+  .btn-swap {
+    background-color: $dd-primary-background !important;
+  }
+
+}
+
+.back-to-top-wrapper {
+  .btn-back-to-top {
+    border-radius: 20px;
+    min-width: auto !important;
+  }
+
+  .wide-screen {
+    .btn-back-to-top {
+      position: absolute;
+      bottom: 5px;
+    }
+  }
+
+  .icon-pointer-right-270 {
+    color: white;
+    @include rotate(270deg);
+    font-size: 15px;
+    padding: 5px;
+  }
+}

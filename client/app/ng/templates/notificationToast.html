@@ -1,0 +1,7 @@
+<md-toast class="full-width-toast notification-toast">
+	<div class="content l-padding">
+		<span ng-bind-html="toastContent"></span>
+    <span class="toastAction" ng-if="actionTitle"><a ng-click="actionCb()">{{actionTitle}}</a></span>
+		<md-button class="btn" ng-click="closeToast()">OK</md-button>
+	</div>
+</md-toast>

@@ -1,0 +1,434 @@
+<div class="payments">
+  <p ng-if="vm.currentUser.billing.verificationState==='pending'">It appears your account is not yet verified to receive payments, please fill out and submit the form below.</p>
+  <collapsible-card expand-card="true" id="personal">
+    <collapsible-card-header><h6 class="no-margin">Personal Details</h6></collapsible-card-header>
+    <collapsible-card-body>
+
+      <div class="collapsible-card-body-content">
+      <form class="form" name="vm.personalDetailsForm" ng-submit="vm.submit(vm.personalDetailsForm)" novalidate>
+        <div layout="column" layout-gt-sm="row">
+          <div flex="50" flex-gt-sm="100">
+            <div layout="row">
+              <md-input-container>
+                <label>First name *</label>
+                <input name="fistName" type="text" ng-model="vm.billingUser.first_name"
+                       required readonly class="read-only" disabled/>
+                <div ng-messages="vm.personalDetailsForm.fistName.$error">
+                  <div ng-message="required">This is required</div>
+                </div>
+              </md-input-container>
+              <div flex="10">
+                <a class="info-btn btn md-fab md-mini dark-blue" hide-gt-sm="true">
+                  <i class="icon icon-info"></i>
+                  <md-tooltip>To make changes to this field please go to Edit My Profile</md-tooltip>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div id="mobile"></div>
+          <div flex="50" flex-gt-sm="100">
+            <div layout="row">
+              <md-input-container>
+                <label>Last name *</label>
+                <input name="lastName" type="text" ng-model="vm.billingUser.last_name"
+                       required readonly class="read-only" disabled/>
+                <div ng-messages="vm.personalDetailsForm.lastName.$error">
+                  <div ng-message="required">This is required</div>
+                </div>
+              </md-input-container>
+              <div flex="10">
+                <a class="info-btn btn md-fab md-mini dark-blue">
+                  <i class="icon icon-info"></i>
+                  <md-tooltip>To make changes to this field please go to Edit My Profile</md-tooltip>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container>
+            <label>DOB *</label>
+            <input name="dob" type="text" placeholder="DD/MM/YYYY" ng-model="vm.billingUser.dob"
+                   required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"
+                   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"/>
+            <div ng-messages="vm.personalDetailsForm.dob.$error" ng-auto-hide="false"
+                ng-show="vm.personalDetailsForm.dob.$touched && vm.editMode">
+              <div ng-message="required">This is required</div>
+              <div ng-message="pattern">Format must be DD/MM/YYYY</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container >
+            <label>Mobile Phone * </label>
+            <input name="mobile" type="text" placeholder="E.g. 04XX XXX XXX" ng-model="vm.billingUser.mobile"
+                   required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-messages="vm.personalDetailsForm.mobile.$error" ng-auto-hide="false"
+                 ng-show="vm.editMode || vm.err === 'already exists' ">
+              <div ng-message="required">This is required</div>
+              <div ng-message="exists">This number is already being used with another account, please use a different one</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <h6>Address</h6>
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container>
+            <label>Address *</label>
+            <input name="address" type="text" placeholder="E.g. Unit #, Street Name" ng-model="vm.billingUser.address_line1"
+                   required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-messages="vm.personalDetailsForm.address.$error">
+              <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <label>City *</label>
+            <input name="city" type="text" ng-model="vm.billingUser.city"
+                   required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-messages="vm.personalDetailsForm.city.$error">
+              <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container>
+            <label>State *</label>
+            <input name="state" type="text" ng-model="vm.billingUser.state"
+                   required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-messages="vm.personalDetailsForm.state.$error">
+              <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <label>Post Code *</label>
+            <input name="zip" type="text" ng-model="vm.billingUser.zip"
+                   required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-messages="vm.personalDetailsForm.zip.$error">
+              <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+        </div>
+      </form>
+      </div>
+    </collapsible-card-body>
+  </collapsible-card>
+
+
+  <collapsible-card expand-card="true" id="business">
+    <collapsible-card-header><h6 class="no-margin">Business Details</h6></collapsible-card-header>
+    <collapsible-card-body>
+      <div class="collapsible-card-body-content">
+        <form class="form" name="vm.businessDetailsForm" ng-submit="vm.submit(vm.businessDetailsForm)" novalidate>
+          <div layout="row">
+            <md-input-container>
+              <label>Trading Name *</label>
+              <input name="tradingName" type="text" ng-model="vm.billingCompany.name"
+                     required readonly class="read-only" disabled/>
+              <div ng-messages="vm.businessDetailsForm.tradingName.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+            <div flex="10">
+              <a class="info-btn btn md-fab md-mini dark-blue">
+                <i class="icon icon-info"></i>
+                <md-tooltip>To make changes to this field please go to Edit My Profile</md-tooltip>
+              </a>
+            </div>
+          </div>
+          <div layout="column" layout-gt-sm="row">
+            <md-input-container>
+              <label>Legal Business Name *</label>
+              <input name="legalName" type="text" ng-model="vm.billingCompany.legal_name"
+                     required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+              <div ng-messages="vm.businessDetailsForm.legalName.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout="row">
+            <md-input-container>
+              <label>ABN *</label>
+              <input name="abn" type="text" ng-model="vm.billingCompany.tax_number"
+                     required readonly class="read-only" disabled/>
+              <div ng-messages="vm.businessDetailsForm.abn.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+            <div flex="10">
+              <a class="info-btn btn md-fab md-mini dark-blue">
+                <i class="icon icon-info"></i>
+                <md-tooltip>To make changes to this field please go to Edit My Profile</md-tooltip>
+              </a>
+            </div>
+          </div>
+
+          <h6>Business Address</h6>
+          <md-checkbox ng-show="vm.editMode" ng-model="vm.sameAsPersonalAddress"
+                       aria-label="Same as perosnal address">Same as personal address</md-checkbox>
+          <div layout="column" layout-gt-sm="row" ng-if="!vm.editMode || !vm.sameAsPersonalAddress">
+            <md-input-container>
+              <label>Address *</label>
+              <input name="address" type="text" placeholder="E.g. Unit #, Street Name" ng-model="vm.billingCompany.address_line1"
+                     required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+              <div ng-messages="vm.businessDetailsForm.address.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>City *</label>
+              <input name="city" type="text" ng-model="vm.billingCompany.city"
+                     required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+              <div ng-messages="vm.businessDetailsForm.city.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout="column" layout-gt-sm="row" ng-if="!vm.editMode || !vm.sameAsPersonalAddress">
+            <md-input-container>
+              <label>State *</label>
+              <input name="state" type="text" ng-model="vm.billingCompany.state"
+                     required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+              <div ng-messages="vm.businessDetailsForm.state.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Post Code *</label>
+              <input name="zip" type="text" ng-model="vm.billingCompany.zip"
+                     required ng-readonly="!vm.editMode" ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+              <div ng-messages="vm.businessDetailsForm.zip.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-input-container>
+          </div>
+        </form>
+      </div>
+    </collapsible-card-body>
+  </collapsible-card>
+  <collapsible-card expand-card="true" id="banking">
+    <collapsible-card-header><h6 class="no-margin">Bank Account</h6></collapsible-card-header>
+    <collapsible-card-body>
+      <div class="collapsible-card-body-content">
+
+      <!--<div>We will need your bank account details so that you can receive and make payments from here</div>-->
+
+      <form class="form" name="vm.bankAccountForm" ng-submit="vm.submit(vm.bankAccountForm)" novalidate autocomplete="off">
+
+        <!--<md-checkbox ng-disabled="!vm.bankAccount"-->
+                     <!--ng-model="vm.primaryPaymentBank"-->
+                     <!--ng-change="vm.setPrimaryPaymentType('bankAccount')"-->
+                     <!--aria-label="Checkbox 1">Set primary payment type</md-checkbox>-->
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container flex>
+            <label>Account Name <span ng-if="vm.editMode">*</span></label>
+            <input required name="accountName" type="text" minlength="1" ng-readonly="!vm.editMode"
+                   ng-model="vm.bankAccount.account_name"
+                   ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-messages="vm.bankAccountForm.accountName.$error" md-auto-hide="false"
+                 ng-show="vm.bankAccountForm.accountName.$touched && vm.editMode">
+              <div ng-message="required">This is required</div>
+              <div ng-message="minlength">The name has to be a minimum of 1 characters</div>
+            </div>
+          </md-input-container>
+          <md-input-container flex>
+            <label>Bank <span ng-if="vm.editMode">*</span></label>
+            <input required name="bank" type="text" ng-readonly="!vm.editMode"
+                   ng-model="vm.bankAccount.bank_name" value="{{vm.bankAccount.bank_name}}"
+                   ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-show="vm.editMode">
+              <div ng-messages="vm.bankAccountForm.bank.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container flex>
+            <label>BSB <span ng-if="vm.editMode">*</span></label>
+            <input required name="bsb" minlength="6" maxlength="6" type="text" pattern="^[0-9]*$"
+                   ng-model="vm.bankAccount.routing_number" value="{{vm.bankAccount.routing_number}}"
+                   ng-class="{'read-only': !vm.editMode}"
+                   ng-disabled="!vm.editMode" ng-readonly="!vm.editMode"/>
+            <div ng-messages="vm.bankAccountForm.bsb.$error" md-auto-hide="false"
+                 ng-show="vm.bankAccountForm.bsb.$touched && vm.editMode">
+              <div ng-message="pattern">Numbers only</div>
+              <div ng-message="required">This is required</div>
+              <div ng-message="minlength">The bsb must be 6 digits</div>
+            </div>
+          </md-input-container>
+          <md-input-container flex>
+            <label>Account No <span ng-if="vm.editMode">*</span></label>
+            <input required name="accountNumber" minlength="4" type="text" pattern="^[0-9]*$"
+                   ng-model="vm.bankAccount.account_number" value="{{vm.bankAccount.account_number}}"
+                   ng-class="{'read-only': !vm.editMode}"
+                   ng-disabled="!vm.editMode" ng-readonly="!vm.editMode"/>
+            <div ng-messages="vm.bankAccountForm.accountNumber.$error" md-auto-hide="false"
+                 ng-show="vm.bankAccountForm.accountNumber.$touched && vm.editMode">
+              <div ng-message="required">This is required</div>
+              <div ng-message="pattern">Numbers only</div>
+              <div ng-message="minlength">This is too short</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <!--<div layout="column" layout-gt-sm="row" layout-align="end center" ng-show="!vm.editMode && vm.bankAccount">-->
+          <!--<md-button type="submit" class="btn md-secondary" hide-sm="true" hide-md="true" hide-xs="true"-->
+                     <!--ng-click="vm.deleteBankAccount($event, vm.bankAccount.id)" ng-cloak>-->
+            <!--Delete-->
+          <!--</md-button>-->
+        <!--</div>-->
+
+      </form>
+
+      </div>
+    </collapsible-card-body>
+  </collapsible-card>
+  <collapsible-card ng-if="false" expand-card="true">
+    <collapsible-card-header>CREDIT CARD</collapsible-card-header>
+    <collapsible-card-body>
+      <div class="collapsible-card-body-content">
+
+      <div>Your credit card details are used only to make payments. You cannot receive payments on your credit card.</div>
+
+      <form class="form" name="vm.creditCardForm" ng-submit="vm.submit(vm.creditCardForm)" novalidate autocomplete="off">
+        <md-checkbox ng-disabled="!vm.creditCard"
+                     ng-model="vm.primaryPaymentCredit"
+                     ng-change="vm.setPrimaryPaymentType('creditCard')"
+                     aria-label="Credit card primary payment">Set primary payment type</md-checkbox>
+
+        <div class="card-types">
+          <img width="64" height="40" src="assets/images/payment-icons/visa-light.png"
+               ng-class="{'card-type-disable': !vm.isCardType('Visa')}">
+          <img width="64" height="40" src="assets/images/payment-icons/mastercard-light.png"
+               ng-class="{'card-type-disable': !vm.isCardType('MasterCard')}">
+        </div>
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container flex>
+            <label>Card holder name <span ng-if="vm.editMode">*</span></label>
+            <input required name="cardHolderName" type="text" minlength="1" ng-readonly="!vm.editMode"
+                   ng-model="vm.creditCard.cardHolderName" value="{{vm.creditCard.cardHolderName}}"
+                   ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"/>
+            <div ng-messages="vm.creditCardForm.cardHolderName.$error" md-auto-hide="false"
+                 ng-show="vm.creditCardForm.cardHolderName.$touched && vm.editMode">
+              <div ng-message="required">This is required</div>
+              <div ng-message="md-minlength">The name has to be a minimum of 1 characters</div>
+            </div>
+          </md-input-container>
+          <md-input-container flex>
+            <label>Card Number <span ng-if="vm.editMode">*</span></label>
+            <input name="cardNumber" type="text" ng-readonly="!vm.editMode"
+                   ng-change="vm.creditCardForm.cardNumber.$setValidity('cardsupport', true);vm.checkChange();"
+                   ng-model="vm.creditCard.cardNumber" value="{{vm.creditCard.cardNumber}}"
+                   ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"
+                   cc-number supported-types/>
+            <div ng-messages="vm.creditCardForm.cardNumber.$error" md-auto-hide="false"
+                 ng-show="vm.creditCardForm.cardNumber.$touched && vm.editMode">
+              <div ng-message="required">This is required</div>
+              <div ng-message="ccNumber">That is not a valid credit card number</div>
+              <div ng-message="supportedTypes">We currently only support Visa and Master Card</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout="column" layout-gt-sm="row">
+          <div flex="100" flex-gt-sm="50">
+            <div layout="row" cc-exp>
+              <md-input-container flex="50">
+                <label>Expiry Month <span ng-if="vm.editMode">*</span></label>
+                <input name="expiryMonth" ng-readonly="!vm.editMode"
+                       ng-model="vm.creditCard.expiryMonth" cc-exp-month
+                       ng-value="vm.creditCard.expiryMonth"
+                       ng-class="{'read-only': !vm.editMode}"
+                       ng-disabled="!vm.editMode"/>
+                <div ng-messages="vm.creditCardForm.expiryMonth.$error" md-auto-hide="false"
+                     ng-show="vm.creditCardForm.expiryMonth.$touched && vm.editMode">
+                  <div ng-message="required">This is required</div>
+                  <div ng-message-exp="['parse', 'ccExpMonth']">This is not a valid month</div>
+                </div>
+                <div ng-messages="vm.creditCardForm.$error" md-auto-hide="false"
+                     ng-show="vm.creditCardForm.expiryMonth.$touched
+                     && vm.creditCardForm.expiryMonth.$valid
+                     && vm.creditCardForm.expiryYear.$valid
+                     && vm.editMode">
+                  <div ng-message="ccExp">Expired cards not accepted</div>
+                </div>
+              </md-input-container>
+              <md-input-container flex="50">
+                <label>Expiry Year <span ng-if="vm.editMode">*</span></label>
+                <input name="expiryYear" ng-readonly="!vm.editMode"
+                       ng-model="vm.creditCard.expiryYear" cc-exp-year full-year
+                       ng-value="vm.creditCard.expiryYear"
+                       ng-class="{'read-only': !vm.editMode}"
+                       ng-disabled="!vm.editMode"/>
+                <div ng-messages="vm.creditCardForm.expiryYear.$error" md-auto-hide="false"
+                     ng-show="vm.creditCardForm.expiryYear.$touched && vm.editMode">
+                  <div ng-message="required">This is required</div>
+                  <div ng-message="parse">This is not a valid year</div>
+                  <div ng-message="ccExpYear">Expired cards not accepted</div>
+                </div>
+              </md-input-container>
+            </div>
+          </div>
+          <div flex="100" flex-gt-sm="50">
+            <div layout="row">
+              <md-input-container flex="50">
+                <label>Security Code <span ng-if="vm.editMode">*</span></label>
+                <input required name="securityCode" type="text" ng-readonly="!vm.editMode"
+                       ng-model="vm.creditCard.securityCode" value="{{vm.creditCard.securityCode}}"
+                       ng-class="{'read-only': !vm.editMode}" ng-disabled="!vm.editMode"
+                       cc-cvc cc-type="vm.creditCardForm.cardNumber.$ccType"/>
+                <div ng-messages="vm.creditCardForm.securityCode.$error" md-auto-hide="false"
+                     ng-show="vm.creditCardForm.securityCode.$touched && vm.editMode">
+                  <div ng-message="required">This is required</div>
+                  <div ng-message="ccCvc">Not a valid security code</div>
+                </div>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+
+        <div layout="column" layout-gt-sm="row" layout-align="end center" ng-show="!vm.editMode && vm.creditCard">
+          <md-button class="btn md-primary-cta md-raised" ng-cloak ng-click="vm.editCreditCard()">
+            Edit
+          </md-button>
+          <md-button type="submit" class="btn md-secondary" ng-click="vm.deleteCreditCard($event, vm.creditCard.accountId)" ng-cloak>
+            Delete
+          </md-button>
+        </div>
+
+        <div layout="column" layout-gt-sm="row" layout-align="end center" ng-show="vm.editMode">
+          <md-button ng-show="vm.creditCard.accountId" class="btn md-secondary" ng-cloak flex-order-sm="2" flex-order-xs="2" ng-click="vm.cancelCreditCardEdit()">
+            Cancel
+          </md-button>
+          <md-button type="submit" class="btn md-primary-cta md-raised btn-save" ng-cloak flex-order-sm="1" flex-order-xs="1">
+            Submit
+          </md-button>
+        </div>
+
+      </form>
+      </div>
+    </collapsible-card-body>
+  </collapsible-card>
+
+  <div layout="column" layout-gt-sm="row" layout-align="end center">
+    <div ng-show="!vm.editMode && !vm.processing" flex-sm="100">
+      <md-button class="btn md-primary-cta md-raised" ng-cloak ng-click="vm.bulkEdit()">
+        Edit
+      </md-button>
+    </div>
+
+    <div layout="column" layout-gt-sm="row" ng-show="vm.editMode && !vm.processing" flex-sm="100">
+      <md-button class="btn md-secondary txt-negative" ng-cloak flex-order-sm="2" flex-order-xs="2" ng-click="vm.cancelBulkEdit()">
+        Cancel
+      </md-button>
+      <md-button ng-click="vm.bulkSubmit()" class="btn md-primary-cta md-raised" ng-cloak flex-order-sm="1" flex-order-xs="1">
+        Submit
+      </md-button>
+    </div>
+
+    <md-progress-circular ng-show="vm.processing" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+  </div>
+</div>

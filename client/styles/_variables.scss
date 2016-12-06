@@ -1,0 +1,314 @@
+// The naming convention for these variable names is element-property
+
+// ==========================================================================
+// BREAKPOINTS
+// ==========================================================================
+
+$bp-xxs-min: 0;
+$bp-xs-min: 1;
+$bp-s-min: 600;
+$bp-m-min: 960;
+$bp-l-min: 1280;
+$bp-xl-min: 1960;
+$bp-xxl-min: 2500;
+
+// Range for the static stylesheet to use. Is used when $IS_RESPONSIVE is equal to false
+// and ignores breakpoints outside of the specified range
+$bp-static-min: 0;
+$bp-static-max: $bp-xxl-min - 1;
+
+// Range for the print stylesheet to use. It applies @media screen to breakpoints outside of this
+$bp-print-min: 0;
+$bp-print-max: 550;
+
+// nav breakpoints
+$offscreen-bp: m; // biggest breakpoint for offscreen nav (default is m)
+$onscreen-bp: l; // smallest breakpoint for onscreen nav (default is l)
+
+// ==========================================================================
+// COLOUR GUIDE
+// ==========================================================================
+
+/* Greys and blacks */
+$dd-black: #000;
+$white:#fff;
+$dd-black-text: #1d1d1d;
+$dd-light-grey-text: #afafaf;
+$dd-dark-grey: #333;
+$dd-grey: #778189;
+$dd-bg-grey-darker:#A7A7A7;
+$dd-light-grey: #d6d6d6;
+$dd-bg-grey: #eeefef;
+$dd-lightest-grey:#F1F1F1;
+$dd-home-neutral:#EDEDED;
+
+
+/* Colour palette for buttons etc */
+$dd-dark:#242B3E;
+$dd-dark-blue:#41648C;
+$dd-primary-background-trans: rgba(25, 150, 130, 0.26);
+$dd-primary-background-light: rgb(185,218,213);
+$dd-primary-background: rgb(25, 150, 130);
+$dd-primary-color:#87BEB4;
+$dd-secondary-color:#DADEE8;
+$dd-negative-color:#D77841;
+$pq-rego-selection-seller-color:#CD960A;
+
+$dd-green: #79b000;
+$dd-light-green: #92d400;
+
+
+/* Theming for some material design components
+   also controlled seperately in app.js  - client/app/app.js*/
+$nab-red: rgb(221,44,0);
+$nice-yellow: #FFB81D;
+$dd-action:#D77840;
+
+.fe{
+  color:brown;
+}
+
+$nab-grey-border: #d9d9d9;
+$nab-grey-light: #cfcecf;
+$nab-text-grey: #a6a7a9;
+$nab-text-grey-light: #bdbdbf;
+$nab-bg-grey: #E8E8E8;
+$nab-bg-x-dark: #1d2124;
+$nab-village-green: #56b439;
+
+$icon-colour-default: #b2b1b2;
+$ratings-blank: $nab-bg-grey;
+
+$facebook-colour: #3b5998;
+$linkedin-colour: #007bb6;
+
+$theme-colour:$dd-primary-background;
+$theme-secondary:$dd-primary-color;
+$theme-warning:$nab-red;
+$theme-accent:$dd-dark-blue;
+
+.theme-colour-txt{
+  color:$theme-colour;
+}
+.theme-secondary-txt{
+  color:$theme-secondary;
+}
+.theme-warning-txt{
+  color:$theme-warning;
+}
+.theme-accent-txt{
+  color:$theme-accent;
+}
+
+// ==========================================================================
+// SITE COLOURS
+// ==========================================================================
+
+$overlay-bg: $dd-black;
+
+// ==========================================================================
+// SIZES
+// ==========================================================================
+
+$offscreen-nav-width: 270px;
+$complementary-width: 280px;
+$aside-width: 360px;
+
+$margins-text-small: 15px;
+$margins-text: 40px;
+
+$layout-padding: 10px;
+$layout-padding-m: 20px;
+$layout-padding-xl: 30px;
+
+$layout-margins: 10px;
+
+$layout-m-width: $bp-m-min - ($layout-padding-m * 2);
+$layout-l-width: $bp-l-min - ($layout-padding-m * 2);
+$layout-xl-width: $bp-xl-min - ($layout-padding-xl * 2);
+$layout-xxl-width: $bp-xxl-min - ($layout-padding-xl * 2);
+
+// ==========================================================================
+// TYPOGRAPHY
+// ==========================================================================
+
+// NAB Fonts
+$font-family-corpid-light:     "BrownStandardLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-corpid-regular:   "BrownStandard", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-corpid-bold:       "BrownStandardBold", "Arial Black";
+$font-family-corpid-heavy:      "BrownStandardBold", "Arial Black";
+
+$font-family-sans-serif:  "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+$font-family-base:        $font-family-corpid-light;
+
+// Default body text (paragraphs, lists, etc)
+$base-font-size: 16;
+$base-line-height: 24;
+
+$paragraph-font-size: $base-font-size;
+$paragraph-line-height: $base-line-height;
+$paragraph-color: #333;
+$paragraph-margin: 5px 0 14px 0;
+
+
+// Headings
+@mixin font-base() {
+	font-family: $font-family-base;
+}
+
+@mixin font-feature() {
+	font-family: $font-family-corpid-regular;
+	//font-weight: bold;
+}
+@mixin font-feature-bold() {
+  font-family: $font-family-corpid-bold;
+}
+@mixin font-feature-heavy() {
+  font-family: $font-family-corpid-heavy;
+  //font-weight: bold;
+}
+@mixin font-feature-light{
+  font-family: $font-family-corpid-light;
+}
+
+
+$icon-size:24;
+$icon-line-height:24;
+
+$heading-color: #000;
+
+$h1-font-size: 48;
+$h1-line-height: 52;
+$h1-margin: $margins-text 0 $margins-text-small 0;
+
+$h2-font-size: 34;
+$h2-line-height: 36;
+$h2-margin: $margins-text 0 $margins-text-small 0;
+
+$h3-font-size: 28;
+$h3-line-height: 34;
+$h3-margin: $margins-text 0 $margins-text-small 0;
+
+$h4-font-size: 24;
+$h4-line-height: 28;
+$h4-margin: $margins-text 0 $margins-text-small 0;
+
+$h5-font-size: 20;
+$h5-line-height: 24;
+$h5-margin: $margins-text 0 $margins-text-small 0;
+
+$h6-font-size: 18;
+$h6-line-height: 21;
+$h6-margin: $margins-text 0 $margins-text-small 0;
+
+// Links
+$link-color-default: $dd-dark-blue;
+$link-color-visited: lighten($dd-dark-blue, 25);
+$link-color-hover: lighten($dd-dark-blue, 25);
+
+$link-color-active: shade($dd-dark-blue, 25);
+
+// ==========================================================================
+// MODULES
+// ==========================================================================
+
+// Border color is used for panel borders, horizontal rules, etc
+$module-border-color: $dd-light-grey;
+$module-border-radius: 3px;
+$module-margin: $paragraph-margin;
+$module-padding: 15px 20px;
+
+// ==========================================================================
+// FORMS
+// ==========================================================================
+
+$hr-block-margin:40px 0;
+
+$formmodule-background: tint($dd-grey, 90);
+$formmodule-padding: $module-padding;
+
+// FORM LABEL
+// ==========================================================================
+
+$formlabel-color: #333;
+$formlabel-font-size: $paragraph-font-size;
+$formlabel-line-height: $paragraph-line-height;
+$formlabel-margin: 0 0 10px 0;
+
+// FORM FIELD
+// ==========================================================================
+
+$formfield-height: 41px;
+$formfield-holder-margin-v: 30px;
+$formfield-holder-margin-h: 0;
+$formfield-font-size: 16;
+$formfield-color: $paragraph-color;
+$formfield-background: #fff;
+$formfield-background-focus: #e0f5fe;
+$formfield-border-color: #dcdcdc;
+$formfield-border-color-focus: $theme-colour;
+$formfield-placeholder-color: tint($paragraph-color, 50);
+$formfield-border-radius: 2px;
+
+// FANCY OPTIONS
+// ==========================================================================
+
+$formfield-fancyopt-padding: 20px 25px 20px 55px;
+$formfield-fancyopt-input-top: 25px;
+$formfield-fancyopt-input-left: 25px;
+
+$formfield-fancyopt-checked-border-color: $dd-green;
+$formfield-fancyopt-checked-background: $dd-green;
+$formfield-fancyopt-checked-text-color: #fff;
+
+// ERROR/SUCCESS STATES
+// ==========================================================================
+
+$formfield-error-color: #f73535;
+$formfield-error-background: $formfield-background;
+$formfield-error-border-color: #f73535;
+
+$formfield-error-message-font-size: 12;
+$formfield-error-message-color: #cf0000;
+$formfield-error-message-background: #fddbdb;
+
+$formfield-success-color: #22823b;
+$formfield-success-background: $formfield-background;
+$formfield-success-border-color: #80b816;
+
+$formfield-disabled-color: #666;
+$formfield-disabled-background: #efefef;
+$formfield-disabled-border-color: $formfield-border-color;
+
+// FORM SUMMARY
+// ==========================================================================
+
+$formsummary-border: 1px solid #f73535;
+$formsummary-border-radius: 2px;
+
+$errorsummary-color: #f73535;
+$errorsummary-background: #fddbdb;
+$errorsummary-border-color: #f73535;
+
+$successsummary-color: $heading-color;
+$successsummary-background: #e9fddc;
+$successsummary-border-color: #76d041;
+
+$sectionhelp-color: $heading-color;
+$sectionhelp-background: #d5e2eb;
+$sectionhelp-border-color: $heading-color;
+
+// TOOLTIPS
+// ==========================================================================
+
+$tooltip-bg-color: $dd-black;
+$tooltip-text-color: #fff;
+$tooltip-border-radius: 6px;
+$tooltip-font-size: 14;
+
+$z-index-modal : 10015;
+
+// FOR SHADOWY EFFECTS YO
+$box-shadow-general: 0 0 3px rgba(0,0,0,0.12), 0 0 2px rgba(0,0,0,0.24);
+$box-shadow-hover: 0 0 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);

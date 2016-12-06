@@ -1,0 +1,689 @@
+// ==========================================================================
+// GLOBAL STYLES (included in style.css but not scedit.css)
+// ==========================================================================
+
+
+body {
+	&.no-scroll {
+		position: fixed;
+		overflow: hidden;
+		width: 100%;
+		min-height: 100%;
+	}
+}
+
+*{
+  outline:none !important;
+  outline:0 !important;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .fn-cloak {
+	display: none !important;
+	overflow: hidden;
+
+	*{
+		display: none !important;
+		position: relative !important;
+	}
+}
+
+.modal-backdrop {
+  bottom: 0;
+  position: fixed;
+}
+
+.padding-40-gt-s{
+  @include bp(s){
+    padding:40px;
+  }
+
+}
+
+.padding-top-large{
+	padding-top:60px;
+  	padding-bottom:20px;
+}
+.padding-bottom-20{
+  padding-bottom:20px;
+}
+.padding-top-20{
+  padding-top:20px;
+}
+
+.padding-top-10{
+  padding-top:10px;
+}
+
+.margin-top-bottom{
+  margin:80px 0;
+}
+.paddingless{
+  padding:0;
+}
+
+.padding-margin-less{
+  padding:0;
+  margin:0;
+}
+
+.padding-left-s{
+  @include bp-max(s){
+    padding-left:15px;
+  }
+}
+.padding-right-s{
+  @include bp-max(s){
+    padding-right:15px;
+  }
+}
+.padding-left-no-s{
+  @include bp(s){
+    padding-left:15px;
+  }
+}
+
+.padding-left{
+    padding-left:10px;
+}
+.padding-left-no{
+  padding-left:0 !important;
+}
+.padding-right-no{
+  padding-right:0 !important;
+}
+.padding-right-20{
+  padding-right: 20px;
+}
+.padding-top-no{
+  padding-top:0 !important;
+}
+.padding-left-15{
+  padding-left:10px;
+}
+.padding-left-20{
+  padding-left:20px;
+}
+.padding-left-gt-xs-10{
+  @include bp(s){
+    padding-left:10px;
+  }
+}
+.padding-left-gt-md-10{
+  @include bp(m){
+    padding-left:10px;
+  }
+}
+
+.padding-gt-xs-20{
+  @include bp(s){
+    padding:20px;
+  }
+}
+
+.margin-left-gt-xs-10{
+  @include bp(s){
+    margin-left:10px;
+  }
+}
+
+.margin-top-ls-xs-10{
+  @include bp-max(s){
+    margin-top:10px;
+  }
+}
+
+.margin-left-gt-md-10{
+  @include bp(m){
+    margin-left:10px;
+  }
+}
+
+.margin-left-10{
+  margin-left:10px;
+}
+
+.margin-left-5{
+  margin-left:5px;
+}
+
+.padding-top{
+  padding-top:15px;
+}
+
+.padding-top-xs{
+  @include bp-max(xs){
+    padding-top:15px;
+  }
+}
+
+.padding-top-md{
+  @include bp-max(m){
+    padding-top:15px;
+  }
+}
+
+@mixin paddingRight (){
+  @include bp(s){
+    padding-right:20px;
+  }
+}
+
+@mixin padding20(){
+  @include bp(m){
+    padding:20px;
+  }
+}
+
+@mixin padding-variable($t, $r, $b, $l, $factor){
+
+  padding:#{$t - ($t / $factor)}px #{$r - ($r / $factor)}px  #{$b - ($b / $factor)}px  #{$l - ($l / $factor)}px;
+
+  @include bp(l) {
+    padding: #{$t}px #{$r}px #{$b}px #{$l}px;
+  }
+
+}
+
+.padding-20{
+  @include padding20();
+}
+
+.padding-right{
+  @include paddingRight();
+}
+
+.margin-bottom-10{
+  margin-bottom:10px;
+}
+
+.icon-after-asterisk{
+  color:$errorsummary-color !important;
+  margin-left: 100% !important;
+  @include font-size(7,10);
+  top: 12px;
+  margin-right: 15px !important;
+}
+.icon-asterisk{
+  color:$errorsummary-color  !important;
+  margin-left: 0.25rem;
+  @include font-size(7,10);
+  position: relative;
+  bottom: 0.5rem;
+}
+
+.icon-asterisk.regular{
+  color:$dd-black  !important;
+}
+
+
+.clear-both{
+  clear:both;
+}
+
+.card-box-shadow {
+  @include card-box-shadow();
+}
+
+
+.special-logo{
+  background: url('../../assets/images/badge.png') no-repeat;
+  background-size:100%;
+  width:100px;
+  height:100px;
+
+  position: relative;
+  &.icon-percentage{
+    @include font-size(60,60);
+    font-weight: bold;
+    color:$white;
+    &:after{
+      font-family: "BrownStandardBold", "Arial Black";
+      position: absolute;
+      left: 25%;
+      top: 21%;
+      content:"%";
+    }
+  }
+
+  &.icon-free{
+    color:$white;
+    font-weight: bold;
+    @include font-size(60,60);
+    &:after{
+      font-family: "BrownStandardBold", "Arial Black";
+      position: absolute;
+      left: 20%;
+      top: 18%;
+      content:"$0";
+    }
+  }
+
+}
+
+
+
+.skills {
+  @extend .cf;
+  overflow: hidden;
+  position: relative;
+  padding-right: 10px;
+
+  .skill{
+    @include skill-tag(26);
+    @include font-size(12);
+    margin: 0 5px 5px 0;
+    white-space: nowrap;
+    //float: left;
+  }
+
+  .overflown-indicator{
+    position: absolute;
+    right: 6px;
+    bottom: 0;
+    display: none;
+
+    i{
+      color: $theme-colour;
+      @include font-size(21);
+      vertical-align: bottom;
+    }
+  }
+
+  &.is-overflown{
+    .overflown-indicator{
+      display: block;
+    }
+  }
+}
+
+
+
+.card{
+  position:relative;
+
+  padding-bottom:50px;
+  .content{
+    background:$white;
+    min-height: 350px;
+    @include padding-variable(60, 20, 20, 20, 1.1);
+
+
+    h6,h5{
+      margin-bottom:0;
+      font-weight: bold;
+    }
+    h6{
+      margin-top:0;
+    }
+    p{
+      margin:3px 0;
+      @include font-size(16, 20);
+      font-weight: bold;
+
+    }
+    .business-name-heading{
+      color: $theme-accent;
+    }
+
+  }
+
+  .special-logo{
+    right:-10px;
+    top:-10px;
+    position:absolute;
+  }
+
+  .profile-photo{
+    max-width:200px;
+  }
+
+  .star-rating{
+    margin:0;
+  }
+  .review-num, .distance{
+    color:$theme-secondary;
+    clear: both;
+    font-weight: bold;
+    margin-bottom:20px;
+    @include font-feature();
+    @include font-size(16, 16);
+  }
+
+  .message-btn {
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    border-radius: 0 0 3px 3px;
+  }
+}
+
+.showHidePasswd {
+  position:absolute;
+  right:42px;
+  margin-top:4px;
+}
+
+.txt-warning{
+  color: $nab-red;
+  @include font-size(12, 20);
+}
+
+.txt-secondary{
+  color: $dd-black;
+}
+
+.txt-positive{
+  color:$dd-dark-blue;
+}
+
+.txt-negative{
+  color: $dd-negative-color;
+}
+
+.txt-warning-bigger{
+  font-size: 18px;
+  color: $nab-red;
+  text-align: center;
+}
+
+md-divider.thick{
+  border-top-width: 5px;
+}
+
+/* mdPicker datepicker over-rides to fix several issues on mobile*/
+.mdp-datepicker {
+  .mdp-calendar-days .md-button.md-icon-button {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  md-toolbar.md-default-theme.md-hue-1:not(.md-menu-toolbar), md-toolbar.md-hue-1:not(.md-menu-toolbar) {
+    background-color: $theme-colour;
+    color: $white;
+  }
+
+  .mdp-datepicker-year {
+    @include font-size(45, 45);
+  }
+  span.mdp-datepicker-date.ng-binding.active,
+  .mdp-datepicker-date, .mdp-datepicker-day, .mdp-datepicker-dow, .mdp-datepicker-month {
+    @include font-size(15, 15);
+  }
+
+  /* Drastic over-ride because hte button is showing up pink*/
+  a.md-button.md-default-theme.md-accent.md-raised,
+  a.md-button.md-accent.md-raised,
+  a.md-button.md-default-theme.md-accent.md-fab,
+  a.md-button.md-accent.md-fab, .md-button.md-default-theme.md-accent.md-raised,
+  .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab,
+  .md-button.md-accent.md-fab {
+    background-color: $theme-colour !important;
+  }
+
+  &.portrait .mdp-calendar-week-days > *, &.portrait .mdp-calendar-days > * {
+    width: 40px !important;
+  }
+
+  &.portrait .mdp-calendar {
+    width: 294px !important;
+  }
+
+
+  @include bp-max(xs){
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+
+/* FAB over-ride to get rid of pink !*/
+.md-fab.md-mini{
+  background: transparent;
+  box-shadow:none;
+  &:hover{
+    background-color:$dd-bg-grey !important;
+  }
+  i{
+    color:$dd-light-grey;
+  }
+}
+
+md-checkbox.md-default-theme.md-checked .md-ink-ripple, md-checkbox.md-checked .md-ink-ripple{
+  color: $theme-colour !important;
+}
+md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon{
+  background-color: $theme-colour !important;
+}
+
+
+md-dialog{
+  md-toolbar{
+    .icon-remove{
+      color:$dd-light-grey-text;
+    }
+  }
+
+  &.full-screen-on-mobile{
+    @include bp-max(xs){
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+  }
+}
+
+.not-specified-txt{
+  font-style:italic;
+  color:$nab-text-grey;
+}
+
+.md-black-theme{
+  background:$dd-black;
+  color:$white !important;
+}
+
+a.md-button.md-black-theme:not([disabled]):hover, .md-button.md-black-theme:not([disabled]):hover{
+  background-color:$dd-black;
+  color:$white;
+}
+a.md-button.md-black-theme:not([disabled]).md-focused, .md-button.md-black-theme:not([disabled]).md-focused{
+  background-color:$dd-black;
+}
+
+.md-icon.md-black-theme{
+  color:$white !important;
+}
+.md-grey-theme{
+  background:$dd-light-grey;
+  color:$white ;
+}
+
+.md-primary{
+  background-color: rgb(135,190,180) !important;
+  color: $white !important;
+  md-icon.material-icons{
+    color: $white !important;
+  }
+}
+.md-primary-default-theme{
+  background-color: $dd-primary-background !important;
+  color: $white !important;
+  md-icon.material-icons{
+    color: $white !important;
+  }
+}
+
+
+.md-primary-cta {
+  background-color: $dd-dark-blue !important;
+  color: $white !important;
+}
+
+md-radio-group.md-default-theme .md-checked .md-ink-ripple, md-radio-group .md-checked .md-ink-ripple {
+  color:$dd-primary-background-trans;
+}
+md-radio-button.md-default-theme.md-checked .md-ink-ripple, md-radio-button.md-checked .md-ink-ripple {
+  color: $dd-primary-background;
+}
+
+md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
+  border-color: $dd-primary-background;
+}
+md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+  background-color: $dd-primary-background;
+}
+
+
+.md-blue-theme{
+  background-color:$dd-dark-blue;
+  color:$white;
+}
+a.md-button.md-blue-theme:not([disabled]):hover, .md-button.md-blue-theme:not([disabled]):hover,
+a.md-button.md-blue-theme:not([disabled]).md-focused, .md-button.md-blue-theme:not([disabled]).md-focused{
+  background-color: $dd-dark-blue;
+}
+md-icon.md-blue-theme {
+  color: $white;
+}
+
+.ellipsis-txt{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.no-margin{
+  margin:0 !important;
+}
+.no-margin-top{
+  margin-top:0 !important;
+}
+.margin-top-10{
+  margin-top:10px !important;
+}
+.margin-top-50{
+  margin-top:50px !important;
+}
+.margin-top-5{
+  margin-top:5px !important;
+}
+.margin-right-gt-xs-10{
+  @include bp(s){
+    margin-right:10px !important;
+  }
+}
+.no-margin-left-right-xs{
+  @include bp-max(xs){
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+}
+.no-margin-left-right-s{
+  @include bp-max(s){
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+}
+.no-margin-left-right{
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+a.md-button.md-default-theme.md-raised, a.md-button.md-raised, .md-button.md-default-theme.md-raised, .md-button.md-raised {
+  color: $theme-colour;
+  background-color: rgb(238, 238, 241);
+  text-transform: capitalize;
+}
+
+.nowrap{
+  white-space:nowrap;
+}
+
+a.md-button.md-default-theme.md-fab:not([disabled]).md-focused,
+a.md-button.md-fab:not([disabled]).md-focused,
+.md-button.md-default-theme.md-fab:not([disabled]).md-focused,
+.md-button.md-fab:not([disabled]).md-focused{
+  background-color:$dd-primary-background;
+}
+
+
+.uppercase{
+  text-transform: uppercase !important;
+}
+
+.add_skill_btn{
+  color:$dd-dark-blue;
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.custom-chip{
+  text-transform: uppercase;
+  font-weight:bold;
+  border-radius:20px;
+  background:$dd-light-grey;
+  display: inline-block;
+  padding: 10px 30px 10px 20px;
+  text-align:center;
+  @include font-size(14,14);
+  position:relative;
+  margin-right:10px;
+  margin-bottom:5px;
+  margin-top:5px;
+  cursor:pointer;
+
+  max-width: 250px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  .icon{
+    transition:transform 0.5s;
+    transform:rotate(45deg);
+    position:absolute;
+    top:50%;
+    margin-top:-6px;
+    right:10px;
+    cursor:pointer;
+  }
+
+  &.is-active{
+    background:$dd-primary-background;
+    color:$white;
+    .icon{
+      transition:transform 0.5s;
+      transform:rotate(0deg);
+    }
+    &.skills-offered{
+      background-color: $dd-negative-color;
+    }
+    &.skills-needed{
+      background-color: $dd-primary-background;
+    }
+  }
+
+}
+
+/* zen desk button */
+.zEWidget-launcher{
+  @include bp-max(s){
+    display:none !important;
+  }
+}
+
+.underline{
+  text-decoration:underline;
+}
+.italic{
+  font-style:italic;
+}
+p.text-area{
+  white-space: pre-wrap;
+}
+
+.mandatory{
+  color: $errorsummary-color;
+}

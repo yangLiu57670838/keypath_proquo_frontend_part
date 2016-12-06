@@ -1,0 +1,100 @@
+<div class="l-layout l-one-column cf itdb-view">
+  <div class="l-padding">
+    <div class="content-container cf margin-bottom-10">
+      <div class="itdb-container padding-top-10 margin-bottom-10 " flex="100">
+
+          <section class="itdb-detail padding-top-10 margin-bottom-10 " flex="100" flex-gt-xs="70" flex-gt-lg="50">
+            <h3 class="center">
+              <span ng-if="!vm.offerToRecipient">Your Offer</span>
+              <span ng-if="vm.offerToRecipient">You have received an offer from {{vm.business.primaryContactFirstName}} {{vm.business.primaryContactLastName}}</span>
+            </h3>
+            <div ng-show="vm.offerToRecipient" class="center">
+              <a ui-sref="profile({profileId: vm.business._id})" >View {{vm.business.primaryContactFirstName}}'s profile</a>
+            </div>
+            <div class="padding-40-gt-s">
+
+              <p class="bolder no-margin">{{vm.itdb.brief.workTitle}}</p>
+              <p>{{vm.itdb.brief.description}}</p>
+              <p><span class="bolder">Duration:</span> {{vm.duration}}</p>
+              <p>
+                <span class="bolder">Value of services:</span>
+                <span ng-show="vm.budget!=null ">${{vm.budget}}</span>
+                <span ng-show="vm.budget===null ">Not specified</span>
+              </p>
+
+
+              <collapsible-card card-id="website-links" expand-card="{{vm.offerToRecipient}}" ng-if="vm.itdb.brief.links.length>0">
+                <collapsible-card-header>
+                  <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+                    <h6 class="no-margin" flex>Website Links</h6>
+                  </div>
+                </collapsible-card-header>
+                <collapsible-card-body>
+
+                  <div ng-repeat="link in vm.itdb.brief.links" class="padding-left-20 padding-bottom-20">
+                    <a href="{{link.url}}" target="_blank">{{link.urlDescription}}</a>
+                  </div>
+                </collapsible-card-body>
+              </collapsible-card>
+
+              <collapsible-card card-id="files-links" expand-card="{{vm.offerToRecipient}}" ng-if="vm.itdb.brief.attachments.length>0">
+                <collapsible-card-header>
+                  <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+                    <h6 class="no-margin" flex>Attached Files</h6>
+                  </div>
+                </collapsible-card-header>
+                <collapsible-card-body>
+
+                  <div ng-repeat="file in vm.itdb.brief.attachments" layout="row" layout-align="space-between center" class="padding-left-20 padding-bottom-20 padding-right-20">
+                    <div>
+                      <a ng-href="{{file.url}}" download="{{file.attachmentName}}"><i class="icon icon-clip"></i>
+                        <label>
+                          <span class="ellipsis-txt">{{file.attachmentName}} </span>
+                          <span ng-show="file.size" hide-xs hide-sm>
+                            <span class="ellipsis-txt">(</span><span class="ellipsis-txt">{{ file.size | filesize }}</span><span class="ellipsis-txt">)</span>
+                          </span>
+                        </label>
+                      </a>
+                    </div>
+                    <div>
+                      <label class="ellipsis-txt" hide-xs hide-sm>{{file.updatedAt|date:"dd/MM/yyyy"}}</label>
+                    </div>
+                  </div>
+                </collapsible-card-body>
+              </collapsible-card>
+
+              <div ng-if="vm.offerToRecipient && vm.itdb.acceptsSwap" class="profile-summary" layout="column" layout-align="start start" layout-gt-sm="row" layout-align-gt-sm="start center" layout-margin>
+                <profile-photo  class="profile-summary-photo" ng-class="{ 'profile-present': vm.business }" profile="::vm.business"></profile-photo>
+                <div class="contact-name feature-heading-light-bold ">{{vm.business.primaryContactFirstName}} has indicated an interest in swapping</div>
+              </div>
+
+              <div layout="row" layout-align="end center" ng-if="!vm.offerToRecipient">
+                <md-button class="btn md-primary-cta" ng-click="vm.gotoProjectsPage()">Close</md-button>
+              </div>
+            </div>
+
+
+
+          </section>
+
+       </div>
+    </div>
+  </div>
+
+  <div class="invite-response-container padding-bottom-20 padding-top-20" ng-if="vm.offerToRecipient">
+    <div class="l-padding margin-bottom-10" >
+      <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center" layout-padding class="max-page-size form-element-fixed">
+        <h4 class="no-margin">Are you interested in responding to {{vm.business.primaryContactFirstName}}'s offer?<i class="icon-asterisk"></i></h4>
+        <div layout="row">
+          <md-radio-group layout="row" ng-model="vm.respondInterested">
+            <md-radio-button ng-value="true">Yes</md-radio-button>
+            <md-radio-button ng-value="false">No</md-radio-button>
+          </md-radio-group>
+
+        </div>
+        <md-button ng-click="vm.respondToInvite()" class="btn md-primary-cta" ng-disabled="vm.respondInterested === undefined">Send</md-button>
+
+      </div>
+    </div>
+  </div>
+</div>

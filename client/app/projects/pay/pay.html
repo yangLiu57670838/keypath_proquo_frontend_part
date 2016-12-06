@@ -1,0 +1,32 @@
+<div class="l-layout l-one-column l-bg-grey cf" xmlns="http://www.w3.org/1999/html">
+  <div class="content-container l-padding cf l-content-padding">
+    <section class="pay-screen form-element-fixed">
+      <div layout="row" layout-align="space-between center">
+        <h3 class="heading">Pay deposit</h3>
+        <a href="" ui-sref="projects({projectId: vm.projectId})">Close</a>
+      </div>
+
+      <section class="pay-detail">
+        <p>Great, you've now agreed to go ahead with {{vm.project.creditorName}} on your {{vm.project.brief.workTitle}} project.</p>
+        <p>The 50% deposit needs to be paid before {{vm.project.creditorName}} can start work.</p>
+
+        <div layout="row" layout-align="space-between center">
+          <h4 ng-if="vm.projectStatus==='deposit-pending'">Deposit to be paid</h4>
+          <h4 ng-if="vm.projectStatus==='deposit-paid'">Deposit being processed</h4>
+          <h4 ng-if="vm.projectStatus==='in-progress'">Deposit paid</h4>
+          <h4>{{vm.project.depositPayment.paymentAmount | currency }}</h4>
+        </div>
+
+        <p>Your deposit is securely held in our trust account (escrow) until you're happy the work has been completed.</p>
+      </section>
+
+      <div  layout="row" layout-xs="column" layout-align-gt-xs="end center" ng-hide="vm.projectStatus!=='deposit-pending'">
+        <div id="promisepay-1" ng-hide="!vm.sessionId || !vm.isBuyer || vm.processing" data-custom_text="Set up payment" data-session="{{vm.sessionId}}" data-type="2" class="promisepay-widget btn md-raised md-primary-cta md-button">
+          <md-progress-circular class="md-hue-2" md-diameter="40px"></md-progress-circular>
+        </div>
+        <md-progress-circular ng-show="vm.processing" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+      </div>
+    </section>
+  </div>
+  <div id="pp-script"></div>
+</div>

@@ -1,0 +1,62 @@
+
+.rate-modal{
+  .rate-section{
+    .heading.icon{
+      @include roundedIcon($theme-colour, $theme-colour, $white);
+    }
+
+    .star-rating {
+      margin-left:0;
+      .btn-star{
+        height: 40px;
+        width: 40px;
+
+        i{
+          font-size: 40px;
+          line-height: 40px;
+          height: 40px;
+          width: 40px;
+        }
+      }
+    }
+
+
+    ul{
+      list-style: none;
+      background: $dd-light-grey;
+      padding:20px;
+
+      li:first-child{
+        font-weight: bold;
+      }
+    }
+    .star-rating-container{
+      @extend .cf;
+
+
+      .star-rating{
+        height: 28px;
+        float: left;
+        margin-left:40px;
+
+        .btn-star{
+          min-width: 0;
+          min-height: 0;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin: 0;
+          padding: 0;
+          i{
+            @include font-size(35, 34);
+          }
+        }
+      }
+    }
+
+    .heading{
+      @include feature-heading();
+    }
+  }
+
+}

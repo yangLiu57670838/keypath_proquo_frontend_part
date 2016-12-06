@@ -1,0 +1,95 @@
+$fa-font-path: "../bower_components/font-awesome/fonts";
+@import '../bower_components/font-awesome/scss/font-awesome';
+
+@import '../bower_components/angular-material/angular-material';
+//@import '../bower_components/prism/themes/prism.css';
+//@import '../bower_components/slick-carousel/slick/slick';
+//@import '../bower_components/slick-carousel/slick/slick-theme';
+
+@import '../styles/style';
+
+/**
+ * App-wide Styles
+ */
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+// Component styles are injected through grunt
+// injector
+@import '_modal.scss';
+@import 'about/about.scss';
+@import 'account/forgotpassword/forgotpassword.scss';
+@import 'account/resetpassword/resetpassword.scss';
+@import 'account/settings/settings.scss';
+@import 'admin/admin.scss';
+@import 'category/categoryGenericSelector.scss';
+@import 'chat/chat.scss';
+@import 'email/verificationModal/emailVerificationModal.scss';
+@import 'getstarted/buyer/buyer.scss';
+@import 'getstarted/getstarted.scss';
+@import 'getstarted/seller/profile/sellerProfile.template.scss';
+@import 'getstarted/seller/seller.scss';
+@import 'home/home.scss';
+@import 'how/how.scss';
+@import 'mimic/mimic.scss';
+@import 'my/editField/editField.scss';
+@import 'my/my.scss';
+@import 'my/payments/payments.scss';
+@import 'not-implemented/not-implemented.scss';
+@import 'notification/notification.scss';
+@import 'notification/notificationDropDown.scss';
+@import 'privacy/privacy/privacy.scss';
+@import 'profile/myprofile/editCompanyName/editCompanyName.scss';
+@import 'profile/myprofile/editPortfolio/editPortfolio.scss';
+@import 'profile/myprofile/editQualifications/editQualifications.scss';
+@import 'profile/myprofile/editQualifications/myPopup/myPopup.scss';
+@import 'profile/myprofile/editUrl/editUrl.scss';
+@import 'profile/myprofile/myprofile.scss';
+@import 'profile/profile.scss';
+@import 'projects/agreement/agreement.scss';
+@import 'projects/brief/brief.scss';
+@import 'projects/brief/briefSwapSkillsModal/briefSwapSkillsModal.scss';
+@import 'projects/createItdb/createItdb.scss';
+@import 'projects/itdb/itdb.scss';
+@import 'projects/itdbView/itdbView.scss';
+@import 'projects/pay/pay.scss';
+@import 'projects/projectDetail/projectDetail.scss';
+@import 'projects/projectTabs/projectTabs.scss';
+@import 'projects/projects.scss';
+@import 'projects/projectsList/projectsList.scss';
+@import 'projects/quote/quote.scss';
+@import 'projects/requestForQuote/requestForQuote.scss';
+@import 'projects/requestForQuotesList/requestForQuotesList.scss';
+@import 'rating/rate.scss';
+@import 'skill-search/skill-search.scss';
+@import 'skill-search/skill-selector/skill-selector.scss';
+@import 'swapagree/swapagree.scss';
+@import 'terms/terms/terms.scss';
+@import '../components/collapsibleCard/collapsibleCard.scss';
+@import '../components/content-header/content-header.scss';
+@import '../components/footer/footer.scss';
+@import '../components/listReveal/listReveal.scss';
+@import '../components/modalService/modal.scss';
+@import '../components/navbar/navbar.scss';
+@import '../components/navbar/profileDropdown.scss';
+@import '../components/oauth-buttons/oauth-buttons.scss';
+@import '../components/paginator/paginator.scss';
+@import '../components/profilePhoto/profilePhoto.scss';
+@import '../components/profileScroll/profileScroll.scss';
+@import '../components/profileSummary/profileSummary.scss';
+@import '../components/starRating/starRating.scss';
+@import '../components/suggestedSkillsList/suggestedSkills.scss';
+@import '../components/supplierCandidatesList/supplierCandidatesList.scss';
+// endinjector

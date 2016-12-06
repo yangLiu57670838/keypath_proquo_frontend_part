@@ -1,0 +1,85 @@
+
+md-menu-content.profile-dropdown-menu{
+  padding-bottom:0;
+
+  .premium-btn{
+    text-transform: none;
+    margin: 0;
+    padding: 10px 20px;
+    text-align: left;
+    background: $theme-accent;
+    border-radius: 0;
+    height: auto;
+    &:hover{
+      background: lighten($theme-accent, 5);
+    }
+    h5{
+      @include font-size(14, 24);
+      font-weight: normal;
+      margin: 0;
+      color:$white;
+    }
+    h6{
+      @include font-size(12, 20);
+      font-weight: normal;
+      margin: 0;
+      color:$white;
+    }
+  }
+}
+
+
+
+
+.progress-bar-container{
+  background:$dd-lightest-grey;
+  .progress-bar{
+    width:100%;
+    padding:5px;
+    @include font-size(12,12);
+    p{
+      margin-bottom: 4px;
+    }
+  }
+
+}
+.arrow-up{
+  border-width: 11px;
+  border-style: solid;
+  border-color: transparent transparent $white;
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -22px;
+  left: 50%;
+  margin-left: -10px;
+}
+
+.profile-dropdown{
+  width:75px;
+  display: inline-block;
+  float: right;
+  margin-top: 5px;
+  margin-right: 20px;
+  @include bp(m){
+    width: 90px;
+    margin-top: 10px;
+  }
+  .profile-dropDown-btn{
+    cursor:pointer;
+    .avatars{
+      min-width: 100%;
+      min-height: 100%;
+
+      .org-no-logo .txt-container .txt{
+        font-size: 7px;
+      }
+    }
+  }
+
+
+
+}
+
+

@@ -1,0 +1,38 @@
+
+
+<div class="project-tabs" >
+  <div layout="row" layout-align="space-between start" layout-align-gt-sm="start start" layout-padding layout-fill layout-align="stretch" class="padding-left-no">
+    <div ng-repeat="tab in vm.tabModelTabs" class="padding-left-no">
+      <div class="project-tab" >
+        <div class=" {{tab.tab}}" ng-class="{'tab-active':tab.active}" layout="column" layout-align="start center" >
+          <div ng-click="vm.setActve($index)" ng-class="[{'cursor-pointer':tab.stateOn>0}, tab.setState(vm.stateNumber, theModel)]" class="project-icons"></div>
+          <div class="tab-text">{{tab.tabTitle}}</div>
+          <div class="arrow-container"><div class="arrow-down"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <md-divider></md-divider>
+  <div ng-repeat="tabOn in vm.tabModelTabs">
+
+    <div class="tab-hide"  ng-class="{'tab-show':vm.tabModelTabs[$index].active}">
+
+      <div class="activity-detail project-section">
+        <div class="tab-desc md-padding"  ng-click="vm.redirectTo(vm.iconDesc.state, vm.iconDesc.params, vm.iconDesc.handler)"
+             layout="row" layout-align="space-between center" flex="100" ng-if="vm.iconDesc">
+          <div layout="row" layout-align="space-between center">
+            <!-- place holder for activity description icon-->
+            <div layout="column" layout-align="start">
+              <div>{{vm.iconDesc.desc}}</div>
+              <div class="tab-desc-note">{{vm.iconDesc.note}}</div>
+            </div>
+          </div>
+          <i class="material-icons tab-desc-arrow" ng-show="vm.iconDesc.state || vm.iconDesc.handler">keyboard_arrow_right</i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {{vm.tabModelTabs[$index]}}
+
+</div>

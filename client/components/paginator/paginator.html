@@ -1,0 +1,14 @@
+<div layout="row" layout-align="center center" class="paginator-centred" ng-show="pg.totalPages > 1">
+  <md-button id="mdPageButton1" class=" md-mini" ng-click="pg.gotoSection(pg.currentSectionNum-1, true)"
+             ng-show="!pg.compactView && pg.totalSections > 1" ng-disabled="pg.currentSectionNum == 1">
+    &lt;</md-button>
+
+  <md-button id="pageButton{{i}}" class="md-mini" ng-repeat="i in pg.pagesInCurrentSection"
+             ng-click="pg.gotoPage(i)" ng-show="!pg.compactView && i != undefined"
+             ng-class="{true: 'md-primary', false: ''}[i === pg.options.pageNum]">
+    {{i}}
+  </md-button>
+  <md-button id="nextButton" class="" ng-click="pg.gotoSection(pg.currentSectionNum+1, false)"
+             ng-show="!pg.compactView && pg.totalSections > 1" ng-disabled="pg.currentSectionNum == pg.totalSections">
+    &gt;</md-button>
+</div>

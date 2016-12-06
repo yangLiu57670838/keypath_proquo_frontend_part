@@ -1,0 +1,18 @@
+<md-content aria-label="Email validation" layout="column" layout-align="center center" class="forgotpwd-margin md-padding">
+  <div ng-if="vm.processed">
+    <div ng-if="vm.validated">
+      <div class="md-headline forgotpwd-msg-successful">Email validation is completed </div>
+      <div>Redirecting to <a ui-sref="home">Home Page</a> in {{vm.countDown}} second{{vm.countDown> 1 ? 's' : ''}}...</div>
+    </div>
+    <div ng-if="!vm.validated">
+      <div class="md-headline forgotpwd-msg-successful">Email validation is has encountered error </div>
+      <div>{{vm.errors}}</div>
+      <div>Click here to redirect to <a ui-sref="home">Home Page</a></div>
+    </div>
+  </div>
+  <div ng-if="!vm.processed">
+    <div class="md-headline forgotpwd-msg-successful">Validating email address... please wait</div>
+  </div>
+</md-content>
+
+

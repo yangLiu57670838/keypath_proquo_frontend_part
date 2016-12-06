@@ -1,0 +1,227 @@
+
+.profile-scroll-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: auto;
+
+  md-content {
+    background-color: $dd-bg-grey;
+  }
+
+  .profile-slider-container {
+    .profile-slider {
+      width: 50%;
+      .md-thumb {
+        &:after {
+          background-color: $dd-primary-background;
+          border-color: $dd-primary-background;
+        }
+      }
+
+      .md-track-container {
+        height: 4px;
+      }
+      .md-focus-ring {
+        background-color: $dd-bg-grey;
+      }
+
+      .md-track-fill {
+        background-color: $dd-primary-background;
+      }
+    }
+  }
+
+  .prev-btn {
+    display: block;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    border: none;
+    width: 40px;
+    @include bp(s) {
+      width: 210px;
+    }
+    margin: 0px 0px 13px 0px;
+
+    background: -moz-linear-gradient(left,  rgba(238,239,239,1) 33%, rgba(255,255,255,0) 100%);
+    background: -webkit-linear-gradient(left,  rgba(238,239,239,1) 33%,rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right,  rgba(238,239,239,1) 33%,rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeefef', endColorstr='#00ffffff',GradientType=1 );
+
+    &:before {
+      color: $dd-grey;
+      font-family: 'village';
+      font-size: 36px;
+      content: '\006d';
+    }
+  }
+
+  .prev-btn-disabled {
+    &:before {
+      color: $white;
+    }
+  }
+
+  .next-btn {
+    display: block;
+    top: 0;
+    left: 100%;
+    z-index: 10;
+    border: none;
+    width: 40px;
+    @include bp(s) {
+      width: 210px;
+    }
+    margin: 0px 0px 13px 0px;
+
+    background: -moz-linear-gradient(right,  rgba(238,239,239,1) 33%, rgba(255,255,255,0) 100%);
+    background: -webkit-linear-gradient(right,  rgba(238,239,239,1) 33%,rgba(255,255,255,0) 100%);
+    background: linear-gradient(to left,  rgba(238,239,239,1) 33%,rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#eeefef',GradientType=1 );
+
+    &:before {
+      color: $dd-grey;
+      font-family: 'village';
+      font-size: 36px;
+      content: '\006e';
+    }
+  }
+
+  .next-btn-disabled {
+    &:before {
+      color: $white;
+    }
+  }
+
+  .profile-one-page {
+    margin: auto;
+    width: 100%;
+  }
+
+  .profile-row {
+    overflow: hidden;
+
+    .profile-scroll {
+      height: 440px;
+      width: 100%;
+      overflow: hidden;
+      margin-left: -30px;
+      margin-right: -30px;
+
+      @include bp(s) {
+        margin: 0 -210px;
+      }
+
+      .md-virtual-repeat-scroller {
+        overflow-x: hidden;
+        background-color: $dd-bg-grey;
+
+        &::-webkit-scrollbar {
+          background-color: $dd-bg-grey;
+          width: 13px;
+          height: 13px;
+          border: none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: $dd-primary-background;
+          border-radius: 50px;
+          border: 1px solid $dd-light-grey;
+        }
+      }
+
+      .profile-items {
+        box-sizing: border-box;
+        display: inline-block;
+        height: 340px;
+        text-align: center;
+        vertical-align: top;
+        margin: 0px 10px;
+        border: none;
+
+        .card-place-holder {
+          border: none;
+          box-shadow: none !important;
+          background: $dd-bg-grey !important;
+          width: 0px !important;
+          @include bp(s) {
+            width: 200px !important;
+          }
+        }
+
+        .card-container {
+          position: relative;
+          background: #fff;
+          width: 200px;
+          max-height: 100%;
+          cursor: pointer;
+
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+          margin-top: 20px;
+          .card {
+            .content {
+              text-align: left;
+              padding: 0px 0px 0px 10px !important;
+              min-width: 180px;
+              .profile-photo {
+                max-width: 120px;
+                padding-top: 10px;
+              }
+
+              .profile-contact-name {
+                display: block;
+              }
+
+              .profile-business-name {
+                display: block;
+              }
+
+              .padding-top {
+                padding-top: 3px;
+              }
+
+              .review-num {
+                margin-bottom: 10px;
+                padding-top: 10px;
+              }
+
+              .skills {
+                max-width: 180px;
+                white-space: normal;
+                line-height: 0px;
+
+                .skill {
+                  max-width: 185px;
+                  -ms-text-overflow: ellipsis;
+                  text-overflow: ellipsis;
+                  overflow-x: hidden;
+                }
+
+                .skill.hidden-skills-count {
+                  max-width: 50px !important;
+                }
+              }
+              .skills ~ .skills {
+                .skill {
+                  background-color: $dd-negative-color;
+                }
+              }
+            }
+          }
+
+          .card-btn {
+            position: relative;
+            left: -5px;
+            padding: 0px;
+            box-shadow: none;
+            margin: 0px 5px;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+            bottom: 50px;
+            width: 200px;
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,65 @@
+<div class="invitation-to-do-business">
+  <div class="margin-top-10">
+
+    <div layout="row" layout-align="space-between top">
+      <div  flex-gt-sm="30" class="info-title padding-left-15">You:</div>
+      <div flex="20" flex-gt-sm="10"> </div>
+      <div flex="45" flex-gt-sm="55" class="info-title padding-left-15">{{vm.businessType}}</div>
+    </div>
+    <div layout="row" layout-align="space-between top">
+      <div layout="column" flex-gt-sm="40">
+        <profile-summary business="::vm.myBusiness" ng-if="!vm.displayItdbInvite"></profile-summary>
+        <div ng-if="vm.displayItdbInvite" class="profile-summary" layout="column" layout-align="start start" layout-gt-sm="row" layout-align-gt-sm="start center" layout-margin>
+          <profile-photo  class="profile-summary-photo" ng-class="{ 'profile-present': vm.business }" profile="::vm.myBusiness"></profile-photo>
+          <div class="contact-name feature-heading-light-bold " hide-xs hide-sm>View your offer below</div>
+        </div>
+      </div>
+
+      <div layout="row" layout-align="center center" flex="20" flex-gt-sm="10">
+        <div class="icon icon-dollar"></div>
+      </div>
+
+      <div layout="row" flex="45" flex-gt-sm="50">
+        <profile-summary business="::vm.supplierBusiness"></profile-summary>
+        <div ng-if="!vm.displayItdbInvite" layout="row" layout-align="start center">
+          <div hide-xs hide-sm>You are awaiting on an interested buyer to get started</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div layout="row">
+    <div flex="5" hide-xs></div>
+    <div flex layout="column" ng-if="!vm.displayItdbInvite">
+      <div>
+        <md-button class="modify-brief" ng-click="vm.viewInvitation()">View Offer</md-button>
+      </div>
+
+      <itdb-invitee-list invitees="vm.invitees" itdb-id="vm.model._id"></itdb-invitee-list>
+
+      <md-button ng-show="vm.allowedToAddSuppliers" class="quote-card add-new-person no-margin" layout="row" layout-align="center center" layout-margin ng-click="vm.addUsers()">
+        <svg fill="#000000" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+        <h5 class="bolder" >Add new person</h5>
+      </md-button>
+      <div>
+        <md-button  class="request-for-invite-action no-margin-left-right" ng-click="vm.deleteItdb()">Cancel Offer</md-button>
+      </div>
+    </div>
+
+    <div flex layout="column" ng-if="vm.displayItdbInvite" class="margin-top-bottom">
+      <md-button  class="quote-card add-new-person no-margin" layout="row" layout-align="center center" layout-margin ng-click="vm.viewInvitation()">
+        <md-icon class="material-icons visibility">visibility</md-icon>
+        <span class="icon icon-visibility"></span>
+        <h5 class="bolder" >View Offer</h5>
+      </md-button>
+    </div>
+
+    <div flex="5" hide-xs></div>
+  </div>
+
+</div>

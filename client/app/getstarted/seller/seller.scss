@@ -1,0 +1,42 @@
+.getstarted-seller{
+  position:relative;
+}
+.seller-signup-profile{
+  .welcome-msg{
+    font-size: 24px;
+    magin: 0 auto;
+    text-align: center;
+  }
+
+  .denote{
+    font-size: 0.875rem;
+    padding: 7px;
+  }
+}
+
+.profile-scroll-section {
+  background-color: $dd-bg-grey;
+  padding-bottom: 50px;
+
+  .header-text {
+    @include font-size($h6-font-size, $h6-line-height);
+    margin: $h6-margin;
+  }
+
+  .header-text-swap {
+    @include font-size($h6-font-size, $h6-line-height);
+  }
+
+  .required-category-container {
+    padding: 0px 20px;
+    min-width: 100%;
+  }
+
+  pre {
+    white-space: pre !important;
+  }
+
+  .find-match-sort-wrapper{
+    margin-top: 10px;
+  }
+}

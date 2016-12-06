@@ -1,0 +1,48 @@
+<md-dialog aria-label="Edit portfolio" class="full-screen-on-mobile abn-check-dialog">
+  <md-toolbar class="md-toolbar-tools">
+    <div layout="row" layout-align="space-between center" layout-padding="" flex="100" class="layout-padding layout-align-space-between-center layout-row flex-100">
+      <h2>We need some business details...</h2>
+      <md-button class="md-icon-button md-button md-ink-ripple" ng-click="vm.cancel()">
+        <md-icon aria-label="Close dialog" class="icon icon-remove material-icons" aria-hidden="true"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+
+    <md-dialog-content class="chat-need-abn">
+      <form name="ABNForm">
+        <p>
+          Everyone working at Proquo needs to provide a business name and ABN so you can have confidence you are working with registered Australian businesses.
+        </p>
+        <md-input-container>
+          <label>Business name</label>
+          <input flex-gt-xs="50" ng-model="vm.business.name" name="businessName" required  autocomplete="off">
+          <div ng-messages="ABNForm.businessName.$error" role="alert" md-auto-hide="false" ng-show="ABNForm.businessName.$touched">
+            <div ng-message="required">Please fill in your business name.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>ABN Number</label>
+          <input flex-gt-xs="50" ng-model="vm.business.abn" name="abn" abn required  autocomplete="off">
+          <div ng-messages="ABNForm.abn.$error" role="alert" md-auto-hide="false" ng-show="ABNForm.abn.$touched">
+            <div ng-message="required">Please fill in your ABN number.</div>
+            <div ng-message="abn">The number you have entered is incorrect, please provide a valid ABN</div>
+          </div>
+          <div ng-show="vm.serverErrors.abn" role="alert" ng-messages="vm.serverErrors.abn">
+            <div ng-message="message">{{vm.serverErrors.abn.message}}</div>
+          </div>
+        </md-input-container>
+
+        <p>
+          Can't remember your ABN? <a href="http://abr.business.gov.au/" target="_blank">Check the Australian Business Registry</a><br/><br/>
+          If you need help, please contact us at <a href="mailto:support@proquo.com.au" target="_blank">support@proquo.com.au</a>
+        </p>
+      </form>
+    </md-dialog-content>
+
+
+  <md-dialog-actions class="md-actions actions" aria-label="actions" layout="row" layout-align="end center">
+    <md-button class="btn md-primary-cta md-raised" ng-click="vm.submit()">Submit</md-button>
+  </md-dialog-actions>
+
+</md-dialog>

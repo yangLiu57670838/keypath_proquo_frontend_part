@@ -1,0 +1,47 @@
+<div class="l-layout l-one-column l-bg-grey cf">
+  <div class="content-container l-padding cf l-content-padding">
+    <section class="pay-screen form-element-fixed">
+      <div layout="row" layout-align="space-between center">
+        <h3 class="heading">Pay Final Payment</h3>
+        <a href="" ui-sref="projects({projectId: vm.projectId})">Close</a>
+      </div>
+
+      <section class="pay-detail">
+        <p>{{vm.project.brief.supplierName}} has confirmed completion of the project {{vm.project.brief.workTitle}}.</p>
+
+        <div layout="row" layout-align="space-between center">
+          <div>Total amount quoted by {{vm.project.higherQuoteUser}} (including GST)</div>
+          <div>{{vm.project.higherQuoteAmount | currency}}</div>
+        </div>
+
+        <div layout="row" layout-align="space-between center" ng-if="vm.project.nameSpace == 'swap'">
+          <div>Total amount quoted by {{vm.project.lowerQuoteUser}} (including GST)</div>
+          <div>{{vm.project.lowerQuoteAmount | currency}}</div>
+        </div>
+
+        <div layout="row" layout-align="space-between center">
+          <div>Deposit paid (currently held in our trust account)</div>
+          <div>{{vm.project.depositPayment.paymentAmount | currency}}</div>
+        </div>
+
+        <div layout="row" layout-align="space-between center">
+          <h4 ng-if="vm.projectStatus==='final-payment-pending'">Balance to be paid</h4>
+          <h4 ng-if="vm.projectStatus==='final-payment-paid'">Payment being processed</h4>
+          <h4 ng-if="vm.projectStatus==='rating-review-pending'">Deposit paid</h4>
+          <h4>{{vm.project.finalPayment.paymentAmount | currency}}</h4>
+        </div>
+      </section>
+
+      <div  layout="row" layout-xs="column" layout-align-gt-xs="end center">
+        <md-button flex-order-xs="2" class="btn txt-positive"  ng-click="vm.showChatModal($event)">Message</md-button>
+        <div ng-hide="vm.projectStatus!=='final-payment-pending'">
+          <div id="promisepay-1" ng-hide="!vm.sessionId || !vm.isBuyer || vm.processing" data-custom_text="Set up payment" data-session="{{vm.sessionId}}" data-type="2" class="promisepay-widget btn md-raised md-button md-ink-ripple">
+            <md-progress-circular class="md-hue-2" md-diameter="40px"></md-progress-circular>
+          </div>
+          <md-progress-circular ng-show="vm.processing" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="pp-script"></div>
+</div>

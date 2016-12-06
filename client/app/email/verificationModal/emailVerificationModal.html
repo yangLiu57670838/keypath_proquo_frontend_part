@@ -1,0 +1,38 @@
+<md-dialog aria-label="Email Verification" class=" full-screen-on-mobile emailVerficationModal">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Verify your email address</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="vm.cancel()">
+        <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <form name="emailVerificationForm">
+    <md-dialog-content>
+      <div flex ng-if="!vm.emailInput && !vm.emailSent">
+        In order to go ahead, you will need to check your email and verify your registration. Click on the link below if you want us to resend the email.
+      </div>
+      <div flex ng-if="vm.emailSent">
+        A verification email has been sent to <b>{{vm.currentUser.email}}</b> Click on the link below if you do not receive it within 10 minutes.
+      </div>
+      <div class="click-email-link" ng-if="!vm.emailInput || vm.emailSent">
+        <a ng-click="vm.showEmailInput()">Resend verification email?</a>
+      </div>
+      <div>
+        <md-input-container md-no-float flex class="padding-right email-input" ng-if="vm.emailInput && !vm.emailSent">
+          <label>Email will be sent to following address:</label>
+          <input placeholder="Enter" required autocomplete="false" ng-disabled="true" ng-readonly="true" aria-label="email" name="email"
+                 spellcheck="false" value="{{vm.currentUser.email}}">
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions ng-if="vm.emailInput && !vm.emailSent" class="md-actions actions" aria-label="actions" layout="row" layout-align="space-between center">
+      <md-button class="btn md-raised md-primary-cta" ng-disabled="emailVerificationForm.$invalid || vm.processing"  ng-click="vm.resendVerification()" aria-label="Ok">
+        submit
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

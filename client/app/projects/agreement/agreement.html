@@ -1,0 +1,382 @@
+<div class="l-layout l-one-column cf l-bg-grey project-agreement">
+  <div class="content-container l-padding cf l-content-padding projects ">
+
+    <section class="quote-status-panel padding-left-no-s" layout="row" layout-align="space-between center">
+        <h2 class="no-margin">
+          <span ng-show="vm.project.nameSpace === 'cash'">Pay Agreement</span>
+          <span ng-show="vm.project.nameSpace === 'swap'">Swap Agreement <span ng-if="vm.swapStatusHeading"> - {{vm.swapStatusHeading}}</span></span>
+        </h2>
+        <md-button  class="btn txt-positive bolder" ng-click="vm.close()">Close</md-button>
+    </section>
+
+    <!-- IS BUYER-->
+    <section layout="column" layout-gt-sm="row" layout-margin ng-if="!vm.isSeller" layout-wrap  class="no-margin">
+
+      <div flex-gt-sm="45" layout="column" class="content no-margin-left-right padding-large" ng-if="vm.myBusiness" >
+
+        <div class=" icon " ng-class="{'icon-dollar': vm.project.nameSpace === 'cash', 'icon-swap':vm.project.nameSpace === 'swap'}"></div>
+
+        <div layout="row" layout-align="center center" class="profile-positioner">
+          <div class="profile-container">
+            <profile-photo profile="vm.myBusiness"/>
+          </div>
+          <div ng-if="!vm.swapStatusHeading" flex-offset="95">
+            <md-button class="md-fab md-mini" ng-click="vm.viewBrief()" ng-if="vm.showPendingCashEditBtn">
+              <i class="icon icon-edit-quote">&nbsp;</i>
+            </md-button>
+          </div>
+        </div>
+        <!-- BUYER VIEW CASH -->
+        <div ng-if="vm.project.nameSpace === 'cash'">
+          <div layout="column" layout-align="center center">
+            <h3>YOU PAY</h3>
+            <h2 class="margin-top-10">{{vm.project.quote.fee + vm.project.quote.gst | currency }}</h2>
+            <p ng-show="vm.project.quote.gst>0">(inclusive of GST)</p>
+          </div>
+        </div>
+        <!-- BUYER VIEW SWAP-->
+        <div ng-if="vm.project.nameSpace === 'swap'">
+          <div layout="column" layout-align="center center">
+            <h3>YOU PROVIDE</h3>
+          </div>
+          <h5>{{vm.project.swapProject.brief.workTitle}}</h5>
+          <list-reveal ng-if="vm.project.swapProject.brief.description" minheight="100">
+           <p>{{vm.project.swapProject.brief.description  || 'No description provided'}}</p>
+          </list-reveal>
+          <h5 ng-show="vm.project.swapProject.quote.deliverables.length>0">Items to be delivered</h5>
+          <list-reveal ng-if="vm.project.swapProject.quote.deliverables.length>0" minheight="100">
+            <ul>
+              <li ng-repeat="swapItem in vm.project.swapProject.quote.deliverables track by $index">
+                <span>{{swapItem}}</span>
+              </li>
+            </ul>
+          </list-reveal>
+
+          <h5>When</h5>
+          <p ng-if="vm.project.swapProject.brief.dueDate">{{vm.project.swapProject.brief.dueDate | date}} ({{vm.calculateDueDateHint(vm.project.swapProject.brief.dueDate)}})</p>
+          <p ng-if="!vm.project.swapProject.brief.dueDate">Not specified</p>
+        </div>
+
+
+
+
+      </div>
+
+      <!-- Other party -->
+
+      <div flex-gt-sm="45" layout="column" class="content no-margin-left-right-s padding-large" ng-if="vm.otherBusiness">
+
+        <div layout="row" layout-align="center center" class="profile-positioner">
+          <div class="profile-container">
+            <profile-photo profile="vm.otherBusiness"/>
+          </div>
+        </div>
+
+        <div layout="column" layout-align="center center">
+          <h3 class="uppercase">{{vm.otherBusiness.primaryContactFirstName}} PROVIDES</h3>
+
+        </div>
+
+        <div layout="column">
+          <h5>{{vm.project.brief.workTitle}}</h5>
+          <list-reveal ng-if="vm.project.brief.description" minheight="100">
+            <p>
+              {{vm.project.brief.description || 'No description provided'}}
+            </p>
+          </list-reveal>
+
+          <h5 ng-show="vm.project.quote.deliverables.length > 0">Items to be delivered</h5>
+          <list-reveal ng-if="vm.project.quote.deliverables.length>0"  minheight="100">
+            <ul>
+              <li ng-repeat="item in vm.project.quote.deliverables track by $index">
+                <span>{{item}}</span>
+              </li>
+            </ul>
+          </list-reveal>
+          <h5>When</h5>
+          <p ng-if="vm.project.brief.dueDate">{{vm.project.brief.dueDate | date}} ({{vm.calculateDueDateHint(vm.project.brief.dueDate)}})</p>
+          <p ng-if="!vm.project.brief.dueDate">Not specified</p>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- IS SELLER -->
+
+    <section layout="column" layout-gt-sm="row" layout-margin ng-if="vm.isSeller == true" layout-wrap class="no-margin">
+      <!-- Seller -->
+      <div flex-gt-sm="45" layout="column" class="content no-margin-left-right padding-large" ng-if="vm.myBusiness">
+
+        <div class=" icon" ng-class="{'icon-dollar': vm.project.nameSpace === 'cash', 'icon-swap':vm.project.nameSpace === 'swap'}"></div>
+
+        <div layout="row" layout-align="center center" class="profile-positioner">
+          <div class="profile-container">
+            <profile-photo profile="vm.myBusiness"/>
+          </div>
+          <div ng-if="!vm.swapStatusHeading" flex-offset="95">
+            <md-button class="md-fab md-mini" ng-click="vm.viewQuote()" ng-if="vm.showPendingCashEditBtn">
+              <i class="icon icon-edit-quote">&nbsp;</i>
+            </md-button>
+          </div>
+        </div>
+
+        <div layout="column" layout-align="center center">
+          <h3>YOU PROVIDE</h3>
+        </div>
+
+        <div layout="column">
+          <h5>{{vm.project.brief.workTitle}}</h5>
+          <list-reveal ng-if="vm.project.brief.description" minheight="100">
+            <p>
+              {{vm.project.brief.description || 'No description provided'}}
+            </p>
+          </list-reveal>
+
+          <h5 ng-show="vm.project.quote.deliverables.length>0">Items to be delivered</h5>
+          <list-reveal ng-if="vm.project.quote.deliverables.length>0"  minheight="100">
+            <ul>
+              <li ng-repeat="item in vm.project.quote.deliverables track by $index">
+                <span>{{item}}</span>
+              </li>
+            </ul>
+
+          </list-reveal>
+          <h5>When</h5>
+          <p ng-if="vm.project.brief.dueDate">{{vm.project.brief.dueDate | date}} ({{vm.calculateDueDateHint(vm.project.brief.dueDate)}})</p>
+          <p ng-if="!vm.project.brief.dueDate">Not specified</p>
+
+        </div>
+
+      </div>
+
+
+      <!-- Buyer -->
+      <div flex-gt-sm="45" layout="column"  class="content no-margin-left-right-s padding-large" ng-if="vm.otherBusiness">
+
+        <div layout="row" layout-align="center center" class="profile-positioner">
+          <div class="profile-container">
+            <profile-photo profile="vm.otherBusiness"/>
+          </div>
+        </div>
+
+        <div ng-if="vm.project.nameSpace === 'cash'" layout="column" layout-align="center center">
+          <h3 class="uppercase">{{vm.otherBusiness.primaryContactFirstName}} PAYS</h3>
+          <h2 class="margin-top-10">{{vm.project.quote.fee + vm.project.quote.gst | currency }}</h2>
+          <p ng-show="vm.project.quote.gst > 0">(inclusive of GST)</p>
+        </div>
+
+        <div ng-if="vm.project.nameSpace === 'swap'">
+          <div  layout="column" layout-align="center center">
+            <h3 class="uppercase">{{vm.otherBusiness.primaryContactFirstName}} PROVIDES</h3>
+          </div>
+
+          <div layout="column">
+            <h5>{{vm.project.swapProject.brief.workTitle}}</h5>
+            <list-reveal ng-if="vm.project.swapProject.brief.description" minheight="100">
+              <p>
+                {{vm.project.swapProject.brief.description || 'No description provided'}}
+              </p>
+            </list-reveal>
+
+            <h5 ng-show="vm.project.swapProject.quote.deliverables.length>0">Items to be delivered</h5>
+            <list-reveal ng-if="vm.project.swapProject.quote.deliverables.length>0"  minheight="100">
+              <ul>
+                <li ng-repeat="item in vm.project.swapProject.quote.deliverables track by $index">
+                  <span>{{item}}</span>
+                </li>
+              </ul>
+
+            </list-reveal>
+
+            <h5>When</h5>
+            <p ng-if="vm.project.swapProject.brief.dueDate">{{vm.project.swapProject.brief.dueDate | date}} ({{vm.calculateDueDateHint(vm.project.swapProject.brief.dueDate)}})</p>
+            <p ng-if="!vm.project.swapProject.brief.dueDate">Not specified</p>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+
+    <!-- PAYMENT VALUE -->
+
+    <section layout="column" flex="100" class="margin-right-gt-xs-10 ">
+      <div class="content padding-bottom-20" layout="column">
+        <div layout="row">
+          <h5 class="margin-bottom-10">Value of Services</h5>
+          <span flex></span>
+          <div ng-if="!vm.swapStatusHeading" class="div-edit-quote-icon">
+            <md-button class="md-fab md-mini" ng-click="vm.viewQuote()" ng-if="vm.showPendingCashEditBtn">
+              <i class="icon icon-edit-quote">&nbsp;</i>
+            </md-button>
+          </div>
+        </div>
+
+
+        <!-- CASH ONLY -->
+        <div ng-if="vm.project.nameSpace === 'cash'">
+          <div layout="row" layout-align="space-between center">
+            <div>Fee</div>
+            <div>{{vm.project.quote.fee | currency }}</div>
+          </div>
+          <div layout="row" layout-align="space-between center">
+            <div>GST</div>
+            <div>{{vm.project.quote.gst | currency }}</div>
+          </div>
+          <div layout="row" layout-align="space-between center">
+            <h6>Total </h6>
+            <h6>{{vm.project.quote.fee + vm.project.quote.gst | currency }}</h6>
+          </div>
+        </div>
+
+
+
+        <!-- SWAP seller view-->
+        <div ng-if="vm.project.nameSpace === 'swap' && vm.isSeller">
+          <div layout="row" layout-align="space-between center" class="margin-bottom-10">
+            <label>Total amount quoted by you (including GST)</label>
+            <div>{{vm.project.quote.fee + vm.project.quote.gst | currency }}</div>
+          </div>
+
+          <div layout="row" layout-align="space-between center">
+            <label>Credit for services provided by {{vm.otherBusiness.primaryContactFirstName}} (including GST)</label>
+            <div>{{vm.project.swapProject.quote.fee + vm.project.swapProject.quote.gst | currency }}</div>
+          </div>
+          <!-- Show balance and who owes the balance (if there is a value differnece) -->
+          <div layout="row" layout-align="space-between center" ng-if="vm.project.depositPayment && vm.project.depositPayment.paymentAmount >0">
+             <h5 ng-if="vm.project.depositPayment.payerRole === 'supplier'" class="bolder">Balance to be paid by you</h5>
+             <h5 ng-if="vm.project.depositPayment.payerRole === 'buyer'" class="bolder">Balance to be paid by {{vm.otherBusiness.primaryContactFirstName}}</h5>
+
+             <h5 class="bolder">{{vm.project.depositPayment.paymentAmount*2 | currency }}</h5>
+          </div>
+          <!-- If balance is equal then its a pure swap -->
+          <div layout="row" layout-align="space-between center" ng-if="!vm.project.depositPayment || vm.project.depositPayment.paymentAmount === 0">
+            <h5 class="bolder">Balance to be paid</h5>
+            <h5 class="bolder">{{0 | currency }}</h5>
+          </div>
+        </div>
+        <!-- SWAP buyer view-->
+        <div ng-if="vm.project.nameSpace === 'swap' && !vm.isSeller">
+
+          <div layout="row" layout-align="space-between center" class="margin-bottom-10">
+            <label>Total amount quoted by {{vm.otherBusiness.primaryContactFirstName}} (including GST)</label>
+            <div>{{vm.project.quote.fee + vm.project.quote.gst | currency }}</div>
+          </div>
+
+          <div layout="row" layout-align="space-between center">
+            <label>Credit for services provided by you (including GST)</label>
+            <div>{{vm.project.swapProject.quote.fee + vm.project.swapProject.quote.gst | currency }}</div>
+          </div>
+          <!-- Show balance and who owes the balance (if there is a value differnece) -->
+          <div layout="row" layout-align="space-between center" ng-if="vm.project.depositPayment && vm.project.depositPayment.paymentAmount >0">
+            <h5 ng-if="vm.project.depositPayment.payerRole === 'buyer'" class="bolder">Balance to be paid by you</h5>
+            <h5 ng-if="vm.project.depositPayment.payerRole === 'supplier'" class="bolder">Balance to be paid by {{vm.otherBusiness.primaryContactFirstName}}</h5>
+
+            <h5 class="bolder">{{vm.project.depositPayment.paymentAmount*2 | currency }}</h5>
+          </div>
+          <!-- If balance is equal then its a pure swap -->
+          <div layout="row" layout-align="space-between center" ng-if="!vm.project.depositPayment || vm.project.depositPayment.paymentAmount === 0">
+            <h5 class="bolder">Balance to be paid</h5>
+            <h5 class="bolder">{{0 | currency }}</h5>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SWAP AND CASH ONLY FINAL DEPOSIT DUE -->
+    <section layout="column" flex="100" class="margin-top-5 margin-right-gt-xs-10" ng-if="vm.project.nameSpace === 'swap' && vm.project.depositPayment && vm.project.depositPayment.paymentAmount">
+      <div class="content padding-bottom-20">
+        <h4 ng-if="vm.paymentStatus === 'pending' && ((vm.isSeller && vm.project.depositPayment.payerRole === 'supplier') || (!vm.isSeller && vm.project.depositPayment.payerRole === 'buyer'))" class="bolder">Deposit to be paid by you to finalise agreement</h4>
+        <h4 ng-if="vm.paymentStatus === 'pending' && ((vm.isSeller && vm.project.depositPayment.payerRole === 'buyer') || (!vm.isSeller && vm.project.depositPayment.payerRole === 'supplier'))" class="bolder">Deposit to be paid by {{vm.otherBusiness.primaryContactFirstName}} to finalise agreement</h4>
+        <h4 ng-if="vm.paymentStatus === 'paid'">Deposit paid</h4>
+        <h2 class="deposit-paid-value">{{vm.depositToBePaid | currency }}</h2>
+        <span ng-if="vm.paymentStatus === 'paid'" class="deposit-paid-date">On {{vm.depositPaidDate | date}}</span>
+        <p ng-if="vm.paymentStatus === 'paid'">Your deposit is currently held in a trust account (escrow) until the project has been completed.</p>
+        <p ng-if="vm.paymentStatus === 'pending'">Your deposit will be held in a trust account (escrow) until the project has been completed.</p>
+        <div ng-if="vm.paymentStatus === 'paid'">
+          <h4 ng-if="(vm.isSeller && vm.project.depositPayment.payerRole === 'supplier') || (!vm.isSeller && vm.project.depositPayment.payerRole === 'buyer')" class="bolder">Final balance to be paid by you after completion - {{vm.depositToBePaid | currency }}</h4>
+          <h4 ng-if="(vm.isSeller && vm.project.depositPayment.payerRole === 'buyer') || (!vm.isSeller && vm.project.depositPayment.payerRole === 'supplier')" class="bolder">Final balance to be paid by {{vm.otherBusiness.primaryContactFirstName}} after completion - {{vm.depositToBePaid | currency }}</h4>
+        </div>
+        <span ng-if="!vm.isPayer && !vm.me.billing.feesExempted">A Proquo fee for services of 10% will be deducted from the final amount</span>
+      </div>
+    </section>
+    <!-- CASH ONLY FINAL DEPOSIT DUE (or not if already paid) -->
+    <section layout="column" flex="100" class="margin-top-5 margin-right-gt-xs-10 " ng-if="vm.project.nameSpace === 'cash'">
+
+      <div class="content padding-bottom-20">
+        <h4 ng-if="vm.paymentStatus === 'pending' && vm.isSeller">
+          Deposit to be paid by {{vm.otherBusiness.primaryContactFirstName}} to finalise agreement
+        </h4>
+        <h4 ng-if="vm.paymentStatus === 'pending' && !vm.isSeller">
+          Deposit to be paid by you to finalise agreement
+        </h4>
+        <h4 ng-if="vm.paymentStatus === 'paid'">
+          Deposit paid to finalise agreement
+        </h4>
+        <h2 class="deposit-paid-value">{{ vm.depositToBePaid | currency }}</h2>
+        <span ng-if="vm.paymentStatus === 'paid'" class="deposit-paid-date">On {{vm.depositPaidDate | date}}</span>
+        <p ng-if="vm.paymentStatus === 'paid'">Your deposit is currently held in a trust account (escrow) until the project has been completed.</p>
+        <p ng-if="vm.paymentStatus === 'pending'">Your deposit will be held in a trust account (escrow) until the project has been completed.</p>
+        <span ng-if="vm.isSeller && !vm.me.billing.feesExempted">A Proquo fee for services of 10% will be deducted from the final amount</span>
+      </div>
+    </section>
+
+
+    <section layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center" layout-padding class="margin-top-10" ng-if="vm.project.nameSpace === 'swap' && vm.isSeller">
+        <h5 class="no-margin">{{vm.otherBusiness.primaryContactFirstName}} has accepted this agreement</h5>
+        <md-checkbox ng-if="vm.project.status === 'swap.swap-quote-lodged'" class="no-margin" ng-model="vm.sellerSwapAgreed" >
+          <h5 class="no-margin">You accept this</h5>
+        </md-checkbox>
+        <h5 ng-if="vm.swapStatusHeading" class="no-margin">You have accepted this agreement</h5>
+    </section>
+    <section layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center" layout-padding class="margin-top-10" ng-if="vm.project.nameSpace === 'swap' && !vm.isSeller">
+        <h5 ng-if="!vm.swapStatusHeading" class="no-margin">{{vm.otherBusiness.primaryContactFirstName}} has not yet accepted this agreement</h5>
+        <h5 ng-if="vm.swapStatusHeading"  class="no-margin">{{vm.otherBusiness.primaryContactFirstName}} has accepted this agreement</h5>
+        <h5 class="no-margin">You have accepted this agreement</h5>
+    </section>
+
+
+    <!-- BUTTON ACTIONS -->
+
+    <div  layout="row" layout-xs="column" layout-align-gt-xs="end center">
+      <!-- MESSAGE BUTTON -->
+      <md-button flex-order-xs="2" aria-label="chat" class="btn txt-positive" ng-click="vm.showChatModal()">
+        Message
+      </md-button>
+      <!-- BUYER CASH PAY BUTTON -->
+      <md-button ng-if="!vm.isSeller && vm.project.nameSpace === 'cash' && vm.project.status === 'cash.quote-accepted'" ng-hide="vm.processing || vm.paymentStatus === 'paid'" aria-label="Pay" class="btn md-raised md-primary-cta" ng-click="vm.acceptPayAgreement()">
+        Pay
+      </md-button>
+
+      <!-- SUPPLIER SWAP SUBMIT/PAY BUTTON -->
+      <md-button ng-disabled="!vm.sellerSwapAgreed" flex-order-xs="1" ng-if="vm.isSeller && vm.project.nameSpace === 'swap' && vm.project.status === 'swap.swap-quote-lodged' && (vm.project.depositPayment.payerRole === 'buyer' || !vm.project.depositPayment.payerRole)" ng-hide="vm.processing" aria-label="Accept agreement" class="btn md-raised md-primary-cta" ng-click="vm.sellerAcceptSwapAgreement()">
+        Submit
+      </md-button>
+      <md-button ng-disabled="!vm.sellerSwapAgreed" flex-order-xs="1" ng-if="vm.isSeller && vm.project.nameSpace === 'swap' && vm.project.status === 'swap.swap-quote-lodged' && vm.project.depositPayment.payerRole === 'supplier'" ng-hide="vm.processing" aria-label="Accept agreement" class="btn md-raised md-primary-cta" ng-click="vm.sellerAcceptSwapAgreement()">
+        Pay
+      </md-button>
+
+      <!-- BUYER SWAP PAY BUTTON - (if payment owed) -->
+      <md-button flex-order-xs="1" ng-if="!vm.isSeller && vm.project.nameSpace === 'swap' && vm.project.status === 'swap.deposit-pending' && vm.project.depositPayment.payerRole === 'buyer'&& vm.project.depositPayment.paymentAmount > 0" ng-hide="vm.processing" aria-label="Accept agreement" class="btn md-raised md-primary-cta" ng-click="vm.buyerAcceptSwapAgreement()">
+        Pay
+      </md-button>
+      <md-progress-circular ng-show="vm.processing" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+    </div>
+
+    <div layout="row" layout-align="end center" class="md-padding" ng-show="(((vm.project.status === 'swap.swap-quote-lodged' && vm.isSeller) || (vm.project.status === 'swap.deposit-pending' && !vm.isSeller)) && vm.isPayer) || (!vm.isSeller && vm.project.status === 'cash.quote-accepted')">
+      <div>
+      <p class=" tandc">
+        <span class="warn">* </span>By clicking on 'Pay' you are approving the <span class="">deposit of amount {{ vm.depositToBePaid | currency }}</span> to be paid
+        from your account and held in the trust account (escrow) until you are satisfied that the work has been completed
+      </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

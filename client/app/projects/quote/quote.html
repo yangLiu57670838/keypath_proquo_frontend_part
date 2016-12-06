@@ -1,0 +1,813 @@
+<div class=" l-bg-grey quote">
+
+
+  <div class="l-layout l-one-column cf l-container " ng-if="vm.pageMode">
+    <div class="content-container l-padding  cf l-content-padding">
+      <div class="max-page-size">
+
+        <form name="quoteForm">
+          <section>
+            <div layout="row" layout-align="space-between center" layout-wrap
+                 ng-if="vm.pageMode === 'edit' || vm.isSwapBriefEditable() || vm.isSwapQuoteEditable()">
+              <h2 class="no-margin" ng-if="!vm.project.quote">
+                Create Quote
+              </h2>
+
+              <h2 class="no-margin" ng-if="vm.project.quote">
+                Modify Quote
+              </h2>
+              <a hide-gt-xs md-no-ink ng-click="vm.saveAndClose(quoteForm)" class="bolder nowrap">Save and Close</a>
+              <div layout="row" layout-align="end center" layout-padding flex-xs="100">
+                <a hide-xs md-no-ink ng-click="vm.saveAndClose(quoteForm)" class="bolder nowrap">Save and Close</a>
+                <md-button flex-xs="100" ng-disabled="quoteForm.$invalid" flex="none"
+                           class="btn md-raised md-primary-cta"
+                           ng-click="vm.action(action.actionLabel, $event, quoteForm)"
+                           ng-repeat="action in vm.availableActions">
+                  <span>{{action.btnLabel}}</span>
+                </md-button>
+              </div>
+
+            </div>
+            <div layout="row" layout-align="space-between center" layout-wrap
+                 ng-if="vm.pageMode === 'view' && !vm.isSwapBriefEditable() && !vm.isSwapQuoteEditable()">
+              <h2 class="no-margin">
+                View Quote
+              </h2>
+              <a md-no-ink ng-click="vm.close()" class="bolder" hide-gt-xs>Close</a>
+              <div layout="row" layout-align="end center" layout-padding flex-xs="100">
+                <a md-no-ink ng-click="vm.close()" class="bolder" hide-xs>Close</a>
+                <md-button flex-order-xs="1" ng-disabled="quoteForm.$invalid" flex-xs="100" flex-gt-xs="none"
+                           class="btn md-raised md-primary-cta"
+                           ng-click="vm.action(action.actionLabel, $event, quoteForm)"
+                           ng-repeat="action in vm.availableActions">
+                  <span>{{action.btnLabel}}</span>
+                </md-button>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h4 class="padding-left-15 uppercase" ng-if="vm.isSeller">{{vm.buyer.firstName}}'s Brief</h4>
+            <h4 class="padding-left-15 uppercase" ng-if="!vm.isSeller">Your Brief</h4>
+            <collapsible-card ng-if="vm.project._id" card-id="{{vm.project._id}}"
+                              expand-card="{{vm.isSeller}}">
+              <collapsible-card-header>
+                <div layout="row" layout-align="space-between center">
+                  <h5 flex class="feature-heading-light-bold no-margin">{{vm.project.brief.workTitle}}</h5>
+                </div>
+              </collapsible-card-header>
+              <collapsible-card-body>
+                <div class="project-section padding-top-no">
+
+                  <p class="no-margin bolder">{{vm.project.brief.description || 'No description provided'}}</p>
+
+                  <div layout="row" layout-wrap class="brief-files">
+                    <a ng-repeat="attachment in vm.project.brief.attachments track by $index" href="{{attachment.url}}"
+                       download="{{attachment.attachmentName}}" target="_blank" class="brief-file">
+                      <i class="icon icon-clip"></i><span>{{attachment.attachmentName}}</span>
+                    </a>
+                  </div>
+                </div>
+
+                <md-divider ng-show="vm.project.brief.links.length>0" class="thick"></md-divider>
+
+                <div ng-if="vm.project.brief.links.length>0" class="project-section">
+                  <h5 class="feature-heading-light-bold">Links</h5>
+
+                  <div layout="row" layout-align="space-between center" ng-repeat="link in vm.project.brief.links">
+                    <i flex="5" class="icon material-icons" hide-xs>link </i>
+                    <a flex href="{{link.url && link.url.indexOf('://') > -1 ? link.url : 'http://' + link.url}}"
+                       target="_blank">
+                      <span> {{link.urlDescription ? link.urlDescription : link.url}}</span>
+                    </a>
+                  </div>
+                </div>
+
+                <md-divider></md-divider>
+
+                <div layout="row" layout-xs="column" layout-align-gt-xs="space-between center" class="project-section">
+                  <h5 class="feature-heading-light-bold no-margin">To be completed by</h5>
+                  <h6 class="feature-heading-light-bold no-margin">
+                    {{vm.project.brief.dueDate ? (vm.project.brief.dueDate | date) : "not specified"}}
+                  </h6>
+                </div>
+
+                <md-divider></md-divider>
+
+                <div layout="row" layout-xs="column" layout-align-gt-xs="space-between center" class="project-section">
+                  <h5 class="feature-heading-light-bold no-margin">Budget</h5>
+                  <h6 class="feature-heading-light-bold no-margin">
+                    {{vm.project.brief.budget ? (vm.project.brief.budget | currency ) : 'No budget set'}}
+                  </h6>
+                </div>
+
+
+              </collapsible-card-body>
+            </collapsible-card>
+          </section>
+
+          <div ng-if="vm.isSeller" layout="row" layout-align="space-between center" class="no-padding">
+            <h4 class="padding-left-15 uppercase">Your Quote</h4>
+            <a flex-order-xs="4" md-theme="red" class="headline"
+               ng-click="vm.confirmRejectBrief($event)" ng-show="vm.rejectBriefAction">
+              <span class="txt-negative nowrap bolder">{{vm.rejectBriefAction.btnLabel}}</span>
+            </a>
+          </div>
+          <h4 ng-if="!vm.isSeller" class="padding-left-15 uppercase"> {{vm.seller.firstName}}'s Quote</h4>
+
+          <div ng-if="!vm.isSeller && vm.project.nameSpace === 'swap'">
+
+            <p class="margin-left-gt-xs-10">{{vm.seller.firstName}} has quoted a market value for the services they are providing.
+              This will ensure a fair and equitable swap</p>
+          </div>
+
+
+          <section class="quote-detail" >
+            <div class="md-padding" ng-if="vm.pageMode === 'edit'">
+              <md-checkbox ng-model="vm.project.quote.gstPayable" aria-label="GST is payable for these services"
+                           ng-change="vm.calculateTotal()" class="padding">
+                <label class="padding-left"><span class="">GST is payable for these services</span></label>
+              </md-checkbox>
+            </div>
+
+
+            <section layout="column" flex-gt-xs="100" layout-padding>
+
+              <!-- EDIT CREATE FIELDS -->
+
+              <div ng-if="vm.pageMode === 'edit'">
+                <span ng-if="quoteForm.fee.$invalid" id="quote-detail"></span>
+                <md-input-container flex-gt-xs="50">
+                  <label>Fee for this work</label>
+                  <input id="fee" type="number" required name="fee" placeholder="Fee" ng-model="vm.project.quote.fee"
+                         ng-pattern="vm.currencyPattern"
+                         ng-change="vm.calculateTotal()" min="2"
+                         ng-disabled="vm.pageMode != 'edit'"/>
+                  <md-icon class="icon icon-dollar"></md-icon>
+                  <div ng-messages="quoteForm.fee.$error" role="alert" md-auto-hide="false"
+                       ng-show="quoteForm.fee.$touched">
+                    <div ng-message="required">This is required</div>
+                    <div ng-message="min">Fee needs to be $2 or more</div>
+                    <div ng-message="pattern">Invalid fee</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container flex-gt-xs="50" ng-show="vm.project.quote.gstPayable">
+                  <label>GST payable</label>
+                  <input id="gst" type="number" name="gst" placeholder="GST" ng-model="vm.project.quote.gst"
+                         ng-pattern="vm.currencyPattern"
+                         ng-change="vm.calculateTotal()"
+                         ng-disabled="!vm.project.quote.gstPayable || vm.pageMode != 'edit'"/>
+                  <md-icon class="icon icon-dollar"></md-icon>
+                  <div ng-messages="quoteForm.gst.$error" role="alert" md-auto-hide="false"
+                       ng-show="quoteForm.gst.$touched">
+                    <div ng-message="pattern">Invalid gst</div>
+                  </div>
+                </md-input-container>
+
+              </div>
+
+
+              <!-- READ ONLY FIELDS-->
+              <div ng-if="vm.pageMode != 'edit'" layout="row" layout-align="space-between center">
+                <h5 class="feature-heading-light-bold no-margin">Fee for this work</h5>
+                <h5 class="feature-heading-light-bold no-margin">{{vm.project.quote.fee | currency}}</h5>
+              </div>
+
+              <div ng-if="vm.pageMode != 'edit'" ng-show="vm.project.quote.gstPayable" layout="row"
+                   layout-align="space-between center">
+                <h5 class="feature-heading-light-bold no-margin">GST payable</h5>
+                <h5 class="feature-heading-light-bold no-margin">{{vm.project.quote.gst | currency}}</h5>
+              </div>
+
+              <div layout="row" layout-align="space-between center">
+                <h5 class="feature-heading-light-bold no-margin" flex="50">Total amount</h5>
+                <h5 class="feature-heading-light-bold no-margin">{{vm.quoteTotalAmount || '0.00' | currency }}</h5>
+              </div>
+
+
+
+              <!-- ATTACH FILES-->
+              <div layout="row" layout-align="end start">
+                <div class="attach-documents-link margin-top-10" ng-show="vm.pageMode === 'edit'">
+                  <a href="" ng-click="vm.clickUpload(quoteForm)">
+                    <i class="icon icon-clip"></i> Attach Files</a><span> (e.g. T&Cs)</span>
+                </div>
+              </div>
+              <div ng-if="vm.project && vm.project.quote && vm.project.quote.termsAndConditions.length > 0">
+                <h5 class="feature-heading-light-bold no-margin layout-padding">Attachments Added</h5>
+
+                <div ng-repeat="attachment in vm.project.quote.termsAndConditions track by $index" layout="row"
+                     layout-align="space-between center" class="md-inline-form">
+                  <div>
+                    <a href="{{attachment.url}}" download="{{attachment.attachmentName}}" target="_blank"><i
+                      class="icon icon-clip"></i>
+                      <label>{{attachment.attachmentName}}({{ attachment.size | filesize }})</label>
+                    </a>
+                  </div>
+                  <div>
+                    <label>{{attachment.updatedAt|date:"dd/MM/yyyy"}}</label>
+                    <a ng-show="vm.pageMode === 'edit'" class="remove-item"
+                       ng-click="vm.deleteAttachment($index, quoteForm)"><i class="icon icon-remove"></i></a>
+                  </div>
+                </div>
+              </div>
+
+            </section>
+            <md-divider></md-divider>
+
+            <h5 ng-if="vm.isSeller">You will deliver</h5>
+            <h5 ng-if="!vm.isSeller">{{vm.seller.firstName}} will deliver</h5>
+            <section ng-if="vm.pageMode === 'edit'">
+              <p class="no-margin">Use this space if you wish to itemise your deliverables</p>
+
+              <div>
+                <a href="" ng-class="{'disabled': vm.shouldDisableAddDeliverableButton()}"
+                   ng-click="vm.addDeliverable(quoteForm)" ng-if="!vm.isReadonly()">+ Add another item</a>
+              </div>
+
+              <ng-form name="deliverableForm" ng-repeat="deliverable in vm.project.quote.deliverables track by $index"
+                       layout="row" layout-align="space-between center">
+                <md-input-container class="no-margin" md-no-float>
+
+                  <input placeholder="Describe an item" aria-label="Deliverable summary" name="deliverableSummary"
+                         required
+                         ng-model="vm.project.quote.deliverables[$index]" maxlength="50"/>
+
+                  <div ng-messages="quoteForm.deliverableSummary.$error">
+                    <div ng-message="required">This is required!</div>
+                  </div>
+                </md-input-container>
+
+                <div layout="row" layout-align="space-between center">
+                  <a class="remove-item" layout-align="start top" ng-click="vm.removeDeliverable($index)"><i
+                    class="icon icon-remove"></i></a>
+                </div>
+              </ng-form>
+
+
+            </section>
+
+            <section ng-if="vm.pageMode != 'edit'">
+              <p class="no-margin" ng-show="vm.project.quote.deliverables<1">No items added</p>
+
+              <div ng-repeat="deliverable in vm.project.quote.deliverables" layout="row"
+                   layout-align="space-between top">
+                <div>{{deliverable}}</div>
+              </div>
+            </section>
+
+
+          </section>
+
+          <!-- SWAP SWAP SWAP - please leave for completion in another jira -->
+
+          <!--swap brief for seller to view and edit-->
+          <div ng-if="vm.project.brief.considerSwap && vm.isSeller && ['swap.quote-pending', 'cash.quote-pending', 'swap.quote-lodged'].indexOf(vm.project.status) > -1">
+            <div class="padding-left-15">
+              <div layout="row" layout-align="space-between center"><h4 class="uppercase"> {{vm.buyer.firstName}} wants
+                to Swap</h4><i class="material-icons ticked margin-top-10">done</i></div>
+              <p class="no-margin bolder">{{vm.buyer.firstName}} has offered to swap services with you to offset the
+                cost of this project</p>
+              <a href="https://proquo.zendesk.com/hc/en-us/sections/204466067-Choosing-Swap-or-Pay" target="_blank" class="bolder">New to Swapping? </a><a href="https://proquo.zendesk.com/hc/en-us/sections/204466067-Choosing-Swap-or-Pay" target="_blank" class="btn"><i class="material-icons  info-link">info</i></a>
+            </div>
+            <section class="quote-detail">
+              <div class="no-margin bolder">{{vm.buyer.firstName}} is ready to offer the following as a swap</div>
+              <div class="pills" ng-if="vm.project.brief.thingsICanSwap && vm.project.brief.thingsICanSwap.length > 0">
+                <span ng-repeat="thingToSwap in vm.project.brief.thingsICanSwap">
+                  <span class="pill " ng-class="{'pill-on':vm.project.nameSpace === 'swap'}">{{thingToSwap}}</span>
+                </span>
+              </div>
+            </section>
+
+            <div class="padding-left-15">
+              <div layout="row" layout-align="space-between center"><h4 class="uppercase">Your Brief For A Swap</h4><i
+                ng-if="vm.project.nameSpace === 'swap'" class="material-icons ticked margin-top-10">done</i></div>
+              <p ng-if="vm.project.nameSpace === 'swap'" class="bolder">You have agreed to swap services with
+                {{vm.buyer.firstName}} </p>
+            </div>
+            <section class="quote-detail">
+              <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center"
+                   ng-if="vm.isSwapBriefEditable()">
+                <div class="no-margin bolder">Would you be open to a swap?</div>
+                <div layout="row">
+                  <md-button ng-class="{'btn-raised md-primary':vm.project.nameSpace === 'swap'}" class="btn"
+                             ng-click="vm.isSwapBriefEditable() ? vm.toggleProjectType('swap') : undefined">Yes
+                  </md-button>
+                  <md-button ng-class="{'btn-raised md-primary':vm.project.nameSpace === 'cash'}"
+                             class="btn txt-negative"
+                             ng-click="vm.isSwapBriefEditable() ? vm.toggleProjectType('cash') : undefined">No
+                  </md-button>
+                </div>
+              </div>
+
+              <div ng-if="vm.project.nameSpace !== 'swap'">You have indicated you are not open to swap</div>
+
+
+              <div ng-if="vm.project.nameSpace === 'swap'">
+
+                <!-- SELLER EDIT SWAP --->
+                <div ng-if="vm.isSwapBriefEditable()">
+                  <span ng-if="quoteForm.title.$invalid || quoteForm.description.$invalid" id="quote-detail"></span>
+                  <h5>Provide details of the work that you need</h5>
+                  <md-input-container class="md-block">
+                    <label>Work Title *</label>
+                    <input aria-label="Work title" name="title" required
+                           ng-model="vm.project.swapProject.brief.workTitle" maxlength="100"
+                           ng-disabled="!vm.isSwapBriefEditable()" ng-readonly="!vm.isSwapBriefEditable()">
+
+                    <div ng-messages="quoteForm.title.$error">
+                      <div ng-message="required">This is required!</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container>
+                    <label>Brief Description *</label>
+                    <textarea name="description" ng-model="vm.project.swapProject.brief.description" required
+                              maxlength="1000"
+                              ng-disabled="!vm.isSwapBriefEditable()"
+                              ng-readonly="!vm.isSwapBriefEditable()"></textarea>
+
+                    <div ng-messages="quoteForm.description.$error">
+                      <div ng-message="required">This is required!</div>
+                    </div>
+                  </md-input-container>
+                </div>
+
+                <!-- SELLER READONLY SWAP -->
+                <div ng-if="!vm.isSwapBriefEditable()">
+                  <h5 class="no-margin">{{vm.project.swapProject.brief.workTitle}}</h5>
+
+                  <p>{{vm.project.swapProject.brief.description}}</p>
+                </div>
+
+                <!-- SELLER EDIT/READONLY ATTACHMENTS-->
+                <div class="attachment-margin-bottom" ng-if="vm.project.nameSpace === 'swap'">
+                  <h5 class="margin-top-10" ng-show="vm.isSwapBriefEditable()">Attachments Added</h5>
+
+                  <div layout="row" layout-align="end center" ng-if="vm.isSwapBriefEditable()">
+                    <div class="attach-documents-link margin-bottom-10">
+                      <a href="" class="nowrap"
+                         ng-click="vm.project.swapProject.brief.attachments.length >= 10? vm.numberOfFilesReachLimit($event): vm.addAttachment2Swap(quoteForm, $event)">
+                        <i class="icon icon-clip"></i> Add Attachments</a>
+                    </div>
+                  </div>
+                  <div>
+                    <div ng-repeat="attachment in vm.project.swapProject.brief.attachments" layout="row"
+                         layout-align="space-between center" class="md-inline-form">
+                      <div>
+                        <a ng-href="{{attachment.url}}" download="{{attachment.attachmentName}}"><i
+                          class="icon icon-clip"></i>
+                          <label>{{attachment.attachmentName}}({{ attachment.size | filesize }})</label>
+                        </a>
+                      </div>
+                      <div>
+                        <label>{{attachment.updatedAt|date:"dd/MM/yyyy"}}</label>
+                        <a ng-if="vm.isSwapBriefEditable()" class="remove-item"
+                           ng-click="vm.deleteAttachmentFromSwap(quoteForm, attachment, $event)"><i
+                          class="icon icon-remove"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SELLER EDIT LINKS ADDED-->
+                <div ng-if="vm.project.nameSpace === 'swap' && vm.isSwapBriefEditable()">
+                  <h5 class="no-margin">Links Added</h5>
+
+                  <div layout="row" layout-align="end center" ng-if="vm.isSwapBriefEditable()">
+                    <div class="attach-documents-link margin-bottom-10">
+                      <a class="nowrap" href="" ng-click="vm.addLink2Swap(quoteForm)"><i class="icon material-icons">link</i>
+                        Add Links</a>
+                    </div>
+                  </div>
+
+                  <div class="margin-top-10">
+                    <ng-form name="urlForm" ng-repeat="link in vm.project.swapProject.brief.links" layout="row"
+                             layout-align="space-between center" class="md-inline-form">
+                      <md-input-container flex="50">
+                        <label>Link</label>
+                        <input aria-label="link url" name="linkUrl" required ng-model="link.url"
+                               placeholder="e.g.http://www.example.com">
+
+                        <div ng-messages="urlForm.linkUrl.$error">
+                          <div ng-message-exp="['required']" class="my-message">This is required!</div>
+                        </div>
+                      </md-input-container>
+                      <md-input-container flex="50">
+                        <label>Description</label>
+                        <input aria-label="link description" name="linkUrlDescription" maxlength="150" required
+                               ng-model="link.urlDescription">
+
+                        <div ng-messages="urlForm.linkUrlDescription.$error">
+                          <div ng-message="required">This is required!</div>
+                        </div>
+                      </md-input-container>
+
+                      <a class="remove-item" ng-if="vm.isSwapBriefEditable()"
+                         ng-click="vm.deleteLinkFromSwap(link, $event)"><i class="icon icon-remove"></i></a>
+                    </ng-form>
+                  </div>
+
+                </div>
+
+                <!--  SELLER READONLY LINKS ADDED -->
+                <div
+                  ng-if="vm.project.nameSpace === 'swap' && vm.project.swapProject.brief.links.length > 0 && !vm.isSwapBriefEditable()">
+                  <div ng-repeat="link in vm.project.swapProject.brief.links" layout="row"
+                       layout-align="space-between center" class="attach-documents-link">
+                    <a href="{{link.url}}" target="_blank" class="nowrap"><i class="icon material-icons">link</i>{{link.urlDescription}}</a>
+                  </div>
+                </div>
+
+                <md-divider class="margin-bottom-10 margin-top-10"></md-divider>
+
+                <!-- SELLER EDIT DATE -->
+                <div ng-if="vm.isSwapBriefEditable()">
+                  <h5 class="no-margin">To be completed by <span ng-show="vm.isSwapBriefEditable()">(optional)</span>
+                  </h5>
+
+                  <div layout="column" layout-align="start" layout-gt-sm="row"
+                       layout-align-gt-sm="space-between center">
+                    <p class="timing-header no-margin bolder">Work to be completed</p>
+
+                    <div ng-if="!vm.project.swapProject.brief.dueDate && vm.isSwapBriefEditable()">
+                      <md-radio-group class="timing-width" name="timing" ng-model="vm.timingSelection"
+                                      ng-if="!vm.project._id || !vm.project.swapProject.brief.dueDate"
+                                      ng-click="vm.project.swapProject.brief.dueDate = undefined"
+                                       layout="row"
+                                      layout-align="space-between center">
+                        <md-radio-button ng-value="'week'" ng-disabled="!vm.isSwapBriefEditable()"
+                                         ng-readonly="!vm.isSwapBriefEditable()">
+                          In a week
+                        </md-radio-button>
+                        <md-radio-button ng-value="'month'" ng-disabled="!vm.isSwapBriefEditable()"
+                                         ng-readonly="!vm.isSwapBriefEditable()">
+                          In a month
+                        </md-radio-button>
+                      </md-radio-group>
+                    </div>
+                    <div flex layout="row" layout-align="start center"
+                         class="md-input-has-value md-datepicker-container timing-due-date">
+                      <div layout="column">
+                        <div layout="row" layout-align="start center">
+                          <span
+                            ng-if="!vm.project.swapProject.brief._id || (!vm.project.swapProject.brief.dueDate && vm.isSwapBriefEditable())"
+                            class="padding-left-gt-xs-10 margin-left-gt-xs-10 bolder timing-span"> OR </span>
+                          <md-datepicker ng-model="vm.project.swapProject.brief.dueDate" class="date-picker"
+                                         md-min-date="vm.minDueDate" ng-click="vm.timingSelection = undefined"
+                                         ng-disabled="!vm.isSwapBriefEditable()">
+                          </md-datepicker>
+
+                          <label ng-hide="vm.project.swapProject.brief.dueDate" class="mdp-date-picker-place-holder">
+                            Due Date</label>
+                          <label ng-show="vm.project.swapProject.brief.dueDate" class="mdp-date-picker-text">
+                            {{vm.project.swapProject.brief.dueDate|date:'dd/MM/yyyy'}}</label>
+                          <a ng-show="vm.isSwapBriefEditable() && vm.project.swapProject.brief.dueDate"
+                             class="remove-item" ng-click="vm.removeSellerSwapDate()"><i
+                            class="icon icon-remove"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div ng-if="!vm.isSwapBriefEditable() && vm.project.swapProject.brief.dueDate" layout="row"
+                     layout-align="space-between center">
+                  <h5 class="feature-heading-light-bold margin-top-10">To be completed by</h5>
+                  <h6 class="feature-heading-light-bold margin-top-10">
+                    {{vm.project.swapProject.brief.dueDate|date:'dd/MM/yyyy'}}</h6>
+                </div>
+
+                <!-- SELLER NO DATE READONLY-->
+                <h5 ng-if="!vm.isSwapBriefEditable() && !vm.project.swapProject.brief.dueDate">You have not specified a
+                  completion date</h5>
+
+
+              </div>
+
+
+            </section>
+          </div>
+
+
+          <!--swap: buyer's view when seller refused to swap-->
+          <div ng-if="vm.project.userId === vm.user._id && ['cash.quote-lodged'].indexOf(vm.project.status) > -1">
+            <div class="padding-left-15" ng-if="vm.project.nameSpace === 'cash' && vm.project.brief.considerSwap">
+              <h4 class="uppercase"> {{vm.seller.firstName}} has not agreed to swap</h4>
+            </div>
+          </div>
+
+          <!--swap quote for buyer to view and edit --> <!-- todo: for seller to view -->
+          <div ng-if="vm.project.userId === vm.user._id && ['swap.quote-lodged', 'swap.swap-quote-lodged', 'swap.deposit-pending'].indexOf(vm.project.status) > -1 || vm.isSeller && ['swap.swap-quote-lodged', 'swap.deposit-pending'].indexOf(vm.project.status) > -1">
+            <!--  -->
+            <div class="padding-left-15">
+              <div layout="row" layout-align="space-between center">
+                <h4 ng-if="!vm.isSeller" class="uppercase"> {{vm.seller.firstName + (vm.seller.firstName.slice(-1) === "s" ? "'": "'s" )}} brief for a swap</h4>
+                <h4 ng-if="vm.isSeller" class="uppercase"> Your brief for a swap</h4>
+                <i class="material-icons ticked margin-top-10 ">done</i>
+              </div>
+              <p class="no-margin" ng-if="!vm.isSeller">{{vm.seller.firstName}} has agreed to swap services with you</p>
+              <p class="no-margin" ng-if="vm.isSeller">You have agreed to swap services</p>
+              <a href="https://proquo.zendesk.com/hc/en-us/sections/204466067-Choosing-Swap-or-Pay" target="_blank" class="bolder">New to Swapping? </a><a href="https://proquo.zendesk.com/hc/en-us/sections/204466067-Choosing-Swap-or-Pay" target="_blank" class="btn"><i class="material-icons  info-link">info</i></a>
+            </div>
+            <!--brief for buyer to view-->
+            <section class="quote-detail">
+              <div class="project-section">
+                <h5 class="feature-heading-light-bold no-margin" ng-if="vm.project.nameSpace === 'swap'">
+                  {{vm.project.swapProject.brief.workTitle}}</h5>
+
+
+                <list-reveal minheight="70" ng-if="vm.project.nameSpace === 'swap'">
+                  <p class="no-margin bolder">{{vm.project.swapProject.brief.description || 'No description provided'}}</p>
+                </list-reveal>
+
+
+                <div layout="row" layout-wrap class="brief-files">
+                  <a ng-repeat="attachment in vm.project.swapProject.brief.attachments track by $index"
+                     href="{{attachment.url}}"
+                     class="btn md-button feature-heading-light-bold" download="{{attachment.attachmentName}}"
+                     target="_blank">
+                    <md-icon class="icon icon-clip"></md-icon>
+                    {{attachment.attachmentName}}
+                  </a>
+                </div>
+              </div>
+
+              <md-divider ng-show="vm.project.nameSpace === 'swap' && vm.project.swapProject.brief.links.length>0"
+                          class="thick"></md-divider>
+
+              <div ng-if="vm.project.nameSpace === 'swap' && vm.project.swapProject.brief.links.length>0"
+                   class="project-section">
+                <h5 class="feature-heading-light-bold">Links</h5>
+
+                <div layout="row" layout-align="space-between center"
+                     ng-repeat="link in vm.project.swapProject.brief.links">
+                  <i flex="5" class="icon material-icons" hide-xs>link </i>
+                  <a flex href="{{link.url && link.url.indexOf('://') > -1 ? link.url : 'http://' + link.url}}"
+                     target="_blank">
+                    <span> {{link.urlDescription ? link.urlDescription : link.url}}</span>
+                  </a>
+                </div>
+              </div>
+
+              <md-divider></md-divider>
+
+              <div layout="row" layout-xs="column" layout-align-gt-xs="space-between center" class="project-section">
+                <h5 class="feature-heading-light-bold no-margin">To be completed by</h5>
+                <h6 class="feature-heading-light-bold no-margin">
+                  {{vm.project.nameSpace === 'swap' && vm.project.swapProject.brief.dueDate ? (vm.project.brief.dueDate
+                  | date) : "not specified"}}
+                </h6>
+              </div>
+
+              <md-divider></md-divider>
+
+              <div layout="row" layout-xs="column" layout-align-gt-xs="space-between center" class="project-section">
+                <h5 class="feature-heading-light-bold no-margin">Budget</h5>
+                <h6 class="feature-heading-light-bold no-margin">
+                  {{vm.project.nameSpace === 'swap' && vm.project.swapProject.brief.budget ?
+                  (vm.project.swapProject.brief.budget | currency ) : 'No budget set'}}
+                </h6>
+              </div>
+
+            </section>
+
+            <!--swap quote details for buyer to view and edit-->
+            <div class="padding-left-15">
+              <h4 ng-if="!vm.isSeller" class="uppercase">Your Quote</h4>
+              <h4 ng-if="vm.isSeller" class="uppercase">{{vm.buyer.firstName}}'s Quote</h4>
+
+              <p ng-if="!vm.isSeller">Provide a market value for the services that you will provide {{vm.seller.firstName}}.
+                This will ensure an equitable and fair swap.</p>
+
+              <div layout="row" layout-align="end center">
+                <md-checkbox ng-model="vm.cashOnly" class="padding" ng-if="vm.isSwapQuoteEditable()"
+                             ng-change="vm.calculateFinalBalance()">
+                  <label class="padding-left">
+                    <span class="">I want to 'pay only' for {{vm.seller.firstName + (vm.seller.firstName.slice(-1) === "s" ? "'": "'s" )}} services</span>
+                  </label>
+                </md-checkbox>
+              </div>
+            </div>
+
+            <!-- CASH ONLY -->
+            <section class="quote-detail" ng-if="!vm.cashOnly">
+              <div class="md-padding" ng-if="vm.isSwapQuoteEditable()">
+                <md-checkbox ng-model="vm.project.swapProject.quote.gstPayable"
+                             aria-label="GST is payable for these services"
+                             ng-change="vm.calculateTotal4Swap(); vm.calculateFinalBalance()"
+                             ng-disabled="!vm.isSwapQuoteEditable()"
+                             class="padding">
+                  <label class="padding-left"><span class="">GST is payable for these services</span></label>
+                </md-checkbox>
+              </div>
+
+              <section  flex-gt-xs="100" layout-padding>
+                <md-input-container flex-gt-xs="50" ng-if="vm.isSwapQuoteEditable()">
+                  <label>Fee for this work</label>
+                  <input id="swapfee" type="number" required name="swapfee" placeholder="Fee"
+                         ng-model="vm.project.swapProject.quote.fee" ng-pattern="vm.currencyPattern"
+                         ng-change="vm.calculateTotal4Swap(); vm.calculateFinalBalance()"
+                         range="!0-2" range-offset="vm.quoteTotalAmount"/>
+                  <md-icon class="icon icon-dollar"></md-icon>
+                  <div ng-messages="quoteForm.swapfee.$error" role="alert" md-auto-hide="false"
+                       ng-show="quoteForm.swapfee.$touched">
+                    <div ng-message="required">This is required</div>
+                    <div ng-message="pattern">Invalid fee</div>
+                    <div ng-message="range">Swap balance can not be less than $1. Please quote accordingly</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container flex-gt-xs="50"
+                                    ng-show="vm.isSwapQuoteEditable() && vm.project.swapProject.quote.gstPayable">
+                  <label>GST payable</label>
+                  <input type="number" name="swapgst" placeholder="GST" ng-model="vm.project.swapProject.quote.gst"
+                         ng-pattern="vm.currencyPattern"
+                         ng-change="vm.calculateTotal4Swap(); vm.calculateFinalBalance()"
+                         ng-disabled="!vm.project.swapProject.quote.gstPayable"/>
+                  <md-icon class="icon icon-dollar"></md-icon>
+                  <div ng-messages="quoteForm.swapgst.$error" role="alert" md-auto-hide="false"
+                       ng-show="quoteForm.swapgst.$touched">
+                    <div ng-message="pattern">Invalid gst</div>
+                  </div>
+                </md-input-container>
+
+                <!-- READ ONLY FIELDS-->
+                <div ng-if="!vm.isSwapQuoteEditable()" layout="row" layout-align="space-between center">
+                  <h5 class="feature-heading-light-bold no-margin">Fee for this work</h5>
+                  <h5 class="feature-heading-light-bold no-margin">{{vm.project.swapProject.quote.fee | currency}}</h5>
+                </div>
+
+                <div ng-if="!vm.isSwapQuoteEditable()" ng-show="vm.project.swapProject.quote.gstPayable" layout="row"
+                     layout-align="space-between center">
+                  <h5 class="feature-heading-light-bold no-margin">GST payable</h5>
+                  <h5 class="feature-heading-light-bold no-margin">{{vm.project.swapProject.quote.gst | currency}}</h5>
+                </div>
+
+                <div layout="row" layout-align="space-between center">
+                  <h5 class="feature-heading-light-bold no-margin" flex="50">Total amount</h5>
+                  <h5 class="feature-heading-light-bold no-margin">{{vm.swapQuoteTotalAmount || '0.00' | currency}}</h5>
+                </div>
+
+                <!-- ATTACH FILES-->
+                <div layout="row" layout-align="end start" ng-if="vm.isSwapQuoteEditable()">
+                  <div class="attach-documents-link">
+                    <a href="" ng-click="vm.clickUpload4Swap($event, quoteForm)">
+                      <i class="icon icon-clip"></i> Attach Files</a><span> (e.g. T&Cs)</span>
+                  </div>
+                </div>
+                <div
+                  ng-if="vm.project.nameSpace === 'swap' && vm.project.swapProject.quote && vm.project.swapProject.quote.termsAndConditions.length > 0">
+                  <h5 class="feature-heading-light-bold no-margin layout-padding">Attachments Added</h5>
+
+                  <div ng-repeat="attachment in vm.project.swapProject.quote.termsAndConditions track by $index"
+                       layout="row" layout-align="space-between center" class="md-inline-form">
+                    <div>
+                      <a href="{{attachment.url}}" download="{{attachment.attachmentName}}" target="_blank"><i
+                        class="icon icon-clip"></i>
+                        <label>{{attachment.attachmentName}}({{ attachment.size | filesize }})</label>
+                      </a>
+                    </div>
+                    <div>
+                      <label>{{attachment.updatedAt|date:"dd/MM/yyyy"}}</label>
+                      <a class="remove-item" ng-click="vm.deleteTAndC4Swap($index, quoteForm)"
+                         ng-if="vm.isSwapQuoteEditable()"><i class="icon icon-remove"></i></a>
+                    </div>
+                  </div>
+                </div>
+
+              </section>
+
+              <md-divider></md-divider>
+
+              <!-- SELLER EDIT DELIVERABLES -->
+              <h5 ng-if="!vm.isSeller">You will deliver</h5>
+              <h5 ng-if="vm.isSeller">{{vm.buyer.firstName}} will deliver</h5>
+              <section ng-if="vm.isSwapQuoteEditable()">
+                <p>Use this space if you wish to itemise your deliverables</p>
+
+                <div ng-if="vm.isSwapQuoteEditable()">
+                  <a href="" ng-class="{'disabled': vm.shouldDisableAddDeliverableButton()}"
+                     ng-click="vm.addDeliverable4SwapQuote(quoteForm)">+ Add another item</a>
+                </div>
+
+                <ng-form name="deliverableForm"
+                         ng-repeat="deliverable in vm.project.swapProject.quote.deliverables track by $index"
+                         layout="row" layout-align="space-between center">
+                  <md-input-container class="no-margin" md-no-float>
+
+                    <input placeholder="Describe an item" aria-label="Deliverable summary"
+                           name="quoteDeliverableSummary" required
+                           ng-model="vm.project.swapProject.quote.deliverables[$index]" maxlength="50"
+                           ng-readonly="!vm.isSwapQuoteEditable()" ng-disabled="!vm.isSwapQuoteEditable()"/>
+
+                    <div ng-messages="deliverableForm.quoteDeliverableSummary.$error">
+                      <div ng-message="required">This is required!</div>
+                    </div>
+                  </md-input-container>
+
+                  <div layout="row" layout-align="space-between center" ng-if="vm.isSwapQuoteEditable()">
+                    <a class="remove-item" layout-align="start top" ng-click="vm.removeDeliverable4SwapQuote($index)"><i
+                      class="icon icon-remove"></i></a>
+                  </div>
+
+
+                </ng-form>
+
+
+              </section>
+
+              <!-- SELLER READONLY DELIVERABLES -->
+              <section ng-if="!vm.isSwapQuoteEditable()">
+                <p ng-show="vm.project.swapProject.quote.deliverables<1">No items added</p>
+
+                <div ng-repeat="deliverable in vm.project.swapProject.quote.deliverables" layout="row"
+                     layout-align="space-between top">
+                  <div>{{deliverable}}</div>
+                </div>
+              </section>
+
+
+            </section>
+            <!-- END CASH ONLY -->
+
+
+            <!--payment summary/balance amount-->
+
+            <div class="padding-left-15">
+              <h4 class="uppercase" ng-if="vm.project.nameSpace === 'cash' || vm.cashOnly">Payment Summary</h4>
+              <h4 class="uppercase" ng-if="vm.project.nameSpace === 'swap' && !vm.cashOnly">Balance Amount</h4>
+
+              <p ng-if="vm.project.nameSpace === 'swap' && !vm.cashOnly && vm.finalBalance && vm.finalBalance > 0">
+                Since there is a difference between {{vm.seller.firstName + (vm.seller.firstName.slice(-1) === "s" ?
+                "'": "'s" )}} quoted value
+                and your quoted value, there will be a net balance that must be paid.</p>
+            </div>
+            <section class="quote-detail">
+              <div class="layout-padding">
+                <div layout="row" layout-align="space-between center">
+                  <h5 ng-if="!vm.isSeller" class="feature-heading-light-bold no-margin">Total amount quoted by {{vm.seller.firstName}}</h5>
+                  <h5 ng-if="vm.isSeller"class="feature-heading-light-bold no-margin">Total amount quoted by you</h5>
+                  <h5 class="feature-heading-light-bold no-margin">{{vm.quoteTotalAmount || '0.00' | currency}}</h5>
+                </div>
+                <div layout="row" layout-align="space-between center"
+                     ng-if="vm.project.nameSpace === 'swap' && !vm.cashOnly">
+                  <h5 ng-if="!vm.isSeller" class="feature-heading-light-bold no-margin">Total amount quoted by you to be credited from
+                    {{vm.seller.firstName + (vm.seller.firstName.slice(-1) === "s" ? "'": "'s" )}} quote</h5>
+                  <h5 ng-if="vm.isSeller" class="feature-heading-light-bold no-margin">Total amount quoted by {{vm.buyer.firstName}} to be credited from
+                    your quote</h5>
+                  <h5 class="feature-heading-light-bold no-margin">{{vm.swapQuoteTotalAmount || '0.00' | currency}}</h5>
+                </div>
+                <div layout="row" layout-align="space-between center"
+                     ng-if="vm.project.nameSpace === 'swap' && !vm.cashOnly">
+                  <h5 class="feature-heading-light-bold no-margin">Balance to be paid by {{vm.whoPaysBill()}}</h5>
+                  <h5 class="feature-heading-light-bold no-margin">{{vm.finalBalance || '0.00' | currency}}</h5>
+                </div>
+
+                <div layout="row" layout-align="space-between center">
+                  <h4 class="uppercase feature-heading-light-bold no-margin"><span>Deposit to be paid by {{vm.whoPaysBill()}}</span>
+                    <a href="https://proquo.zendesk.com/hc/en-us/sections/204486748-Pricing-and-Payment" target="_blank" ><i class="material-icons  info-link">info</i></a>
+                  </h4>
+                  <h4 class="feature-heading-light-bold no-margin">{{vm.finalDepositBalance || '0.00' | currency}}</h4>
+                </div>
+              </div>
+              <div ng-if="vm.project.nameSpace === 'swap'" class="txt-secondary">* The deposit is securely held in a
+                trust account (escrow) until the project is completed.
+              </div>
+
+            </section>
+          </div>
+
+
+          <!--buttons for workflow change-->
+          <section class="quote-actions" layout="row" layout-xs="column" layout-align-gt-xs="end center" flex>
+            <a flex-order-xs="3" md-theme="red" class="btn txt-negative" ng-click="vm.confirmRejectQuote($event)"
+               ng-show="vm.rejectQuoteAction">
+              <span>{{vm.rejectQuoteAction.btnLabel}}</span>
+            </a>
+            <md-button flex-order-xs="2" class="btn txt-positive" ng-click="vm.showChatModal($event)">
+              <span>Message</span>
+            </md-button>
+            <md-button flex-order-xs="1" ng-disabled="quoteForm.$invalid" flex="none"
+                       class="btn md-raised md-primary md-primary-cta"
+                       ng-click="vm.action(action.actionLabel, $event, quoteForm)"
+                       ng-repeat="action in vm.availableActions">
+              <span>{{action.btnLabel}}</span>
+            </md-button>
+            <md-button flex-order-xs="1" ng-disabled="quoteForm.$invalid" flex="none"
+                       class="btn md-raised md-primary-cta"
+                       ng-click="vm.cashOnly ? vm.acceptCashQuote(quoteForm) : vm.submitQuote(quoteForm)"
+                       ng-if="vm.getAvailableActions().includes('acceptCashQuote')">
+              <span ng-if="!vm.cashOnly">Submit</span>
+              <span ng-if="vm.cashOnly">Next</span>
+            </md-button>
+          </section>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

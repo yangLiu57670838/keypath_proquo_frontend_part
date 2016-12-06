@@ -1,0 +1,41 @@
+<md-dialog aria-label="Edit portfolio" class=" full-screen-on-mobile">
+  <form name="mySimpleForm">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 ng-if="vm.formObject.title">{{vm.formObject.title}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon aria-label="Close dialog" class="icon icon-remove"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div>
+        <md-input-container class="md-block" flex-gt-sm ng-repeat="field in vm.formObject.fields track by $index">
+          <label>{{field.fieldLabel}}</label>
+          <input type="{{field.fieldType?field.fieldType:'text'}}" name="{{field.fieldName}}" placeholder="{{field.fieldLabel}}"
+                 ng-model="field.value" ng-required="field.fieldRequired" ng-change="vm.changeFieldValue()" maxlength="{{field.fieldMaxLength}}" ng-maxlength="field.fieldMaxLength"/>
+
+          <div ng-messages="mySimpleForm[field.fieldName].$error">
+            <p ng-message="required">{{field.fieldLabel}} is required.</p>
+            <p ng-message="maxlength">{{field.fieldLabel}} cannot be longer than {{field.fieldMaxLength}}</p>
+          </div>
+
+        </md-input-container>
+      </div>
+      <div class="simple-form-modal-validation-error" ng-if="vm.validationError">
+        {{vm.validationError}}
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions class="md-actions actions" aria-label="actions" layout="row" layout-align="space-between center">
+      <md-button ng-click="vm.cancel()" aria-label="Delete">
+        NO
+      </md-button>
+      <md-button class="btn md-raised md-primary-cta" aria-label="Save" ng-click="vm.submit()">
+        SUBMIT
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

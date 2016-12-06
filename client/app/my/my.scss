@@ -1,0 +1,46 @@
+.my {
+
+  .tab-body {
+
+  }
+
+  .dashboard-side-panel{
+    padding-right:20px;
+  }
+
+  .my-tabs.dashboard-tabs {
+    .heading{
+      @include feature-heading();
+      @include font-size(14, 14);
+      @include font-feature-bold();
+    }
+
+    md-pagination-wrapper md-tab-item{
+      margin-top:20px;
+    }
+  }
+
+}
+
+.dashboard-tabs{
+
+  .md-tab{
+
+    .heading{
+      color: #000;
+      @include font-size(18,30);
+      @include font-feature-bold();
+
+      .indicator.accent{
+        color: $theme-colour;
+      }
+    }
+
+    &.md-active{
+
+      .heading{
+        color: $theme-colour;
+      }
+    }
+  }
+}

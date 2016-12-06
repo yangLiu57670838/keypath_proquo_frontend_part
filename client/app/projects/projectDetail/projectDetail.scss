@@ -1,0 +1,101 @@
+.project-section{
+
+  &.parties{
+    @include bp(s){
+      width:80%;
+    }
+  }
+
+  padding:15px;
+  @include bp-max(xs){
+    padding:15px 0 15px 0;
+  }
+  profile-photo{
+    width:160px;
+    @include bp-max(xs){
+      width:120px;
+    }
+    .avatars{
+      min-width:inherit;
+      min-height:inherit;
+    }
+
+    .avatars .org-no-logo .txt-container .txt{
+      font-size:50%;
+    }
+
+  }
+  .icon-dollar{
+    color:$dd-grey;
+    @include font-size(25, 25);
+    margin-top:40px;
+    @include bp(0, 599) {
+      margin-top:0px;
+    }
+  }
+  .icon-swap{
+    color:$dd-grey;
+    @include font-size(25, 25);
+    margin-top:40px;
+  }
+
+  .collaborator{
+    cursor:pointer;
+  }
+
+  .icon-add{
+    font-size: 18px;
+    padding: 0 16px;
+  }
+
+  .files-body{
+    min-width: 45%;
+    min-height: 25px;
+    padding: 8px;
+
+    .file{
+      .filename{
+        max-width: 300px;
+        overflow:hidden;
+      }
+      .date{
+        padding: 0 16px;
+      }
+    }
+
+    margin: 8px 0px;
+  }
+
+  .remove-btn{
+    @include font-size(12, 22);
+  }
+
+  .files-heading {
+    background-color: $white;
+    min-height: 26px;
+  }
+
+  .files-container {
+    width: 100%;
+    margin: 5px;
+    background-color: #f1f1f1;
+
+  }
+
+}
+
+
+.project-actions{
+  .md-button{
+    margin:0;
+    border-radius:0;
+  }
+}
+
+.ellipsis-txt{
+  max-width:200px;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

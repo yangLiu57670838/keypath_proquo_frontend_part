@@ -1,0 +1,41 @@
+<div class="card" ui-sref="profile({profileId: result._id, distance: result.distance})">
+  <div class="content" id="anchor{{result._id}}">
+    <div ng-if="result.specialOffering" class="special-logo {{result.specialOffering.offeringIcon}}"></div>
+    <div class="profile-photo">
+        <profile-photo profile="result"></profile-photo>
+    </div>
+
+    <h4 class="feature-heading-light margin-top-10 theme-colour-txt ellipsis-txt search-result-name profile-contact-name">{{result.primaryContactFirstName}} {{result.primaryContactLastName}}</h4>
+    <p class="feature-heading-light ellipsis-txt profile-business-name">
+      {{result.name}}
+    </p>
+
+    <p>
+      {{result.suburb}}<span ng-show="result.postCode">, {{result.postCode}}</span>
+      <span ng-show="!(result.suburb || result.postCode)" class="not-specified-txt">Location unknown</span>
+    </p>
+    <div class="distance-container">
+      <p class="distance" ng-show="result.distance >= 0">{{result.distance | number : 0}} km away</p>
+      <p class="not-specified-txt" ng-show="(result.distance === undefined) && (result.suburb || result.postCode) && result.showNoDistanceTxt">Distance unknown</p>
+    </div>
+
+    <star-rating class="padding-top" data-rating-disabled="ratingDisabled" rating="result.averageReviewRating"></star-rating>
+
+    <div ui-sref="profile({profileId: result._id, distance: result.distance, scrollToReviews: true})" class="review-num padding-top" ng-show="result.numberOfReviews>0">
+
+      <ng-pluralize count="result.numberOfReviews"
+                    when="{
+                     '0': '0 reviews',
+                     '1': '1 review',
+                     'other': '{} reviews'}">
+      </ng-pluralize>
+
+    </div>
+
+
+    <div class="review-num padding-top" ng-show="!result.numberOfReviews">0 reviews</div>
+    <search-result-skills ng-if="searchType === 'skillsRequired' || searchType === 'skillsOfferedAndRequired'" data-skills="result.needs" data-skills-expand-limit="skillsExpandLimit" data-on-click=""></search-result-skills>
+    <search-result-skills ng-if="searchType === 'skillsOffered' || searchType === 'only' || searchType === 'skillsOfferedAndRequired'" data-skills="result.offers" data-skills-expand-limit="skillsExpandLimit" data-on-click=""></search-result-skills>
+  </div>
+
+</div>

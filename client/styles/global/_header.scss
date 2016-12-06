@@ -1,0 +1,143 @@
+/*
+/!* ==========================================================================
+ * HEADER
+ * ========================================================================== *!/
+
+.header {
+	// background-color: rgba(0, 0, 0, 0.7);
+	background: $theme-colour;
+	position: relative;
+	height: 50px;
+
+	@include bp(l) {
+		height: 70px;
+	}
+
+	.top {
+		position: relative;
+	}
+
+	.logo {
+		float: left;
+
+		a {
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			color: #fff;
+			@include font-feature-heavy();
+			text-transform: uppercase;
+
+			&:hover{
+				text-decoration: none;
+			}
+
+			@include bp(l){
+				height: 70px;
+				line-height: 70px;
+			}
+		}
+
+		img {
+			height: 30px;
+			width: auto;
+			margin-top: 10px;
+
+			@include bp(l) {
+				height: 45px;
+			}
+		}
+
+		// todo: instead of hiding this, look at replacing with a smaller one
+		display: none;
+		@include bp(m){
+			display: block; // only show on m screens and above
+		}
+	}
+
+
+
+	.btn-register,
+	.btn-login,
+	.username{
+		float: right;
+		margin: 5px 0 0 10px;
+		padding: 8px 15px;
+		@include box-sizing(border-box);
+		height: 30px;
+		line-height: 20px;
+		@include border-radius(15px);
+		@include font-feature-heavy();
+		text-transform: capitalize;
+		color: $theme-colour;
+		min-width: 60px;
+
+		@include bp(m){
+			margin: 7px 0 0 15px;
+		}
+
+		@include bp(l){
+			margin: 15px 0 0 15px;
+		}
+	}
+
+	.btn-register{
+		color: #eee;
+
+		&:hover{
+			color: #fff;
+		}
+	}
+
+	.username{
+		color: #fff;
+		display: none;
+
+		@include bp(m){
+			display: inline-block;
+		}
+	}
+}
+
+.nav-toggle {
+	position: relative;
+	display: block;
+	float: left;
+	width: 50px;
+	height: 50px;
+
+	.icon{
+		color: #fff;
+		@include font-size(30,50);
+		@include transition(color 250ms);
+		text-align: center;
+		// width: 50px;
+		height: 50px;
+		line-height: 50px;
+	}
+
+	&:hover,
+	&:focus{
+		text-decoration: none;
+
+		.icon{
+			color: $nab-bg-x-dark;
+		}
+	}
+
+	@include bp(l){
+		height: 70px;
+
+		.icon{
+			height: 70px;
+			line-height: 70px;
+		}
+	}
+
+
+	@include bp(xxl) {
+		display: none;
+	}
+  margin: 3px 0 0 0;
+}
+*/

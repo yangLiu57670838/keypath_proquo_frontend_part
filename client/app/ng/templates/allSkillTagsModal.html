@@ -1,0 +1,34 @@
+<md-dialog aria-label="all skills" class="all-skill-tags-modal">
+	<md-dialog-content>
+
+		<p class="small">
+			Choose from the categories below
+		</p>
+
+		<category-skill-selector data-category-skills="categorySkills" data-skills-model="searchKeywordsToAdd">
+		</category-skill-selector>
+
+		<p class="small margin-top-10">
+			So far you've chosen
+		</p>
+
+		<md-chips ng-model="searchKeywordsToAdd" md-autocomplete-snap>
+			<md-chip-template>
+				<span ng-bind="$chip"></span>
+			</md-chip-template>
+		</md-chips>
+
+
+		<div class="md-actions" layout="row">
+			<span flex></span>
+			<md-button ng-click="skillsModalCtrl.closeModal()" class="btn md-raised">
+				Cancel
+			</md-button>
+			<md-button ng-click="skillsModalCtrl.updateKeywords()" class="btn md-primary-cta md-raised" >
+				Add to search
+			</md-button>
+		</div>
+
+
+	</md-dialog-content>
+</md-dialog>

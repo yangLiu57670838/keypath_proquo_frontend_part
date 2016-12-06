@@ -1,0 +1,26 @@
+.paginator-centred {
+  max-width: 200px;
+  margin: auto;
+  margin-top: 20px;
+  .md-button {
+    padding: 0 6px 0 6px;
+    margin: 6px 8px 6px 8px;
+    min-width: 32px;
+    line-height: 30px;
+    min-height: 26px;
+    border-radius: 15px;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration:none;
+    border: none;
+    outline: none;
+  }
+  .page-label {
+    vertical-align: middle;
+  }
+
+  @include bp(l) {
+    max-width: 700px;
+  }
+}

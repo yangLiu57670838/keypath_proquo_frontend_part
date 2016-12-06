@@ -1,0 +1,88 @@
+<div ng-cloak class="profile-scroll-container">
+  <md-content layout="column" layout-align="start stretch">
+    <div layout="row" class="profile-scroll-header">
+
+      <div flex layout="column" layout-align="start center"
+           ng-if="vm.options.searchType === 'skillsOffered' && vm.options.offeredCategories">
+        <div layout="row"><pre class="header-text">{{vm.options.totalRecord}} {{1 >= vm.options.totalRecord ?
+            "person" : "people"}} offering the </pre>
+          <h6>skills you need: </h6></div>
+      </div>
+
+      <div flex layout="column" layout-align="start center"
+           ng-if="vm.options.searchType === 'skillsRequired' && vm.options.requiredCategories">
+        <div layout="row"><pre class="header-text">{{vm.options.totalRecord}} {{1 >=
+            vm.options.totalRecord ?
+            "person" : "people"}} looking for the </pre>
+          <h6>skills you offer: </h6></div>
+      </div>
+
+      <div layout="column" layout-align="start start"
+           ng-if="vm.options.searchType === 'skillsOfferedAndRequired' && (vm.options.requiredCategories || vm.options.offeredCategories)">
+
+        <div class="required-category-container" layout="row" layout-align="start">
+          <h5 class="header-text-swap"> {{vm.options.totalRecord}} {{1 >= vm.options.totalRecord ? "person" : "people"}}</h5>
+          <pre class="header-text"> who {{1 >= vm.options.totalRecord ? "matches" : "match"}}:</pre>
+        </div>
+
+      </div>
+
+      <div flex="30" class="find-match-sort-wrapper">
+        <div layout="column" layout-align="center center">
+          <md-select ng-model="vm.options.searchOrder" ng-change="vm.changeSearchOrder()">
+            <md-option ng-repeat="option in vm.options.sortOptions" value="{{option.value}}">{{option.name}}</md-option>
+          </md-select>
+
+          <div ng-show="vm.options.searchOrder === 'closest'" class="location-directive" md-no-float>
+            <location result="vm.selectedLocation" thisid="'googleLookupSeller'" save-location="vm.changeSelectedLocation()" activate-watch="true"></location>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="vm.options.totalRecord > 0 && vm.options.totalRecord <= vm.windowSize" class="profile-row "
+         layout="column" layout-gt-sm="row" layout-align="center stretch">
+      <div class="profile-scroll" layout="column" layout-gt-sm="row" layout-align="center stretch">
+        <div ng-repeat="a in vm.range(vm.decoratedProfiles.getLength() - 2) track by $index" class="profile-items">
+          <div class="card-container">
+            <search-result data-result="vm.decoratedProfiles.getItemAtIndex($index + 1)"
+                           data-search-type="vm.options.searchType" data-rating-disabled="true"
+                           skills-expand-limit="vm.options.searchType =='skillsOfferedAndRequired'? 1 : 2"></search-result>
+            <md-button aria-label="chat" class="md-raised  btn-connect message-btn card-btn"
+                       ng-click="vm.showChatModal(profile.userId)">
+              Message
+            </md-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="vm.options.totalRecord > vm.windowSize" class="profile-row" layout="row" layout-align="center stretch">
+      <button class="prev-btn" ng-click="vm.prevPage()" ng-class="{'prev-btn-disabled': vm.topIndex <= 0}"
+              ng-disabled="vm.topIndex <= 0" ng-if="vm.options.totalRecord > vm.windowSize"></button>
+      <md-virtual-repeat-container class="profile-scroll" md-top-index="vm.topIndex" md-orient-horizontal="true">
+        <div md-virtual-repeat="profile in vm.decoratedProfiles" md-item-size="220" md-on-demand="true"
+             class="profile-items">
+          <div id="profile-placehoder-{{$index}}" class="card-container card-place-holder" ng-if="profile.placeHolder">
+            &nbsp;
+          </div>
+          <div id="profile-{{$index}}" class="card-container" ng-if="!profile.placeHolder">
+            <search-result data-result="profile" data-search-type="vm.options.searchType" data-rating-disabled="true"
+                           skills-expand-limit="vm.options.searchType =='skillsOfferedAndRequired'? 1 : 2"></search-result>
+            <md-button aria-label="chat" class="md-raised  btn-connect message-btn card-btn"
+                       ng-click="vm.showChatModal(profile.userId)">
+              Message
+            </md-button>
+          </div>
+        </div>
+      </md-virtual-repeat-container>
+      <button class="next-btn" ng-click="vm.nextPage()"
+              ng-class="{'next-btn-disabled': vm.topIndex >= vm.lastVisualIndex()}"
+              ng-disabled="vm.topIndex >= vm.lastVisualIndex()" ng-if="vm.options.totalRecord > vm.windowSize"></button>
+    </div>
+    <div layout="row" layout-align="center center" class="profile-slider-container"
+         ng-if="vm.decoratedProfiles.getLength() > vm.windowSize + 2">
+      <md-slider flex="30" min="0" max="{{vm.lastVisualIndex()}}" ng-model="vm.topIndex" aria-label="slider"
+                 class="profile-slider"></md-slider>
+    </div>
+  </md-content>
+</div>
